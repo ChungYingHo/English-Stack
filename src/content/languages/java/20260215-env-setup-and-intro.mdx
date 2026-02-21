@@ -1,0 +1,110 @@
+---
+title: "[Java] Java 基礎架構介紹與環境配置"
+author: "jeremy"
+date: "2026-02-15"
+tags: ["Java", "JDK", "VScode"]
+---
+
+## 本機 Java 環境配置
+### 下載 JDK
+撰寫 Java 會需要安裝 JDK (Java Development Kit)，一個能讓開發者在本機撰寫、編譯、執行 Java 程式的工具包。  
+撰寫本文的當下 (2026/02/15)，JDK 的最新 LTS 為 25 版，可以直接從 [jdk.java.net](https://jdk.java.net/25/) 下載。
+
+:::tip
+Java 剛新出的版本可能會沒有提供 `.msi` 的安裝檔，所以沒辦法無腦一鍵執行安裝並自動設定環境變數。  
+這時可以下載 `.zip` 壓縮檔，解壓縮至想放的路徑 (例如 `C:\Java\jdk-25`)，然後手動設定環境變數。  
+解壓縮放置路徑以我個人的話，會選擇跟我其它程式語言或環境的 SDK 放在一起，比如我的 node 就是放在 `C:\nvm4w\nodejs`，那麼 jdk 我就會放在 `C:\Java\jdk-25`。
+
+那因為是使用 `.zip` 壓縮檔，所以不會自動幫你設定環境變數，需要手動設定。  
+打開 cmd，並執行下述指令 (記得以管理員身份執行 cmd)：
+
+1. 設定 JAVA_HOME 系統變數
+```powershell
+setx JAVA_HOME "C:\Java\jdk-25" /M
+```
+
+2. 設定 Path 系統變數
+```powershell
+setx PATH "%JAVA_HOME%\bin;%PATH%" /M
+```
+
+:::warning
+Windows 的 `setx` 指令其實有一個存在已久的致命缺陷，就是它最多只能處理 1024 個字元。  
+但對很多開發者來說，如果他的電腦已經用一陣子，勢必已經裝了各種開發工具、SDK、環境變數等等，這時候他的 Path 變數可能已經非常長了，甚至超過 1024 個字元。  
+那用這指令大概就會讓 Path 變數被截斷，導致很多工具無法正常運作，甚至可能會讓電腦出現各種奇怪的問題。(但我的是新電腦，現在環境乾淨得很 www)  
+
+所以替代做法是透過系統搜尋「編輯系統環境變數」，使用圖形化介面來設定環境變數，這樣就不會有字元限制的問題了。  
+但當然，Java 一般提供 `.msi` 檔啦，只是我的 25 版是 2025 年剛出那會兒裝的，所以只能苦哈哈地用 `.zip` 的方式安裝，才會需要手動設定環境變數。
+
+
+3. 接下來關閉 cmd 視窗，重新打開一個新的 cmd 視窗，執行 `java -version` 指令，若能看到版本資訊，代表安裝成功。
+```powershell
+C:\Users\User>java -version
+openjdk version "25" 2025-09-16
+OpenJDK Runtime Environment (build 25+36-3489)
+OpenJDK 64-Bit Server VM (build 25+36-3489, mixed mode, sharing)
+```
+:::
+
+### VScode Java 開發環境配置
+VScode 現在寫 Java 已經比過去方便很多了，只要安裝 [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) 就可以了。  
+這裡面包含了多個 Java 開發相關的擴充套件，像是語法高亮、程式碼補全、除錯等功能。  
+
+如果還沒有安裝 JDK，那其實裝完 VScode extension 後，創建 `.java` file 時，也會被提示要安裝 JDK。  
+但總之，裝好 JDK 跟 VScode extension 後，就可以開始寫 Java 程式了。
+
+## Java 撰寫架構
+在前進 Java 之前，首先要知道的是，Java 是非常典型的 OOP 語言，所以他的一切都建立在 class (類別) 的基礎上。  
+對 Java 而言，一個 .java 檔案最多只能有一個 public class，且檔名必須與該 public class 名稱完全相同（包含大小寫）。  
+注意，這裡說的是「public class」，你可以在同一個 .java 檔案裡面宣告多個 class，但只能有一個是 public 的，且這個 public class 的名稱必須與檔名相同。
+
+一個 `.java` file 的撰寫架構可以區分成幾區：
+1. package 宣告 (可選) → 用來宣告這個 class 屬於哪個 package (套件)
+2. import 宣告 (可選) → 用來引入其他 package 的 class
+3. ⭐ 主類別宣告 (必須) → 用來宣告這個 class 的名稱。要注意的是，所謂主類別宣告，就是 `public class ClassName`，而一個 `.java` file 只能有一個主類別宣告。
+
+主類別宣告的 class 裡面，又可以分成幾區：
+1. 屬性成員宣告 (可選) → 用來宣告這個 class 的屬性 (變數)
+2. ⭐ 主方法宣告 → 就是很常見的 `public static void main(String[] args)`，這是 Java 程式的進入點 (entry point)，程式執行時會從這裡開始。
+3. 其他方法宣告 (可選) → 用來宣告這個 class 的其他方法 (函式)
+
+下面是一個簡單的 Java 範例：
+
+```java
+public class PrintName {
+    static String myName = "Jeremy Ho";
+
+    public static void main(String[] args) {
+      printSomething(myName);
+      printSomething("Hello, World!");
+    }
+
+    static void printSomething(String something) {
+        System.out.println(something);
+    }
+}
+```
+
+:::tip
+`static` 表示該成員屬於 class 本身，而不是某個 instance。  
+當 class 被載入時，static 成員就會建立，因此它可以在不建立物件實例的情況下被呼叫。  
+
+如果不宣告 `static`，那麼這個方法或屬性就屬於 class 的實例 (instance)，必須先創建這個 class 的物件，然後透過這個物件來呼叫這個方法或屬性。  
+舉例來說：
+
+```java
+public class PrintName {
+    String myName = "Jeremy Ho";
+
+    public static void main(String[] args) {
+      PrintName instance = new PrintName();
+      instance.printSomething(instance.myName);
+      instance.printSomething("Hello, World!");
+    }
+
+    void printSomething(String something) {
+        System.out.println(something);
+    }
+}
+```
+:::

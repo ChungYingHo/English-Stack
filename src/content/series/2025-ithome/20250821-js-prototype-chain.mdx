@@ -1,0 +1,95 @@
+---
+title: 'Day13 - JS 的原型鏈又在說什麼故事？'
+tags: [JavaScript, prototype]
+author: 'jeremy'
+date: '2025-08-21'
+changelog: []
+---
+
+Javascript 有一個每本書都會提到，但面試時考出來機會偏低的基本概念，那就是原型鍊（Prototype Chain）。  
+實務上雖然因為諸多原因我們會下意識忽略了原型鍊，但我認同它比前幾天提到的 `call`、`bind`、`apply` 比起來更符合 JS 接近底層的概念，所以考出來也不為過。
+
+為何說原型鍊是 JS 接近底層的概念？  
+我們看著下方的 code 來思索一個問題：為什麼 `nameList` 這個 array 可以用 `.forEach` 來遍歷整個陣列？
+
+```js
+const nameList = ['Alice', 'Bob', 'Charlie']
+nameList.forEach(name => console.log(name))
+```
+
+啊，因為 `nameList` 就是一個 array 呀，然後 `.forEach` 就是 array 的一個操縱方法呀~。  
+說真的，我沒辦法說你錯，因為大概念上來講就是這樣認知。  
+但實際上這句話背後隱藏的是原型鍊的概念。
+
+## OOP 與原型鍊
+學 Javascript 到了原型鍊這塊時會覺得它特別抽象是因為原型鏈的概念更趨近於 OOP (物件導向程式設計)。  
+但 Javascript 雖然本身支援 OOP 的寫法，但絕多數時候 (超過九成的時間)，我們都是用 FP (函數式程式設計) 的方式來開發。  
+
+OOP 的經典就是會有一個 class，然後 class 裡面會有一些屬性 (property) 與方法 (method)。  
+然後就會有一個實體 (instance) 來使用這個 class。  
+這個實體會繼承 class 的屬性與方法，但同時也可以擁有自己的屬性與方法，甚至可以覆寫 class 的方法。  
+以我一個學生物起家的，我會這樣說：
+
+> class 就是母代，往後的 instance 就是子代，子代會繼承母代的特性，但同時也可以擁有自己的特性。
+
+因為不是介紹 OOP，所以我就不講 OOP 的例子，它不是重點。  
+重點是 Javascript 的原型鍊就是這樣的概念，但我們學 JS 都是直接從 FP 的概念學起。
+
+為何說原型鍊跟 OOP 概念很像？  
+簡單來說其實 JS 底層有一個屬於每個物件的原型 (prototype)，這個原型就很像是 OOP 的 class。  
+我們把下面這段 code 放到 devtool 去跑，看看會得到什麼：
+
+```js
+const nameList = ['Alice', 'Bob', 'Charlie']
+
+console.log(Object.getPrototypeOf(nameList)) // Array.prototype
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(nameList))) // Object.prototype
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(nameList)))) // null
+```
+
+第一個 `console.log` 會得到一個 `Array.prototype`，這個原型就是 `nameList` 的原型，可以觀察到它是一個陣列，裡面有各種東西，大概長這樣：
+```js
+[at: ƒ, concat: ƒ, copyWithin: ƒ, fill: ƒ, find: ƒ, …]
+```
+展開後會按到很多熟悉的陣列操作方法：`every`、`filter`、`forEach`、`map`... 等。  
+
+接著第二個 `console.log` 會得到 `Object.prototype`，這個原型是所有物件的原型，大概長這樣：
+```js
+{__defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, __lookupSetter__: ƒ, …}
+```
+展開後也可以看到一些熟悉的物件操作方法：`hasOwnProperty`、`isPrototypeOf`、`valueOf`... 等。  
+最後的第三個 `console.log` 會得到 `null`，這就是原型鍊到頭了，沒有更多的原型可以追溯了。
+
+這樣一個例子套用 OOP 的概念就是 `Object.prototype` 是最早的 class、是最早的母代。  
+它往下是繼承了它屬性的 instance `Array.prototype`，也就是第一代子代。  
+再往下就是繼承 `Array.prototype` 的 `nameList`。  
+所以為何 `nameList` 可以使用 `.forEach`？追本溯源是因為它的媽媽 `Array.prototype` 提供了這個屬性給它。
+
+為此我們可以給原型鍊一個結論：
+
+> JS 的原型鍊就是一個親緣關係樹。當你在一個物件 (包含我們常用的 string、boolean、array... 等) 上呼叫屬性或方法時，JS 會沿著這條鍊一路往上找，直到找到為止，或是走到 null 才停下。
+
+## 被忽視的原型鍊，但其實他無處不在
+日常開發中我們會因為用這些繼承的屬性用得很順手而忽視原型鏈的存在，但其實它總是在各處會出現刷一下存在感。  
+舉個例來說，把這段 code 拿去跑會得到 `Uncaught TypeError: user.forEach is not a function`：
+
+```js
+const user = {
+  name: 'Alice',
+  age: 25
+}
+
+user.forEach(name => console.log(name)) // Uncaught TypeError: user.forEach is not a function
+```
+
+這是因為 `user` 這個物件，從它開始往上找原型鍊，路過了它的媽媽、阿嬤都沒找到 `forEach` 這個屬性，那自然而然用不了。  
+熟悉 TS 開發的，如果寫過聯合型別，如以下範例：
+
+```ts
+const test: string[] | Object = ['Alice', 'Bob', 'Charlie'] // 先別管為何型別要塞 array 跟 object，就是示範 ><
+
+test.forEach(name => console.log(name))
+```
+會看到 TS 說 ` Property 'forEach' does not exist on type 'Object'`，這就是原型鏈的體現。  
+因為 `Object` 那條原型鍊上沒有 `forEach` 這個屬性，所以 TS 會報錯。  
+是說這也是我推崇 TS 的其中一個原因。比起 JS 執行時會回傳 undefined， TS 會在編譯時直接阻止你呼叫找不到的屬性。

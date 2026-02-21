@@ -1,0 +1,44 @@
+{
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "astro"
+  ],
+  "cSpell.words": [
+    "Aira",
+    "chartjs",
+    "Crect",
+    "cssrem",
+    "Csvg",
+    "datalabels",
+    "Drilldown",
+    "Fira",
+    "flexsearch",
+    "Frontmatter",
+    "grayscale",
+    "Hartwell",
+    "ithome",
+    "Katex",
+    "leetcode",
+    "Lerp",
+    "macrotask",
+    "maxage",
+    "Noto",
+    "Nové",
+    "nums",
+    "oneline",
+    "setx",
+    "shiki",
+    "textable",
+    "unins",
+    "vocus",
+    "Ying"
+  ],
+  "chat.tools.terminal.autoApprove": {
+    "mv": true
+  }
+}

@@ -1,0 +1,573 @@
+---
+title: "[Data Structure] 陣列 & 鏈結串列"
+author: "jeremy"
+date: "2026-02-17"
+tags: [data structure, array, linked list]
+changelog: []
+sameDateSort: 1
+---
+
+:::info
+對於 Java 而言，其實有更方便的 ArrayList class 可用來取代傳統陣列 (Array)，同時也有 LinkedList class 可用來取代手動實作的鏈結串列 (Linked List)。  
+但因為這裡紀錄的是「資料結構」的基本觀念與實作方式，所以還是會以最原始的陣列與鏈結串列來說明其概念與操作。
+:::
+
+線性串列是數學理論應用在電腦科學中一種簡單與基本的資料結構，這一範疇包含了陣列與鏈結串列兩種主要的實作方式。  
+一般來說，如果線性串列是 $n$ 個元素組成的有限序列 ($n > 0$)，那其表示式為 $(a1, a2, a3, ..., an)$。
+
+那線性串列應用在電腦資料儲存結構中可以分為兩種：
+1. 靜態資料結構，又稱**密集串列**，指的其實就是陣列 (Array)。其特性為將有序的資料，使用連續記憶體空間儲存。因此在建立初期就需要先宣告最大可能的固定記憶體空間。
+    - 優勢：設計簡單，可以輕鬆讀取、修改串列中的任意元素 (透過索引值)。
+    - 劣勢：插入與刪除元素時，需要搬移大量元素，易造成記憶體浪費。
+2. 動態資料結構，又稱**鏈結串列** (Linked List)。其特性為將有序的資料，使用不連續記憶體空間儲存。動態資料結構的記憶體配置是在執行時才發生，所以不需要事先宣告記憶體空間大小。
+    - 優勢：插入與刪除元素時，只需調整指標 (Pointer) 即可，不需要搬移其他元素，節省時間與空間。
+    - 劣勢：設計較為複雜，無法直接存取任意元素 (只能從頭節點開始逐一遍歷)。
+
+## 陣列 (Array)
+陣列是線性資料結構，其將**相同的資料型別**元素儲存在連續的記憶體空間中。  
+而元素在陣列中的位置稱作**索引值** (Index)，通常從 $0$ 開始編號。
+
+陣列又有三種類型：
+
+| 類型 | 語法範例 | 說明 | 生活化例子 |
+|------|-----------|------|-------------|
+| 一維陣列 (1D Array) | `int[] numbers = {1, 2, 3, 4, 5};` | 最基本的陣列形式，元素排成一列。可以想成一排座位，每個位置放一個資料。 | 一整排學生的座號：`[1, 2, 3, 4, 5]` |
+| 二維陣列 (2D Array) | `int[][] matrix = {{1, 2}, {3, 4}};` | 元素排列成表格或矩陣，有「行」與「列」的概念。 | 教室座位表（2 行 2 列）：<br/>`[ [1, 2], [3, 4] ]` |
+| 多維陣列 (Multi-dimensional Array) | `int[][][] cube = {{{1}, {2}}, {{3}, {4}}};` | 超過兩個維度的陣列，可以想成堆疊起來的立體結構。 | 多間教室的座位表（每間都有 2x2 座位）：<br/>`[ [ [1], [2] ], [ [3], [4] ] ]` |
+
+### 走訪、隨機走訪元素
+```java
+import java.util.concurrent.ThreadLocalRandom;
+
+public class arrayVisit {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 2, 5, 4};
+
+        // 原始陣列
+        System.out.print("Original array's element: ");
+
+        // 遍歷走訪
+        readArr(arr);
+
+        // 隨機走訪
+        randomNum(arr);
+    }
+
+    // 遍歷讀陣列
+    static void readArr(int[] arr) {
+        int arrSum = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print(arr[i] + ", ");
+            }
+
+            arrSum += arr[i];
+        }
+
+        System.out.println();
+        System.out.println("Array sum is: " + arrSum);
+    }
+
+    // 隨機走訪
+    static void randomNum(int[] arr) {
+        ThreadLocalRandom tlr = ThreadLocalRandom.current();
+        int randomNum = tlr.nextInt(arr.length);
+        System.out.println("Random visit: " + arr[randomNum]);
+    }
+}
+```
+
+### 新增、插入元素
+陣列元素在記憶體的儲存是連續的，所以之間無空間再存放新元素。  
+若要在陣列中間插入新元素，必須將插入位置後的所有元素往後移動一個位置，然後再將新元素放入指定位置。  
+但因為陣列大小是固定的，所以加入元素必定會導致**該陣列尾部的元素遺失**。
+
+```java
+public class arrayInsert {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 2, 5, 4};
+
+        // 原始陣列
+        System.out.print("Original array's element: ");
+        readArr(arr);
+
+        // 插入元素
+        insertNum(arr, 9, 2); // [1, 3, 9, 2, 5]
+    }
+
+    // 遍歷讀陣列
+    static void readArr(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print(arr[i] + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    // 插入元素
+    static void insertNum(int[] arr, int value, int index) {
+        for (int i = arr.length - 1; i > index; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[index] = value;
+        System.out.print("Array after inserted: ");
+        readArr(arr);
+    }
+}
+```
+
+### 刪除元素
+如果想刪除索引 `i` 位置，則需把索引 `i` 之後的所有元素往前移動一個位置，最後一個元素則會重複倒數第二個元素的值。
+
+```java
+public class arrayDelete {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 2, 5, 4};
+
+        // 原始陣列
+        System.out.print("Original array's element: ");
+        readArr(arr);
+
+        // 刪除元素
+        deleteNum(arr, 2); // [1, 3, 5, 4, 4]
+
+    }
+
+    // 遍歷讀陣列
+    static void readArr(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print(arr[i] + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    // 刪除元素
+    static  void deleteNum(int[] arr, int index){
+        for (int i = index; i < arr.length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        System.out.print("Array after deleted: ");
+        readArr(arr);
+    }
+}
+```
+
+:::info
+總結陣列的 insert 與 delete 有以下特點，或者說缺點：
+1. 時間複雜度高：插入與刪除的平均時間複雜度為 $O(n)$，$n$ 為陣列長度。因為需要移動大量元素，當陣列很大時，這會導致效能瓶頸。
+2. 丟失元素：因為陣列長度不可變，所以插入元素會超出陣列長度，導致陣列尾部的元素遺失。
+3. 記憶體浪費：陣列元素變動時並無法改變陣列大小，若一開始宣告過大，會浪費記憶體空間。
+:::
+
+### 尋找元素位置
+陣列因為是線性結構，所以陣列的查詢又稱為線性搜尋 (Linear Search)，需要從頭到尾逐一比對每個元素，直到找到目標元素或搜尋完整個陣列為止。
+
+```java
+public class arraySearch {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 2, 5, 4};
+
+        // 原始陣列
+        System.out.print("Original array's element: ");
+        readArr(arr);
+
+        // 搜尋存在的元素
+        searchNum(arr, 5);
+        // 搜尋不存在的元素
+        searchNum(arr, 9);
+    }
+
+    // 遍歷讀陣列
+    static void readArr(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print(arr[i] + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    // 查詢目標位置
+    static void searchNum(int[] arr, int value) {
+        int targetIndex = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == value) {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        if (targetIndex == -1) {
+            System.out.println("Cannot find index of value");
+        } else {
+            System.out.println("Find the index of value " + value + " is: " + targetIndex);
+        }
+    }
+}
+```
+
+### 陣列擴充
+雖說陣列長度不可變，但可以透過建立一個更大的新陣列，然後將舊陣列的元素依序複製過去，來達到擴充陣列的目的。  
+因為這樣依序複製的手法跟走訪的邏輯類似，所以時間複雜度也是 $O(n)$。
+
+```java
+import java.util.Arrays;
+
+public class arrayExtend {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 2, 5, 4};
+
+        // 原始陣列
+        System.out.print("Original array's element: ");
+        readArr(arr);
+
+        // 不使用 copyOf 的擴充
+        extendArrWithoutCopyOf(arr, 5);
+
+        // 擴充陣列並新增元素
+        extendArr(arr, 9, 2, 3);
+    }
+
+    // 遍歷讀陣列
+    static void readArr(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print(arr[i] + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    // 擴充陣列 & 新增元素
+    static  int[] extendArr(int[] arr, int value, int index, int large){
+        arr = Arrays.copyOf(arr, arr.length + large);
+        for (int i = arr.length - 1; i > index; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[index] = value;
+        System.out.print("Array after expanded: ");
+        readArr(arr);
+
+        return arr;
+    }
+
+    // 不用 copyOf 的擴充
+    static void extendArrWithoutCopyOf(int[] arr, int large) {
+        int[] newArr = new int[arr.length + large];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+
+        readArr(newArr);
+    }
+}
+```
+
+### 陣列的優缺點
+1. 優點
+    - 空間效率高：陣列在記憶體中是連續分配的，這使得陣列在存取元素時非常高效，因為可以透過索引直接定位到元素的位置。
+    - 可以隨機訪問：陣列允許透過索引值直接存取任意位置的元素，這使得讀取和修改元素的操作非常快速，時間複雜度為 $O(1)$。
+    - 快取區域性：由於陣列的元素在記憶體中是連續存放的，所以可以快速取得相鄰元素。
+2. 缺點
+    - 固定大小：陣列的大小在宣告時就必須確定，無法動態調整，這可能導致記憶體浪費或不足。
+    - 插入與刪除效率低：在陣列中插入或刪除元素需要移動其他元素，時間複雜度為 $O(n)$，這在處理大量資料時可能會導致效能問題。
+
+所以從陣列的優缺點可以看出，陣列除了讀取與修改特定 index 的元素為 $O(1)$，其他像是插入、刪除、搜尋等操作都需要 $O(n)$ 的時間複雜度。  
+所以陣列這種資料結構比較適合「已知資料長度，且讀取頻繁、修改 (插入、刪除) 較少」的應用場景，所以特別常被用來存放常數型資料 (constant data)，主要用途是查詢或讀取特定位置資料，而非頻繁更新資料。  
+這類情景在生活上的例子包括：
+1. 遊戲裡的玩家排行榜 → 通常會固定顯示前 N 名玩家，且主要操作是讀取排名。
+2. 學生成績單 → 成績單通常有固定的科目數量，讀取成績的頻率較高。
+
+或是存取一些已知長度的資料，如：
+1. 一週七天的天氣預報 → 每週有固定的七天，主要操作是查詢每天的天氣狀況。
+2. 一年 12 個月的星座 → 這也是固定的 12 個星座，主要操作是查詢某個月份對應的星座。
+
+舉一個簡單例子來說，金融機構可以用陣列來存放「今日的各種幣別匯率」。  
+因為這些匯率資料的筆數是固定的（例如僅有 5 種主要貨幣），而主要操作是查詢特定幣別的匯率，並非頻繁地更新或刪除。  
+因此，用陣列來儲存與查詢這類固定資料是相當合適的作法。
+
+```java
+public class ExchangeRate {
+    public static void main(String[] args) {
+        // 幣別與對應匯率（以新台幣為基準）
+        String[] currencies = {"USD", "JPY", "EUR", "KRW", "GBP"};
+        double[] rates = {32.1, 0.22, 34.8, 0.024, 40.5}; // 匯率表
+
+        String target = "EUR"; // 想查詢的幣別
+        double amount = 100;   // 欲換匯的金額（例如 100 新台幣）
+
+        boolean found = false;
+        for (int i = 0; i < currencies.length; i++) {
+            if (currencies[i].equals(target)) {
+                double result = amount / rates[i];
+                System.out.println(amount + " TWD 可兌換成 " + result + " " + target);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("查無幣別：" + target);
+        }
+    }
+}
+```
+
+## 鏈結串列 (Linked List)
+
+是一種線性資料結構，每一個元素都是一個**節點物件 (Node)**。  
+各節點透過**引用 (next)** 相連結，形成一個鏈狀結構，故稱為鏈結串列。  
+引用會紀錄下一個節點的記憶體位置 (address)，最後一個節點的引用則指向 `null`，表示串列結束。  
+所以透過引用，可以從當前節點訪問到下一個節點，依此類推直到串列尾端。  
+Linked List 的設計使各 node 可以分散在記憶體中的任意位置，無需連續空間。
+
+Linked List 的第一個 node 稱為**頭節點 (Head Node)**，最後一個 node 則稱為**尾節點 (Tail Node)**。  
+每個 node 都由**值 (Value)** 與**引用 (Next)** 組成，因此在相同資料量下，Linked List 會比 Array 佔用更多的記憶體空間 (大致就是多了 1 倍啦)。
+
+### Category of Linked List
+1. 單向鏈結串列 (Singly Linked List)：最基本的鏈結串列，每個節點只包含一個指向下一個節點的引用與值。首個節點稱為頭節點，最後一個節點稱為尾節點，其引用指向 null。 → 適合實現堆疊 (Stack) 或佇列 (Queue) 等資料結構。
+2. 雙向鏈結串列 (Doubly Linked List)：每個節點包含兩個引用，一個指向下一個節點，另一個指向前一個節點。這使得在串列中可以雙向遍歷，方便插入與刪除操作。所占記憶體空間較單向鏈結串列多。 → 適合需要頻繁插入與刪除操作的場景 or 快速查詢前後節點的應用，ex: 瀏覽器的歷史紀錄。
+3. 環形鏈結串列 (Circular Linked List)：最後一個節點的引用指向頭節點，形成一個環狀結構。這種結構允許從任意節點開始遍歷整個串列，適用於需要循環訪問資料的場景。 → 適合需要循環訪問資料的場景，ex: 音樂播放器的播放清單、作業系統的排程演算法。
+
+### Create a Linked List
+
+建立 Linked List 大致有兩個步驟：
+1. 先初始化各 node 物件
+2. 建立 node 之間的引用關係
+
+```java
+public class listBasic {
+    public static void main(String[] args) {
+        Node n0 = new Node(1);
+        Node n1 = new Node(3);
+        Node n2 = new Node(2);
+        Node n3 = new Node(5);
+        Node n4 = new Node(4);
+
+        n0.next = n1;
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+    }
+}
+
+class Node {
+    int value;
+    Node next;
+
+    Node(int val) {
+        this.value = val;
+    }
+}
+```
+
+### Insert a Node
+
+在 Linked List 裡要插入新的 node 是相當容易的事情，例如要在 `n0` 與 `n1` 之間加入新節點 `p`，只需要調整兩個節點間的引用。  
+因此 insert 的時間複雜度為 $O(1)$，相較於 Array 的 $O(n)$，效率提升非常多。
+
+```java
+public class listInsert {
+    public static void main(String[] args) {
+       Node n0 = new Node(1);
+       Node n1 = new Node(3);
+       Node n2 = new Node(2);
+       Node n3 = new Node(5);
+       Node n4 = new Node(4);
+
+       n0.next = n1;
+       n1.next = n2;
+       n2.next = n3;
+       n3.next = n4;
+
+       Node p = new Node(0);
+       insertNode(n0, p);
+       printList(n0);
+    }
+
+    static void insertNode (Node head, Node newNode) {
+        newNode.next = head.next;
+        head.next = newNode;
+    }
+
+    static void printList(Node head) {
+        Node curr = head;
+        System.out.print("Linked List: ");
+
+        while (curr != null) {
+            if (curr.next != null) {
+                System.out.print(curr.value + ", ");
+            } else {
+                System.out.print(curr.value);
+            }
+            
+            curr = curr.next;
+        }
+        System.err.println();
+    }
+
+
+}
+
+class Node {
+    int value;
+    Node next;
+
+    Node (int val) {
+        this.value = val;
+    }
+}
+```
+
+### Delete a Node
+
+刪除 node 在 Linked List 也是相當簡單的事情，只需要改變一個 node 的引用即可。  
+以前面 insert 的例子來說，要在原 Linked List 裡刪除 `p` 節點，只需要將 `n0` 的引用指向 `n1` 即可。  
+
+刪除完成後，雖然 node `p` 仍然存在，其引用仍指向 `n1`，但在走訪由 `n0` 開始的 Linked List 時，已經無法再透過 `n0` 訪問到 `p` 了。  
+某種意義上來說，也是又建立了一條由 `p` 開始的 Linked List。
+
+```java
+public class listDelete {
+    public static void main(String[] args) {
+       Node n0 = new Node(1);
+       Node p = new Node(0);
+       Node n1 = new Node(3);
+       Node n2 = new Node(2);
+       Node n3 = new Node(5);
+       Node n4 = new Node(4);
+
+       n0.next = p;
+       p.next = n1;
+       n1.next = n2;
+       n2.next = n3;
+       n3.next = n4;
+
+       removeNode(n0, p);
+       printList(n0);
+
+       removeNextNode(n0);
+       printList(n0);
+    }
+
+    static void removeNode (Node head, Node targetNode) {
+        if (head == null || targetNode == null){
+            return;
+        }
+        if (head.next == targetNode) {
+            head.next = targetNode.next;
+        }
+    }
+
+    static void removeNextNode (Node head) {
+        if (head.next == null) {
+            return;
+        }
+        head.next = head.next.next;
+    }
+
+    static void printList(Node head) {
+        Node curr = head;
+        System.out.print("Linked List: ");
+
+        while (curr != null) {
+            if (curr.next != null) {
+                System.out.print(curr.value + ", ");
+            } else {
+                System.out.print(curr.value);
+            }
+            
+            curr = curr.next;
+        }
+        System.err.println();
+    }
+
+}
+
+class Node {
+    int value;
+    Node next;
+
+    Node (int val) {
+        this.value = val;
+    }
+}
+```
+
+### Search a Node
+
+```java
+public class listSearch {
+    public static void main(String[] args) {
+        Node n0 = new Node(1);
+        Node n1 = new Node(3);
+        Node n2 = new Node(2);
+        Node n3 = new Node(5);
+        Node n4 = new Node(4);
+
+        n0.next = n1;
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+
+        searchList(n0, 9); // value 9 不存在 -> Cannot find the value of 9 in the linked list.
+        searchList(n0, 5); // value 5 存在 -> Success! Find the value 5 in the linked list.
+    }
+
+    static void searchList (Node head, int val) {
+        Node current = head;
+        boolean isFindVal = false;
+
+        while (current != null) {
+            if (current.value == val) {
+                isFindVal = true;
+                break;
+            }
+            current = current.next;
+        }
+
+        if (isFindVal) {
+            System.out.println("Success! Find the value " + val + " in the linked list.");
+        } else {
+            System.out.println("Failed! Cannot find the value of " + val + " in the linked list.");
+        }
+    }
+}
+
+class Node {
+    int value;
+    Node next;
+
+    Node(int val) {
+        this.value = val;
+    }
+}
+```
+
+## Array vs Linked List — CRUD 時間複雜度比較
+
+
+| 資料結構     | 讀取 (Access) | 搜尋 (Search) | 插入 (Insert) | 刪除 (Delete) | 存放方式 | 擴展性 | 記憶體效率 |
+|--------------|---------------|---------------|---------------|---------------|----------|--------|------------|
+| Array        | $O(1)$          | $O(n)$          | $O(n)$          | $O(n)$          | 連續記憶體 | 良好   | 佔用少，但易浪費       |
+| Linked List  | $O(n)$          | $O(n)$          | $O(1)$          | $O(1)$          | 不連續記憶體 | 較差   | 佔用多       |
+
+:::info
+Linked list 的插入與刪除為 $O(1)$ 的前提是「已經持有該節點的參考 (reference)」，只需調整指標即可。  
+若未知插入位置的記憶體位置，即不知道他前後節點是誰時，則必須先搜尋，因為搜尋是 $O(n)$，所以插入也會變 $O(n)$。  
+不過一般在探討比較時都是用「理論」啦~
+:::

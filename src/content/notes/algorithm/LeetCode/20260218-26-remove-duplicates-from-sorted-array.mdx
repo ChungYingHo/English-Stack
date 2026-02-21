@@ -1,0 +1,86 @@
+---
+title: "26. Remove Duplicates from Sorted Array"
+author: "jeremy"
+date: "2026-02-18"
+tags: [leetcode, array]
+changelog: []
+---
+
+:::info
+[Leetcode 26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
+:::
+
+## 題目要求
+Given an integer array `nums` sorted in non-decreasing order, remove the duplicates **in-place** such that each unique element appears only once. The relative order of the elements should be kept the same.
+
+Consider the number of unique elements in `nums` to be `k​`​​​​​​​​​​​​​. After removing duplicates, return the number of unique elements `k`.  
+The first `k` elements of `nums` should contain the unique numbers in sorted order. The remaining elements beyond index $k - 1$ can be ignored.
+
+Custom Judge:  
+The judge will test your solution with the following code:
+```
+int[] nums = [...]; // Input array
+int[] expectedNums = [...]; // The expected answer with correct length
+
+int k = removeDuplicates(nums); // Calls your implementation
+
+assert k == expectedNums.length;
+for (int i = 0; i < k; i++) {
+    assert nums[i] == expectedNums[i];
+}
+```
+If all assertions pass, then your solution will be accepted.
+
+```
+Example 1:
+
+Input: nums = [1,1,2]
+Output: 2, nums = [1,2,_]
+```
+Explanation: Your function should return $k = 2$, with the first two elements of `nums` being 1 and 2 respectively.  
+It does not matter what you leave beyond the returned `k` (hence they are underscores).
+
+
+Example 2:
+```
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
+```
+Explanation: Your function should return $k = 5$, with the first five elements of `nums` being 0, 1, 2, 3, and 4 respectively.  
+It does not matter what you leave beyond the returned `k` (hence they are underscores).
+
+## 解題思路
+先說我第一次解這題時犯了一個大錯，我完全忽略了這題要求要「in-place」的條件，也就是演算法常說的在地性。  
+所以我直接新增了一個 ArrayList 塞那些 unique element XD。
+
+那既然要考慮在地性，解法理所當然就沒上面那麼簡單。  
+這題優秀的點在於數字是已經排序過的，對於我們來說，我們剩下的只是盡量把 unique element 往前塞、然後把重複的 element 往後移動就好。  
+以 `[1,1,2]` 為例，我們預期的結果是 `[1,2,_]`，那個 `_` 其實不重要，他其實單純是 leetcode 用來表示「這個位置的值不重要」的符號。  
+不然以 Java 解題來說，`int[]` 怎麼說也不可能塞一個 char `_` 進去吧 www  
+所以 `[1, 1, 2]` 在經過演算法處理後，實際是變成 `[1, 2, 2]`，簡單來說就是從 index 2 開始後面其實都是垃圾區，沒必要在乎它，題目要的只是垃圾區前面的 unique element 數量。
+
+在解這種 array 相關的題目時，標準解法是宣告一個指標 (pointer)，這個指標代表的是我們關心的 array index。  
+以這題來說，pointer 代表的是目前 unique element 應該要被放置的位置。  
+然後還有一個小技巧是，這種跟 array 遍歷相關的題目，尤其跟 sort、duplicate 相關的題目，我們其實可以從 index 1 開始遍歷，因為 index 0 的 element 一定是 unique 的 (前面沒有東西可以跟他重複嘛)。  
+那因為是從 index 1 開始遍歷嘛，那所以比較對象就會是前一個 element (index - 1)。  
+
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int pointer = 1;
+
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) {
+                nums[pointer] = nums[i];
+                pointer++;
+            }
+        }
+
+        return pointer;
+    }
+}
+```

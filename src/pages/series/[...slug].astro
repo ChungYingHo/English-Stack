@@ -1,0 +1,17 @@
+---
+import { generateCollectionPaths } from '@/utils/content';
+import PostRenderer from '@/components/PostRenderer.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  return generateCollectionPaths('series');
+}
+
+type Props = {
+  entry: CollectionEntry<'series'>;
+}
+
+const { entry } = Astro.props;
+---
+
+<PostRenderer entry={entry} />

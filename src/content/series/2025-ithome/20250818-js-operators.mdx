@@ -1,0 +1,181 @@
+---
+title: 'Day10 - 又不是寫文章，為什麼 JS 也有「!」跟「?」呢？'
+tags: [JavaScript, operator, function]
+author: 'jeremy'
+date: '2025-08-18'
+changelog: []
+---
+
+如題，又不是寫文章，為什麼 Javascript 裡到處都是 `!` 跟 `?`？  
+這其實來自於人類的一種偷懶個性，就是想透過這樣簡短的 operator 來達成一些本來要寫勒勒長的邏輯。  
+
+## `!` 真的讓我好驚訝！
+學 Javascript 的，喔，其實不限 JavaScript，任何程式語言都是，都有一個 data type 叫 boolean。  
+在實務上，`!` 這個 operator 就常常是對應 boolean 的操作。  
+初學 Javascript 的看到最多的就是單一 `!` 存在，但其實雙 `!!` 的寫法同樣在實務上很常見喔！
+
+### 單一 `!`
+`!` 眾所周知其實就是「not」的意思，所以不等於的 not equal 才會寫成 `!==`。  
+所以對使用 `!` 的東西來說，就有一種否定、反轉的意思，比如：
+
+```js
+const isLoading = true
+console.log(!isLoading) // false
+```
+
+這樣為一個本身是 `true` 的變數加上 `!`，就會變成 `false`。  
+反之，對於一個本身是 `false` 的變數加上 `!`，就會變成 `true`。
+
+但是，在 if-else 裡有一個值得關注的是，如果條件裡用了 `!`，那就會視為該在 `false` 的情況下執行。
+
+```js
+const isLoading = false
+if (!isLoading) {
+  console.log("isLoading 為 false")
+} else {
+  console.log("isLoading 為 true")
+}
+```
+
+## 雙重 `!!` 用來檢查空資料
+已經知道 `!` 會將資料反轉，但前面沒提到，但我想諸位應該也都知道的是，`!` 遇到非 boolean 的資料時會將其轉換成 boolean 並進行一次反轉。  
+而在 JavaScript 的資料結構裡，我們也都知道下述這些資料其實都是 falsy，也就是說這些資料在 boolean 上都是 `false`：
+1. `undefined`
+2. `null`
+3. `0`
+4. `NaN`
+5. `""` (空字串)
+
+所以對於要檢測這些資料是否存在的情況下，我們可以使用 `!!` 來達成。  
+為何要多一個 `!` 呢？  
+前面提到過 `!` 遇到非 boolean 的資料時會將其轉換成 boolean 並進行一次反轉，也就是說，第一次 `!` 會把空資料的 boolean 轉成 `true`，那就會希望第二次 `!` 再將其轉回 `false`。
+
+## 但怎麼檢查空陣列與空物件？
+複習一下~  
+對於空陣列 `[]` 與空物件 `{}`，它們在 JavaScript 裡都是 truthy 的資料，所以如果要檢查它們是否為空陣列或空物件，就不能單靠 `!!` 來判斷了。  
+陣列的話我們可以檢查它的長度，為 0 就是空陣列：
+
+```js
+const arr = []
+if (arr.length === 0) {
+  console.log("這是一個空陣列")
+}
+```
+
+物件的話我們可以檢查它的 key 數量，為 0 就是空物件：
+
+```js
+const obj = {}
+if (Object.keys(obj).length === 0) {
+  console.log("這是一個空物件")
+}
+```
+
+### 多提一嘴 TypeScript 裡的 `!`
+有在寫 TypeScript 的朋朋應該不陌生，雖然這做法跟 any 一樣不推薦，但有時遇到 type error，資料與 interface 對不上時，比如 interface 表示此屬性為 `string | string[]`，但後端回來的資料可能是 `string | undefined`，我們可能會默默在資料後面加上一個 `!` 來做 assertion，表示這個資料一定會有值。  
+但這種做法真的不是很推薦，因為在非必要場景下繞過 TypeScript 的 type check 其實是有風險的，安全做法其實是要去看資料來源要修正還是 interface 要修正。
+
+## `?` 也讓我滿頭問號耶
+`?` 在 Javascript 裡有 optional (可選的) 的意思。  
+所以有在寫 TypeScript 的人在定義 interface 時，有時會把某些屬性用 `?` 做標記，就表示這個屬性是可選的，可能會有值，也可能沒有值，那 TS 在 type check 時就不會強制要求這個屬性一定要有值。  
+以下方範例來講，也就是冠以 `User` type 的資料其實不一定要有 `email` 這個屬性。
+
+```ts
+interface User {
+  id: number
+  name: string
+  email?: string
+}
+```
+
+### 守護程式運作的 optional chaining
+現來看下述這段 code，你覺得它能運作嗎？
+
+```js
+const user = {
+  id: 1,
+  name: "John Doe"
+}
+
+console.log(user.email.toLowerCase())
+```
+
+答案是不行，我們會得到 `Uncaught TypeError: Cannot read properties of undefined (reading 'toLowerCase')`。  
+這是因為 `user` 物件裡沒有 `email` 屬性，所以當我們嘗試去讀取 `email` 的時候，JavaScript 會報錯，然後程式執行會被中斷。  
+這個時候我們就可以使用 `?` 來做 optional chaining。  
+`?` 的存在會讓 JS 知道 `email` 這個屬性可能不存在，但存在時就會執行後面的 `toLowerCase()` 方法。
+
+```js
+const user = {
+  id: 1,
+  name: "John Doe"
+}
+
+console.log(user.email?.toLowerCase())
+```
+
+ok，這次我們輸出了 `undefined`，而不會報錯了。  
+這種 optional chaining 的做法在實務中相當常見。  
+因為前端會需要頻繁與後端溝通，有時我們對於後端回來的資料裡某些屬性是否必定有值其實是不確定的，或是前端自己的表單可能也會有某些欄位是可選的，這時候就可以使用 `?` 來避免程式因為讀取不存在的屬性而報錯。
+
+### 三元運算子
+三元運算子也是實務中常用的判別式語法，尤其是用 Vue 或 React 開發的話，有時難免會需要在 template 或 JSX 中去進行條件判斷，但這時 if-else 是不被准許的，就可以使用三元運算子來達成。  
+實作起來大概就會像這樣：
+
+```js
+<template>
+  <div>
+    <p>{{ isLoading ? "Loading..." : "Loaded!" }}</p>
+  </div>
+</template>
+```
+
+那當然在一般 JS 中也是可以使用三元運算子，畢竟它的出現就是在條件為單一的情況下，讓我們可以用更簡潔的方式來寫出 if-else 的邏輯。
+
+```js
+const loadingMsg = isLoading ? "Loading..." : "Loaded!"
+```
+
+你可能會說，條件為單一？但三元運算子也可以寫巢狀判別式呀：
+```js
+const errorMsg = errorStatus === 404 ? "Not Found" :
+  errorStatus === 500 ? "Internal Server Error" :
+  "Unknown Error"
+```
+
+遇到這種多重條件的情況，我建議還是用 if-else，或是 switch case，在可讀性上會更好。
+
+```js
+let errorMsg
+
+switch (errorStatus) {
+  case 404:
+    errorMsg = "Not Found"
+    break
+  case 500:
+    errorMsg = "Internal Server Error"
+    break
+  default:
+    errorMsg = "Unknown Error"
+}
+```
+
+還是老話一句，達到同一個目的的手段有很多種，但要視情況選擇合適的那個。
+
+### 雙重 `??` 表滿足條件
+雙重 `??` 也是一個實用的開發方式，通常用在資料是 `null` 或 `undefined` 時給予 fallback 值的情況下。  
+以下方範例來說，這段的意思是，如果 `user.name` 有值，就使用它，否則就使用 `"Guest"` 作為預設值。
+
+```js
+const currentUser = user.name ?? "Guest"
+```
+
+fallback 是程式開發中很重要的手段，在不確定資料實際型態的時候，使用 `??` 可以讓我們在資料不存在或是為 `null`、`undefined` 時提供一個預設值，避免程式因為讀取不到資料而報錯。  
+比如以下範例如果沒有加 fallback，當 `user.name` 為 `undefined` 時，就會導致程式報錯 (注意：這假設 `user.name` 一定是字串；如果型別不正確，依然可能在呼叫方法時出錯)。  
+但如果使用 `??`，就可已在沒有值的情況下提供一個預設值去做 `toLowerCase()`：
+
+```js
+const currentUser = user.name ?? "Guest"
+
+currentUser.toLowerCase()
+```

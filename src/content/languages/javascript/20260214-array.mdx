@@ -1,0 +1,836 @@
+---
+title: "[JS] Array Cheat Sheet"
+author: "jeremy"
+date: "2026-02-14"
+tags: ["JavaScript", "Array"]
+changelog: []
+---
+
+## 陣列新增元素
+### `arr.push()`
+往陣列最後方新增元素。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+numbers.push(9, 10)
+console.log(numbers)
+
+// Expected output:
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+### `arr.unshift()`
+往陣列最前方新增元素。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+numbers.unshift(-1, 0)
+console.log(numbers) 
+
+// Expected output:
+// [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+### `arr[]`
+直接指定索引位置新增元素，如果指定的索引位置已經有元素了，就會覆蓋掉原本的值。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+numbers[5] = 'six'
+console.log(numbers) 
+
+// Expected output:
+// [1, 2, 3, 4, 5, 'six', 7, 8]
+```
+
+:::warning
+那 `[]` 能拿來往陣列最後方新增元素嗎？  
+其實可以，但一般不建議這麼做，畢竟用 `[]` 的前提是必須知道 index，但實務上我們通常不會特別去看最後元素的 index 為何，而且實務上操作到陣列資料往往也是動態的，這種情況用 `[]` 遠不如用 `push` 來得直覺又安全。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+numbers[numbers.length] = 9
+console.log(numbers)
+
+// Expected output:
+// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+:::
+
+## 陣列移除元素
+### `arr.pop()`
+刪除陣列最後一個元素並回傳刪掉的值。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const removeNum = numbers.pop()
+console.log(removeNum)
+console.log(numbers)
+
+// Expected output:
+// 8
+// [1, 2, 3, 4, 5, 6, 7]
+```
+
+### `arr.shift()`
+刪除陣列最前方的元素並回傳刪掉的值。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const removeNum = numbers.shift()
+console.log(removeNum)
+console.log(numbers)
+
+// Expected output:
+// 1
+// [2, 3, 4, 5, 6, 7, 8]
+```
+
+### `arr.splice()`
+對**原陣列**直接做裁切並傳回裁切的部分。  
+注意！是原陣列！原陣列！原陣列！很重要說三次。  
+所以這是一個會對原資料直接出手的方法，使用上要特別注意。
+
+`splice` 的語法是 `array.splice(start[, deleteCount[, item1[, item2[, ...]]]])`，這是 MDN 上的公式，乍看之下好像是從 `start` 後就要開始傳 array 當參數，但那其實只是 MDN 在說明 `start` 後面的參數都是 optional 的。  
+意即我們可以這樣寫 `array.splice(start)`，這樣就會從 `start` 開始刪除到陣列結尾，所以 `start` 是「開始刪除的位置」，也就是起點 index。  
+而 `splice` 本身會回傳被刪除的元素，所以如果我們只帶 `start` 這個參數，回傳的就是從 `start` 開始到陣列結尾的元素。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const spliceValue = numbers.splice(5)
+console.log(spliceValue)
+console.log(numbers)
+
+// Expected output:
+// [6, 7, 8]
+// [1, 2, 3, 4, 5]
+```
+
+第二個參數 `deleteCount` 是選填的，他表示「要刪除的元素數量」，所以如果我們帶了 `start` 和 `deleteCount` 這兩個參數，回傳的就是從 `start` 開始往後數 `deleteCount` 個元素，而原陣列就會剩下被刪除的元素以外的部分。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const spliceValue = numbers.splice(5, 2)
+console.log(spliceValue)
+console.log(numbers)
+
+// Expected output:
+// [6, 7]
+// [1, 2, 3, 4, 5, 8]
+```
+
+第三個參數是 `item`，它可以有無數個，因為它代表的是「要插入的元素」。  
+所以一個 `splice` 如果看到它的參數是 >= 3 的話，就表示它不僅會刪除元素，還會在刪除的位置插入新的元素。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const spliceValue = numbers.splice(5, 2, 'six', 'seven', 'eight')
+console.log(spliceValue)
+console.log(numbers)
+
+// Expected output:
+// [6, 7]
+// [1, 2, 3, 4, 5, 'six', 'seven', 'eight', 8]
+```
+
+### `arr.slice()`
+有些人會說 `slice` 就是不修改原陣列的 `splice`，hmmm... 不太能說錯，部分時候這樣理解我覺得沒問題，尤其是對 JS 新手而言，這樣記的確比較方便。  
+但是！`slice` 其實語法是跟 `splice` 不一樣的！  
+很多人會說 `slice` 跟 `splice` 的差異只在於會不會修改原陣列，那是因為 `splice` 在實務上通常都只帶前兩個參數，第三個參數以後的部分很少用到。  
+而 `slice` 是真的**只**能帶兩個參數，它的語法是：`arr.slice([begin[, end]])`，一樣，MDN 用 `[]` 標記 `end` 是個 optional 的參數。
+
+所以 `slice` 的意義上嚴格上來說是「從原陣列要開始切割的位置 (`begin`) 到結束切割的位置 (`end`) 切下一塊肉來」。  
+如果只帶 `begin` 這個參數，回傳的就是從 `begin` 開始到陣列結尾的元素。
+
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const newNumbers = numbers.slice(2, 5)
+const newNumbers2 = numbers.slice(2)
+console.log(newNumbers)
+console.log(newNumbers2)
+
+// Expected output:
+// [3, 4, 5]
+// [3, 4, 5, 6, 7, 8]
+```
+
+:::tip
+`slice` 是前端實務上較常使用的陣列裁切方法，因為它不會修改原陣列（immutable），因此在狀態管理或 UI 更新時較安全。  
+有看過一些人 (滿少數的) 會使用 `delete` 來刪除陣列元素：
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+delete numbers[2]
+console.log(numbers)
+// Expected output:
+// [1, 2, empty, 4, 5, 6, 7, 8]
+
+numbers.forEach((number, index)=>{
+  console.log(index, number)
+})
+// Expected output:
+// 0 1
+// 1 2
+// 3 4 → 注意這邊略過 index 2 的元素了，因為 index 2 現在是 empty 了
+// 4 5
+// 5 6
+// 6 7
+// 7 8
+```
+但需要注意的是，`delete` 並不是專門用來刪除陣列元素的 API，它只是刪除物件屬性。  
+由於陣列本質上是物件，因此這樣做會產生「hole」。使用 `delete` 會有三種特性：
+
+- length 不會改變
+- 迭代方法（如 `forEach`）會跳過該位置
+- 可能導致引擎優化失效（效能下降）
+
+因此在實務開發中通常不建議使用 `delete` 來操作陣列。
+:::
+
+## 陣列元素排序 & 反轉
+### `arr.sort()`
+
+`sort` 顧名思義就是排序的方法 XD  
+MDN 裡定義的語法是 `arr.sort([compareFunction])`，這表示 `sort` 接受一個我們自己寫的排序方法作為參數。  
+如果我們都不給 `compareFunction` 這個參數，根據 MDN，這時 `sort` 「將根據各個元素轉為字串後的每一個字元之 Unicode 編碼位置值進行排序」。
+
+```js
+const randomNumbers = [10, 5, 8, 2, 4, 1, 0]
+
+randomNumbers.sort()
+console.log(randomNumbers)
+// Expected output:
+// [0, 1, 10, 2, 4, 5, 8]
+```
+
+可以看到，對於數字排序我們預期應該是 0, 1, 2, 3....9, 10 的排序，但使用 `sort` 不帶參數的話，會先把數字轉成字串來排序，所以 10 會被當成 '1' 開頭的字串來排序，因此就會排在 2 前面。  
+因此為了避免這種情況，`sort` 絕大多數時候都會搭配我們自己撰寫的 `compareFunction` 來使用，這樣我們也更好預測排序的結果。
+
+```js
+const randomNumbers = [10, 5, 8, 2, 4, 1, 0]
+
+function sortNumbers(a, b){
+  if(a > b){
+    return 1
+  }else if(a < b){
+    return -1
+  }else{
+    return 0
+  }
+}
+
+randomNumbers.sort(sortNumbers)
+console.log(randomNumbers)
+
+// Expected output:
+// [0, 1, 2, 4, 5, 8, 10]
+```
+
+### `arr.reverse()`
+
+這個方法名稱也很直觀，就是反轉陣列的元素順序。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+numbers.reverse()
+console.log(numbers)
+
+// Expected output:
+// [8, 7, 6, 5, 4, 3, 2, 1]
+```
+
+## 陣列篩選與搜尋
+### ⭐ `arr.filter()`
+
+重要指數拉滿的一個陣列操作方法。  
+`filter` 顧名思義就是用來做篩選的，它會從原陣列中篩選出符合條件的元素，並回傳一個新陣列。  
+`filter` 語法是 `arr.filter(callbackFunction)`。
+
+這個 `callbackFunction` 學問就大了！  
+它其實可以接受三個參數：
+1. `currentValue`：正在處理的元素。
+2. `index`：正在處理的元素的索引位置。
+3. `array`：正在操作的陣列。
+
+但我們幾乎都沒在用到 `index` 和 `array` 這兩個參數，實務上你會看到的幾乎都是像這種只用了 `currentValue` 的寫法：
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const filterNum = numbers.filter((number)=>{
+  return number > 5
+})
+
+console.log(filterNum)
+
+// Expected output:
+// [6, 7, 8]
+```
+
+這基本是因為平常我們在做 `filter` 的時候通常都會追求明確的篩選條件，當條件夠清楚，理應使用 `currentValue` 就足夠了。  
+但有時總會有一些情況是不得不用到 `index` 或 `array` 這兩個參數的，比如說遇到一個情境是你要對 A array 做 `filter`，但在做的同時，它的資料卻存在 B array 裡，很剛好後端說這些陣列都是排序過的，所以用 `index` 去比對是 ok 的 (實務上市真的會有這種情況，別不信，尤其是跟第三方服務相關時)，這時就得仰賴 `index` 這個參數了。
+
+```js
+const a = [
+  { name: 'Alice' },
+  { name: 'Bob' },
+  { name: 'Charlie' },
+  { name: 'David' }
+]
+
+const b = [
+  { age: 25 },
+  { age: 30 },
+  { age: 35 },
+  { age: 40 }
+]
+
+const filteredA = a.filter((item, index)=>{
+  return b[index].age > 30
+})
+console.log(filteredA)
+
+// Expected output:
+// [{ name: 'Charlie' }, { name: 'David' }]
+```
+
+:::info
+當然，我們都希望能盡量不要用 index 去做 mapping，因為這樣的寫法相對來說比較脆弱，尤其是當資料不確定是否會變動的情況下。  
+一般我們都會希望請後端幫忙給個明確的 property 來讓我們直接對比，比如常見的 `id`。  
+但真的有時候涉及一些外部的第三方服務，你就是得用他們反還的東西，後端也不好對他們做甚麼操作，只好整包又一起給前端時，這時也只能選擇相信並妥協。
+:::
+
+:::tip
+```js
+const numInBoolean = [0, 0, 1, 0, 1, 1, 0, 1]
+const filterNum = numInBoolean.filter(Boolean)
+console.log(filterNum) // [1, 1, 1, 1]
+```
+
+猜猜上面反還的為何是 `[1, 1, 1, 1]`？  
+因為 `Boolean` 會將 0 轉為 `false`，1 轉為 `true`，所以 `filter` 會回傳 `true` 的值。  
+`filter(Boolean)` 通常拿來排除陣列中的 `false`、`null`、`0`、`""`、`undefined`、`NaN`，屬於 `filter` 的一個小技巧~
+:::
+
+
+### `arr.find()`
+
+跟 `filter` 其實有點類似，但它遇到第一個符合條件的元素就會回傳該元素並停止搜尋了，所以它回傳的不是陣列，而是單一元素。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 6]
+
+const findNum = numbers.find((number)=>{
+  return number > 5
+})
+console.log(findNum)
+
+// Expected output:
+// 6 → 注意這裡回傳的就是第一個符合條件的元素了，後面那個 6 就不會被回傳了
+```
+
+### ⭐ `arr.some()`
+
+一般坊間 JS 書籍 or 課程常快速帶過，但也是實務上非常實用的方法。  
+`some` 的語義是檢查陣列中是否至少有一個元素符合條件，如果有就回傳 `true`，沒有的話就回傳 `false`。  
+這在開發一些專案時，如果遇到那種特別刁鑽的判斷條件時很有用，比如：航空公司同個訂位紀錄內，有任一旅客的護照號碼是黑名單上的，就要整個訂位紀錄都不能通過驗證，這時就可以用 `some` 來做判斷。  
+所以 `some` 很適合處理那種「只要有一個元素符合條件就好」的情況。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const hasGreaterThan5 = numbers.some((number)=>{
+  return number % 2 === 0 && number > 5
+})
+console.log(hasGreaterThan5)
+// Expected output:
+// true → 因為陣列中有 6 和 8 這兩個元素符合條件，所以回傳 true
+```
+
+### ⭐ `arr.every()`
+
+跟 `some` 是差不多的東西，只是 `every` 跟它的名字一樣，要所有元素都符合條件才會回傳 `true`，只要有一個元素不符合條件就會回傳 `false`。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const allGreaterThan5 = numbers.every((number)=>{
+  return number > 5
+})
+console.log(allGreaterThan5)
+
+// Expected output:
+// false → 因為陣列中有 1、2、3、4、5 這五個元素不符合條件，所以回傳 false
+```
+
+### `arr.findIndex()`
+
+跟 `find` 類似，但它回傳的是第一個符合條件的元素的索引位置，而不是元素本身。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const findIndex = numbers.findIndex((number)=>{
+  return number > 5
+})
+console.log(findIndex)
+
+// Expected output:
+// 5 → 因為陣列中第一個符合條件的元素是 6，而 6 的索引位置是 5，所以回傳 5
+```
+
+### `arr.indexOf()`
+
+查詢某元素的陣列索引位置。  
+語法是 `indexOf(searchElement[, fromIndex])`。  
+所以 `indexOf` 的使用條件是「必須知道你要找的元素是誰」，如果想找的元素不存在陣列中，`indexOf` 就會回傳 -1，這有時候也可以拿來判斷陣列中是否存在某元素。  
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const index = numbers.indexOf(6)
+console.log(index)
+
+// Expected output:
+// 5 → 因為陣列中 6 的索引位置是 5，所以回傳 5
+
+const notExistIndex = numbers.indexOf(10)
+console.log(notExistIndex)
+// Expected output:
+// -1 → 因為陣列中沒有 10，所以回傳 -1
+```
+
+第二個參數 `fromIndex` 是選填的，它表示從陣列的哪個索引位置開始搜尋，預設值是 0，也就是從陣列的第一個元素開始搜尋。  
+而且很有趣的是，它可以帶負數 XD  
+如果 `fromIndex` 是負數，它的 `fromIndex` 就會被解讀為 `arr.length + fromIndex`。  
+以待會的例子 `arr.indexOf(6, -3)` 來說，`-3` 就會被解讀為 `arr.length - 3`，計算出的 index 就會是起始的搜尋位置。
+
+```js
+const numbers = [1, 2, 9, 3, 4, 5, 6, 7, 8]
+// 長度 9
+
+const indexFromBack = numbers.indexOf(9, -3)
+console.log(indexFromBack)
+// Expected output:
+// -1 → fromIndex 是 -3，會被解讀為 9 - 3 = 6
+// 也就是從 index 6 開始往右搜尋：[6, 7, 8]
+// 但 9 在 index 2，已經被跳過了，所以找不到，回傳 -1
+
+const indexFromFront = numbers.indexOf(9, 1)
+console.log(indexFromFront)
+// Expected output:
+// 2 → 從 index 1 開始往右搜尋，找到 index 2 的 9
+```
+
+### `arr.includes()`
+
+基本就是 `indexOf` 的孿生兄弟，差別在於 `includes` 是回傳布林值，`indexOf` 是回傳索引位置。  
+`includes` 顧名思義就是用來檢查陣列中是否包含某個元素的。  
+所以剛剛前面講到可以用 `if-else` 搭配 `indexOf` 是否回傳 -1 來判斷陣列中是否存在某元素，這時若改用 `includes` 就會更簡潔明瞭了。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+console.log(numbers.includes(6))
+
+// Expected output:
+// true → 因為陣列中有 6，所以回傳 true
+```
+
+:::info
+`some` 跟 `includes` 一樣都是在判斷陣列中是否存在符合條件的元素，他們差別在哪？  
+差別在 `includes` 是用來判斷「某個值是否存在於陣列中」，它使用的是值相等比較 (SameValueZero)，因此比較適合 primitive 型別，例如字串或數字。  
+而 `some` 則是透過 callback 進行條件判斷，你可以自行定義邏輯來決定是否符合條件，因此更適合用在物件陣列或複雜條件的情境。  
+實務上，API 回傳的資料通常是物件陣列，這時候如果只是想知道「是否存在符合某條件的資料」，使用 `some` 會比 `includes` 更適合。  
+簡單來說，`includes` 適合單純的值存在檢查、`some` 適合複雜、動態的條件判斷。
+:::
+
+## 陣列的迭代
+
+陣列的迭代這邊提出來的都很重要！  
+重要指數是 ⭐⭐⭐⭐⭐ 滿分！
+
+前端除了畫面外，絕多數時間是在處理資料，而對於一些大型專案而言，API 返回的 array 可能都落落長，看過 300 多行的陣列沒？  
+所以資料操作最基本的能力就是迭代了，俗話說，學好迭代、生活很耐思 (抱歉我沒押韻 www)。
+
+### ⭐ `arr.forEach()`
+
+這是一個「不修改原陣列」，亦「不回傳新陣列」的方法 (除非手賤在 callback 裡面改原陣列 www)。
+那它在幹嘛？  
+`forEach` 讓我們得以對陣列中的每個元素執行一個共同的行為，也就是 callback function，這讓我們得以對陣列中的每個元素進行操作，像是計算、修改、或是其他副作用的行為。  
+這個 callback function 其實也接受三個參數：
+1. `currentValue`：正在處理的元素。
+2. `index`：正在處理的元素的索引位置。
+3. `array`：正在操作的陣列。
+
+但一樣，我們平常幾乎都只帶 `currentValue` 這個參數，偶爾可能才會用到那麼一兩次的 `index`，而 `array` 則是幾乎可以被蛋雕 (台語) 了。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+let sum = 0
+
+numbers.forEach((number)=>{
+  sum += number
+})
+console.log(sum)
+
+// Expected output:
+// 36
+```
+
+### ⭐ `arr.map()`
+
+也是很常很常很常用的陣列迭代方法！  
+`map` 的使用我覺得應該比 `forEach` 還要更頻繁，因為實務上多得是那種需要對資料做整理後回傳的情況。  
+而 `map` 會回傳新陣列的特性就相當適合處理上述這種情境。  
+`map` 跟 `forEach` 一樣都是接受一個 callback function 作為參數，然後這個 callback function 能接受的參數也一模一樣 XD  
+
+
+```js
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 },
+  { name: 'David', age: 40 }
+]
+
+const userNames = users.map((user)=>{
+  return user.name
+})
+console.log(userNames)
+// Expected output:
+// ['Alice', 'Bob', 'Charlie', 'David']
+```
+
+### `arr.reduce()`
+
+`reduce` 是一個在特定場境具有奇效的陣列迭代方法。  
+所以是什麼特定場景呢？  
+就是那種需要將陣列中的多個元素「聚合」成一個單一值的情況。  
+以前面面提到的 `forEach` 計算總和的例子來說，就屬於是把陣列中的多個數字聚合成一個總和的例子，因此也可以用 `reduce` 做。
+
+`reduce` 的語法是 `arr.reduce(callbackFunction[, initialValue])`。  
+這個 `callbackFunction` 跟前面幾項方法的 callback function 基本一樣，但它多了一個參數 `accumulator`，所以它實際有四個參數：
+1. `accumulator`：累加器，會累積 callback function 的回傳值，最後回傳給 `reduce`。
+2. `currentValue`：正在處理的元素。
+3. `index`：正在處理的元素的索引位置。
+4. `array`：正在操作的陣列。
+
+所以其實 `reduce` 多少帶點 recursion 的味道，因為它會不斷地把 callback function 的回傳值累積到 `accumulator` 裡，直到整個陣列都被處理完了，最後 `reduce` 就會回傳 `accumulator` 的值。
+
+`reduce` 的第二個參數 `initialValue` 是選填的，它表示 `accumulator` 的初始值，如果不提供這個參數，則會把陣列第一個元素當作 `accumulator` 的初始值，從第二個元素開始執行 callback function。
+
+先用上面 `forEach` 的 sum 例子來看看 `reduce` 的寫法：
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const sum = numbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue
+})
+console.log(sum)
+
+// Expected output:
+// 36
+```
+
+`reduce` 在實務上有個很好用的用法，就是用來做陣列的分組 (grouping)。  
+什麼叫陣列的分組呢？  
+有時候因為資料結構問題，我們可能會希望把陣列中的元素按照某個屬性來分組，比如說本來的陣列裡面存著每個 passenger 的資料，今天因為一些需求，需要把它轉成物件，並透過 passengerNumber 作為 key 來分組，這時候 `reduce` 就非常適合用來做這件事了。
+
+```js
+const passengers = [
+  { passengerNumber: 1, name: 'Alice' },
+  { passengerNumber: 2, name: 'Bob' },
+  { passengerNumber: 3, name: 'David' }
+]
+
+const groupedPassengers = passengers.reduce((accumulator, passenger) => {
+  accumulator[passenger.passengerNumber] = passenger.name
+  return accumulator
+}, {})
+
+console.log(groupedPassengers)
+
+// Expected output:
+// {
+//   1: 'Alice',
+//   2: 'Bob',
+//   3: 'David'
+// }
+```
+
+### `arr.flatMap()`
+
+`flatMap` 是個有點小眾，但在那種需要把子層元素攤平 (flatten) 到父層的情況下會有奇效。  
+或者應該說，它生而就是為了處理這種情況而存在的。
+
+`flatMap` 的語法是 `arr.flatMap(callbackFunction)`，基本上 array 加的 method 引用的 callback function 都是那個調調，標準的參數三件套 (`currentValue`, `index`, `array`)。  
+`flatMap` 其實依其字義，就是 `flat` + `map`，`map` 負責做遍歷並對每個元素做處理，而 `flat` 則是負責把 `map` 回傳的陣列攤平到父層。
+
+```js
+const users = [
+  { name: 'Alice', hobbies: ['reading', 'traveling'] },
+  { name: 'Bob', hobbies: ['cooking', 'gaming'] },
+  { name: 'Charlie', hobbies: ['hiking', 'swimming'] }
+]
+
+const allHobbies = users.flatMap((user)=>{
+  return user.hobbies
+})
+console.log(allHobbies)
+
+// Expected output:
+// ['reading', 'traveling', 'cooking', 'gaming', 'hiking', 'swimming']
+```
+
+上述如果我們單純用 `map` 就會得到一個二維陣列。  
+想在攤平就得再做一次 `flat`，所以就會變成這樣：
+
+```js
+const users = [
+  { name: 'Alice', hobbies: ['reading', 'traveling'] },
+  { name: 'Bob', hobbies: ['cooking', 'gaming'] },
+  { name: 'Charlie', hobbies: ['hiking', 'swimming'] }
+]
+
+const allHobbies = users.map((user)=>{
+  return user.hobbies
+})
+console.log(allHobbies)
+
+// Expected output:
+// [['reading', 'traveling'], ['cooking', 'gaming'], ['hiking', 'swimming']]
+
+const flattenedHobbies = allHobbies.flat()
+console.log(flattenedHobbies)
+
+// Expected output:
+// ['reading', 'traveling', 'cooking', 'gaming', 'hiking', 'swimming']
+```
+
+## 陣列刪去重複元素
+### `new Set()`
+
+嚴格來說這不是 array method，但他在去除陣列重複元素的情況下真的非常好用，所以放在這。  
+先說一句，實務上如果單純要做去重，可以透過 `includes` 跟 `filter` 來實做，但如果有在刷 leetcode 的話，你就會發現這兩種寫法會在 leetcode 的效能測試上倒下，因此才顯得 `Set` 這個資料結構的重要。
+
+```js
+const numbers = [1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 8, 8]
+const uniqueNumbers = [...new Set(numbers)]
+
+console.log(uniqueNumbers)
+
+// Expected output:
+// [1, 2, 3, 4, 5, 6, 7, 8] → 重複的元素 4 和 8 都被去掉了
+```
+
+這裡舉個例子，一個人可以買兩份飛機餐，當航班異動時，曾經選過餐的旅客需要讓他重新選餐，那我們系統上得列出需要重新選餐的旅客對吧？  
+那對於選過兩份餐的旅客，如果我們不去重，是不是畫面上就會連續出現兩次他的名字，比如「Jeremy, Jeremy」，但其實我們只要顯示一次他的名字就可以讓他重新選餐了對吧？
+
+```js
+const mealRecords = [
+  {
+    name: 'Jeremy',
+    meal: 'meal1',
+    isMissing: true
+  },
+  {
+    name: 'Jeremy',
+    meal: 'meal2',
+    isMissing: true
+  },
+  {
+    name: 'Alice',
+    meal: 'meal1',
+    isMissing: false
+  },
+  {
+    name: 'Bob',
+    meal: 'meal2',
+    isMissing: true
+  }
+]
+
+const missingPassengers = new Set()
+mealRecords.forEach((record) => {
+  if(record.isMissing){
+    missingPassengers.add(record.name)
+  }
+})
+console.log([...missingPassengers])
+
+// Expected output:
+// ['Jeremy', 'Bob'] → Jeremy 雖然有兩份餐點紀錄，但透過 Set 過濾，只會出現一次他的名字讓系統通知他重新選餐
+```
+
+
+## 陣列間合併
+### `arr.concat()`
+
+用來合併兩個陣列，合併結果會透過新陣列回傳。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+const secondNumbers = [9, 10, 11]
+
+const newNumbers = numbers.concat(secondNumbers)
+
+console.log(newNumbers)
+
+// Expected output:
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+```
+
+## 陣列轉字串
+### `arr.join()`
+
+陣列轉字串的方法，在部分場景會用到，比如把陣列裡的內容輸出成文字顯示在畫面上。  
+`join` 的語法是 `arr.join(separator)`，其中 `separator` 是選填的參數，用來指定元素之間的分隔符號，預設值是逗號 (`,`)。  
+所以如果不帶參數，`join` 就會用逗號把陣列裡的元素連接起來，如果帶了參數，就會用你指定的分隔符號來連接元素。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+const string1 = numbers.join()
+console.log(string1) // 1,2,3,4,5,6,7,8
+
+const string2 = numbers.join('')
+console.log(string2) // 12345678
+
+const string3 = numbers.join(' ') // 注意這裡有帶空格
+console.log(string3) // 1 2 3 4 5 6 7 8
+```
+
+所以實務上可能會怎麼用呢？  
+比如我們要列出旅客購買的餐點：
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  meals: ['meal1', 'meal2']
+} 
+
+const mealsString = passenger.meals.join(', ')
+console.log(mealsString)
+
+// Expected output:
+// meal1, meal2
+```
+
+## 陣列的拷貝
+### `[...arr]`
+
+`...` 這個展開運算子 (spread operator) 很常用在陣列的淺拷貝 (shallow copy) 上，算是實務上數一數二常用的陣列拷貝方法。
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+const copyNumbers = [...numbers]
+
+console.log(copyNumbers)
+// Expected output:
+// [1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+但要注意的是，因為 `...` 是 shallow copy，也就是陣列裡存放的是物件的話，雖然我們 `console` 印出 copy 後的陣列會跟原陣列看起來一模一樣，但實際上複製的是物件的 reference，所以如果我們對 copy 後的陣列裡的物件做修改，原陣列裡的物件也會被修改。  
+
+```js
+const original = [
+  { name: 'Alice' },
+  { name: 'Bob' }
+]
+const copy = [...original]
+
+copy[0].name = 'Charlie'
+console.log(original)
+// Expected output:
+// [
+//   { name: 'Charlie' }, → original 陣列裡的第一個物件的 name 也被修改了，因為 copy 的第一個元素跟 original 的第一個元素指向同一個物件
+//   { name: 'Bob' }
+// ]
+```
+
+### `arr.from()`
+
+在實務上我也看過使用 `from` 來做陣列拷貝的例子。  
+但其實 `from` 跟 `...` 一樣都是 shallow copy，所以在對於陣列裡存放物件的情況下，`from` 也是會有 reference 的問題的。
+
+```js
+const original = [
+  { name: 'Alice' },
+  { name: 'Bob' }
+]
+
+const copy = Array.from(original)
+copy[0].name = 'Charlie'
+console.log(original)
+
+// Expected output:
+// [
+//   { name: 'Charlie' }, → original 陣列裡的第一個物件的 name 也被修改了，因為 copy 的第一個元素跟 original 的第一個元素指向同一個物件
+//   { name: 'Bob' }
+// ]
+```
+
+但 `from` 跟 `...` 差在哪？  
+差在 `from` 其實還可以接受其他兩個可選參數：`mapFn` 和 `thisArg`。 (但說實在的，幾乎用不到啦)  
+`mapFn` 是一個 callback function，基本上來說差不多就是 `map` 啦，單純只是讓我們在複製陣列的同時，還能對元素做一些轉換或處理。  
+`thisArg` 則是用來指定 `mapFn` 中 `this` 的值的，這在實務上幾乎也是用不到的，因為我們現在大多數都是用 arrow function 來寫 callback function 的了，而 arrow function 是沒有自己的 `this` 的，所以 `thisArg` 這個參數就更沒什麼意義了。
+
+```js
+const original = [1, 2, 3, 4, 5]
+
+const copy = Array.from(original, (number)=>{
+  return number * 2
+})
+
+console.log(copy)
+// Expected output:
+// [2, 4, 6, 8, 10] → 因為我們在 `from` 的第二個參數裡面寫了一個 map function，所以在複製陣列的同時，還對每個元素做了乘以 2 的處理
+```
+
+### `arr.structuredClone()`
+
+`structuredClone` 是一個比較新的方法，它可以用來做陣列的深拷貝 (deep copy)。  
+所謂 deep copy 就是真正地擺脫 reference 的問題，也就是說 `structuredClone` 複製出的新陣列內部的元素跟原陣列裡的元素完全沒有 reference 的關係了。  
+以記憶體的角度來看就是真正地再開了一個新的記憶體空間來存放複製出來的陣列了。
+
+```js
+const original = [
+  { name: 'Alice' },
+  { name: 'Bob' }
+]
+
+const copy = structuredClone(original)
+copy[0].name = 'Charlie'
+console.log(original)
+
+// Expected output:
+// [
+//   { name: 'Alice' }, → original 陣列裡的第一個物件的 name 沒有被修改，因為 copy 的第一個元素跟 original 的第一個元素是完全不同的物件了
+//   { name: 'Bob' }
+// ]
+```
+
+:::info
+在 `structuredClone` 出來後，傳統的 `JSON.parse(JSON.stringify(arr))` 基本可以丟進垃圾桶了，因為 `structuredClone` 不但語法更簡潔，也少了更多限制。  
+但這不是說 `structuredClone` 就無所不能，對於一些特別的資料型態，比如說 function、含 function 的物件 or DOM element，`structuredClone` 是無法處理的。  
+不過說真的，誰沒事會對這些玩意兒做 deep copy？實務上幾乎遇不到~  
+所以對於陣列來說，`structuredClone` 就放心用唄~
+
+喔對了，要記得你家 NodeJS 的版本得至少在 17 up 才能用 `structuredClone` 唷！  
+不過都 2026 了，NodeJS 都上 24 了，那些還在用 16 或以下版本的專案也都該考慮升級了。
+:::

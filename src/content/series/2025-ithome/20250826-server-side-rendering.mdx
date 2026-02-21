@@ -1,0 +1,52 @@
+---
+title: 'Day18 - SSR！出金啦！'
+tags: [JavaScript, SPA, SSR]
+author: 'jeremy'
+date: '2025-08-26'
+changelog: []
+---
+
+SPA 是去海島國家飯店的必備享受。  
+看著國外的海灘夕陽，享受著 SPA 的放鬆，真是人生一大享受... (誤)。
+
+咳咳... web 的 SPA 非彼 SPA。  
+在網頁開發裡常聽到的 SPA mode 其實全名是單頁應用程式（Single Page Application）。  
+與之對應的是傳統的 MPA 多頁應用程式（Multi Page Application）。
+
+SPA 是前端剛入門必定接觸到的概念，那時都會說 SPA 多好、多優秀，有多少知名企業如 Gmail、Netflix、Pinterest 的頁面都是使用 SPA 技術開發的。  
+但漸漸的，隨著接觸前端越久，你就會發現還有一種東西叫 SSR（Server-Side Rendering）。  
+(還是其實現在前端入門就直接教 SSR 惹 @@)
+
+## SPA
+迅速說說什麼是 SPA。  
+
+SPA 的技術實做是讓網站初始載入時就載好核心的 HTML 與 CSS 以及一大包 JavaScript bundle，後續由這包 JS 控管整個頁面渲染與路由。  
+傳統 MPA 每切一次頁面都要重新載入整個 HTML、CSS、JavaScript，而 SPA 會透過前端 Router 根據 URL 判斷要顯示哪個元件，JS 負責更新對應的 DOM 節點。  
+對 SPA 來說，它的換頁就很像是在同一個畫面骨架上切換不同內容，然後每個內容都可以是不同路由。  
+我這樣講有點抽象，但你可以打開你的電腦版 Gmail，嘗試切切看「收件夾」、「已加星號」兩個 tab，你會發現切下去時只有右方的畫面是改變的，而且一個路由是 `#inbox`、一個是 `#starred`。  
+但他們外圍的整個畫面大架構 (sidebar、search bar... 等) 都是不變的，這個就是共用的 HTML。  
+因為這種行為很像自始至終都只在一個頁面上，所以叫做單頁應用程式。
+
+但 SPA 有一個稍微嚴重一點的缺點就是因為主要內容是交給 JS 控管的，共用的 HTML 其實只能算是骨架，但 SEO 其實是爬 HTML 內容的，對於這種網站因為爬起來感覺很「空泛」(因為內容在 JS)，所以一般追求 SEO 都不會使用 SPA。  
+那 SPA 適用在哪？  
+它特別適用在開發後台管理系統、儀表板等需要快速切換不同頁面的應用程式上。  
+這些應用程式通常也不需要太多 SEO，因為它們的使用者多是內部人員或特定使用者群體，所以不需要考慮搜尋引擎的爬蟲。
+
+## SSR
+SSR 就不一樣了，SSR 的 SEO 可謂是極佳。  
+SSR 的概念其實較接近 MPA。  
+但跟 MPA 不同的是，SSR 是在伺服器端就將 HTML 頁面渲染好，然後再傳送到客戶端。所以它才叫做 Server-Side Rendering。  
+好處是使用者能更快看到初始內容，因為 HTML 已經在 server 渲染完成再傳過來。也就是把初始渲染的工作轉嫁給伺服器端。  
+但通常 server 扛得住的啦，安啦！
+
+所以 SSR 特別適用在那種需要 SEO 的網站上，像是部落格、新聞網站、電商網站等。  
+較知名的 SSR 範例就是 Medium 跟 Apple 官網吧。
+
+## 可以混用 SPA 跟 SSR 嗎
+其實可以，也是目前一些網站的做法。
+
+透過初次載入使用 SSR 來快速提高首頁速度以及 SEO。  
+後續切頁的時候則是使用 SPA 來達到快速切換頁面的效果。  
+這種混用方式稱為同構應用程式（Isomorphic Application）或是 Universal Application。
+
+現今的前端框架，Next、Nuxt 其實都支援這種同構應用程式的開發方式。

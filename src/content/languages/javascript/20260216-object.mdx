@@ -1,0 +1,353 @@
+---
+title: "[JS] Object Cheat Sheet"
+author: "jeremy"
+date: "2026-02-16"
+tags: ["JavaScript", "Object"]
+changelog: []
+---
+
+:::warning
+閱讀本篇要注意 `Object.method()` 與 `obj.method()` 的差異。  
+前者的使用是一定得寫成 `Object.method(obj, ...)` 的形式，因為這是呼叫物件這個類別裡的方法。  
+後者的 `obj` 則是指物件變數，是一個物件實例，呼叫的則是物件實例裡的方法，所以寫法是 `obj.method(...)` 的形式。
+:::
+
+## 物件取 key & value
+### `Object.keys()`
+
+把物件的 keys 取出來，並以陣列的方式回傳。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+const keys = Object.keys(passenger)
+console.log(keys)
+
+// Expected output:
+// ['name', 'age', 'location']
+```
+
+### `Object.values()`
+
+取出物件的 values，並以陣列的方式回傳。  
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+const values = Object.values(passenger)
+console.log(values)
+// Expected output:
+// ['Jeremy', 30, 'Taiwan']
+```
+
+### `Object.entries()`
+
+取出物件的 key-value pair，並以陣列的方式回傳。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+const entries = Object.entries(passenger)
+console.log(entries)
+// Expected output:
+// [
+//   ['name', 'Jeremy'],
+//   ['age', 30],
+//   ['location', 'Taiwan']
+// ]
+```
+
+## 物件的屬性刪除
+### `delete`
+
+之前在陣列被說要小心使用的 `delete`，在物件自己本身是可以放心使用滴~~~  
+在 array 使用會產生 hole 的問題，在 object 裡並不存在，其原因是 object 本身並沒有 index 那種資料連續的特性，所以 delete 後不會有 hole 的問題。  
+因此放心使用 `delete` 來刪除物件的屬性吧！
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+delete passenger.age
+console.log(passenger)
+// Expected output:
+// {
+//   name: 'Jeremy',
+//   location: 'Taiwan'
+// }
+```
+
+## 物件的迭代
+### `for-in`
+
+Object 沒有像 array 一樣有那麼多種遍歷的方式，畢竟 object 如前面說的，它就不是一個連續的資料結構。  
+不過如果真要遍歷 object 的話，還是有 `for-in` 可以使用。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+for (const key in passenger) {
+  console.log(key, passenger[key])
+}
+
+// Expected output:
+// name Jeremy
+// age 30
+// location Taiwan
+```
+
+## 物件的複製
+### `...obj`
+
+同 array 一文裡的展開運算子用法，是很常見的 shallow copy 用法。  
+但老問題一樣，shallow copy 會有 reference 問題，意即如果物件 A 裡面有巢狀物件的話，透過 `...A` 複製出來的物件 B 裡面巢狀物件的 reference 會跟 A 一樣，這時候修改 B 裡面巢狀物件的值就會影響到 A 裡面巢狀物件的值。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan',
+  contact: {
+    email: 'test@gmail.com',
+    phone: '123456789'
+  }
+}
+
+const shallowCopyPassenger = {...passenger}
+shallowCopyPassenger.contact.email = 'newemail@example.com'
+
+console.log(shallowCopyPassenger.contact.email)
+console.log(passenger.contact.email)
+// Expected output:
+// newemail@example.com
+// newemail@example.com → 可以看到原物件 passenger 內部的 contact 物件的 email 也被修改了
+```
+
+### `{...obj1, ...obj2}`
+
+其實是 `...` 的衍伸，這是一個淺拷貝合併物件的方法。  
+`{...obj1, ...obj2}` 會用兩個物件來建立一個新物件，並以後者的屬性覆蓋前者同名的屬性。  
+如果兩個物件都沒有同名的屬性，那麼新物件就會包含兩個物件的所有屬性。
+
+```js
+const passenger1 = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+const passenger2 = {
+  name: 'Aira',
+  job: 'designer',
+  date: '2026-02-16'
+}
+
+const mergedPassenger = {...passenger1, ...passenger2}
+console.log(mergedPassenger)
+
+// Expected output:
+// {
+//   name: 'Aira', // 注意這裡會被 passenger2 的 name 覆蓋掉
+//   age: 30,
+//   location: 'Taiwan',
+//   job: 'designer',
+//   date: '2026-02-16'
+// }
+```
+
+### `Object.assign()`
+
+也是淺層複製 + 合併物件的方法，它的語法是 `Object.assign(target, ...sources)`，會把 source 物件的屬性複製到 target 物件上，並回傳 target 物件。  
+所以它跟 `{...obj1, ...obj2}` 的差異在於 `Object.assign` 是直接修改 target 物件，而 `{...obj1, ...obj2}` 是建立一個全新的物件。  
+至於其他特性，基本上跟 `{...obj1, ...obj2}` 是一樣的，會以後者的屬性覆蓋前者同名的屬性，沒有同名屬性的話就會保留兩個物件的所有屬性。
+
+```js
+const passenger1 = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+const passenger2 = {
+  name: 'Aira',
+  job: 'designer',
+  date: '2026-02-16'
+}
+
+Object.assign(passenger1, passenger2)
+console.log(passenger1)
+
+// Expected output:
+// {
+//   name: 'Aira', // 注意這裡會被 passenger2 的 name 覆蓋掉
+//   age: 30,
+//   location: 'Taiwan',
+//   job: 'designer',
+//   date: '2026-02-16'
+// }
+```
+
+真要讓 `Object.assign` 回傳一個新物件的話，我們可以把第一個參數設為一個空物件 `{}`，以上面例子可以改寫成：
+
+```js
+const passenger1 = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+const passenger2 = {
+  name: 'Aira',
+  job: 'designer',
+  date: '2026-02-16'
+}
+
+const mergedPassenger = Object.assign({}, passenger1, passenger2)
+console.log(mergedPassenger)
+// Expected output:
+// {
+//   name: 'Aira',
+//   age: 30,
+//   location: 'Taiwan',
+//   job: 'designer',
+//   date: '2026-02-16'
+// }
+```
+
+實務上來說，`{...obj1, ...obj2}` 跟 `Object.assign` 沒有孰優孰劣，端看你是想要修改原物件還是建立一個新物件來使用，這點很看情境和團隊風格。  
+但在處理前端表單資料時，這都是很常見的用法。
+
+### `JSON.stringify` 與 `JSON.parse`，
+
+Node 17 以前常見的 deep copy 方法，透過把物件轉成 JSON 字串再轉回物件的方式來達到深層複製的效果，但其實就是把 reference 給破開啦。  
+Node 17 之後，還是推薦 `structuredClone`，語義更好而且支援更多資料類型。  
+但姑且這裡還是紀錄一下，因為我 array 那邊沒寫 www
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan',
+  contact: {
+    email: 'test@gmail.com',
+    phone: '123456789'
+  }
+}
+
+const deepCopyPassenger = JSON.parse(JSON.stringify(passenger))
+deepCopyPassenger.contact.email = 'newemail@example.com'
+
+console.log(deepCopyPassenger.contact.email)
+console.log(passenger.contact.email)
+
+// Expected output:
+// newemail@example.com
+// test@gmail.com
+```
+
+### `structuredClone`
+
+Node 17 後出現的 deep copy 方法，基本上現在都推薦使用 `structuredClone` 來做深層複製了。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan',
+  contact: {
+    email: 'test@gmail.com',
+    phone: '123456789'
+  }
+}
+
+const deepCopyPassenger = structuredClone(passenger)
+deepCopyPassenger.contact.email = 'newemail@example.com'
+
+console.log(deepCopyPassenger.contact.email)
+console.log(passenger.contact.email)
+
+// Expected output:
+// newemail@example.com
+// test@gmail.com
+```
+
+:::info
+`structuredClone` 雖說較新，但他的概念其實存在一段時間了，只是在大概 2021 年才正式成為通用的 web api。  
+這背後原因有包括那個被大家嘲笑的 IE 瀏覽器的退場，也有 `JSON.stringify` 與 `JSON.parse` 的限制性讓大家需要一個更好的解決方案。
+:::
+
+
+## 物件的查詢
+
+### `property in obj`
+
+用來查詢某個屬性是否存在於物件中。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+console.log('name' in passenger)
+
+// Expected output:
+// true
+```
+
+### `obj.hasOwnProperty()`
+
+同樣也用在查詢某個屬性是否存在於物件中。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+console.log(passenger.hasOwnProperty('name'))
+// Expected output:
+// true
+```
+
+:::warning
+`property in obj` 會順著原型鏈的屬性一路找上去，這通常不是我們想要的行為。  
+而 `obj.hasOwnProperty()` 只檢查物件自身屬性，所以更加推薦。
+:::
+
+### `Object.hasOwn()`
+
+`Object.hasOwn()` 是 `obj.hasOwnProperty()` 的更新版本，語法上回歸到了大部隊的 `Object.method()` 的形式。  
+其他內容跟 `obj.hasOwnProperty()` 是一模一樣的，都是用來檢查物件自身是否擁有某個屬性。
+
+```js
+const passenger = {
+  name: 'Jeremy',
+  age: 30,
+  location: 'Taiwan'
+}
+
+console.log(Object.hasOwn(passenger, 'name'))
+// Expected output:
+// true
+```

@@ -1,0 +1,42 @@
+---
+// src/components/CodePen.astro
+interface Props {
+  id: string;
+  title?: string;
+  user?: string;
+  tabs?: string;
+  height?: number;
+}
+
+const {
+  id,
+  title = 'CodePen Embed',
+  user = 'ChungYingHo',
+  tabs = 'html,result',
+  height = 600
+} = Astro.props;
+
+const embedUrl = `https://codepen.io/${user}/embed/${id}?default-tab=${tabs}&theme-id=dark`;
+---
+
+<div class="w-full my-8 rounded-xl overflow-hidden border border-slate-700/60 bg-[#0a0a0a] shadow-2xl">
+  {/* macOS 風格的視窗頂部裝飾條 */}
+  <div class="h-10 bg-slate-800/40 border-b border-slate-700/60 flex items-center px-4 gap-2">
+    <div class="flex gap-1.5">
+      <div class="w-3 h-3 rounded-full bg-red-500/80 border border-red-600/50"></div>
+      <div class="w-3 h-3 rounded-full bg-amber-500/80 border border-amber-600/50"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500/80 border border-green-600/50"></div>
+    </div>
+    <span class="ml-2 text-xs text-slate-400 font-mono truncate">{title}</span>
+  </div>
+  
+  {/* 使用原生 height 屬性，拔除無用的備用文字，保證編譯通過 */}
+  <iframe
+    class="w-full border-none"
+    height={height}
+    title={title}
+    src={embedUrl}
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>

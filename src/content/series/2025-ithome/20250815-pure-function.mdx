@@ -1,0 +1,150 @@
+---
+title: 'Day07 - 老哥！這批函式很純！'
+tags: [JavaScript, pure function, function]
+author: 'jeremy'
+date: '2025-08-15'
+changelog: []
+---
+
+JavaScript 另一個常被問的問題是：
+
+> 什麼是純函式 (pure function)？
+
+作為一個常被問的問題，聰明的你也是可以很迅速地回答問題：
+
+> pure function 就是指那種不會改變外部狀態、沒有副作用、輸入相同內容就會輸出相同結果的函式呀。
+
+Bingo! 恭喜你學會了學會了，今天這篇就這樣結束吧 (誤)。  
+我覺得挺有趣的是，大家在看 pure function 都會說他很重要，因為其可預測性和易於測試的特性。  
+但實務上開發來說，純不純真的很重要嗎？
+
+## 快速複習一下「純」與「不純」的函式
+還是迅速走過「純」與不純的函式範例。
+
+### 純函式
+```js
+function sum (a, b) {
+  return a + b
+}
+```
+
+這就是一個簡單的 pure function，只要輸入相同的 `a` 和 `b`，永遠都會得到相同的結果，而且不會改變外部狀態。  
+這句話的意思是，不管呼叫這個函式多少次，只要輸入的 `a` 和 `b` 一樣，結果就永遠都一樣，就像 `1 + 1 = 2`、`3 + 3 = 6` 是世間不變的真理一般。  
+所以 pure function 相當好預測結果，好預測結果就表示寫測試時也相當容易寫 expected value。  
+可以說 pure function 內部就是一個工廠，給他一樣的原料就能獲得一樣的產品。
+
+### 不純的函式
+```js
+let count = 0
+
+function increment() {
+  count += 1
+  return count
+}
+
+increment()
+increment()
+
+console.log(count) // 2
+```
+
+這是一個很簡單的不純的函式範例。  
+為什麼不純？因為每次執行 `increment()` 都會改變外部狀態 `count` 的值。  
+瞧瞧，`count` 的初始值是 `0`，但當我們呼叫 `increment()` 兩次後，`count` 的值變成了 `2`。  
+這種改變了外部狀態的行為又叫「副作用 (side effect)」。而有 side effect 的函式就是不純的函式。
+
+這裡要提醒的是，side effect 不只指的是改變外部狀態，凡是與外部世界互動的行為，都屬於 side effect，比如：
+1. 改變外部變數或狀態
+2. 與外部世界互動 (DOM 操作、API request、檔案讀寫、console 輸出)
+3. 依賴可變的環境狀態 (`Date.now()`、`Math.random()` 等)
+
+## function 純不純真的很重要嗎？
+所以回歸這篇要說的，實務開發上，function 純不純真的很重要嗎？  
+這裡我想先探討一下軟體開發的本質。  
+所謂軟體開發的意義是為了把重複性的工作交給電腦自動化，比如上千百萬次的計算、上千百萬次一樣的訂票流程... 之類。  
+所以本質上軟體就是一種複數使用者操作都能得到相同結果的工具。總不會說今天一個售票網站，某 A 訂跟 B 訂的流程不一樣吧？(這裡不考慮他們可能會員等級制不一樣 www)  
+而函式作為軟體的基本單位，當然也要符合這個本質。
+
+為什麼會需要函式？  
+因為某功能的 code 可能複用在多處地方，與其在每一個地方都寫一次相同的邏輯，不如把這段邏輯抽出來封裝成 method，然後在要使用的地方調用此 method。  
+大大減輕 code 的數量並提升維護性與可讀性。  
+因為這種「想重複利用」的特質，一般會希望函式是個純函式，我們並不會希望每次重複的結果都不一樣對吧？  
+所以這才是為何說純函式很重要。
+
+### 實務上純函式有哪些
+綜上所述，為了這種「想重複利用」的特質，實務上很多重要的函式都會盡量往 pure function 靠攏。  
+前端常寫的各種 formatter，比如日期格式化、數字格式化、form POST 給後端前的格式化... 等，通常都是 pure function 的最佳例子。  
+這些都會是純函式，因為它們只根據輸入的值進行格式化，不會改變外部狀態。
+
+```js
+function formatPercentage (value, decimals = 2) {
+  if (typeof value !== 'number' || isNaN(value)) return ''
+  return `${(value * 100).toFixed(decimals)}%`
+}
+```
+
+### 那「不純」的函式有存在的必要嗎？
+答案是有的。  
+舉例來說，可能會需要一個 toggle 來管理某個 UI 元件的顯示與隱藏。那這個 toggle 一定會綁在某個 eventHandler 上，隨著每次點擊 toggle 觸發。  
+下方範例是一個簡單的 toggle 實作，當點擊時就會切換 `isShowItem` 的值，這種函式就是不純的，因為它會改變外部狀態 `isShowItem` 的值。  
+但它很重要，因為它幫助我們控制 UI 的顯示與隱藏，這是軟體開發中常見的需求。
+
+```js
+let isShowItem = false
+
+function toggleItem() {
+  isShowItem = !isShowItem
+}
+```
+
+另外一種常用的不純函式，就是 call api。  
+舉例來說：
+
+```js
+let apiResult
+let isLoading = false
+
+async function getApiData() {
+  try {
+    isLoading = true
+    const { data } = await fetch('https://api.example.com')
+    apiResult = data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading = false
+  }
+}
+```
+
+大概類似這樣的一支 get api method 就是實務上常見的封裝方式。  
+他做兩件事：
+1. 設定 & 重置 `isLoading` 狀態。
+2. 跟後端取得資料，並把結果存到 `apiResult`。
+
+雖然看起來這次函式無論呼叫多少次都是在跟同一個 api 取得資料，但實際上每次呼叫都會改變 `isLoading` 和 `apiResult` 的值。  
+而且 call api 的行為本身就是一種外部依賴，這也算是一種 side effect。  
+這種只要含有 side effect 的函式就不是 pure function，但它很重要，對吧？
+
+## 所以實務上其實 pure function 居多囉？
+我只能說，理想是豐滿的、現實是骨感的。  
+這個問題的答案是不一定。  
+
+雖然我們盡量都往 pure function 的概念靠攏，但請記得 side effect 的定義是相當廣泛的。  
+以下述 errorHandler 為例，用途是在發生錯誤時顯示一個通知 (`<q-notify>` 是 vue 框架 Quarsar 呼叫 notify 元件的一個方式)。  
+對於這個 errorHandler，我們可以說它擁有純函式的概念，只要錯誤訊息相同，顯示的通知內容也會相同。  
+但因為它操縱了 DOM (顯示 `<q-notify>`) ，所以它並不是一個真正的 pure function。
+
+```js
+function showErrorNotify (error) {
+  $q.notify({
+    type: 'negative',
+    message: error.message
+  })
+}
+```
+
+實務上這種「擁有 pure function 概念，但實際是 impure function」的情況是相當常見的。  
+因為我們總是無可避免的會操縱到 DOM、依賴一些外部狀態，即使我們可以預測到結果，但這些行為都會讓函式變成 impure function。  
+但 pure function 的概念在開發中仍然是非常重要的，因為越往 pure function 靠攏，你越能掌握程式的結果，也就是所謂的可預測性。  
+綜上所述，我其實更喜歡把 pure function 當做一個概念，一個寫 code 的指導原則。

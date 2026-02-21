@@ -1,0 +1,549 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { AUTHORS } from '@/constants/authors';
+import Layout from '@/layouts/Layout.astro';
+
+interface Props {
+  entry: CollectionEntry<'notes'> | CollectionEntry<'series'> | CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+
+const authorKey = entry.data.author || 'Jeremy';
+const authorData = AUTHORS.find(a => a.name.toLowerCase() === authorKey.toLowerCase()) || AUTHORS[0];
+
+const publishDate = entry.data.date ? new Date(entry.data.date) : new Date();
+const tags: string[] = entry.data.tags || [];
+
+// Process Changelog: Sort descending & take top 3
+const changelog = (entry.data.changelog || [])
+  .map(date => new Date(date))
+  .sort((a, b) => b.getTime() - a.getTime())
+  .slice(0, 3);
+
+const formatDate = (d: Date) => {
+  if (isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.');
+};
+---
+
+<Layout title={entry.data.title} description={entry.data.title}>
+  
+  <div id="progress-bar" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400 z-[100] w-0 transition-all duration-100 ease-out shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
+  <div class="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-900/10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+
+  <div class="relative w-full max-w-[900px] mx-auto px-5 md:px-8 pt-0 pb-0">
+    
+    <header class="flex flex-col items-center text-center mb-16 md:mb-24 space-y-6 animate-fade-in-up">
+      {tags.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-2">
+          {tags.map((tag: string) => (
+            <span class="px-2.5 py-0.5 text-[10px] font-bold tracking-[0.1em] uppercase rounded border border-white/10 text-slate-400 hover:text-white hover:border-white/30 transition-all duration-300 bg-white/5 backdrop-blur-md">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.2] drop-shadow-xl max-w-4xl mx-auto">
+        {entry.data.title}
+      </h1>
+
+      <div class="flex flex-wrap items-center justify-center gap-5 text-xs font-medium text-slate-500 tracking-wider uppercase">
+        <a 
+          href="/about" 
+          class="flex items-center gap-3 group cursor-pointer hover:opacity-90 transition-opacity p-1 -ml-1"
+          title="About Author"
+        >
+          <img 
+            src={authorData.imgPath} 
+            alt={authorData.name} 
+            class="w-10 h-10 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-white/40 transition-all shadow-lg" 
+          />
+          <span class="text-slate-400 group-hover:text-white transition-colors border-b border-transparent group-hover:border-white/50 pb-0.5">
+            {authorData.name}
+          </span>
+        </a>
+        <div class="w-px h-4 bg-white/10 hidden sm:block"></div>
+        <div class="flex items-center gap-2" title="Published Date">
+          <span class="text-slate-500">{formatDate(publishDate)}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="relative">
+      <article class="md-content min-w-0 break-words pb-24">
+        <Content />
+        
+        {/* Changelog Section */}
+        {changelog.length > 0 && (
+          <div class="mt-24 pt-8 border-t border-white/10">
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Latest Updates</h3>
+            <ul class="space-y-3">
+              {changelog.map(date => (
+                <li class="flex items-center gap-4 text-xs text-slate-500 group">
+                  <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 group-hover:bg-indigo-400 transition-colors"></span>
+                  <span class="font-mono text-slate-400">{formatDate(date)}</span>
+                  <span class="text-slate-600 group-hover:text-slate-400 transition-colors">Content updated</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </article>
+
+      <aside class="hidden xl:block absolute top-0 left-[100%] ml-12 h-full">
+        <div class="sticky top-32 w-64 max-h-[75vh] overflow-y-auto custom-scrollbar">
+          <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4 pl-3 border-l-2 border-transparent">
+            On this page
+          </div>
+          <nav>
+            <ul class="space-y-1">
+              {headings.map((heading) => (
+                <li>
+                  <a 
+                    href={`#${heading.slug}`} 
+                    class="toc-link block py-1.5 pl-3 border-l-2 border-white/5 text-xs text-slate-500 hover:text-white hover:border-white transition-all duration-200 truncate leading-relaxed"
+                    data-depth={heading.depth}
+                    style={`margin-left: ${(heading.depth - 2) * 0.5}rem`}
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div 
+    id="mobile-toc-container" 
+    class="
+      xl:hidden fixed z-50 
+      bottom-0 left-0 right-0
+      translate-y-[calc(100%-4rem)]
+      transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+      border-t border-white/10 bg-[#0f0f11]/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
+    "
+  >
+    <button id="toc-toggle" class="w-full h-16 flex items-center justify-between px-6 cursor-pointer group">
+       <div class="flex flex-col items-start">
+         <span class="text-xs font-bold tracking-[0.2em] text-white/90 uppercase group-hover:text-blue-400 transition-colors">Table of Contents</span>
+         <span class="text-[10px] text-white/40 mt-0.5" id="toc-hint">Click to expand</span>
+       </div>
+       <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white/60 transition-transform duration-300" id="toc-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+         </svg>
+       </div>
+    </button>
+    <div class="px-6 py-6 pb-16 max-h-[60vh] overflow-y-auto custom-scrollbar">
+      <ul class="space-y-3">
+        {headings.map((heading) => (
+          <li>
+            <a 
+              href={`#${heading.slug}`} 
+              class="mobile-toc-link block text-sm text-slate-400 hover:text-white transition-colors border-l-2 border-transparent pl-4 hover:border-white/50"
+              style={`margin-left: ${(heading.depth - 1) * 0.5}rem`}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+</Layout>
+
+<script>
+// === 1. Progress Bar ===
+const progressBar = document.getElementById('progress-bar')
+window.addEventListener('scroll', () => {
+  if(progressBar) {
+    const winScroll = document.documentElement.scrollTop
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0
+    progressBar.style.width = scrolled + '%'
+  }
+})
+
+// === 2. TOC Highlight ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.toc-link').forEach(l => {
+        l.classList.remove('text-white', 'border-white')
+        l.classList.add('text-slate-500', 'border-white/5')
+      })
+      const activeLink = document.querySelector(`.toc-link[href="#${entry.target.id}"]`)
+      if (activeLink) {
+        activeLink.classList.remove('text-slate-500', 'border-white/5')
+        activeLink.classList.add('text-white', 'border-white')
+      }
+    }
+  })
+}, { rootMargin: '-100px 0px -70% 0px' })
+document.querySelectorAll('.md-content h2, .md-content h3').forEach(h => observer.observe(h))
+
+// === 3. Mobile TOC Toggle ===
+const toggleBtn = document.getElementById('toc-toggle')
+const container = document.getElementById('mobile-toc-container')
+const icon = document.getElementById('toc-icon')
+const hint = document.getElementById('toc-hint')
+let isOpen = false
+
+const toggle = (force?: boolean) => {
+  isOpen = force ?? !isOpen
+  if(isOpen) {
+    container?.classList.remove('translate-y-[calc(100%-4rem)]')
+    container?.classList.add('translate-y-0')
+    icon?.classList.add('rotate-180')
+    if(hint) hint.innerText = 'Click to close'
+  } else {
+    container?.classList.add('translate-y-[calc(100%-4rem)]')
+    container?.classList.remove('translate-y-0')
+    icon?.classList.remove('rotate-180')
+    if(hint) hint.innerText = 'Click to expand'
+  }
+}
+
+toggleBtn?.addEventListener('click', () => toggle())
+document.querySelectorAll('.mobile-toc-link').forEach(l => l.addEventListener('click', () => toggle(false)))
+
+// === 4. Code Block Copy Button ===
+document.addEventListener('DOMContentLoaded', () => {
+  const preElements = document.querySelectorAll('pre')
+
+  preElements.forEach(pre => {
+    const wrapper = document.createElement('div')
+    wrapper.className = 'code-block-wrapper group relative mb-8 rounded-lg overflow-hidden'
+    
+    pre.parentNode?.insertBefore(wrapper, pre)
+    wrapper.appendChild(pre)
+
+    pre.style.marginTop = '0'
+    pre.style.marginBottom = '0'
+    pre.style.borderRadius = '0'
+
+    const copyBtn = document.createElement('button')
+    copyBtn.className = 'copy-btn'
+    copyBtn.setAttribute('aria-label', 'Copy code')
+    
+    copyBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    `
+
+    copyBtn.addEventListener('click', async () => {
+      const code = pre.querySelector('code')?.innerText || ''
+      try {
+        await navigator.clipboard.writeText(code)
+        copyBtn.classList.add('is-copied')
+        setTimeout(() => copyBtn.classList.remove('is-copied'), 2000)
+      } catch (err) {
+        console.error('Failed to copy!', err)
+      }
+    })
+
+    wrapper.appendChild(copyBtn)
+  })
+
+  // === 5. Heading Anchor Links ===
+  const headings = document.querySelectorAll('.md-content h1, .md-content h2, .md-content h3')
+  headings.forEach(heading => {
+    const anchor = document.createElement('a')
+    anchor.className = 'heading-anchor'
+    anchor.href = `#${heading.id}`
+    anchor.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    `
+    
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault()
+      history.pushState(null, '', anchor.href)
+      navigator.clipboard.writeText(window.location.href)
+      
+      anchor.classList.add('copied')
+      setTimeout(() => anchor.classList.remove('copied'), 1500)
+    })
+
+    heading.appendChild(anchor)
+  })
+
+  // === 6. External Links in MDX ===
+  // 找出所有在文章內容裡的連結，並排除那些作為頁面內跳轉用的錨點（href 以 # 開頭的）
+  const contentLinks = document.querySelectorAll('.md-content a')
+  contentLinks.forEach(link => {
+    const href = link.getAttribute('href')
+    if (href && !href.startsWith('#')) {
+      link.setAttribute('target', '_blank')
+      link.setAttribute('rel', 'noopener noreferrer')
+    }
+  })
+})
+</script>
+
+<style is:global>
+  /* Base Typography */
+  .md-content { 
+    color: #e2e8f0; 
+    font-size: 1.05rem; 
+    line-height: 1.8; 
+    letter-spacing: 0.01em; 
+  }
+  
+  @media (min-width: 768px) { 
+    .md-content { font-size: 1.125rem; line-height: 1.9; } 
+  }
+
+  .md-content strong { color: #fff; font-weight: 600; }
+  
+  /* Heading Styles - 包含 Anchor 定位 */
+  .md-content h1, .md-content h2, .md-content h3, .md-content h4 { 
+    color: #fff; 
+    font-weight: 700; 
+    line-height: 1.3; 
+    scroll-margin-top: 6rem;
+    position: relative; 
+  }
+  
+  /* Anchor Link Styles */
+  .heading-anchor {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    opacity: 0;
+    color: #64748b; 
+    transition: all 0.2s;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  .md-content h1:hover .heading-anchor,
+  .md-content h2:hover .heading-anchor,
+  .md-content h3:hover .heading-anchor {
+    opacity: 1;
+  }
+
+  .heading-anchor:hover { color: #fff; }
+  .heading-anchor.copied { color: #4ade80; transform: scale(1.1); }
+
+  /* [修正] H1: 文章內標題 (通常隱藏，但這裡開啟樣式以備不時之需) */
+  .md-content h1 { 
+    display: block; /* 開啟顯示 */
+    font-size: 2.25rem;
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+  }
+  @media (min-width: 768px) { .md-content h1 { font-size: 3rem; } }
+  
+  /* [修正] H2: 章節標題 - 加上明顯的底線 (Divider) */
+  .md-content h2 { 
+    font-size: 1.75rem; 
+    margin-top: 5rem; /* 大間距 */
+    margin-bottom: 1.5rem; 
+    padding-bottom: 0.5rem; 
+    
+    /* 章節分隔線：稍微亮一點的線條 */
+    border-bottom: 1px solid rgba(255,255,255,0.2); 
+  }
+  @media (min-width: 768px) { 
+    .md-content h2 { 
+      font-size: 2rem; 
+      margin-top: 7rem; /* Desktop 更大的間距，約 112px */
+      margin-bottom: 2rem; 
+    } 
+  }
+  
+  /* [修正] H3: 子章節 - 加上左側飾條 (Left Border) */
+  .md-content h3 { 
+    font-size: 1.35rem; 
+    margin-top: 3.5rem; 
+    margin-bottom: 1rem; 
+    color: #f1f5f9; 
+    
+    /* 左側飾條：使用粉色或強調色 */
+    padding-left: 0.75rem;
+    border-left: 4px solid #f472b6; /* Pink-400 */
+    border-bottom: none; /* 移除底線，改用左側強調 */
+  }
+  @media (min-width: 768px) { 
+    .md-content h3 { 
+      font-size: 1.5rem; 
+      margin-top: 4.5rem; 
+      margin-bottom: 1.25rem; 
+      padding-left: 1rem;
+    } 
+  }
+
+  /* [修正] H4: 小標題 - 顯眼但層級較低 */
+  .md-content h4 { 
+    font-size: 1.15rem; 
+    font-weight: 700; 
+    margin-top: 2.5rem; 
+    margin-bottom: 0.75rem; 
+    color: #cbd5e1; /* Slate-300 */
+  }
+  @media (min-width: 768px) { .md-content h4 { font-size: 1.25rem; } }
+
+  /* Paragraphs & Lists */
+  .md-content p { margin-bottom: 1.5rem; }
+  
+  .md-content ul { list-style: disc; }
+  .md-content ol { list-style: decimal; }
+  
+  .md-content ul, .md-content ol { 
+    margin: 1.5rem 0; 
+    padding-left: 1.25rem; 
+  }
+  @media (min-width: 768px) { 
+    .md-content ul, .md-content ol { padding-left: 1.5rem; } 
+  }
+  
+  .md-content li { margin: 0.5rem 0; padding-left: 0.25rem; }
+  .md-content li::marker { color: #94a3b8; }
+
+  /* Links */
+  .md-content a { color: #60a5fa; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .md-content a:hover { border-bottom-color: #60a5fa; }
+  
+  /* Inscription Blockquote Styles */
+  .md-content blockquote { 
+    margin: 3rem 0; 
+    padding: 2rem; 
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: none;
+    background: transparent;
+    color: #94a3b8;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+
+  .md-content blockquote p { margin-bottom: 0; }
+  
+  .md-content blockquote a {
+    color: #e2e8f0 !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    border-bottom: none;
+    font-weight: normal;
+  }
+  .md-content blockquote a:hover { color: #fff !important; }
+
+  /* Code Block Styles */
+  .md-content :not(pre) > code { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85em; color: #ff79c6; background: #282a36; padding: 0.2em 0.4em; border-radius: 0.3em; vertical-align: 1px; border: 1px solid rgba(255,255,255,0.05); }
+  
+  .md-content pre { padding: 1rem; background: #1e1e1e; overflow-x: auto; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85rem; }
+  @media (min-width: 768px) { .md-content pre { padding: 1.25rem; font-size: 0.9rem; } }
+  .md-content pre code { background: transparent; padding: 0; color: inherit; border: none; font-size: inherit; }
+
+  .md-content img { border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.05); margin: 2.5rem auto; display: block; max-width: 100%; height: auto; }
+  @media (min-width: 768px) { .md-content img { border-radius: 0.75rem; margin: 3.5rem auto; } }
+  .md-content hr { border: 0; height: 1px; background: rgba(255,255,255,0.1); margin: 4rem 0; }
+  
+  /* Table Styles */
+  .md-content table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; margin: 2rem 0; font-size: 0.95rem; white-space: nowrap; }
+  @media (min-width: 768px) { .md-content table { display: table; white-space: normal; } }
+  .md-content th { text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: #fff; background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  .md-content td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #e2e8f0; transition: background-color 0.2s; }
+  .md-content tr:last-child td { border-bottom: none; }
+  .md-content tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+  /* Admonitions Styles */
+  .admonition { 
+    margin: 2rem 0; 
+    padding: 0.75rem 1rem; 
+    border-radius: 0.5rem; 
+    background: rgba(255, 255, 255, 0.02); 
+    font-size: 0.95rem;
+    padding-left: 1.25rem;
+    border-left-width: 4px;
+    border-left-style: solid;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @media (min-width: 768px) { .admonition { padding: 1rem 1.5rem; padding-left: 1.75rem; } }
+
+  .admonition::after { display: none; }
+  .admonition::before { 
+    content: attr(class); 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    font-size: 0.75rem; 
+    letter-spacing: 0.1em; 
+    display: block; 
+    margin-bottom: 0.5rem; 
+    opacity: 0.9; 
+    visibility: visible;
+  }
+  
+  .admonition.info::before { content: 'INFO'; color: #60a5fa; }
+  .admonition.note::before { content: 'NOTE'; color: #cbd5e1; }
+  .admonition.tip::before { content: 'TIP'; color: #34d399; }
+  .admonition.warning::before { content: 'WARNING'; color: #fbbf24; }
+  .admonition.danger::before { content: 'DANGER'; color: #f87171; }
+
+  .admonition.info { border-left-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+  .admonition.note { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.1); }
+  .admonition.tip { border-left-color: #10b981; background: rgba(16, 185, 129, 0.1); }
+  .admonition.warning { border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+  .admonition.danger { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+
+  .admonition p { margin: 0.5rem 0 0 0; }
+  .admonition p:first-of-type { margin-top: 0; }
+
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+  /* Copy Button Wrapper */
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+    opacity: 0; 
+    z-index: 20;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .code-block-wrapper:hover .copy-btn { opacity: 1; }
+  .copy-btn:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; border-color: rgba(255,255,255,0.1); }
+
+  .copy-btn.is-copied { border-color: rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); color: #4ade80; }
+  .copy-btn .icon-check { display: none; }
+  .copy-btn .icon-copy { display: block; }
+  .copy-btn.is-copied .icon-check { display: block; }
+  .copy-btn.is-copied .icon-copy { display: none; }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+</style>

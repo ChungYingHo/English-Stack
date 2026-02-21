@@ -1,0 +1,70 @@
+---
+title: "206. Reverse Linked List"
+author: "jeremy"
+date: "2026-02-18"
+tags: [leetcode, linked list]
+changelog: []
+---
+
+:::info
+[Leetcode 206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/)
+:::
+
+## 題目要求
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+Expected input and output:
+```
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+Input: head = [1,2]
+Output: [2,1]
+
+Input: head = []
+Output: []
+```
+
+
+## 解題思路
+如題，這題只是要將單向鏈結串列 (singly linked list) 反轉。  
+別看題目的 example 好像 I/O 就是要輸入跟輸出一組陣列，但實際上輸入輸出都是 linked list 的 head Node。
+
+那根據 linked list 的特性，每個 Node 都會有一個 next pointer 指向下一個 Node，那這題就是需要把每個 Node 的 next pointer 反轉指向前一個 Node。  
+那所以理所當然爾，我們會需要做 linked list 的遍歷，然後在遍歷的過程中，把每個 Node 的 next pointer 反轉指向前一個 Node。  
+對於 linked list 遍歷而言，基本操作是 currentNode 與 while 迴圈的組合拳，只要是 linked list 的遍歷基本都是這個起手式。
+
+那在每次遍歷的過程中，會需要做三件事：
+1. 因為要反轉 next pointer，現正讀取的 Node next 必須指向前一個 Node。
+2. 接下來為了推進遍歷，對下一次遍歷來說，下一次遍歷要讀取的「前一個 Node」會是這一次遍歷的 currentNode。
+3. 同樣為了推進遍歷，這個是 linked list 遍歷基本操作，要把 currentNode 推進到下一個 Node (也就是原本的 next Node)。
+
+從上面的邏輯來看，我們會需要一個「前一個 Node」，他相當地重要，所以必須定義一個 prevNode 來儲存這個「前一個 Node」。  
+那這樣我們就可以在每次遍歷的過程中，依序完成上述三件事。  
+以第一次遍歷來說，步驟會像這樣：
+1. currentNode 會是 head Node，而 prevNode 則是 null (因為 head Node 前面沒有 Node)。
+2. 進入遍歷。
+3. 先暫存 currentNode 的 next Node (避免反轉 next pointer 後就無法取得原本的 next Node)。
+4. 把 currentNode 的 next 指向 prevNode (第一次遍歷時，prevNode 是 null)。
+5. 把 prevNode 更新為 currentNode 的 Node (為了下一次遍歷做準備)。
+6. 把 currentNode 更新為剛剛暫存的 next Node (為了下一次遍歷做準備)。
+
+步驟 5、6 其實就是單純推進 linked list 遍歷。
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode currentNode = head;
+        ListNode prevNode = null;
+
+        while (currentNode != null) {
+            ListNode tempNextNode = currentNode.next;
+            currentNode.next = prevNode;
+            prevNode = currentNode;
+            currentNode = tempNextNode;
+        }
+
+        return prevNode;
+    }
+}
+```

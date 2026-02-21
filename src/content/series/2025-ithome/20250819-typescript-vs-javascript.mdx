@@ -1,0 +1,108 @@
+---
+title: 'Day11 - needTypeCheck ? TypeScript : JavaScript'
+tags: [JavaScript, TypeScript]
+author: 'jeremy'
+date: '2025-08-19'
+changelog: []
+---
+
+前面那篇一不小心提到了一些關於 TypeScript、關於型別的問題，本來 TypeScript 是想放到後面再來聊聊的，但想想還是先拿出來講好了。  
+眾所周知 Javascript 其實是個有別於其他程式語言的動態型別語言，所謂動態就是寫 code 時不用特別塞給變數一個 type，JS 會自己去推斷，這樣的好處是相當自由，所以同一個變數可能先是 string，後來又變成 object。  
+但也就是這樣的自由讓 JS 開發者在開發時有時會遇到一些 bug，追蹤之後才發現可能是在某個 component、某個 flow 修改到了資料的型別，然後導致整組 code 都壞掉。  
+這種情況對於大型專案尤其常見，主因是大型專案通常都 flow 複雜，工程師們也都各自負責不同的 part，這種情況下過度的自由就會變成一種負擔。  
+於是乎後來有了 TypeScript 的出現就是為了解決 JavaScript 過度自由的問題。
+
+嚴格來說 TypeScript 不算是新的語言，它始終還是會被編譯成 Javascript 去執行。  
+我更喜歡說 TypeScript 是 JavaScript 的靜態型別寫法。  
+這篇也不是在教如何使用 TypeScript，想從 0 開始學的建議翻一下 TS 的官網。  
+其實這篇是想 murmur 一下，實務開發真的需要 TypeScript 嗎？他真的有前面所說的優點那麼好嗎？
+
+## 自由與嚴謹各自的代價
+前面提到 TS 的出現就是為了解決 JS 型別不嚴謹的問題，這是它最大的優點。  
+對前端來講，我們可以針對一個表單給與一個 interface 去定義各屬性的型別，這樣在我們真正 POST 給後端前，TS 就可以很快地幫我們檢查出這個表單的資料是否符合需求。  
+只要當 TS 噴出 type error，我們就知道這個表單的資料有問題，可以及早處理。
+
+```ts
+interface FormData {
+  name: string;
+  age: number;
+  email: string;
+}
+
+function submitForm(data: FormData) {
+  // ...
+}
+```
+
+另外在前一篇有提到 `??` 的用法，裡面我給了一個範例，並括號了說：「這假設 `user.name` 一定是字串；如果型別不正確，依然可能在呼叫方法時出錯」。  
+這如果是用 TS 改寫的話，就可以在一開始明確定義 `user.name` 的型別一定要是個 string，當他有值時就一定會是 string，這樣搭配 fallback 是更安全的一個實作方式。
+
+- Javascript 的寫法
+
+```js
+const currentUser = user.name ?? "Guest"
+
+currentUser.toLowerCase()
+```
+
+- TypeScript 的寫法
+
+```ts
+interface User {
+  name: string
+  email: string
+}
+
+const user: User = {
+  // ...
+}
+
+const currentUser = user.name ?? "Guest"
+
+currentUser.toLowerCase()
+```
+
+這裡如果故意把 `user.name` 的值隨便給個 `123` 之類的 number，TS 馬上就會報錯，比起讓程式跑起來才報錯，這樣更能提前發現問題。
+
+所以說 TS 的優點就是確保了變數、資料在整個 flow 中的一致性，這個 flow 不只是前端自己的資料流、元件流，還包括了前端與後端之間的資料傳遞。  
+但在某些情況下，TS 的嚴謹也會成為一種開發負擔。  
+這些負擔多半來自於幾種可能：
+1. 資料結構過於複雜
+2. 同一筆資料用在不同的地方，可能會有不同的型別需求
+3. 型別的來源不一致或仰賴後端 API
+
+我舉個最近遇到的例子：  
+最近一項功能需要實作一個極度複雜、多層的 form，而這個 form 會用在新增與編輯上，這是前端常見的實務要求 - 能共用的元件就共用。  
+為此後端設計了三個 api：
+1. POST - 新增用的
+2. GET - 剛進編輯表單時要看到已經填好的資料嘛
+3. PUT - 編輯用的
+
+通常在這種有前後端資料交流的時候都會導入 openapi 幫助前端自動根據後端的 api document 生成 type。  
+那你猜 POST、GET、PUT 三個的資料型別會不會一樣？  
+Well，當然不一樣！  
+對於一個複雜的表單來說，新增時可能某些欄位是必填，但編輯時因為這欄位已經是 disabled 狀態，於是後端的設計就會是 GET 時有送這個欄位回來，但 PUT 時就不要求要送這個欄位出去。  
+所以這個欄位就突然被加上一個 `undefined` 的型別，然後 TS 開始哇哇叫。  
+上面這個故事出現了幾件事：
+1. 資料結構過於複雜 - 太多欄位導致屬性過多
+2. 同一筆資料用在不同的地方，可能會有不同的型別需求 - 新增與編輯的需求不同
+3. 型別的來源不一致或仰賴後端 API - 透過 openapi 會仰賴後端的 API document，當後端改了資料結構，前端也要跟著改。
+
+這種時候其實可能會說那又請 UI 改設計、請後端改 api document。  
+Well... 這是理想，但現實是設計稿可能都是客戶確認過的、api document 也是後端改過 N 版的版本了、前端也有自己複雜的 component flow 跟 data flow，大家各有各的難處。  
+撇除這些因素，這個例子其實想說的是，在一些情況下，TS 的嚴謹會讓開發的過程變得很複雜，常常可能牽一髮而動全身，造成開發時間拉長。  
+這裡如果改成把 form 的 type 直接給 any，也就是回歸到 JavaScript 的自由，就不會有上述這些問題。  
+但試問，這種複雜的資料結構難道不應該有個 type check 來及早發現問題嗎？
+
+## needTypeCheck ? TypeScript : JavaScript
+`needTypeCheck ? TypeScript : JavaScript`，這一直都是個選擇題。  
+一段時間以前，我聽過一個言論 (我沒去看是否是真的啦)，說 TS 的創辦人之一發表說應該要回歸 JS 的自由，因為這才是 JS 問世的一大目的。  
+先不論他是否真的有這樣說過，但 web 圈確實 JS 跟 TS 各自都有擁護者。  
+誠然，這兩種寫法都有其優劣，那青菜蘿蔔各有所愛，只能說每個人心中各有一把尺，真的開發上就按照團隊的需求來選擇就好。
+
+微軟在 2025 年用 Go 重寫 TypeScript 的底層邏輯，讓 TS 更加強大、編譯更快，這無疑也是在告訴大家，使用 TS 的開發者其實相當龐大。  
+以我個人而言，雖然我有時也會跟同事抱怨說 type 好煩，或是某某某 type 寫錯，害我這個衍生功能要做之前要先修 type... 等只有 TS 會遇到的問題。  
+但說真的，TS 提供的安全性還是會讓我願意花時間處理它的不便利性。  
+況且這種定義好的 type，更能讓開發者預測資料的長相，也算是一種小確幸。
+
+再說一次，TS or JS 從來都沒有誰對誰錯，就像 python 跟 Java 也永遠都有人拿出來互相攀比一樣，真的沒必要去爭論太多，取你所需即可。

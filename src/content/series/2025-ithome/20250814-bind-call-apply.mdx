@@ -1,0 +1,58 @@
+---
+title: 'Day06 - 到底為何這麼愛考 bind, call, apply？'
+tags: [JavaScript, this, bind, call, apply]
+author: 'jeremy'
+date: '2025-08-14'
+changelog: []
+---
+
+如題，我想不透為什麼這麼愛考 `bind`, `call`, `apply`。  
+有人說是因為這是考考新人對 `this` 的操縱能力的方式，但我很不解，這三兄弟其實在現代開發中真的已經很少用到了，考這個的意義到底在哪？  
+到頭來考完了，沒用到還是忘記，然後以後被問還是得繼續當 google 工程師。  
+與其相信這是在考新人對於 `this` 的理解，我有時會覺得是不是考題又去網路上抄了...。
+
+ok，fine，但它既然作為面試常見考題，那還是得說說他們到底在做什麼。
+
+## 三兄弟都會綁定 `this`，差別在生效的時機不同
+我覺得先看 code 應該比較快：
+
+```js
+function showName(prefix) {
+  console.log(prefix, this.name)
+}
+
+const obj = { name: 'Jeremy' }
+
+// bind → 綁定時 this 固定，等之後執行才用
+const boundFn = showName.bind(obj)
+boundFn('哈囉') // 哈囉 Jeremy
+
+// call → 馬上綁定並執行
+showName.call(obj, '你好') // 你好 Jeremy
+
+// apply → 馬上綁定並執行，但參數要用陣列
+showName.apply(obj, ['嗨']) // 嗨 Jeremy
+```
+
+從這個範例可以很快歸納以下幾點：
+1. `call` 跟 `apply` 比較類似，都是綁定 `this` 並馬上執行函式。
+2. `bind` 則是綁定 `this`，但不會立即執行，而是回傳一個新的函式，等之後再執行。
+
+喔，如果看到這裡你想說：哪裡有 `this`？你不是綁 obj 嗎？  
+呃... 那你要知道 `this` 本來就是指向當前執行上下文的物件。
+
+所以我們在探討 arrow function 跟 function 宣告的那篇文中有提到它們兩個的 `this` 指向性差異。  
+只要是以 `function` 去宣告函式，用了 `bind`、`call`、`apply`，都可以改變 `this` 的指向，硬生生地把 `this` 綁定到你想要的物件上。  
+arrow function 因為建立時就綁定外層作用域的 `this`，所以不會受到 `bind`、`call`、`apply` 的影響。  
+這也許是為什麼面試官喜歡考這個的原因，因為它可以測試你對於 `this` 的理解。
+
+## 然後我要繼續 murmur
+我對於 `bind`、`call`、`apply` 的看法其實比較把他們歸類在那種真正用到時再去看怎麼用就好的工具範疇，因為真的太少用了。  
+以 Vue 來說，Vue 3 之後的 Composition API 基本上就看不到 `this` 了，更遑論 `bind`、`call`、`apply`。  
+較早期以 Vue2 開發的專案，`this` 的身影還是會充斥在各個 component 中，但大多數的情況下，`this` 都是指向當前 component 的實例，所以 `bind`、`call`、`apply` 也不太需要用到。  
+
+我覺得這是一種時間的推移。  
+隨著前端持續演進，過往被視為基礎的東西其實有些漸漸與實務脫鉤。  
+我覺得當難以學以致用的時候，這個知識的重要程度就在逐漸下滑，`bind`、`call`、`apply` 我認為就在這個範疇。  
+講真，考這個我覺得不如去考更基本的 array 跟 object 的各種操縱方法，至少還是很多人 `slice` 跟 `splice` 有些分不清楚的 www。  
+但如果你是面試一間很愛原生 JavaScript 的公司，理解這三兄弟還是非常必要的。

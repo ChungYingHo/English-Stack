@@ -1,0 +1,201 @@
+---
+title: 'Day08 - 面試很愛考的閉包 (Closure) 到底是怎麼一回事？'
+tags: [JavaScript, Closure]
+author: 'jeremy'
+date: '2025-08-16'
+changelog: []
+---
+
+其實我第一次接觸閉包 (Closure) 這個概念其實並不是在 JavaScript，而是那個時候被當時任職公司要求學 Flutter 時在 Dart 裡碰到的。  
+之後會再看到閉包這個辭彙，講真，真的是在面試時被問。  
+
+幾年前碰 Dart 的時候我在自己的筆記裡是這樣紀錄 closure：
+
+> 當定義一個函式時，如果在函式內部引用了外部的變數，那麼這個函式就是一個閉包。
+
+那時為了形象一點解釋這樣一句話，我嘗試用了一些譬喻 (想像一個盒子，這個盒子裡面有一些東西...) 來描述它，現在回頭來看反而看不懂當時自己寫的那段東西，現在想來我那時其實根本沒懂 closure 的概念。
+
+## So, what is Closure?
+為了了解閉包我曾經看過不少文章，大家對閉包的解釋都各有風格：
+1. 當定義一個函式時，如果在函式內部引用了外部的變數，那麼這個函式就是一個閉包。
+2. 函式裡引用了外層作用域的變數 && 外層作用域已經結束，但變數依然活著，那麼這個函式就是閉包。
+3. 閉包就是內部函式能取用並記住外部的變數。
+
+然後 [MDN](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Closures) 對於 closure 的解釋是：
+
+> 閉包為函式的組合、還有該宣告函式的作用域環境。這個環境包含閉包建立時，所有位於該作用域的區域變數。
+
+啊啊啊啊... 所以 closure 到底是什麼？  
+說實在這個概念真的抽象到很難形象，所以各路大神無所不用其極，各自用自己的話來解釋 closure。  
+但其實大概可以抓出幾個重點：
+1. closure 是個函式。
+2. closure 是個跟「外部」有高度關聯的函式。
+
+先來看 closure 的經典範例：
+```js
+function outer() {
+  const outerVar = 'I am outside!'
+
+  function inner() {
+    console.log(outerVar)
+  }
+
+  return inner // 或是直接 inner()
+}
+```
+
+這個例子常被用作說明 closure 的概念：  
+`inner` 作為一個 closure，它取用了外部作用域 `outer` 的變數 `outerVar`。  
+在 `outer` 執行結束 (`outer` 作用域消失) 後，`inner` 仍然能夠存取 `outerVar`。  
+這個例子不論用上面三個 closure 的解釋來看哪個都對：
+1. 當定義一個函式時，如果在函式內部引用了外部的變數，那麼這個函式就是一個閉包。 → 對，因為 `inner` 引用了 `outerVar`。
+2. 函式裡引用了外層作用域的變數 && 外層作用域已經結束，但變數依然活著，那麼這個函式就是閉包。 → 對，因為 `outer` 執行結束後，`outerVar` 依然可以被 `inner` 存取。
+3. 閉包就是內部函式能取用並記住外部的變數。 → 對，因為 `inner` 記住了 `outerVar` 的值。
+
+但該怎麼用 MDN 的定義來理解這個範例？  
+大致上是這樣：
+1. `inner` 是個 closure，它是函式 (`inner` 本身) 與 `inner` 被宣告時所在的作用域環境（這裡是 `outer`）的組合。
+2. 這個環境包含閉包 (`inner`) 建立時，所有位於該作用域 (`outer`) 的區域變數 (`outerVar`)。
+
+以 MDN 的角度來看，一言以蔽之 closure 的概念是：
+
+> 函式在建立時就記住了外部作用域變數的狀態，那就是 closure
+
+所以理論上來說，只要有使用外部的變數的函式都可以被視為 closure。  
+但為何會有論點特別強調「外層作用域要死掉」呢？  
+我覺得換個思維把「closure 會記住外部作用域變數」 改成 「closure 可以延長外部作用域變數的生命週期」應該能更好解釋這個論點。
+
+回到 `outer` 的例子，`outer` 執行時會啟動屬於它的做用域，當 `outer` 執行完畢後，這個作用域就會被銷毀。  
+但 `outer` 的作用域被銷毀，理應 `outerVar` 也會被銷毀，但因為 `inner` 這個 closure 的存在，`outerVar` 被帶到了closure `inner` 裡面，其生命週期被延長。  
+普遍上 closure 出現的例子都是這種 function 內 return function 的情境，這種情境下外層作用域幾乎必定是會死去的，也更加凸顯 closure 會把外部作用域變數的生命週期延長的特性。  
+因此某些論點才會特別強調「外層作用域要死掉」。  
+學術一點來看就是函式執行結束後，它的執行環境會從 stack 記憶體移除，但如果有 closure 引用了該作用域裡的變數，那些變數會被額外保留在 Heap 記憶體中，直到沒有任何引用為止。
+
+但嚴格來講，MDN 只說了 closure 會記住外層作用域變數，沒說過外層作用域一定要死掉，所以下面兩種其實都是 closure：
+
+```js
+// 外層作用域死掉的例子
+function outer() {
+  const msg = 'Hello Closure';
+  return function inner() {
+    console.log(msg)
+  }
+}
+
+const fn = outer() // outer 結束了
+fn() // 'Hello Closure' -> msg 還活著
+
+
+// 外層作用域沒死掉的例子
+const msg = 'Hello World' // 全域作用域，永遠不會死
+
+function greeting() {
+  console.log(msg)
+}
+
+greeting() // 這其實也是閉包，因為 greeting 仍引用了外部 msg
+```
+
+挺訝異的吧，`greeting` 竟然也是 closure！  
+所以我們放寬來說，函式只要有用到外部作用域的變數，就可以被視為 closure。  
+當然外層作用域沒死掉的例子基本不會做為 closure 的範例，因為它太難凸顯 closure 延長外部作用域變數生命週期的強大。
+
+為此，我們應該可以根據 MDN 統一出一個簡短的結論：
+
+> 函式只要在建立時就記住了外部作用域變數的狀態，那就是 closure
+
+## 閉包的使用情境
+接著我們來談談閉包的使用情境。
+
+### 私有變數
+一樣先來看範例：
+
+```js
+function counter() {
+  let count = 0
+
+  function increment() {
+    count++
+  }
+
+  function getCount() {
+    return count
+  }
+
+  return {
+    increment,
+    getCount
+  }
+}
+
+const value = counter()
+value.increment()
+value.increment()
+value.increment()
+console.log(value.getCount()) // 3
+```
+
+創建私有變數其實是閉包最直觀的使用情境。  
+同時因為 `count` 是宣告在 `counter` method 內部，所以 `count` 就變成了私有變數，外部是無法直接存取到 `count` 的。
+
+### 柯里化 (Currying)
+誒，別說，我以前問助教什麼是柯里化，他很疑惑地問我哪裡聽的，可見這不是一個常見的概念。  
+但是齁，我還真的被考過過柯里化 www  
+但柯里化說穿了本質上就是閉包的概念衍伸應用。
+
+先說啊，柯里化用的閉包「記住變數」的特性。柯里化的目的其實是要把一個接受多個參數的函式，轉換成一連串只接受一個參數的函式。  
+有夠抽象的，乾脆看例子，這個例子是最前面閉包那個例子的改編衍伸版：
+
+```js
+function countNumber(a) {
+  return function(b) {
+    return function(c) {
+      return a + b + c
+    }
+  }
+}
+
+const result = countNumber(1)(2)(3)  // 1 + 2 + 3 = 6
+console.log(result) // 6
+```
+
+上面這行為其實就是每次傳一個參數進去，內部的函式就會記住這個參數，並且等到所有參數都傳完後再一次性計算。  
+那個記住的動作就是閉包的特性。
+
+話說會不會有人問如果不傳 `c` 會怎樣？  
+答：會報錯。  
+或是如果寫 `countNumber(1)(2)()`，那此時因為 `c` 是 `undefined`，所以會得到 `NaN`。  
+統一回答這時不想它報錯或回傳 `NaN`，可以在一開始就預設參數的值，ex: `return function(c = 0) { ... }`。
+
+啊對，柯里化實務上真的很少很少用，瞧，senior 都不知道了，但就是莫名其妙竟然讓我面試遇到 www
+
+### lazy evaluation (延遲計算)
+我想直接先丟範例：
+
+```js
+function sayHi () {
+  console.log( 'Hello World!' )
+}
+
+function lazyLoad () {
+  let isLoaded = false
+
+  return function () {
+    if (!isLoaded) {
+      sayHi()
+      isLoaded = true
+    } else {
+      console.log('Already loaded')
+    }
+  }
+}
+
+const load = lazyLoad()
+
+load() // Hello World!
+load() // Already loaded
+load() // Already loaded
+```
+
+延遲計算的精髓就是「只有在需要的時候才執行，並且只執行一次」，通常會用在避免重複運算的情境。  
+以上述的範例來看，執行了 `load()` 一次後，`isLoaded` 就變成 `true` 了，所以之後再執行 `load()` 時就會直接印出 `Already loaded`，不會再執行 `sayHi()`。

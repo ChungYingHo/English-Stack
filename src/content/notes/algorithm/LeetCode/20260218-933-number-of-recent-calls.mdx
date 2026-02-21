@@ -1,0 +1,75 @@
+---
+title: "933. Number of Recent Calls"
+author: "jeremy"
+date: "2026-02-18"
+tags: [leetcode, queue]
+changelog: []
+---
+
+:::info
+[Leetcode 933. Number of Recent Calls](https://leetcode.com/problems/number-of-recent-calls/description/)
+:::
+
+## 題目要求
+You have a RecentCounter class which counts the number of recent requests within a certain time frame.
+
+Implement the RecentCounter class:
+- `RecentCounter()` Initializes the counter with zero recent requests.
+- `int ping(int t)` Adds a new request at time `t`, where `t` represents some time in milliseconds, and returns the number of requests that has happened in the past 3000 milliseconds (including the new request). Specifically, return the number of requests that have happened in the inclusive range `[t - 3000, t]`.
+
+It is guaranteed that every call to ping uses a strictly larger value of t than the previous call.
+
+```
+Example 1:
+
+Input
+["RecentCounter", "ping", "ping", "ping", "ping"]
+[[], [1], [100], [3001], [3002]]
+Output
+[null, 1, 2, 3, 3]
+
+Explanation
+RecentCounter recentCounter = new RecentCounter();
+recentCounter.ping(1);     // requests = [1], range is [-2999,1], return 1
+recentCounter.ping(100);   // requests = [1, 100], range is [-2900,100], return 2
+recentCounter.ping(3001);  // requests = [1, 100, 3001], range is [1,3001], return 3
+recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002], range is [2,3002], return 3
+```
+
+## 解題思路
+這題其實滿直觀的，英文敘述其實寫得滿繞的，但其實基本上就是 `t` 代表的既是 request 也是這個 request 發生的時間點。  
+那題目要求的 `ping(t)` 其實就是要我們回傳在 `[t-3000, t]` 這個時間區間內發生的 request 數量。  
+然後每次調用 `ping` 時傳入的 `t` 值都是遞增的。  
+那這裡有個小陷阱，但其實就是說文解字啦，他回傳的「時間區間內的 request 數量」，是包含過去調用 `ping` 傳入的所有 `t` 值，所以我們得儲存每次調用 `ping` 傳入的 `t` 值。  
+
+那接下來 leetcode 還有一個需要注意的點是執行的效能，我們要是每次存取 `t` 值後，再去遍歷整個 list 去計算 `[t-3000, t]` 這個區間內的 request 數量，效能會很差，在邏輯上達成了題目目標但還是會過不了 leetcode 的效能測試。  
+那因為每次傳入的 `t` 值都是遞增的，所以理論每次檢查的時間區間 `[t-3000, t]` 也是遞增的，那小於 `t-3000` 的 request 在未來是肯定不會被計算在內的，因此就可以每次檢查時就把小於 `t-3000` 的 request 從儲存結構中移除。
+
+因此基於上面的三項重點：
+1. `t` 是遞增的
+2. 我們需要儲存每次調用 `ping` 傳入的 `t` 值
+3. 每次檢查時移除小於 `t-3000` 的 `t` 值
+
+這些重點相當符合 Queue 的 FIFO (First In First Out) 特性。  
+簡單來說，我們每次調用 `ping(t)` 時就把 `t` 值放進 Queue 裡，所以 Queue 裡的值會是依序慢慢變大排列的。  
+接下來調用 `ping(t)` 時，我們就檢查 Queue 的最前端值 (也就是最早放進去的值)，如果它小於 `t-3000`，那就把它移除，然後繼續檢查下一個最前端值，直到最前端值不小於 `t-3000` 為止。  
+最後返回 Queue 裡的元素數量就是我們要的結果。
+
+```java
+class RecentCounter {
+
+    Queue<Integer> queue;
+
+    public RecentCounter() {
+        this.queue = new LinkedList<>();
+    }
+
+    public int ping(int t) {
+        queue.offer(t);
+        while (!queue.isEmpty() && queue.peek() < t - 3000) {
+            queue.poll();
+        }
+        return queue.size();
+    }
+}
+```

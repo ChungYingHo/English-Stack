@@ -1,0 +1,82 @@
+---
+title: 'Day25 - 面試問我開發環境以及流程耶~ 我該怎麼回答？'
+tags: [git, vscode, docker]
+author: 'jeremy'
+date: '2025-09-02'
+changelog: []
+---
+
+這個議題其實可以在拆成三個常見的問題：
+1. 你有使用過 git 嗎？可以簡述一下你的使用流程嗎？
+2. 你平常都用什麼開發工具或輔助開發工具呢？
+3. 你有使用過 docker 嗎？知道 docker-compose.yml 是什麼嗎？
+
+因為這三個問題其實就差不多囊括了現今前端協作開發的三個面向了。  
+面試官問這些問題除了在考對工具的熟悉度，一方面也是藉這題了解你過去的開發經驗。  
+畢竟以 vscode 來說，新手的 vscode 跟老手的 vscode 可能差很多，畢竟老手才有餘裕去看各式各樣的 vscode extension，或是去玩 vscode theme 甚至是在 vscode 養寵物 XD
+所以這篇我們稍微來看看這些開發中常見的工具吧！
+
+## git
+git 真的是前端開發的必備技能了。  
+應該說軟體開發的必備技能了。
+
+你只要想做版本控制、想要多人協作開發，git 幾乎是唯一的選擇了。  
+你總不想把一大包的 code zip 起來然後寄給同事吧？  
+就算真的 zip 打包過去，也無法像 git 那樣動態追蹤 code 的變動，整個會變得很麻煩。   
+這裡要提的是，面試官問你 git 的時候，除了最基本的 git 指令你要會之外，其實也會想聽聽你對 git flow 的理解。
+
+git flow 是 git 指令的綜合實踐，也是團隊的開發策略。  
+相信各位多少聽過 master branch、develop branch、release branch 這些名詞，git flow 就是在說這些東西。  
+這裡我相當推薦還不太了解 git flow 的人可以閱讀一下[「為你自己學 git：Git Flow 是什麼？為什麼需要這種東西？」](https://gitbook.tw/chapters/gitflow/why-need-git-flow)這篇文章。
+
+一般 git flow 有三種主流版本：git flow、github flow、gitlab flow。  
+它們各自對於 branch 的使用規範不太一樣，但目的都是希望能讓多人協作開發時，能夠更有效率地管理 code、減少 conflict 的產生、減少破壞性的 commit & 影響其它 branch 的機會。  
+就如同 restful api 也只是一個準則，git flow 要走哪一套其實也沒有規範。  
+更多的是團隊參考其中一個版本，然後再依照團隊的需求做調整。  
+但脫離不了的是大概都會有這幾支 branch：
+1. master/main branch：code 最主要的 branch。通常會被保護起來，不允許直接 commit。
+2. develop branch：給工程師開發用的 branch。
+3. test branch：有些團隊在正式上線前還會有一個上線前的測試 branch。
+4. release branch：正式上線的 branch。
+
+所以面試官考你 git 的時候，除了是想知道你對 git 的熟悉程度之外，藉由你對 git flow 的回答也能對你之前團隊的開發方式略知一二。  
+但當然，這如果對於一位剛要轉職前端、正在找第一份工作的前端新手來說，這題可能就比較難回答了。  
+但如果有機會，比如各轉職班的畢業作品應該通常會要求前後端的學生合作開發，這時候就可以試著實踐看看 git flow 了。
+
+## vscode
+喔，這簡直是不會就該打屁股。  
+vscode 差不多就是前端的生命了。  
+但如果面試官問你這題，千萬別只回答「我用 vscode 開發的」就完事了。  
+我們當然知道你大機率是用 vscode 開發，現在基本不會教其它 IDE 呀 XD
+
+那我該回答什麼？  
+那我想問問你，你用過 eslint 跟 prettier 嗎？  
+你有用過的話你就該講。  
+問你 vscode 的問題其實更多是想知道你會用什麼 vscode 的工具來輔助你的開發。  
+像 eslint 跟 prettier 就是對於 code style 的輔助工具。  
+而 Vue (official) extension 就是開發 Vue 專案的好幫手。
+
+在一些較有組織、規範的團隊，會有 `.vscode` 的設定，讓大家的 vscode 都有一樣的設定、一樣的 extension，確保大家的開發環境是一致的。  
+所以可見 vscode extension 的重要性了。  
+
+## docker
+這是這幾年聽到有公司面試會問的問題。  
+大概是因為現今開發也都講究透過 docker 容器開發維持環境一致性了。
+
+稍微說說 docker 解決了什麼事情。  
+傳統開發上，喔不對，現在很多公司可能也是這樣做的：讓工程師在各自電腦上跑 vscode，然後透過 git 協作。  
+這其實沒什麼問題，不然不會依舊是現今許多公司或團隊的主流做法。  
+但這樣有一個風險，就是即使盡量要求每台開發電腦的環境一致，但總有一些細節會不一樣。  
+比如 node 版本，甚至 windows 或 macOS 版本有時候也會影響到開發環境，導致有人跑得起來，有人卻會出錯。
+而 docker 就是針對這種情況設計的。
+
+docker 本質上是一個「容器化」工具，讓我們能在一個封閉的容器裡面跑整個開發環境。  
+這個容器裡可以定義作業系統、套件版本、環境變數，甚至還能把資料庫、快取、message queue 一起跑起來。  
+只要大家使用同一份 dockerfile 或 docker-compose，跑出來的環境就會完全一致。  
+那在多人協作下，也不會再有「A 本機可以跑，但 B 本機那邊不行」的問題。  
+更進一步，這些 container 不只在本機可以跑，把它搬到 CI/CD pipeline 或雲端伺服器上也能直接用，減少那種本機測試沒問題，上線卻出錯的情況。
+
+一般來說考 docker 不會考太深啦，因為那基本是 devOps 的範疇了。  
+但大概會稍微問一下什麼是 docker-compose.yml 或 dockerFile。  
+那也不要慌，只要能回答出那是 docker container 的設定檔，是來讓它產生的 container 有一致的環境，基本上面試官都不會刁難。  
+畢竟如前所述，你只要知道為什麼需要 docker，剩下寫那份文件的事通常是 devOps 的事了。

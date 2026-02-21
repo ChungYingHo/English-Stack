@@ -1,0 +1,146 @@
+---
+title: 'Day15 - Waiter! 然後 API 端上了一盤 response'
+tags: [JavaScript, api]
+author: 'jeremy'
+date: '2025-08-23'
+changelog: []
+---
+
+前一篇講到非同步在 JS 的歷史崛起，今天這篇就來講講非同步在前端最廣泛的應用 - 串接 api。
+
+api 在 web 開發中的角色是重中之重，我們使用網站通常都是為了做些事：查資料、訂位、訂餐、訂機票、買衣服、買書... 等，這些都脫離不了 api。  
+以訂機票為例好了，已知機票的資料都在航空公司的資料庫中，當我們在網站上查詢機票時，你的 browser 裡前端的 code 就會 call 一支查詢機票的 api，這支 api 會帶著你的查詢條件去航空公司的資料庫裡撈出你想要的資料又匆匆回來 browser，然後再經過前端解析顯示在你面前。  
+所以 api 就是前端與後端的溝通橋樑，也是現今 web 能跟人們高度互動的關鍵。
+
+我自己相當喜歡網路上大家常在說的說法 ([IG Reels](https://www.instagram.com/reel/DNBRKDVM1cT/?igsh=MWRobDBhZmF6eTRwdw%3D%3D) 支援 XD)：
+
+> 網頁就像是一間餐廳。  
+> 你看到的美麗環境是前端營造的。
+> 而後廚是由後端負責的。
+> api 就像是服務員，穿梭於餐廳大堂與後廚之間，負責傳送客人的點單與餐點。
+
+## 改變歷史的 AJAX
+AJAX (Asynchronous JavaScript and XML) 其實不算是 api 的規範，而是指一種使用 JavaScript 來非同步地從伺服器獲取資料的技術。  
+在 AJAX 技術出現之前，通常需要整頁重新載入來獲取資料，導致 UX 不佳。  
+在 AJAX 之後，才有了前端能夠非同步地從後端獲取資料的能力，因此才有了我們偉大的非同步命題。  
+這一舉讓前端開發者能夠在不重新載入整個頁面的情況下更新頁面內容，從而大幅提升了使用者體驗，堪稱革命也不為過！
+
+所以說 AJAX 的出現是前端開發史上的一個重要里程碑，它開啟了使用者與網站高度互動的時代。  
+但也開啟了前端開始常被考非同步的時代 www
+
+## 各式各樣的 api
+### SOAP
+SOAP (Simple Object Access Protocol) 可以說是最早的 api 標準，它的誕生還比大家熟知的 AJAX 還早。  
+我把這老古董拿出來提的原因，是因為在一些相對保守的產業，例如金融、航空業，仍然可以見到以 SOAP 開發的 api。  
+但請別擔心，2025 年的前端通常不會直接使用到這些老古董，我們偉大的後端往往會選擇把他們作為 internal api，包裝過後給我們現今更常用的 RESTful。
+
+SOAP 的傳輸格式也是較早期流行的 XML，這也讓它在當時的網路環境下有著較好的跨平台能力。  
+XML 後來雖然其網路傳輸的霸主地位被 JSON 取代，但在現今依舊有些產業仍是使用 XML 作為資料傳輸格式，其中地理資訊業就是箇中翹楚，因為地理資訊往往都是用 XML 格式來儲存的。  
+但這裡不用知道 SOAP 怎麼使用，只是說說這玩意兒其實現在還活著，真的遇到再說吧。
+
+### RESTful API
+RESTful api 可以說是現今前端最熟悉的 api 標準。  
+他不是一套硬性規定，只是給予一套設計風格，讓前端與後端共用一套 api 規範，降低前後端的溝通成本。
+
+我們都知道網頁最基本的功能就是 CRUD。  
+而 HTTP 協定的四個動詞 (GET、POST、PUT、DELETE) 剛好對應到 CRUD 的四個動作。  
+RESTful api 更是依照 HTTP 協議來將這四個動作與資源的操作結合起來，形成一套簡單易懂的 api 設計風格。
+
+1. GET：對應 Read (讀取)
+2. POST：對應 Create (建立)
+3. PUT：對應 Update (更新)
+4. DELETE：對應 Delete (刪除)
+
+其中 PUT 有時會用 PATCH 來取代，這是因為 PATCH 只會更新部分資料，而 PUT 則是會更新整個資源。  
+DELETE 也有用 POST 來取代的情況，這通常是因為某些舊系統或瀏覽器/防火牆不支援 DELETE method 而選的折衷方案。
+
+RESTful api 以目前來講幾乎是 web 開發的 api 規範主流。  
+因為高度跟隨 HTTP 協議的關係，response status 也是依照 HTTP 協議來設計的，關於 status code 那倒是明天的內容。  
+但可以稍微說一下舉凡常見的 200、404、500 都是 HTTP 協議中定義的狀態碼，而 RESTful api 大多也會遵循這些狀態碼來回應客戶端的請求。
+
+### GraphQL
+這是一個算新 (?) 的 api 設計。  
+它是 2015 年由 Facebook 開發公布的，但一直到這幾年才逐漸被推廣的樣子，所以說新應該不為過？  
+GQL 在國外的應用看起來是滿廣泛的，但以目前台灣的 web 生態來說應該還是很少見，畢竟絕大多數的網站其實 RESTful api 就已經夠用了。
+
+所以 GQL 為何會推出？  
+他其實是為了解決 RESTful api 在複雜 api request 下的一些不足。  
+舉個簡單的例子，如果一個網站要拿到使用者資料與使用者的文章們，RESTful api 通常會設計兩個 endpoint，讓功能分開處理：
+1. GET `/users/:id/profile`
+2. GET `/users/:id/posts`
+
+這沒什麼不好，RESTful 的期望就是 endpoint 各司其職。  
+但這種設計在網頁極度複雜、一次操作都會需要跟多個 endpoint 互動的情況下，就會變得很麻煩。
+
+GQL 解決的就是上面的痛點。  
+以上述例子來說，既然已知這次互動是一定需要拿到使用者資料與文章們，那就可以設計一個 GQL endpoint 來一次性地拿到這些資料：
+```js
+{
+  user(id: 1) {
+    profile {
+      id
+      name
+      email
+    }
+    posts {
+      id
+      title
+    }
+  }
+}
+```
+
+有些人可能會有疑問：那設計一支可以同時 GET 使用者資料與文章的 RESTful api 不就好了？  
+呃，確實可以，但它最大的痛點是不能單獨查詢使用者資料或文章們，但上述的 GQL 卻可以讓前端自由地選擇要查詢哪些資料。  
+用 RESTful 的設計一個統一的 api 會讓 api 彈性不足，只能綁定在特定情境上。而 GraphQL 的強項就是讓前端能自由決定要哪些欄位。  
+想想，要能分開以及同時查詢使用者資料與文章們，RESTful 的設計會需要三個 endpoint：
+1. GET `/users/:id/profile` → 查詢使用者資料
+2. GET `/users/:id/posts` → 查詢文章們
+3. GET `/users/:id` → 查詢使用者資料與文章們
+
+但 GQL 只需要一個 endpoint，然後根據傳入的 query 來決定要回傳哪些資料就可以了。
+
+但這麼方便的東西為何在台灣沒那麼熱門？  
+前面講了，因為多數的網站用不到。  
+對於像範例這種請求資料相當單純的情況，RESTful api 的設計已經足夠應付需求，再導入 GQL 純粹是增加開發成本。  
+但如果把範例的複雜度往上提升呢？  
+比如購物網站的訂單 page，會需要訂單清單、訂單的各個產品資訊、訂單的運送資訊、訂單的付款資訊... 等等，以 RESTful 來講這時就會顯得過於龐大，可能一頁會有幾 10 支 api。  
+這種情況就適合導入 GQL 了。  
+不過如果很確定這些資訊其實只有這頁會用到，像前面說的，用 RESTful 包一個通通都拿的 api 也是可以的。
+
+所以說 RESTful 跟 GQL 的使用是要看專案的需求而定，沒有絕對的好壞。  
+以效能來說，RESTful 的設計可能會因為多次 api request 而有較高的延遲，但 GQL 的設計也會讓後端對 server 的需求提高，孰優孰劣真的不好說。  
+而對台灣的情況而言，其實多數公司的網站都還是以 RESTful 為主，沒有需要用到 GQL 的複雜需求。
+
+> GQL 最大的魅力是「讓前端拿到剛好需要的資料，不多也不少」，這點是 RESTful 無法優雅解決的。
+
+## 那些常見到的跟 api 有關的名詞
+### axios
+一個前端相當常用，常用到已經被很多有名框架當成預設的 http client 的套件。  
+它的目的就是讓前端能更迅速地為 api request 設定好 headers、body 等等，然後發出請求。
+
+而且比起原生 JS 的 `fetch`，axios 還會自動處理 JSON 的轉換、HTTP 請求的錯誤處理等等，讓前端開發者能更專注在業務邏輯上。
+
+### Apollo
+一個專門用於 GraphQL 的前端 library，提供了許多方便的功能來處理 GraphQL 的請求與狀態管理。  
+它的目的是讓前端開發者能更輕鬆地與 GraphQL API 互動，並且提供了許多現成的解決方案來處理常見的需求，例如快取、錯誤處理等等。  
+Apollo 幾乎可以說是 GraphQL 生態系中最常見、最主流的解決方案。
+
+### errorHandler
+執行 api request 時總不可能每次都成功。  
+對於失敗的情況，前端往往會需要 errorHandler 來處理特定錯誤的情況。  
+比如：顯示錯誤資訊的 notify、或是把使用者導引到其他頁面。
+
+```js
+async function fetchData() {
+  try {
+    const response = await axios.get('/api/data');
+    return response.data
+  } catch (error) {
+    $q.notify({
+      type: 'negative',
+      message: '發生錯誤，請稍後再試',
+    })
+  }
+}
+```

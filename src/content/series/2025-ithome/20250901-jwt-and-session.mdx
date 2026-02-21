@@ -1,0 +1,113 @@
+---
+title: 'Day24 - 網路身分證：JWT 與 session'
+tags: [JWT, session]
+author: 'jeremy'
+date: '2025-09-01'
+changelog: []
+---
+
+前一篇提到 CSRF 的意思是攻擊者竊取受害者的身份後，冒充受害者對網站發出請求。  
+所以這個網路上的「身份」究竟是什麼？  
+網頁究竟是怎麼讓使用者登入後，每一次的請求都能讓 server 知道這個請求就是這個登入的使用者發出的呢？  
+所以稍微談談目前最主流的兩項身份認證方式：session 與 JWT。
+
+## session
+session-based 的出現早於 JWT，在 JWT 崛起的現代，session 認證仍佔有一席之地。  
+session 的特點是把使用者的登入資訊存在 server 端管理，主要透過 server 做驗證。
+
+session 的運作方式大致如下：
+1. 使用者登入成功。
+2. 後端 server 生成一串隨機 session ID (maybe like `qaz123`)，並且在 server 有一張表格紀錄這個 session ID 對應的使用者資訊 (`qaz123 -> userA`)
+3. server 將 session ID 塞進 cookie 送回 browser
+4. browser 收到 cookie 後，其實並不知道這個 session ID 是什麼意思，但沒關係，只要知道之後每次 request 都要帶上這個有 session ID 的 cookie 就可以了
+5. browser 發送請求，server 看到請求裡帶有 session ID 的 cookie，去查詢 server 端的 session 表格，找到對應的使用者資訊，確認這個請求是 userA 發出的
+
+這是 session 的運作概念，簡單來說就是把辨認使用者是誰的工作交給後端 server 來做。  
+
+之前曾經看過一篇文章以商店來解釋 session 與 JWT，雖然有點忘記具體內容那位作者怎麼比喻，但我嘗試一下一樣用商店來對 session 做比喻。  
+大概是這樣，有一個名叫 server 的人開了一家小店，店裡客人 (browser) 很多，而且每個 browser 都有自己的喜好，但 server 有臉盲症，他沒辦法認出對方是誰，所以理所當然也無法記得對方喜好，迅速提供優質服務。  
+server 很沮喪，眼看客人一直減少，它痛定思痛，決定改變現況。  
+它靈機一動，想到一個方法，它決定每次有客人來店裡消費時，給客人一個獨特的會員編號 (session ID)，並且 server 在自己的筆記本 (session store) 上記錄這個號碼對應的客人喜好。  
+只要客人在結帳時出示這個會員編號，server 就能迅速查找筆記本，找到客人是誰，並提供對應的服務。  
+
+## JWT
+JWT 全名是 JSON Web Token，是一種基於 JSON 格式的輕量級身份驗證機制。  
+它跟 session 本質上都是用來辨認使用者身份的方式，但與 session 把使用者資訊存在 server 端不同，JWT 是把使用者資訊直接攜帶在 token 裡面。
+
+JWT 的運作方式大致如下：
+1. 使用者登入成功
+2. 後端 server 生成一個 JWT，裡面包含使用者的身份資訊 (例如使用者 ID)
+3. server 將這個 JWT 包在 cookie 中，並回傳給 browser
+4. browser 收到 cookie 後，其實也不知道這個 JWT 是幹嘛的，但沒關係，只要知道之後每次 request 都要帶上這個有 JWT 的 cookie 就可以了
+5. browser 發送請求，server 解析請求裡的 JWT token，從中提取使用者資訊，確認這個請求是 userA 發出的
+
+其實可以看到步驟跟 session 基本沒差，只差在最後一步，session 需要 server 去查表，但 JWT 只要 server 解析 JWT token 裡帶的使用者資訊即可。  
+換言之，我們再強調一次，JWT 的機制是直接把使用者身份放在 token 裡面跟著 cookie 一起雙向跑來跑去。
+
+我們把 session 那段的商店例子拿來繼續說。  
+今天 server 有感每次都還要自己翻筆記本有點累，所以它決定改變策略。  
+它設計了一種新的會員卡 (JWT)，這種會員卡上面直接印有客人的身份資料。  
+當客人結帳時，只要出示這張會員卡，server 就能直接從卡片上讀取客人是誰，並提供對應的服務。  
+server 總算不用每次都翻它的筆記本了，真是太棒了！
+
+然後 JWT 是怎麼儲存使用者資訊的呢？  
+JWT 眾所周知分成三個部分：  
+1. Header：包含 token 的類型 (JWT) 以及所使用的簽名演算法 (例如 HMAC SHA256)  
+2. Payload：包含使用者的身份資訊 (例如使用者 ID) 以及其他的 metadata  
+3. Signature：用來驗證 token 的簽名，確保 token 的完整性
+
+這三個部分經過 Base64Url 編碼後，用點 (`.`) 連接起來，就形成了一個完整的 JWT token。  
+大概長這樣：
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiJIZWxsbyB3b3JsZCEifQ.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
+```
+
+我們拿去 [decode](https://www.jwt.io/) 會得到下面的資訊：
+```
+// Header
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+// Payload
+{
+  "msg": "Hello world!"
+}
+```
+
+可以看到 Header 跟 Payload 都是可以被解碼的，所以 Payload 是千萬不能放敏感資訊，比如密碼、信用卡號之類的東西。  
+然後眼尖你的一定會發現，signature 是無法 decode 的，它只會有 valid 跟 invalid 兩種結果。  
+這是因為 signature 是用來驗證 token 的完整性，確保 token 在傳輸過程中沒有被竄改。  
+當 server 收到一個 JWT 時，它會使用 Header 帶的演算法、Payload 裡的內容，以及只有 server 知道的 secret 密鑰來計算出一個新的 signature，然後跟 token 裡的 signature 進行比對。  
+如果兩者相同，則表示 token 是有效的；如果不同，則表示 token 已經被竄改。
+
+```
+HMACSHA256( base64Url(header) + "." + base64Url(payload), secret )
+```
+
+強調一次，secret 只有 server 知道。  
+以數學公式來講，同樣的 secret + 同樣的 header + 同樣的 payload，會產生同樣的 signature。  
+你更改任何一個部分，signature 都會不一樣，這就是 JWT 防止被竄改的重要機制。
+
+## session vs JWT
+稍微丟張 session vs JWT 的比較表在這裡。  
+實務上我體感使用 JWT 還是居多啦，但 session 還是有一席之地。  
+舉例來說，你的網站需要使用者登入一小時後自動把它踢出去確保安全，這種情境 session 會比較好處理。  
+只要在伺服器端設定好 session 的過期時間，當時間到達後，伺服器就會自動刪除該 session，使用者下次請求時就會被要求重新登入。
+
+| 比較項目 | Session (伺服器記帳本)  | JWT (自帶證件的票)  |
+|----------|-------------------------|----------------------|
+| **登入後怎麼驗證** | 伺服器生成一個隨機號碼 (Session ID)，存在伺服器的「記帳本」裡。瀏覽器只帶這個號碼回來，伺服器查帳本就知道你是誰。 | 伺服器發給你一張票 (JWT)，票上寫好你的資訊 (使用者 ID、角色、到期時間)，還有一個防偽章 (簽名)。之後每次請求都要自己帶這張票。 |
+| **資料存哪裡** | 使用者資料存在伺服器。瀏覽器只有一把「鑰匙」 (Session ID)。 | 使用者資料直接寫在票上 (JWT Payload)。伺服器不用存，只要驗章就好。 |
+| **過期或登出** | 伺服器可以隨時把帳本上的紀錄刪掉 → 立即失效。常見設定：30 分鐘～1 小時不操作就過期，可以設定「滑動過期」 (有操作就延長)。 | 票上已經寫死到期時間 (exp)，到期才會失效。如果要強制登出，必須做「黑名單」或等票自然過期。 |
+| **適合的情境** | 傳統網站 (PHP、Django、Rails)、公司內部系統，一般只要一台或幾台伺服器就行。 | 前後端分離的 SPA、手機 App、微服務、API Gateway → 不想讓伺服器保存使用者狀態時特別適合。 |
+
+## 小小一些提醒
+我看過面試作品把 token 存在 localStorage，雖然我剛學前端時也這樣做過，但這其實超危險~  
+要知道 localStorage 是沒有過期時間的，這意味著只要使用者不手動清除，token 就會一直存在。  
+假設你今天用的公用電腦，攻擊者只要趁你不在位置時打開瀏覽器，右鍵叫出 devtool，就能從 localStorage 裡把你的 token 複製走，然後就能冒充你對網站發出請求了。
+
+所以現在前端一般沒在處理 JWT 跟 session，基本都是交給後端塞在 cookie 裡，並且設定好 HttpOnly 和 Secure 屬性，這樣可以有效降低被竊取的風險。  
+HttpOnly 屬性可以防止 JavaScript 存取 cookie，減少 XSS 攻擊的風險；Secure 屬性則確保 cookie 只能在 HTTPS 連線中傳輸，避免在不安全的連線中被竊取。  
+所以前端一般只要開心地使用 cookie 就好，真是可喜可賀！

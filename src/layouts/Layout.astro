@@ -1,0 +1,130 @@
+---
+import '@/styles/tailwind.css'
+import '@/styles/main.scss'
+import Menu from '@/components/Menu/Menu.svelte'
+import { useMenu } from '@/utils/useMenu'
+import CustomCursor from '@/components/CustomCursor.astro'
+import 'katex/dist/katex.min.css'
+
+const { menu } = await useMenu()
+const currentPath = Astro.url.pathname
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+// 1. 定義網站名稱
+const SITE_NAME = 'Jeremy x Aira'
+
+const {
+  title = SITE_NAME,
+  description = "Jeremy & Aira's Tech Blog",
+} = Astro.props
+
+// 2. 標題邏輯
+const pageTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`
+---
+
+<!doctype html>
+<html lang="zh-TW" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    
+    <title>{pageTitle}</title>
+    <link rel="icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body
+    class="
+      min-h-screen
+      flex
+      flex-col
+      text-slate-300
+      bg-[#050505]
+      antialiased
+      selection:bg-indigo-500/30
+      selection:text-indigo-200
+      relative
+    "
+  >
+    <div class="fixed inset-0 z-[-1] w-full h-full pointer-events-none">
+      <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-noise"></div>
+      
+      <div class="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
+
+      <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full mix-blend-screen animate-pulse-slow"></div>
+      <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full mix-blend-screen"></div>
+    </div>
+
+    <Menu client:load rootItems={menu} currentPath={currentPath} />
+
+    <main class="flex-1 w-full max-w-5xl mx-auto px-6 pt-32 pb-24 relative z-10">
+      <slot />
+    </main>
+
+    <CustomCursor />
+
+    <style is:global>
+      :root {
+        color-scheme: dark;
+      }
+
+      html {
+        font-family: 'Inter', 'Noto Sans TC', system-ui, sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* 生成 SVG 噪點 */
+      .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* 極簡網格背景 */
+      .bg-grid-pattern {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, #ffffff 1px, transparent 1px),
+          linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+      }
+
+      /* 緩慢呼吸動畫 */
+      @keyframes pulse-slow {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(1.1); }
+      }
+      .animate-pulse-slow {
+        animation: pulse-slow 8s ease-in-out infinite;
+      }
+
+      /* Scrollbar 美化 */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #262626;
+        border-radius: 4px;
+        border: 1px solid #050505;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #404040;
+      }
+    </style>
+  </body>
+</html>

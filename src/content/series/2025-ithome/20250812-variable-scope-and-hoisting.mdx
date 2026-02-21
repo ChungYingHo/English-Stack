@@ -1,0 +1,173 @@
+---
+title: 'Day04 - 大家都在說的變數作用域和提升到底說了什麼故事？'
+tags: [JavaScript, variable, scope, hoisting]
+author: 'jeremy'
+date: '2025-08-12'
+changelog: []
+---
+
+關於 Javascript 的變數宣告與變數作用域其實也是個老生常談的問題。基本上面試裡總是喜歡塞個幾題考考變數的概念。  
+卡斯伯這位業界前輩有一本挺有名的著作《帶你無痛提升 JavaScript 面試力》，裡面第一章就花了整個章節在講這件事，可見變數的概念有多重要。  
+(是說，不是業配，但這本書真的寫的不錯)
+
+## 關於 `var`、`let`、`const` 的愛恨情仇
+這幾年新學 JavaScript 的，應該都會被呼籲使用 `let` 和 `const` 來取代 `var`。  
+理由我聽過最多人說的是：
+
+> `var` 很危險啊！會宣告成「全域變數」，容易會有變數汙染啊！
+
+Well，不能說這是錯的，這句話其實也是概括描述了用 `var` 的危險性。  
+但它是不精確的，部分人會因為這句話誤會用 `var` 宣告的變數就一定是全域變數，這對於作用域的理解是相當致命的。  
+所以其實這句話理應更正成：
+
+> `var` 很危險啊！他有「機會」宣告成「全域變數」，容易會有變數汙染啊！
+
+嗯，機會，表示是一種潛在的風險。  
+而 `let` 和 `const` 會被推崇，就是因為他們降低了這個潛在風險發生的可能。
+
+### 函式作用域 vs 區塊作用域
+所以來談談 `var` 是如何潛在造成宣告全域變數風險，以及 `let` 和 `const` 又是如何降低這個風險的。  
+這就得從他們的作用域開始說起。
+
+我相信大部分人都能回答出 `var` 是「函式作用域」，那我就想問，有作用域就表示有他作用的範圍，那為何大家常會說 `var` 會宣告成全域變數？  
+其實簡單來看下面例子：
+```javascript
+function test () {
+  var name = 'Jeremy'
+  console.log(name)
+}
+
+test() // Jeremy
+console.log(name) // ReferenceError: name is not defined
+```
+
+這個簡單的範例裡，可以清楚看到「函式作用域」掛名一個「函式」前綴不是空穴來風的。  
+函式作用域的意思表示變數的作用範圍只限於「函式內部」。所以當外部 `console.log` 呼叫 `name` 時，會因為 `name` 只在函式內部宣告而報錯。  
+嘿，只做用在「函式內部」，這句話超重要。
+
+所以我們換成一個不是函式的例子：
+```javascript
+var isGirl = true
+
+if (isGirl) {
+  var name = 'Jane'
+} else {
+  var name = 'John'
+}
+
+console.log(name) // Jane
+```
+
+同樣的 `if` 判斷式，現在把 `var name` 改成 `let name`：
+
+```javascript
+var isGirl = true
+if (isGirl) {
+  let name = 'Jane'
+} else {
+  let name = 'John'
+}
+
+console.log(name) // ReferenceError: name is not defined
+```
+
+可以看到外部的 `console.log` 在 `if` 內部變數宣告時，原先用 `var` 的情形可以順利取到值，但改成 `let` 之後噴出了 `ReferenceError`。  
+這就是剛剛說的函式作用域只做用在函式內部這句話很重要，`var` 一定得塞在函式裡才會有作用域的限制效果，如果放在其他地方就會被宣告成全域變數。
+
+那同樣上述例子為何改成 `let` 之後就不會有這個問題？  
+眾所周知 `let` 和 `const` 是「區塊作用域」，這個「區塊」指的就是 `{}` 包起來的區域，喔，這個 range 就很大了。  
+JavaScript 裡最不缺的就是用 `{}` 包起來的區域，舉凡 `if`、`for`、`while`、`switch` 等等，這些都會被視為區塊。  
+因此對上述例子來說，`let name` 已經被限制只在 `if` 區塊內部有效，外部的 `console.log` 理所當然就拿不到值。
+
+另一個經典的例子是 `for` loop，這個新手超級容易寫錯的：
+```javascript
+// Output: 3, 3, 3
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i)
+  })
+}
+
+// Output: 0, 1, 2
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i)
+  })
+}
+```
+
+在 `for` loop 裡插進一個非同步的 `setTimeout`，因為非同步的特性，`setTimeout` 會等到 `for` loop 跑完才執行。  
+在用 `var` 宣告的情況下，`i` 是被宣告成全域作用域，所以 `for` loop 每次循環拿的都是同一個 `i`，等到 `setTimeout` 執行時，`i` 的值已經是 3 了，所以輸出都是 3。  
+但用 `let` 就不一樣了，對 `let` 來說，每個 `for` loop 循環都是建立一個新的區塊，所以他三次取到的 `i` 都是獨立的，沒有像 `var` 發生那種全域共用因此被改三次的情形，所以輸出就是 0、1、2。
+
+:::info
+嚴格來講，還有一種情況可以探討，就是沒有宣告變數的情況。
+```
+a = 3
+console.log(a)
+```
+這樣的情況下，`a` 會被宣告為全域變數 (嚴格一點說是全域屬性，no mind，這裡不用探討那麼細)。  
+不把不宣告變數這件事拎出來講，是因為實務主流開發時使用的框架或 library，Vue 也好、React 也好，其實基本都是 strict mode，會對這種沒宣告直接引用的情況噴 error。  
+想玩這種情形大概就是 VScode 自己開支 JS 檔案或去 devtool 玩玩。
+:::
+:::tip
+1. 嚴格上來說，全域變數跟全域屬性還是稍微有差的，但個人認為理解到全域變數就非常足夠了，全域屬性就是個添頭。真的想知道的話建議還是讀一下卡斯伯的書。
+2. 思來想去，還是寫一下 `let` 跟 `const` 的差別
+  - `let`：用在宣告可以重新賦值的變數。
+  - `const`：用在宣告不可重新賦值的變數，也就是常數。額外一提，用 `const` 宣告物件或陣列是可以透過物件方法 (e.g., `obj.key = ...`) 或陣列方法 (e.g., `push()`) 改變其內部的值的。
+:::
+
+## 提升 (Hoisting)
+都提到 `var`、`let`、`const` 等宣告變數的方式了，那不可避免地得來聊聊一些關於「提升 (Hoisting)」的話題。  
+提升在 JavaScript 中總共有兩個地方會探討到：
+1. 變數的宣告
+2. 函式的宣告
+
+探討的都是一個順序上的行為：
+
+> 能不能在宣告變數 / 函式之前就調用他們？
+
+函式的提升我們姑且放到日後再談，這玩意兒牽扯到一般 `function` 宣告與 arrow function 的差異。  
+這裡我們就專注在變數的提升就好。  
+那我們把問題 narrow 一下：
+
+> 能不能在宣告變數之前就調用他們？
+
+直接說結論：可以，但限於用 `var` 宣告變數。
+
+```javascript title="use var"
+console.log(name) // undefined
+var name = "Jack"
+```
+
+```javascript title="use let"
+console.log(name) // ReferenceError: name is not defined
+let name = "Jack"
+```
+
+可以清楚看到用 `var` 宣告跟用 `let` (or `const`) 宣告噴出的 error 不一樣。
+1. `var`：得到 `undefined`，這是找不到變數值的 error，發生原因等下提。
+2. `let` (or `const`)：得到 `ReferenceError`，這是找不到變數的宣告。
+
+甚至 `let` 那項範例還會有個額外提示，「ReferenceError: Cannot access 'name' before initialization」，無一不都是在說明 `let` 或 `const` 禁止在宣告之前使用變數。  
+相比之下，`var` 就好像那自由的鳥兒，怎麼自由怎麼來，可以看到即使它宣告在調用之前，調用它的 `console.log` 仍然可以抓到他，這時我們就可以說變數「提升」到調用的它的項目之前了。
+
+至於為何 `var` 的範例會得到 `undefined`，這就是提升的另一個概念：
+
+> 提升是指把變數的宣告放到作用域的最上面，但不會連同賦值一起提升。
+
+聽起來有點抽象，但看一下上面範例提升後的樣子就清楚了：
+```javascript
+var name // 宣告被提升到最上面
+console.log(name) // undefined
+name = "Jack" // 賦值沒有被提升
+```
+
+因為習慣上我們常會把宣告變數與賦值放在一起寫，許多新手就會把它當作是一件事來看，但實際上「宣告」與「賦值」是兩個獨立的事件。  
+上面這是 `var name = "Jack"` 的提升後樣子，宣告被提升到最上面，但賦值沒有被提升，因此 `console.log(name)` 會得到 `undefined`。
+
+:::info
+其實嚴格一點來講，`let` 與 `const` 是會提升的，只是他們會陷入一個叫做「暫時性死區 (Temporal Dead Zone, TDZ)」。  
+TDZ 講的是 JavaScript 拒絕在賦值之前使用變數，而如前述所說，提升並不會提升賦值，所以即使 `let` 與 `const` 的宣告被提升了，但無可避免地一定會踩入 TDZ，進而噴出 `ReferenceError`。  
+久而久之，`let` 與 `const` 就可以當成沒有提升來看待。
+:::

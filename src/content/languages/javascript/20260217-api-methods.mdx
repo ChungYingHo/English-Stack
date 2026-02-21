@@ -1,0 +1,210 @@
+---
+title: "[JS] API 串接"
+author: "jeremy"
+date: "2026-02-17"
+tags: [javascript, api, fetch, axios, ajax, jQuery]
+changelog: []
+sameDateSort: 2
+---
+
+:::info
+2025 iThome 鐵人賽文章已撰寫者不在此篇贅述：
+1. [Day15 - Waiter! 然後 API 端上了一盤 response](https://jeremyho.tw/series/2025-ithome/20250823-api-response)
+    - API 的作用
+    - 各式各樣的 API (SOAP、RESTful、GraphQL)
+2. [Day16 - 404 Not Found!](https://jeremyho.tw/series/2025-ithome/20250824-404-not-found)
+    - 常見的 HTTP 狀態碼介紹
+:::
+
+
+## 範例 API 與前置作業
+1. [RANDOM USER GENERATOR](https://randomuser.me/)
+2. HTML 基本架構
+
+```xml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button id="test-btn">Click me</button>
+    <img id="result-img" src="" alt="result" width="300" />
+
+    <script src="index.js"></script>
+  </body>
+</html>
+```
+
+
+## Ajax
+全名 `Asynchronous JavaScript and XML`，是最早最早串接 API 的方法，而 Ajax 的出現開始讓網頁實現非同步請求，可以說現在的 API 串接方法都奠基在 Ajax 上。  
+但它也因為是最老的，所以相對也是最複雜的。
+
+具體步驟有四個：  
+1. 建立 XMLHttpRequest 物件
+2. 開啟一個請求
+3. 設定拿到回應後需要瀏覽器做什麼
+4. 送出請求
+
+```js title='index.js - AJAX'
+const btn = document.getElementById('test-btn')
+const img = document.getElementById('result-img')
+
+btn.addEventListener('click', loadRandomUser)
+
+// 初始進來就先載一次
+loadRandomUser()
+
+function loadRandomUser() {
+  const xhr = new XMLHttpRequest()  // 建立 XMLHttpRequest 物件
+
+  xhr.open('GET', 'https://randomuser.me/api/', true) // 開啟一個請求
+
+  // 設定拿到回應後需要瀏覽器做什麼
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) return
+
+    if (xhr.status === 200) {
+      try {
+        const data = JSON.parse(xhr.responseText)
+        const imageUrl = data.results[0].picture.large
+        img.src = imageUrl
+      } catch (e) {
+        console.error('JSON parse error', e)
+      }
+    } else {
+      console.error('Request failed:', xhr.status)
+    }
+  }
+
+  xhr.send() // 送出請求
+}
+```
+
+## jQuery Ajax
+在傳統 Ajax 之後，出現了很多函式庫來簡化 Ajax 的使用方式，早期前端開發常用的 jQuery 就有提供 Ajax 方法。  
+不過隨著 axios 的興起，Vue 跟 React 也逐年蠶食 jQuery 的市場，jQuery Ajax 也就沒那麼常見了。  
+但誰知道會不會哪天碰到那種上古專案，所以姑且還是紀錄一下 jQuery Ajax 的用法。  
+
+這裡為了方便直接使用 CDN 做引入，請在 HTML 裡加入以下程式碼：
+```xml title='index.html'
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="index.js"></script>
+```
+
+那接著來調整 `index.js`：
+
+```js title='index.js - jQuery AJAX'
+const btn = document.getElementById('test-btn')
+const img = document.getElementById('result-img')
+
+btn.addEventListener('click', loadRandomUser)
+
+// 初始進來就先載一次
+loadRandomUser()
+
+function loadRandomUser() {
+  $.ajax({
+    url: 'https://randomuser.me/api/',
+    method: 'GET',
+    success: function (data) {
+      const imageUrl = data.results[0].picture.large
+      img.src = imageUrl
+    },
+    error: function (xhr, status, error) {
+      console.error('Request failed:', status, error)
+    }
+  })
+}
+```
+
+可以看到使用 jQuery Ajax 後，相較於傳統 Ajax，不需要自行處理 `readyState`、`status` 與 `JSON.parse`，因此程式碼結構明顯變得更簡潔。
+
+## `fetch` API
+`fetch` 是原生瀏覽器提供的 API，它的出生時間相對較晚，但以現在的時間點 (2026) 回看其實也不年輕了 XD  
+`fetch` 是基於 JS engine 的 Promise 機制所設計的 browser API，因此也可以說是一種更現代化的 Ajax 實作方式。  
+在近幾年不斷地更新迭代後，`fetch` 納百家之長，因此也漸漸出現可以不用 axios 改用 `fetch` 的聲音。  
+舉例來說，Vue 的 Nuxt 框架，官方文件就不推薦使用 axios，而是內建三種 API 的方式，但那三種本質都是基於 `fetch` 的實作。
+
+:::tip
+`fetch` API 是 browser API，在現今已被多數 JS 執行環境所支援，所以使用上不用特別安裝什麼。
+:::
+
+```js title='index.js - fetch API'
+const btn = document.getElementById('test-btn')
+const img = document.getElementById('result-img')
+
+btn.addEventListener('click', loadRandomUser)
+
+// 初始進來就先載一次
+loadRandomUser()
+
+async function loadRandomUser() {
+  try {
+    const response = await fetch('https://randomuser.me/api/')
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`)
+    }
+
+    const data = await response.json()
+    const imageUrl = data.results[0].picture.large
+    img.src = imageUrl
+  } catch (error) {
+    console.error(error)
+  }
+}
+```
+
+## Axios
+Axios 基本是每個前端都必須得知道的串接 API 方式了。  
+實在很難想像一個 npm package 怎麼有辦法這樣統治幾乎整個前端串接 API 的市場這麼久，大概是因為也很難再做出超越它的東西了吧 XD  
+基本上 `fetch` API 在使用上已經比 Ajax 跟 jQuery Ajax 簡單很多且更語意化，但 axios 與 `fetch` 相比又對很多事務進行了封裝，更降低了使用門檻。
+
+Axios 的使用上因為也是基於 Promise 機制，用法上會跟 `fetch` 很像，但它具有下列優勢：
+1. 自動轉換 JSON 資料
+2. 會幫忙處理 HTTP 狀態碼錯誤
+3. 支援請求與回應攔截器：簡單來說就是可以在請求發出前或回應到達前先做一些處理
+4. 支援取消請求
+
+第 1、2 點是最最重要的，因為會大幅提升程式碼的可讀性與簡潔度，這點等等看範例就可以體會到。
+
+Axios 的使用在專案裡一般都是透過 npm 安裝的，但這裡為了方便直接使用 CDN 做引入，請在 HTML 裡加入以下程式碼：
+```xml title='index.html'
+<!-- axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="index.js"></script>
+```
+然後來調整 `index.js`：
+
+```js title='index.js - Axios'
+const btn = document.getElementById('test-btn')
+const img = document.getElementById('result-img')
+
+btn.addEventListener('click', loadRandomUser)
+
+// 初始進來就先載一次
+loadRandomUser()
+
+async function loadRandomUser() {
+  try {
+    const response = await axios.get('https://randomuser.me/api/')
+    const imageUrl = response.data.results[0].picture.large
+    img.src = imageUrl
+  } catch (error) {
+    console.error(error)
+  }
+}
+```
+
+如果將其與 `fetch` 的範例做比較，可以發現 axios 範例的程式碼少了：
+1. `response.ok` 的檢查：axios 會自動幫忙處理非 2xx 的 HTTP 狀態碼錯誤，並且會直接進入 `catch` 區塊。因為不用在 `try` 裡又去 throw error，整體讓 async/await 更加直觀
+2. `response.json()` 的呼叫：axios 會自動幫忙把回應資料轉成 JSON
+
+綜上所述，axios 在前端串接 API 時無疑提供了巨大的便利，也因此在實務專案中，axios 至今仍是許多前端團隊的首選。

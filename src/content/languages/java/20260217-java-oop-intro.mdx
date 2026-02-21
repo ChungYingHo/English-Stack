@@ -1,0 +1,472 @@
+---
+title: "[Java] OOP 概論"
+author: Jeremy
+date: "2026-02-17"
+tags: [java, oop, object-oriented]
+changelog: []
+---
+
+:::note
+再複習一下模組化的概念，模組化的兩大指標：
+
+1. 內聚性 (Cohesion)：模組本身的功能強度，意即模組的完整性。
+2. 耦合性 (Coupling)：模組與模組之間的依賴關係，意即模組之間的關聯性。
+
+以 OOP、甚至應該說多數程式設計的角度來看，**高內聚性**與**低耦合性**是我程式設計時所追求的目標。  
+但這之間必須要拿捏有度，不可過分偏激。  
+舉例來說，如果極高度內聚性，但耦合性趨近於無，那這跟在同一支 file 上寫完所有 code 無異，這樣就失去模組化的意義了。  
+所以高內聚、低耦合是相對且主觀的概念，必須視情況而定。
+:::
+
+## OOP (Object-Oriented Programming)
+
+OOP 的核心組成基本是以**類別 (class)** 為基礎。  
+以 class 做為藍圖 (Blueprint)，來建立具有特徵與行為的**物件 (Object)**。
+
+```java title="一個簡單的 class & object"
+public class practice {
+    public static void main(String[] args) {
+        Student obj1 = new Student("王大明", "S123", "DigitalMedia", "S123", 90, 80, 60);
+        Student obj2 = new Student("李大一", "D456", "ComputerScience", "D456", 20, 40, 70);
+
+        obj1.printStudentInfo();
+        obj1.printStudentScores();
+        System.out.println();
+
+        obj2.printStudentInfo();
+        obj2.printStudentScores();
+    }
+}
+
+class Student {
+    public String name;
+    public String StudentId;
+    public String department;
+    public String id;
+
+    public float chScore;
+    public float enScore;
+    public float mathScore;
+
+    public Student(String name, String StudentId, String department, String id, float chScore, float enScore, float mathScore) {
+        this.name = name;
+        this.StudentId = StudentId;
+        this.department = department;
+        this.id = id;
+        this.chScore = chScore;
+        this.enScore = enScore;
+        this.mathScore = mathScore;
+    }
+
+    public void printStudentInfo () {
+        System.out.println("Student name: " + this.name);
+        System.out.println("Student ID: " + this.StudentId);
+        System.out.println("Student department: " + this.department);
+        System.out.println("Personal  ID: " + this.id);
+    }
+
+    public void printStudentScores () {
+        System.out.println("Chinese score: " + this.chScore);
+        System.out.println("English score: " + this.enScore);
+        System.out.println("Math score: " + this.mathScore);
+
+        isGraduate();
+    }
+
+    private  void isGraduate () {
+        float total = chScore + enScore + mathScore;
+
+        float avg = total / 3;
+
+        if (avg > 60) {
+            System.out.println("Pass! Your semester scores is: " + avg);
+        } else {
+            System.out.println("Not pass! Your semester scores is: " + avg);
+        }
+    }
+}
+```
+
+### OOP 三大特性
+1. 封裝 (Encapsulation)：將物件區分為可被外界使用的特性以及受保護的內部特性。因此封裝有助於維護物件的完整性與安全性 (ex: 資訊的隱藏)。
+2. 繼承 (Inheritance)：一種可以避免重複定義相同屬性與方法的概念。 → 但 child class 依舊可以擁有自己特有的屬性與方法。
+3. 多型 (Polymorphism)：允許物件以不同的形式出現，意即允許物件有同一行為，但有不同的結果。主要透過方法覆寫 (Method Overriding) 與方法重載 (Method Overloading) 來實現多型。 → 簡單來說就是可以利用 parent class 的 method，但 child class 執行出來卻是另一結果。
+
+## 封裝 (Encapsulation)
+如前面所述，OOP 的封裝是一種將變數 & 方法等做內外部區分的概念，口語化一點來說有點像是隱私權的概念在程式裡的實踐。  
+那在 Java 中，封裝主要是透過**存取修飾詞 (Access Modifiers)** 來達成的。  
+所謂的存取修飾詞，簡單來說就是用來定義變數或方法的**可見範圍**，一共有四種修飾詞：
+1. public：公開的，表示該變數或方法可以被任何其他類別存取。
+2. protected：受保護的，表示該變數或方法只能被同一個 package 中的類別或其子類別存取。
+3. default (無修飾詞)：預設的，表示該變數或方法只能被同一個 package 中的類別存取。
+4. private：私有的，表示該變數或方法只能在該類別內部存取。
+
+:::info
+沒有很懂 Java 的 package 範疇的話，可以先直白一點記每個寫在同一 folder 下的 class 都是同一 package 就好。  
+所以最容易搞混的是 default 與 protected，但他們差異是在於 protected 允許子類別存取，而子類別是可以不跟父類別寫在同一 package 下的。
+:::
+
+所以嚴格來說，封裝達到了起碼三件事情：
+1. 安全性：透過限制變數與方法的可見範圍，防止外部直接存取或修改物件的內部狀態，確保資料的完整性與安全性。
+2. 複用性：透過封裝，可以將物件的內部實現細節隱藏起來，使用者只要會調用公開的方法即可，這樣可以提高重複邏輯的複用性。
+3. 易維護性：封裝使得物件的內部實現細節與外部使用者隔離，所以在調整或修改物件的內部實現時，只要能確保公開的方法或變數不變，外部使用者就不需要做任何修改，這樣可以提高程式碼的易維護性。
+
+## 繼承 (Inheritance)
+既然叫做繼承，那就一定有個親緣關係存在。  
+OOP 的世界裡，其實不需要每個 class 都要開發者詳細定義內部的屬性與方法，只要是有相似性的 class，就可以把它們相似的部分抽出來定義在一個**父類別 (Parent Class，或稱基礎類別)** 裡，然後其他**子類別 (Child Class，或稱衍生類別)** 就可以透過**繼承**這個父類別的屬性與方法，來避免重複定義相同的屬性與方法。
+
+口語一點來說，舉個生物的例子。  
+Parent class 是哺乳類 (Mammal)，而 Child class 則是狗 (Dog)、貓 (Cat)、人類 (Human) 等等。  
+哺乳類這個 parent class 裡面會定義一些所有哺乳類都會有的屬性與方法 (ex: 有毛髮、胎生、會哺乳)，而狗、貓、人類這些 child class 就可以繼承這些屬性與方法，然後再各自定義自己特有的屬性與方法 (ex: 狗會吠叫、貓會抓老鼠、人類會寫 code www)。
+
+```java title="封裝與繼承範例：飛行載具、飛機與戰鬥機"
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Fighter fighter = new Fighter();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("請輸入戰鬥機物件 fighter 之相關資訊:");
+        // 範例輸入：
+        // 洛克希德馬丁 F-16 Chinese-1 A0001 1 3986 像鯊魚 20mm火神炮 麻雀飛彈 127mm火箭
+        String line = scanner.nextLine();
+        scanner.close();
+
+        String[] parts = line.split(" ");
+
+        fighter.setManufacturer(parts[0]);
+        fighter.setFlightVehicleType(parts[1]);
+        fighter.setFlightVehicleId(parts[2]);
+        fighter.setEngineId(parts[3]);
+        fighter.setPilotAmount(Integer.parseInt(parts[4]));
+        fighter.setFuelContent(Double.parseDouble(parts[5]));
+        fighter.setFlightVehicleDesc(parts[6]);
+        fighter.setWeapon(parts[7], parts[8], parts[9]);
+
+        fighter.printAirplane();
+    }
+}
+
+/* =========================
+   父類別：飛行載具
+   ========================= */
+class FlightVehicle {
+    protected String flightVehicleDesc;
+
+    public void setFlightVehicleDesc(String desc) {
+        this.flightVehicleDesc = desc;
+    }
+}
+
+/* =========================
+   中介父類別：飛機
+   ========================= */
+class Airplane extends FlightVehicle {
+
+    protected String manufacturer;
+    protected String flightVehicleType;
+    protected String flightVehicleId;
+    protected int pilotAmount;
+    protected double fuelContent;
+
+    private String engineId;
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setFlightVehicleType(String type) {
+        this.flightVehicleType = type;
+    }
+
+    public void setFlightVehicleId(String id) {
+        this.flightVehicleId = id;
+    }
+
+    public void setPilotAmount(int pilotAmount) {
+        if (pilotAmount > 0) {
+            this.pilotAmount = pilotAmount;
+        }
+    }
+
+    public void setFuelContent(double fuelContent) {
+        if (fuelContent >= 0) {
+            this.fuelContent = fuelContent;
+        }
+    }
+
+    public void setEngineId(String engineId) {
+        this.engineId = engineId;
+    }
+
+    public void printAirplane() {
+        System.out.println("製造商： " + manufacturer);
+        System.out.println("飛機型號： " + flightVehicleType);
+        System.out.println("飛機編號： " + flightVehicleId);
+        System.out.println("引擎號碼： " + engineId);
+        System.out.println("飛行員人數： " + pilotAmount);
+        System.out.println("油箱容量 (L)： " + fuelContent);
+        System.out.println("飛機外觀： " + flightVehicleDesc);
+    }
+}
+
+/* =========================
+   子類別：戰鬥機
+   ========================= */
+class Fighter extends Airplane {
+
+    private String gunName;
+    private String missileName;
+    private String rocketName;
+
+    public void setWeapon(String gunName, String missileName, String rocketName) {
+        this.gunName = gunName;
+        this.missileName = missileName;
+        this.rocketName = rocketName;
+    }
+
+    @Override
+    public void printAirplane() {
+        super.printAirplane();
+        System.out.println("機槍名稱： " + gunName);
+        System.out.println("飛彈名稱： " + missileName);
+        System.out.println("火箭名稱： " + rocketName);
+    }
+}
+```
+
+:::note
+一個沒那麼重要的分類：
+1. 單一繼承 (Single Inheritance)：一個子類別只能繼承一個父類別。但一個父類別可以有多個子類別繼承它。
+2. 多層繼承 (Multilevel Inheritance)：子類別可以繼承另一個子類別，形成多層繼承結構。例如，A 繼承 B，B 繼承 C。
+:::
+
+:::warning
+但繼承也不是什麼東西都可以繼承的。  
+前面**封裝**有寫到如 `private` 這類只能給予 class 內部存取的變數與方法，就是無法被 child class 繼承到的。  
+這種時候如果子類別需要使用父類別的這些 private 變數與方法，就必須要透過父類別提供的 public 或 protected 方法來間接存取。  
+父類別的建構子也是無法被子類別直接繼承使用的，但子類別可以透過在自己的建構子裡呼叫 `super()` 來間接使用父類別的建構子，這點下個章節會寫到。
+:::
+
+:::danger
+這裡要注意，如果類別內沒手動定義「無參數」的建構子，只定義了「含參數」的建構子，這寫法在當這個 class 沒任何子輩關係時是沒問題的。  
+但若是要做為父類別，因為子類別實體化時會預設呼叫父類別的無參數建構子，這時就會因為找不到無參數建構子而報錯。  
+所以撰寫 Java 的良好習慣是，不管有沒有子類別，都建議手動定義一個無參數建構子，以避免這種問題發生。
+:::
+
+:::note
+在多層繼承的情況下，在這裡假設有三層繼承關係：GrandParent → Parent → Child。  
+當 Child 類別的建構子被呼叫時，會依序呼叫 Parent 類別的建構子，然後再呼叫 GrandParent 類別的建構子，最後才會執行 Child 類別的建構子內容。  
+這是因為在物件實體化的過程中，必須先初始化父類別的屬性與方法，然後才能初始化子類別的屬性與方法。
+:::
+
+### `super`、`this` & `final` 關鍵字
+這三個關鍵字在繼承的概念中是很重要的，而且時常會出現：
+1. `super`: 指向「父類別的實例」。  
+   - `super()`：用來呼叫父類別的建構子 (Constructor)，通常用在子類別的建構子中，以初始化父類別的屬性。
+   - `super.屬性名稱` 或 `super.方法名稱()`：用來存取父類別的屬性或方法，特別是在子類別中有同名屬性或方法時，可以用 `super` 來區分。
+2. `this`: 指向「目前類別的實例」。
+    - `this()`：用來呼叫目前類別的其他建構子，通常用在建構子中，以避免重複程式碼。
+    - `this.屬性名稱` 或 `this.方法名稱()`：用來存取目前類別的屬性或方法，特別是在方法參數與屬性同名時，可以用 `this` 來區分。
+3. `final`: 用來宣告「不可變更」的變數、方法或類別。
+    - `final` 變數：一旦被賦值後，值就不能再被更改。
+    - `final` 方法：不能被子類別覆寫 (Override)。
+    - `final` 類別：不能被繼承。
+
+```java title="繼承範例：super、this 與 final"
+public class Main {
+    public static void main(String[] args) {
+        Child child = new Child("Dragon", "Jeremy");
+        child.printName();
+    }
+}
+
+/* =========================
+   父類別
+   ========================= */
+class Father {
+
+    protected final String fatherName;
+
+    public Father(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public final void printFatherName() {
+        System.out.println("My father's name is: " + fatherName);
+    }
+}
+
+/* =========================
+   子類別
+   ========================= */
+class Child extends Father {
+
+    private String name;
+
+    public Child(String fatherName, String name) {
+        super(fatherName);   // 呼叫父類別建構子
+        this.name = name;    // this 指向子類別自己的欄位
+    }
+
+    public void printName() {
+        System.out.println("My name is: " + this.name);
+        super.printFatherName(); // 呼叫父類別的方法
+    }
+}
+```
+
+
+## 多型 (Polymorphism)
+前面講了，多型的概念是允許物件以不同的形式出現，意即允許物件有同一行為，但有不同的結果。  
+要實現多型，有兩個方法：
+1. 方法覆寫 (Method Overriding)：即子類別繼承父類別的方法，並重新定義該方法的行為。
+2. 方法多載 (Method Overloading)：即在同一個類別中，定義多個同名但參數不同 (參數型態或數量不同) 的方法。
+
+### 方法覆寫 (Method Overriding)
+Overriding 基本有四個指標，四個條件都要符合才算是方法覆寫：
+1. return type 必須相同。
+2. 參數個數與型態必須相同。
+3. 方法名稱必須相同。
+4. 內容必須不同。
+
+另外，子類別覆寫父類別的方法時，存取修飾詞的權限不能比父類別的方法更嚴格 (ex: 父類別是 public，子類別就不能是 protected 或 private)。  
+並且 `final`、`static`、`private` 跟建構子都是不能被覆寫的。
+
+```java title="多型範例：方法覆寫"
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.speak();
+    }
+}
+
+class Animal {
+    public void speak() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void speak() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+### 方法多載 (Method Overloading)
+多載有三項條件，都必須符合才算是方法多載：
+1. 方法名稱必須相同。
+2. 參數個數、型態或順序必須不同。
+3. 回傳型別的不同不能單獨作為判斷依據，必須配合參數差異
+
+```java title="多型範例：方法多載"
+public class Calculator {
+
+    // 加法：兩個 int
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    // 加法：三個 int
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // 加法：兩個 double
+    double add(double a, double b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.add(2, 3));       // 使用 int, int
+        System.out.println(calc.add(2, 3, 4));    // 使用 int, int, int
+        System.out.println(calc.add(2.5, 3.5));   // 使用 double, double
+    }
+}
+```
+
+## Summary
+這裡簡單記錄一項結合封裝、繼承與多型的範例。
+
+```java
+public class Main {
+    public static void main(String[] args) {
+
+        // 多型：付款方式都是 Payment，但實際行為不同
+        Payment creditCardPayment = new CreditCardPayment("Jeremy");
+        Payment linePayPayment = new LinePayPayment("Jeremy");
+
+        creditCardPayment.pay(1000); // 信用卡付款
+        linePayPayment.pay(1000); // Line Pay 付款
+
+        // 多載：同一功能，不同參數
+        creditCardPayment.pay(1000, "USD");
+        linePayPayment.pay(500, "TWD");
+    }
+}
+
+/* =====================
+   父類別：付款（抽象概念）
+   ===================== */
+abstract class Payment {
+
+    // 封裝：使用者資料不允許外部直接修改
+    private String userName;
+
+    public Payment(String userName) {
+        this.userName = userName;
+    }
+
+    protected String getUserName() {
+        return userName;
+    }
+
+    // 多型：由子類別決定實際付款行為
+    public abstract void pay(int amount);
+
+    // 多載：指定幣別的付款方式
+    public void pay(int amount, String currency) {
+        System.out.println(
+            userName + " pays " + amount + " " + currency
+        );
+    }
+}
+
+/* =====================
+   子類別：信用卡付款
+   ===================== */
+class CreditCardPayment extends Payment {
+
+    public CreditCardPayment(String userName) {
+        super(userName);
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println(
+            getUserName() + " pays " + amount + " by Credit Card"
+        );
+    }
+}
+
+/* =====================
+   子類別：Line Pay 付款
+   ===================== */
+class LinePayPayment extends Payment {
+
+    public LinePayPayment(String userName) {
+        super(userName);
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println(
+            getUserName() + " pays " + amount + " by Line Pay"
+        );
+    }
+}
+```

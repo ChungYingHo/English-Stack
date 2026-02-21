@@ -1,0 +1,114 @@
+---
+title: 'Day21 - React & Vue，慣壞前端的框架們'
+tags: [JavaScript, react, vue]
+author: 'jeremy'
+date: '2025-08-29'
+changelog: []
+---
+
+開篇就要先道歉 XD  
+其實 Angular 也是前端三本柱之一，但我沒碰過它，我跟它不熟，所以就沒列進來 www
+
+雖說這篇題目是框架，但嚴格來說 React 說自己是 library。  
+Vue 倒是說自己是 Javascript framework。  
+但其實說起來我更傾向他們都是 library。  
+原因無他，你單獨使用 React 跟 Vue 的時候其實都得還要額外安裝 react-router-dom 或 vue-router 才能夠實現路由功能；要額外安裝 redux 或 pinia 才能夠實現狀態管理。   
+真的要算 framework 的話反而要像是 Next.js 或 Nuxt.js 這種所有路由、狀態管理、測試... 等都幫你包好了的東西我覺得才是框架。  
+但，姑且在這裡我們還是用框架來統一稱呼吧~
+
+## Why React & Vue
+React 跟 Vue 是現今前端開發的霸主級框架。  
+可以說他倆統治了前端的半壁江山，剩下半壁江山才是 Angular、Svelte、python 的 Django 跟 php 的天下。  
+其實在他倆之前的時代霸主是 Angular，再往前是 jQuery。  
+它們統治前端的最主要原因都是：讓 Javascript 與 DOM 高度耦合。  
+這句話的意思等等解釋，但 React 跟 Vue 能在近年取代 Angular 的原因就像當初 Angular 取代了 jQuery 一樣，都是因為它們更輕量、更方便、更容易上手。
+
+初學前端的人，通常會先學 HTML、CSS、Javascript。  
+會學到一個簡單的網站至少要有三個檔案分別管理 HTML、CSS、Javascript。  
+在那個時候應該 JS 都會很常寫到 `getElementById`、`querySelector` 這類的 DOM 操作，非常繁瑣。  
+對於資料渲染來說更是如此，假設有一個陣列要渲染成一個清單，你就得用迴圈一筆一筆的把資料塞進 HTML 裡面：
+
+```js
+const data = ['Apple', 'Banana', 'Cherry']
+const list = document.getElementById('list')
+data.forEach(item => {
+  const li = document.createElement('li')
+  li.textContent = item
+  list.appendChild(li)
+})
+```
+
+但 React 跟 Vue「讓 Javascript 與 DOM 高度耦合」的特性讓這整件事非常簡單。  
+舉例來說在 React 裡，可以直接在 jsx 裡用 map 來渲染：
+
+```jsx
+const data = ['Apple', 'Banana', 'Cherry']
+
+function App() {
+  return (
+    <ul>
+      {data.map(item => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  )
+}
+```
+
+Vue 裡就更簡單了，直接用 Vue 提供的 `v-for` 來渲染：
+
+```xml
+<template>
+  <ul>
+    <li v-for="item in data" :key="item">{{ item }}</li>
+  </ul>
+</template>
+
+<script setup>
+const data = ['Apple', 'Banana', 'Cherry']
+</script>
+```
+
+會發現 React 跟 Vue 都把整個 JS 的 DOM 操作給抽象化了，讓我們可以直接在 HTML 裡面操作資料。  
+白話一點來講，就是可以在 HTML 中寫 JavaScript 了。  
+這種 JS 與 DOM 高度耦合的特性，讓資料操縱與呈現不在隔著一層壁壘，讓前端開發變得更簡單、更直覺，這就是框架們能夠稱霸前端的主要原因。
+
+除此之外，框架也被很多傳統開發需要注意的細節或技術給抽象化。  
+這類抽象化的東西極度之多，上面的 DOM 操作只是一個例子，其它還包含：資安、打包、效能優化... 等。  
+以資安來講好了，前端面試也時常會被問 XSS 攻擊，這類攻擊其中有一項就是 HTML 注入攻擊，傳統開發上會需要由開發者特別對這一塊做防範，將使用者輸入的資料做 escape。  
+但對 React 跟 Vue 來說，這些框架本身就已經做好 XSS 防範，開發者就能把精力更放在其他項目上。  
+
+以真正意義上的框架來說，我指，那些奠基在 React 跟 Vue 上的框架如 Next、Nuxt、Quasar，它們整合了更多的功能，包括路由、測試、部署... 等等，甚至 Quasar 自己本身還含有 UI framework，都讓這個方便性更上一層樓。  
+所以這就是為什麼框架會寵壞前端工程師，因為真的太方便了。  
+透過框架開發減少的許多操作可以大幅縮短開發時間，讓工程師能夠更專注於業務邏輯的實現，所以現在的前端已經很少很少看到傳統純用 HTML、CSS、Javascript 拆三個檔案來開發的了。
+
+## React 跟 Vue 哪個好？
+既然 React 跟 Vue 是現今前端開發的霸主級框架，那誰比較厲害？  
+這問題面試有被問過，說真的這是看團隊喜好啦，不然也不會打到平分秋色。
+
+以上手難易度來說，Vue 絕對是完勝 React 的。  
+光是 Vue 提供的 `v-for`、`v-if` 等語法，讓再 HTML (嚴格來說是 template) 裡面操作資料變得非常直覺且淺白，這讓上手難易度大幅降低。  
+而且 Vue file 的結構拆分也很清楚：
+1. `template` 對應 HTML 結構
+2. `script` 對應 JavaScript 邏輯
+3. `style` 對應 CSS 樣式
+
+反觀 React 每個 component 都是由 function return 出來的 JSX 結構，初學者比較難去區分 JS 邏輯跟 HTML 結構。
+
+但以對原生 JS 的支援度來說，React 是完勝 Vue 的。  
+這體現在很多第三方 library 的範例通常都是以原生 JS 來寫的，React 的語法跟原生 JS 比較接近，通常照著範例改一改就能用。  
+但對 Vue 來說，往往會需要再轉一層 Vue 的語法才能使用，當然，現在也越來越多 library 的範例也有提供 Vue 版本的了。  
+
+所以綜上所述，React 跟 Vue 孰優孰劣其實沒有一個標準答案，端看團隊喜好。  
+但以華語圈來說，Vue 好像是大宗 (莫非是尤雨溪光環 www)，國外則較多使用 React。  
+但總之，二強鼎立的的時代，先學其中一種，上手另一種的難度也不會太高，一法通則萬法通。  
+以我自己來說，我是 Alpha Camp 學的 React，但我後面兩間公司都寫 Vue，在一開始轉 Vue 的時候也沒什麼太大障礙，反而可以用 React 的經驗來幫助我更快理解 Vue 的概念。  
+反之，最近在重新看 React，以 Vue 的角度回望，其實對 React 的理解有了更深一層的認識。
+
+## 框架的未來
+前端圈自這幾年一直有個聲音就是 React 與 Vue 逐漸式微，原生 JS 或更加輕量型的框架如 Svelte 將會崛起。  
+這一聲音的論點是在說，React 跟 Vue 發展這麼久 (React 都 19 了，Vue 3 也出好幾年了)，他們的架構愈發臃腫，而且因為一些組織問題，比如 React 原團隊集體跳槽去 Vercel，有些發展已經與初衷背道而馳。  
+反而原生 JS 與更輕量的框架正在這幾年逐年吸收 React 跟 Vue 的優點在慢慢進化。  
+Hmmm... 對於這個論點我要說，各位可以先不慌，以現今 React 跟 Vue 的地位與使用量來說，我相信它們總有一天會沒落，跟 Angular 一樣，但這天應該不會是短時間內的事，至少 5 年內我覺得都還好。  
+不用說出於擔憂硬是去學 Svelte，除非真的有興趣，不然我覺得稍微了解一下就好，真要用到時再深入研究就好。
+

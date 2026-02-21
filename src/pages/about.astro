@@ -1,0 +1,291 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { AUTHORS } from '@/constants/authors'
+
+const SocialIcons: Record<string, string> = {
+  github: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
+  linkedin: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+  npm: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 12v3H8v-3H5v7h14v-7h-3zM21 8H3v10h18V8zM3 8v-2h18v2"/></svg>`,
+  ithome: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`,
+  default: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
+}
+
+const getSocialIcon = (key: string) => SocialIcons[key.toLowerCase()] || SocialIcons.default
+
+const splitSummary = (text: string) => {
+  if (!text) return { quote: '', author: '' };
+  const parts = text.split('\n');
+  return {
+    quote: parts[0],
+    author: parts.length > 1 ? parts[1] : ''
+  };
+}
+---
+
+<Layout title="About">
+  <div class="fixed inset-0 z-[-1] w-full h-full pointer-events-none overflow-hidden">
+    <div class="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-pink-600/5 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-[20%] left-[-5%] w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] rounded-full"></div>
+  </div>
+
+  <div class="max-w-4xl mx-auto animate-fade-in-up">
+    
+    <header class="text-center mb-16 space-y-4">
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.1)]">
+        The Creators
+      </h1>
+      <p class="text-slate-400 font-mono text-sm tracking-[0.2em] uppercase">
+        Behind the Code
+      </p>
+    </header>
+
+    <div class="space-y-12">
+      
+      {AUTHORS.map((author, index) => {
+        const { quote, author: quoteAuthor } = splitSummary(author.summary || '');
+        const hasPortfolio = author.portfolio && author.portfolio.length > 0;
+        
+        return (
+          <article 
+            class={`
+              relative group rounded-[32px] p-1
+              ${author.isSecret 
+                ? 'bg-gradient-to-br from-white/5 via-transparent to-white/5' 
+                : 'bg-gradient-to-br from-white/10 via-white/5 to-transparent hover:from-pink-500/20 hover:via-purple-500/20 hover:to-indigo-500/20'}
+              transition-all duration-500
+            `}
+          >
+            <div class="h-full bg-[#161213] rounded-[28px] p-8 md:p-10 border border-white/5 relative z-10 overflow-hidden">
+              
+              <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+                
+                {/* Avatar Section */}
+                <div class="shrink-0 mx-auto md:mx-0 relative md:sticky md:top-10">
+                  <div class={`
+                    relative w-32 h-32 md:w-40 md:h-40 rounded-full p-1
+                    ${author.isSecret ? 'border-2 border-dashed border-white/10' : 'bg-gradient-to-tr from-white/20 to-transparent shadow-2xl'}
+                  `}>
+                    <img 
+                      src={author.imgPath} 
+                      alt={author.name} 
+                      class={`
+                        w-full h-full object-cover rounded-full
+                        transition-all duration-700
+                        ${author.isSecret 
+                          ? 'grayscale contrast-125 brightness-90'
+                          : 'group-hover:scale-105 ring-4 ring-[#161213]'}
+                      `}
+                    />
+                    
+                    {author.isSecret && (
+                      <div class="absolute -bottom-2 -right-2 z-20">
+                        <span class="flex items-center gap-1.5 bg-black/90 px-3 py-1 text-[10px] font-mono text-red-400 border border-red-500/30 rounded-full backdrop-blur-md shadow-lg">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                          LOCKED
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div class="flex-1 min-w-0 text-center md:text-left space-y-6 w-full">
+                  
+                  {/* Name & Role */}
+                  <div>
+                    <h2 class={`
+                      text-4xl md:text-5xl font-black mb-3
+                      ${author.isSecret ? 'text-white/20 tracking-tighter' : 'text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400'}
+                    `}>
+                      {author.name}
+                    </h2>
+                    
+                    {!author.isSecret ? (
+                      <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                        {author.currentRole?.map(role => (
+                          <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded border border-pink-500/20 text-pink-200/80 bg-pink-500/5">
+                            {role}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <div class="flex items-center justify-center md:justify-start gap-2 opacity-50">
+                          <span class="bg-slate-800 text-transparent rounded px-2 select-none text-xs">UNKNOWN ROLE</span>
+                          <span class="text-[10px] font-mono text-slate-600 uppercase tracking-widest">[ REDACTED ]</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Description / Secret Message */}
+                  <div class="prose prose-invert prose-sm max-w-none text-slate-300 whitespace-pre-line leading-relaxed">
+                    {author.isSecret ? (
+                        <div class="py-4 pl-4 border-l-2 border-white/5 space-y-3">
+                          <p class="text-slate-500/80 font-mono text-xs leading-loose">
+                            &gt; Accessing user profile... <span class="text-red-400">DENIED</span><br/>
+                            &gt; Decrypting bio... <span class="text-red-400">FAILED</span><br/>
+                            &gt; Status: <span class="text-slate-400">Character not yet unlocked.</span>
+                          </p>
+                          <p class="text-slate-400 text-sm italic pt-2">
+                            "This profile appears to be encrypted.<br/>Please check back later... or perhaps try to find the key?" 🤫
+                          </p>
+                        </div>
+                    ) : (
+                      <>
+                        {quote && (
+                          <div class="mb-6">
+                            <p class="text-pink-100/90 text-lg md:text-xl font-medium italic leading-relaxed">
+                              "{quote}"
+                            </p>
+                            {quoteAuthor && (
+                              <p class="text-slate-500 text-sm mt-2 font-mono text-right md:text-right">
+                                {quoteAuthor}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        <p>{author.description}</p>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Tech Stack & Links & Portfolio */}
+                  {!author.isSecret && (
+                    <div class="pt-6 border-t border-white/5 flex flex-col items-center md:items-start gap-6">
+                      <div class="w-full flex flex-col md:flex-row items-center md:justify-between gap-6">
+                        
+                        {/* Stack */}
+                        {author.programmingLanguages && (
+                          <div class="flex flex-wrap gap-2 justify-center">
+                            {author.programmingLanguages.map(lang => (
+                              <span class="px-3 py-1 text-xs font-medium rounded-full bg-white/5 text-slate-400 border border-white/5">
+                                {lang}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Socials */}
+                        {author.socialLinks && (
+                          <div class="flex gap-4">
+                            {Object.entries(author.socialLinks).map(([platform, url]) => (
+                              <a 
+                                href={url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                class="text-slate-500 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                title={platform}
+                              >
+                                <Fragment set:html={getSocialIcon(platform)} />
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Portfolio */}
+                      {hasPortfolio && (
+                        <div class="w-full pt-2">
+                           <button 
+                            class="portfolio-trigger group/btn flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-slate-500 hover:text-pink-300 transition-colors"
+                            data-target={`portfolio-${index}`}
+                           >
+                            <span>Featured Projects</span>
+                            <svg 
+                              xmlns="http://www.w3.org/2000/svg" 
+                              width="14" height="14" 
+                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="transform transition-transform duration-300 group-data-[expanded=true]/btn:rotate-180"
+                            >
+                              <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                           </button>
+
+                           <div 
+                              id={`portfolio-${index}`} 
+                              class="portfolio-content grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out"
+                           >
+                              <div class="overflow-hidden">
+                                <div class="pt-6 grid gap-4">
+                                  {author.portfolio.map(project => (
+                                    <a 
+                                      href={project.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      class="
+                                        group/card block p-5 rounded-xl bg-white/[0.03] border border-white/5 
+                                        hover:bg-white/[0.06] hover:border-pink-500/30 hover:shadow-[0_4px_20px_-10px_rgba(236,72,153,0.3)]
+                                        transition-all duration-300
+                                      "
+                                    >
+                                      <div class="flex items-start justify-between mb-2">
+                                        <h3 class="font-bold text-slate-200 group-hover/card:text-pink-200 transition-colors">
+                                          {project.name}
+                                        </h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-600 group-hover/card:text-pink-400 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 transition-all"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                                      </div>
+                                      <p class="text-xs text-slate-400 leading-relaxed group-hover/card:text-slate-300 whitespace-pre-line">
+                                        {project.summary}
+                                      </p>
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                           </div>
+                        </div>
+                      )}
+
+                    </div>
+                  )}
+
+                </div>
+              </div>
+            </div>
+            
+            {author.isSecret && (
+               <div class="absolute inset-0 bg-noise opacity-[0.08] mix-blend-overlay pointer-events-none rounded-[32px]"></div>
+            )}
+          </article>
+        );
+      })}
+
+    </div>
+  </div>
+</Layout>
+
+<script>
+const triggers = document.querySelectorAll('.portfolio-trigger')
+
+triggers.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.getAttribute('data-target')
+    if (!targetId) return
+
+    const content = document.getElementById(targetId)
+    if (!content) return
+
+    const isExpanded = btn.getAttribute('data-expanded') === 'true'
+    
+    btn.setAttribute('data-expanded', (!isExpanded).toString())
+    
+    if (!isExpanded) {
+      content.classList.remove('grid-rows-[0fr]')
+      content.classList.add('grid-rows-[1fr]')
+    } else {
+      content.classList.remove('grid-rows-[1fr]')
+      content.classList.add('grid-rows-[0fr]')
+    }
+  })
+})
+</script>
+
+<style>
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+</style>

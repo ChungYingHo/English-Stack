@@ -1,0 +1,155 @@
+---
+title: "[Git] 安裝與使用"
+author: "jeremy"
+date: "2026-02-18"
+tags: [env, git]
+changelog: []
+sameDateSort: 2
+---
+
+## Git 設定
+### Git 下載與安裝
+
+[Git 安裝檔下載](https://git-scm.com/)。  
+下載安裝完，可以先用 `git --version` 確認是否安裝成功。  
+接著按照[開始 - 初次設定 Git](https://git-scm.com/book/zh-tw/v2/%E9%96%8B%E5%A7%8B-%E5%88%9D%E6%AC%A1%E8%A8%AD%E5%AE%9A-Git) 進行設定。  
+最主要需要設定使用者名稱與電子郵件：
+
+```powershell
+git config --global user.name "Jeremy"
+git config --global user.email jeremy@example.com
+
+git config --list # 確認設定資訊
+```
+
+### Git 基本操作
+要在專案中使用 Git，要先在專案中建立本地儲存庫：
+
+```powershell
+git init​
+```
+
+之後當專案中程式碼編輯完需要紀錄時就可以直接進行下列動作：
+
+1. 追蹤查詢狀態
+
+```powershell
+git status​
+```
+
+2. 檔案更新，準備丟到暫存區。`.` 代表所有變動檔案通通都丟過去，可以用檔案名取代 `.`。
+
+```powershell
+git add .
+```
+
+3. 提交到本地儲存庫
+
+```powershell
+git commit -m "Your commit message"
+```
+
+## Git 與 GitHub/GitLab
+### push 本地 repo 到 GitHub
+
+當已經在 GitHub 上建好一個儲存庫，GitHub 通常會顯示下列指令，沒特別需求就複製貼上執行即可。  
+在第一次執行完畢後，往後如果有程式碼變動要再推到遠端儲存庫來基本只需要輸入`git push`。
+
+```powershell
+git remote add origin https://github.com/{user-name}/{repo-name}.git
+git branch -M main
+git push -u origin main
+```
+
+### clone GitHub 上的 repo 到本地
+
+```powershell
+git clone https://github.com/{owner-name}/{project-name}.git
+```
+
+### `.gitignore`
+關於那些不想讓 Git 紀錄的檔案，比如一大包的 `node_modules` 資料夾、含有私人隱私資訊 (比如資料庫連線字串) 的 `.env` 檔案，可以在專案下建立一個 `.gitignore` 檔案，裡面填入不要 Git 紀錄的檔案。  
+這裡要注意 `.gitignore` 務必優先於 Git 存在於專案中，不然如果先裝 Git，裝的當下其實 Git 就把整個檔案記住了，這時才設定 `.gitignore` 就得多做一些步驟把那些不想被紀錄但已經被紀錄的檔案移除。很多 env 變數都是這樣被不小心丟到雲端 repo 上的。
+
+:::tip
+如果你一開始忘記把 `.env` 加入 `.gitignore`，可以用以下指令移除：
+
+```powershell
+git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD
+```
+
+然後再透過 `git push --force` 來強制推送。
+:::
+
+## Git 實務開發常用的指令
+:::tip
+[Git 練習網站](https://learngitbranching.js.org/?locale=zh_TW)
+:::
+
+### 與分支相關
+1. `git branch`: 檢查本地目錄下有哪些分支。
+2. `git branch XXX`: 創建 XXX 分支。
+3. `git branch -d XXX`: 刪除 XXX 分支。
+    - `-d`：只刪除已經合併的分支。
+    - `-D`：強制刪除分支。
+
+### 與分支切換相關
+4. `git switch XXX`: 切換路徑到 XXX 分支。
+    - 同 `git checkout XXX`。
+5. `git switch -c XXX`: 建立並更換路徑。
+    - 同 `git checkout -b XXX` 。
+
+### 與遠端 repo 相關
+6. `git remote -v`: 查詢連線的遠端 repo。
+7. `git remote remove origin`: 解除跟遠端 repo 的連線。
+
+### 與變更相關
+8. `git log --oneline`: 查詢 commit 紀錄 (行列式)。
+9. `git reset --hard <commit>`: 回到指定 commit。
+    - `git reset --soft HEAD~1`: 回到上一個 commit，並保留變更。
+10. `git stash`: 暫存變更。
+    - `git stash list`: 查看暫存清單。
+    - `git stash apply stash@{0}`: 恢復某暫存。
+    - `git stash drop stash@{0}`: 刪除某暫存。
+11. `git merge XXX`: 合併 XXX 分支到目前分支。
+12. `git rebase XXX`: 將目前分支的 commit 移到 XXX 分支後面。
+    - `git merge --no-edit XXX`: 合併時使用預設 commit。
+
+### `git add -p` 拆解 commit
+假設你一口氣變更了很多程式碼，現在準備提交，卻發現剛剛的變更裡包含太多功能，而通常我們會希望單一功能 (目的) 就單獨一個 commit，這時候就可以使用 `git add -p` 來拆解變更。  
+`git add -p` 執行下去後，git 會先自動拆解每個變更並且逐個問你是否要加入這個變更到 commit 中，可以用這些指令來操作：
+- `y`：加入這個變更到 commit 中。
+- `n`：不加入這個變更到 commit 中。
+- `s`：拆解這個變更。
+- `q`：退出 `git add -p`。
+- `d`：跳過當前文件中的所有剩餘片段。
+- `a`：加入當前文件中的所有剩餘片段。
+
+:::warning
+如果是新增的檔案，`git add -p` 會抓不到，可以先用 `git add [file_name]` 加入暫存區。
+:::
+
+## Trouble Shooting
+### `! [remote rejected] main -> main (pre-receive hook declined) `
+如果 `git clone` 了一份專案，解除原先的遠端 repo 儲存後，要接到自己的遠端 repo 時出現錯誤 `! [remote rejected] main -> main (pre-receive hook declined) `。
+1. 先刪除該專案本地的 git repo。
+
+```powershell
+Remove-Item -Path .git -Recurse -Force
+```
+
+2. 檢查是否刪除乾淨：
+
+```powershell
+git status
+```
+
+3. 重新安裝本地 git repo：
+
+```powershell
+git init
+```
+
+## Reference
+1. [Removing a .env file from Git history](https://dev.to/dailydevtips1/removing-a-env-file-from-git-history-3gao)
+2. [【狀況題】手邊的工作做到一半，臨時要切換到別的任務](https://gitbook.tw/chapters/faq/stash)

@@ -1,0 +1,263 @@
+---
+title: 'Day05 - 咻！飛過去的是 arrow function 還是 function？'
+tags: [JavaScript, arrow function, function, this, hoisting]
+author: 'jeremy'
+date: '2025-08-13'
+changelog: []
+---
+
+函式 (function)，其他語言會稱為 method。  
+因為我自己也稍微碰一下其它語言，我有時偷懶也會乾脆直接把 JS 函式講成 method，所以如果下方出現 method，請不要介意，我在指函式 www。  
+
+method 在 JavaScript 裡重要性跟變數一致，應該說所有程式語言裡這兩項都是核心，一個涉及資料記憶、一個涉及邏輯運算嘛。  
+JavaScript 的 method 最常聽到被考的問題是：
+
+> 請說出，用 `function` 宣告的函式，跟 arrow function 有什麼差別？
+
+一語道盡 JavaScript 裡 method 的核心。  
+JavaScript 裡宣告 method 的方式就是只有兩種：
+1. `function` 關鍵字
+2. arrow function
+
+## 函式的提升
+要來回答「`function` 宣告的函式，跟 arrow function 的區別」這個問題，很多人會先說是對於 `this` 的指向不同。  
+是沒有錯，但實務上對 `this` 的感受差異我個人覺得沒有提升那麼高。
+
+函式的提升有多重要？  
+我說說一個故事 (?)：
+
+> 曾經我很喜歡用 arrow function，覺得用 arrow function 很帥。
+> 直到某次我在維護一個龐大的舊專案。需要寫一支 new method，並在 old method 中做調用。因為檔案龐大，習慣上會把新寫的 method 按照順序放在檔案的最下方。
+> 然後，嗯，很開心地 run 起來後獲得了 error。
+
+然後我們看看一個簡單的範例，當然，因為從簡，我把 old method 調用 new method 那 part 改成直接呼喊 method：
+1. 用大家最常寫 `function` 宣告的方式
+```javascript
+sayHi() // Output: Hello, World!
+
+function sayHi(){
+  console.log("Hello, World!")
+}
+```
+
+2. 用 arrow function 宣告的方式
+``` javascript
+sayHi() // ReferenceError: sayHi is not defined
+
+const sayHi = () => {
+  console.log("Hello, World!")
+}
+```
+
+可以看到，使用 arrow function 宣告的函式，如果被提前調用，會噴出 `ReferenceError`。  
+這是一個函式提升引發 error 的悲慘故事。  
+然後這時看著上面的故事心裡悄悄得到了今天第一個結論：
+
+> arrow function 不會提升
+
+### 函式陳述式 vs 函式表達式
+但我覺得第一個結論不夠嚴謹，因為這樣會誤會用 `function` 宣告的函式都會提升。但我們看看這個例子：
+
+```javascript
+sayHi() // ReferenceError: Cannot access 'sayHi' before initialization
+
+const sayHi = function() {
+  console.log("Hello, World!")
+}
+```
+
+正確寫法是把順序換過來：
+```javascript
+const sayHi = function() {
+  console.log("Hello, World!")
+}
+
+sayHi() // Output: Hello, World!
+```
+
+你可能很少看到這種寫法，這有一個專有名詞 - 函式表達式 (function expression)。  
+實務上很少會見到函式表達式用 `function` 宣告，因為 arrow function 的誕生就是為了寫更簡潔的函式表達式。  
+相對，JavaScript 還有一種寫法就是各位最常見的函式陳述式 (function declaration)，而函式陳述式依前面範例是會提升的：
+```javascript
+function sayHi() {
+  console.log("Hello, World!")
+}
+```
+
+稍微感受一下「函式表達式」跟「函式陳述式」的差異，有沒有發現「函式表達式」的寫法比較像是變數宣告？  
+嘿，這就是核心了！
+
+我們在變數那一篇討論過用 `let` 跟 `const` 宣告的變數不會有提升，只有用 `var` 宣告的變數會有提升。  
+通常實務上函式表達式會用 `const` 來宣告一個變數儲存一個 method，所以變數提升的那套規則同樣適用在函式表達式上。  
+這就是為什麼函式表達式不會提升的原因。
+
+所以我們先來修改第一個結論成第二個結論：
+
+> 函式陳述式會提升，函式表達式不會提升。
+
+然後順便得到第三個結論：
+
+> `function` 宣告可以用在「函式陳述式」與「函式表達式」，但 arrow function 只能用在「函式表達式」。
+
+:::warning
+我猜一定有人去試用 `var` 寫函式表達式，那會得到一個不一樣的錯誤：
+```javascript
+sayHi() // TypeError: sayHi is not a function
+
+var sayHi = function() {
+  console.log("Hello, World!")
+}
+```
+
+這問題跟變數提升那篇尾巴提到的「提升只會把變數宣告提升到最上方，但賦值不會」。  
+所以當提前調用 `sayHi` 時，JavaScript 不知道他的值是什麼，他甚至不知道他是個函式，所以噴出 `TypeError`。
+:::
+
+## `this` 的指向性問題
+這真的是最多人回答「`function` 宣告的函式，跟 arrow function 的區別」的問題時最常答的答案了。  
+老實講，我知道很多文章是這樣寫，GPT 大概也是這樣回你，但我真心覺得它實務上的重要性順位沒有提升高。  
+實話講就是感受沒那麼大 www。  
+但他不是不重要喔！我只是說實務上感受沒有提升那麼大。  
+畢竟提升是會直接噴 error 的，而 `this` 的指向性問題用錯就是隱藏式 bug。
+
+```javascript
+const obj = {
+  name: "Jeremy",
+
+  normalMethod: function () {
+    console.log("normal:", this.name)
+  },
+
+  arrowMethod: () => {
+    console.log("arrow:", this.name)
+  }
+}
+
+obj.normalMethod() // Jeremy
+obj.arrowMethod() // undefined
+```
+
+先不考慮其他的，基本上 `this` 指向性問題的差異可以歸納成：
+1. `function` 宣告的函式 (無論陳述還是表達式)，誰呼叫它，`this` 就指向誰
+2. arrow function 的 `this` 在寫下那行程式碼時就固定了，會繼承包住它的外層作用範圍的 `this`
+
+### `function` 宣告的函式，誰呼叫它，`this` 就指向誰
+其實嚴格一點，`bind`、`call`、`apply` 這些方法都可以改變 `this` 的指向，但我們先不考慮這些。  
+最單純的情況下，`function` 宣告的函式，誰呼叫它，`this` 就指向誰家物件 (如果在 strict mode 下，`.` 前面不加物件，`this` 會是 `undefined`；非 strict mode 下則會是全域物件)。  
+
+```javascript
+const a = {
+  name: "a",
+  sayHi: function () {
+    console.log("Hi from", this.name)
+  }
+}
+
+const b = {
+  name: "b",
+  sayHi: a.sayHi  // 把 a 的 method 借來用
+}
+
+a.sayHi() // Hi from a
+b.sayHi() // Hi from b
+```
+
+上述的範例，b 向 a 借了 `sayHi` 方法，然後呼叫它 (`b.sayHi()`)。  
+這時 `this` 就指向 b 的作用範圍，所以輸出 `b` 的 name。  
+基本上可以記住這個規則：
+
+> `.` 前面是誰，`.` 後 method 的 `this` 就指向誰。
+
+### arrow function 的 `this` 在寫下那行程式碼時就固定了
+arrow function 的 `this` 在寫下那行程式碼時就固定了，會繼承包住它的外層作用範圍的 `this`。  
+所以 arrow function 的 `this` 在一開始就固定了，不會因為誰呼叫它而改變。  
+而有人會說 arrow function 沒有自己的 `this`，這也是在形容它繼承了外層作用範圍的 `this` 這件事。
+把剛剛的範例改成 arrow function，可以看到這次 `this.name` 都是 `undefined`：
+
+```javascript
+const a = {
+  name: "a",
+  sayHi: () => {
+    console.log("Hi from", this.name)
+  }
+}
+
+const b = {
+  name: "b",
+  sayHi: a.sayHi
+}
+
+a.sayHi() // Hi from undefined
+b.sayHi() // Hi from undefined
+```
+
+:::warning
+有些人可能會想說，如果我在最外層加個 `const name = "global"`，那應該印出來會是 `global` 吧？  
+```javascript
+const name = "global"
+const a = {
+  name: "a",
+  sayHi: () => {
+    console.log("Hi from", this.name)
+  }
+}
+
+const b = {
+  name: "b",
+  sayHi: a.sayHi
+}
+
+a.sayHi() // 可能預期：Hi from global
+b.sayHi() // 可能預期：Hi from global
+```
+很遺憾，結果還是 `undefined`。  
+
+首先，記得 arrow function 的 `this` 是指向外層作用範圍的 `this`，並不是外層作用範圍的變數。  
+如果要用變數，我們有更簡單且更常見的做法 - 參數：
+```javascript
+const a = {
+  name: "a",
+  sayHi: (name) => {
+    console.log("Hi from", name)
+  }
+}
+```
+
+想試試印出 `global` 的話，可以這樣寫，然後去 chrome 的 devtool 玩玩 (一般 nodejs 環境無法這樣測)：
+```javascript
+window.name = "global"
+const a = {
+  name: "a",
+  sayHi: () => {
+    console.log("Hi from", this.name)
+  }
+}
+
+const b = {
+  name: "b",
+  sayHi: a.sayHi
+}
+
+a.sayHi() // Hi from global
+b.sayHi() // Hi from global
+```
+這是因為 `window` 是瀏覽器的全域物件，當你在瀏覽器裡寫 `this`，它會指向 `window`。  
+所以 `this.name` 會取到 window object 的 `name` 屬性。
+:::
+
+## Summary
+如果懶得看前面的那麼長的文章，直接來看結論吧~
+
+> 問：用 `function` 宣告的函式，跟 arrow function 有什麼差別？
+
+### 函式的提升
+1. 函式陳述式會提升，函式表達式不會提升。
+2. `function` 宣告可以用在「函式陳述式」與「函式表達式」，但 arrow function 只能用在「函式表達式」。
+
+### `this` 的指向性問題
+1. `function` 宣告的函式，誰呼叫它，`this` 就指向誰。
+2. arrow function 的 `this` 在寫下那行程式碼時就固定了，會繼承包住它的外層作用範圍的 `this`。
+
+:::warning
+在瀏覽器 DevTools、非嚴格模式的普通 `.js` 檔案，或是嚴格模式（ES 模組、現代框架）下，執行同一段程式碼時，錯誤訊息的文字可能不同，這只是執行環境差異，對結論沒有影響。
+:::

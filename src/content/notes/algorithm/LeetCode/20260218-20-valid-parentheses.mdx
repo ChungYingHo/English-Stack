@@ -1,0 +1,86 @@
+---
+title: "20. Valid Parentheses"
+author: "jeremy"
+date: "2026-02-18"
+tags: [leetcode, stack]
+changelog: []
+---
+
+:::info
+[Leetcode 20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/)
+:::
+
+## 題目要求
+Given a string s containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.  
+An input string is valid if:
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+3. Every close bracket has a corresponding open bracket of the same type.
+
+Expected input and output:
+```
+Input: s = "()"
+Output: true
+
+Input: s = "()[]{}"
+Output: true
+
+Input: s = "(]"
+Output: false
+
+Input: s = "([])"
+Output: true
+
+Input: s = "([)]"
+Output: false
+```
+
+## 解題思路
+本題是很經典的 stack 題目，非常適合利用其 LIFO (Last In, First Out) 的特性來解決。  
+這題的解題思路在於掌握兩個原則：
+1. 每個左括號必有一個對應的右括號。
+2. 一組括號內若有其他括號，內部的括號必須也先配對完成 (閉合)。
+
+滿足這兩項原則，那 method 就會 return true，判定其為有效的括號組合。  
+反之，若有任何一項不符合，method 就會 return false。
+
+那為何說 stack 是這題的最佳解法呢？  
+原因在於 LIFO 的特性非常適合用來檢查上述兩個原則。  
+我們可以這樣做：
+1. 遇到左括號時，我們先將左括號給 push 進 stack 裡。
+2. 當遇到右括號時，我們檢查 stack 頂端的元素是否為對應的左括號。
+   - 若是，表示這對括號是有效的，我們就將 stack 頂端的左括號 pop 出 stack。
+   - 若不是，表示這對括號無效，我們直接 return false，可以直接終止程式 (因為只要一個是不合法，就該回傳 false，後面的運算都純屬多餘)。
+3. 遍歷完整個字串後，若儲存左括號的 stack 是空的，表示所有的括號都成功配對，我們就 return true；反之，若 stack 裡還有元素，表示有未配對的左括號，我們就 return false。
+
+```java
+class Solution {
+    public boolean isValid(String s) {
+        boolean isValid = true;
+
+        char[] charArray = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : charArray) {
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else {
+                if (stack.isEmpty()) {
+                    isValid = false;
+                    break;
+                }
+
+                char top = stack.pop();
+                if ((c == ')' && top != '(') ||
+                    (c == ']' && top != '[') ||
+                    (c == '}' && top != '{')) {
+                    isValid = false;
+                    break;
+                }
+            }
+        }
+
+        return isValid && stack.isEmpty();
+    }
+}
+```

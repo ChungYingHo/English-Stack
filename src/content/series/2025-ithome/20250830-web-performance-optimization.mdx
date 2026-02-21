@@ -1,0 +1,104 @@
+---
+title: 'Day22 - 網頁卡卡的怎麼辦？'
+tags: [layout, paint, composite]
+author: 'jeremy'
+date: '2025-08-30'
+changelog: []
+---
+
+網路效能一向是前端開發中很重要的一個議題。  
+有研究指出，一般使用者等待網頁載入的耐心大約是 3 秒鐘，超過這個時間就會開始流失使用者。  
+那這麼重要，但為什麼平常開發中不會被要求網頁效能呢？  
+其實有啦，只是因為一些因素或應對措施會讓人察覺不太到其實網頁效能是有在被重視的。  
+
+現今的框架其實內部都會有一些優化機制，讓以它們開發的網頁在效能上都不至於太差。  
+一些有在做 code review 的團隊，如果遇到 reviewer 要求 refactor 程式碼，多半對效能也是有幫助，畢竟越多 code，那效能的確也會越差。  
+對於一些已知可能會 loading 比較久的，比如 table 資料 api request，前端多半也會塞 loading spinner 來提示使用者稍等。  
+這些都是在不知不覺中就會被實踐的網頁效能優化手段。
+
+但在這些之外呢？
+
+## Rendering Pipeline
+渲染管線 (Rendering Pipeline) 是瀏覽器接收到 server 回傳的資訊後，必經的將資訊轉換成使用者能看見的畫面的過程。  
+會有三個階段：
+1. layout：計算樣式 & 佈局
+2. paint：將計算結果繪製成圖層
+3. composite：將圖層合成到畫面上
+
+完整的畫面渲染流程，從 browser 接收到 server 回傳的資訊後，會是長這樣：
+1. 解析 DOM 與 CSSOM，建構 DOM 樹與 CSSOM 樹
+2. Rendering Pipeline 開始拿到這些樹，進行 layout、paint 與 composite 的過程
+3. 畫面呈現
+
+最一開始 DOM 與 CSSOM 的建構過程是必要成本，我們暫且拋開不談，這邊先專注於 Rendering Pipeline。  
+Rendering Pipeline 是整個前端裡對於效能影響最大的部分。  
+來詳解一下 Rendering Pipeline 的三個階段。
+
+### layout
+Browser 根據計算好的 render tree (即 DOM 樹與 CSSOM 樹結合而成) 來計算每個節點的位置與大小 (這個很多人稱作 reflow)。  
+這個階段牽扯的是 element 與 element 之間彼此的距離與畫面占比，所以會受到 CSS 屬性如 `width`、`height`、`margin`、`padding`、`position`、 `display`... 等影響。  
+或是 DOM tree 有任何變化，比如 Vue 很愛用的 `v-if` 控制 component 顯示與否，第一個影響最大的就是 layout 階段，因為它要計算佈局。
+
+如果我們把最終的畫面當作一幅拼貼畫，那麼 layout 階段就是在為這幅拼貼畫安排各個貼布 (元素) 的位置與大小。
+
+### paint
+Paint 階段則是專注在 element 內部。  
+所謂的 paint 就是指畫出元素、裝飾元素，所以這一步就是會去計算元素的顏色、陰影、邊框... 等。
+
+所以這一步就是實際裝飾我們的各個拼布 (元素)。
+比如說我們預計這一幅拼貼畫會有天空、高山、樹木三個拼布，這一步就是為天空漆上藍色、為山脈畫上陰影、為樹木著上綠色。
+
+### composite
+Composite 階段則是將各個圖層合成到一起，形成最終的畫面。  
+這個階段會考慮到各個圖層之間的堆疊順序、透明度等因素，最終產生一個完整的畫面。
+
+也就是說這一步我們得以將上面 paint 裝飾好的拼布，按照 layout 階段計算好的位置與大小，合成到一起，形成最終的畫面。
+
+### 效能差異
+所以我們從上面知道三階段的詳細差異後，可以清楚知道 layout 的效能負載是最重的，因為它牽扯的是整個 render tree、是整個 element 與 element 之間的關係。  
+而 paint 則是次之，因為它只牽扯到 element 本身的裝飾。  
+最後理論上最輕的就是 composite 階段，因為它只是將已經計算好的圖層合成到一起，不需要再進行額外的計算。
+
+> layout > paint > composite
+
+## 從渲染步驟看效能優化
+現在我們知道 browser 從 server 拿到資源後會有兩個步驟：
+1. 建立 render tree
+2. 執行 Rendering Pipeline
+
+那前端基本上的效能優化手段也是針對這兩個部分。  
+所以我們可以看看一些常見的前端效能優化手段是針對哪些階段。
+
+### 針對 render tree 建立的優化
+因為這部分牽涉的是 server 傳輸過來的資料解析，所以優化手段就是看怎麼加快解析的速度。  
+大概有兩種策略：
+1. 資料越輕量越好：
+    - 比如使用 WebP 格式的圖片，或是 SVG 圖檔，這些格式的圖片通常比傳統的 JPG、PNG 更輕量。
+    - 減少 code 的體積，像是使用 tree shaking、code splitting、minify 等技術來減少 JavaScript 檔案的大小。這也就是為什麼都會要求寫 code 要去除掉多餘註解和冗餘的程式碼。
+2. 減少 browser 解析的工作量：因此 SSR mode 誕生了！透過現在 server 解析完後直接回傳 HTML 結構，降低 browser 端的解析工作量，讓 browser 可以更快建立起 DOM tree。
+
+### Rendering Pipeline - layout 階段優化
+因為這一階段涉及的是 render tree 的計算，所以優化手段就是盡量減少 render tree 的變動。  
+白話一點來講，就是減少 DOM 的操作 (很少操作 CSSOM 的啦)。  
+現代前端愛用框架的一大原因就是 Virtual DOM / reactivity 可以幫助減少不必要的 DOM 更新，這點對 layout 效能很有幫助。
+
+### Rendering Pipeline - paint 階段優化
+這一部分涉及的主要就是 CSS 屬性了。  
+其實這部分優化的手段無他，就是減少冗餘的 CSS 計算。
+
+因為像 `blur`、`box-shadow` 這類效果雖然很潮，但其實都比一般 CSS 屬性更費計算資源，無形中都在加重 paint 階段的負擔。  
+所以如果不是必要的話，盡量減少這類 CSS 屬性。
+
+### Rendering Pipeline - composite 階段優化
+這一部分主要是針對圖層合成的優化。  
+其實這部分的優化手段相對較少，因為 composite 階段本身的計算量就比較小。  
+不過還是有一些可以注意的地方，比如使用 CSS 繪製動畫時，多嘗試使用 `transform` 和 `opacity` 屬性，這兩個屬性不會觸發 layout 和 paint 階段，只會影響 composite 階段，這樣可以減少整體的渲染負擔。  
+但這些屬性一旦套用在大面積元素上，效能消耗還是會特別明顯。
+
+## Summary
+從上述可以知道，前端能做的效能優化基本集中在 Render tree 跟 Rendering Pipeline 這兩個部分。  
+Render tree 有關的優化手段是減少 browser 端的解析工作量，像是 SSR、減少 code 體積、改善傳輸檔案類型等等。  
+而 Rendering Pipeline 的優化手段擇要針對不同階段對症下藥，但一般因為 layout 階段的計算量最大，所以優化的重點往往會放在這個階段。  
+值得一提的是，實務上有時會用 JS 來操作 DOM 或 CSS，本質上也是在改變 render tree，所以這些操作也會影響到 layout 階段的效能。  
+所以有一說是，如果真的要動態改變樣式，先看看純 CSS 能不能滿足需求。  
+因為 JS 操作 DOM 或 CSS，實際上就是在動 render tree，往往會拖慢 layout，而單純的 CSS 多半只影響 paint，負擔小很多。
