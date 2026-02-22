@@ -80,6 +80,19 @@ const topVocabs = allVocab
       </div>
 
     </div>
+
+    <div id="credit-link" class="absolute bottom-6 left-0 w-full flex justify-center z-20 opacity-0 translate-y-4 transition-all duration-1000 delay-500 ease-out">
+      <a 
+        href="https://jeremyho.tw/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="text-xs md:text-sm font-medium text-slate-400 hover:text-indigo-500 transition-colors tracking-widest uppercase flex items-center gap-1.5 md:gap-2 group"
+      >
+        <span class="font-sans text-slate-300 group-hover:text-indigo-300 transition-colors">© 2026</span>
+        <span class="group-hover:-translate-y-0.5 transition-transform duration-300 flex items-center gap-1">Jeremy × Aira</span>
+      </a>
+    </div>
+
   </main>
 </Layout>
 
@@ -87,6 +100,7 @@ const topVocabs = allVocab
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('hero-container')
   const actionBtn = document.getElementById('action-btn')
+  const creditLink = document.getElementById('credit-link')
   const dataEl = document.getElementById('vocab-data')
   const ttsBtn = document.getElementById('tts-btn')
   const contentWrapper = document.getElementById('vocab-content-wrapper')
@@ -166,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(() => {
     if (container) container.classList.remove('opacity-0', 'translate-y-8')
     if (actionBtn) actionBtn.classList.remove('opacity-0', 'translate-y-8')
+    if (creditLink) creditLink.classList.remove('opacity-0', 'translate-y-4')
   })
 })
 </script>
