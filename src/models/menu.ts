@@ -1,7 +1,4 @@
-// src/models/menu.ts
-
-// [1] 定義所有的 Collection 名稱 (這裡新增 'blog')
-export type CollectionType = 'notes' | 'series' | 'languages' | 'blog';
+export type CollectionType = 'reading' | 'writing' | 'speaking' | 'grammar';
 
 export type MenuItem = MenuPage | MenuGroup;
 
@@ -25,10 +22,9 @@ export type MenuCollectionConfig = {
   baseUrl: string;
 }
 
-// [2] 設定檔
 export const MENU_COLLECTIONS: MenuCollectionConfig[] = [
-  { collectionName: 'blog', title: 'Blog', baseUrl: '/blog' },
-  { collectionName: 'notes', title: 'Notes', baseUrl: '/notes' },
-  { collectionName: 'series', title: 'Series', baseUrl: '/series' },
-  { collectionName: 'languages', title: 'Languages', baseUrl: '/languages' },
+  { collectionName: 'reading', title: 'Reading', baseUrl: '/reading' },
+  { collectionName: 'writing', title: 'Writing', baseUrl: '/writing' },
+  { collectionName: 'speaking', title: 'Speaking', baseUrl: '/speaking' },
+  { collectionName: 'grammar', title: 'Grammar', baseUrl: '/grammar' },
 ]

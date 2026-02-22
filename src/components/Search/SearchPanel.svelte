@@ -84,23 +84,23 @@
   }
 </script>
 
-<div class="flex flex-col h-full text-left relative bg-[#161213]">
-  <div class="flex items-center justify-between px-4 py-3 md:px-6 md:py-4 border-b border-white/5 bg-[#161213] shrink-0">
-    <div class="flex items-center gap-2 md:gap-3 text-white/60">
+<div class="flex flex-col h-full text-left relative bg-white rounded-2xl">
+  <div class="flex items-center justify-between px-4 py-3 md:px-6 md:py-4 border-b border-slate-100 bg-white shrink-0 rounded-t-2xl">
+    <div class="flex items-center gap-2 md:gap-3 text-slate-500">
       <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
       <span class="text-xs font-mono font-bold uppercase tracking-[0.15em]">Global Search</span>
     </div>
     <div class="flex items-center gap-2">
-       <span class="text-[10px] font-mono text-white/20 hidden md:inline-block">ESC to close</span>
-       <button on:click={onClose} class="md:hidden text-white/40 p-1 min-w-[32px] min-h-[32px] flex items-center justify-center">✕</button>
+       <span class="text-[10px] font-mono text-slate-400 hidden md:inline-block">ESC to close</span>
+       <button on:click={onClose} class="md:hidden text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors rounded-full p-1 min-w-[32px] min-h-[32px] flex items-center justify-center">✕</button>
     </div>
   </div>
 
   <div class="p-4 md:p-6 overflow-y-auto custom-scrollbar flex-1 relative z-10">
     {#if errorMsg}
-        <div class="text-red-400 text-xs text-center mt-10 p-4 border border-red-500/20 rounded bg-red-500/5">
+        <div class="text-rose-500 text-xs text-center mt-10 p-4 border border-rose-200 rounded-lg bg-rose-50">
           {errorMsg}
         </div>
     {/if}
@@ -112,24 +112,21 @@
 <style>
   :global(:root) {
     --pagefind-ui-scale: 0.85;
-    --pagefind-ui-primary: #f472b6; 
-    --pagefind-ui-text: #cbd5e1;
-    --pagefind-ui-background: #161213;
-    --pagefind-ui-border: #334155;
-    --pagefind-ui-tag: #f472b6;
+    --pagefind-ui-primary: #4f46e5; /* Indigo 600 */
+    --pagefind-ui-text: #475569; /* Slate 600 */
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: #e2e8f0; /* Slate 200 */
+    --pagefind-ui-tag: #4f46e5;
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 8px;
     --pagefind-ui-font: 'Inter', system-ui, sans-serif;
   }
 
-  /* 1. Form 容器修正：
-       - position: relative (為了讓按鈕定位)
-       - flex-direction: column (關鍵！讓 Input 和 結果 垂直排列，不會左右擠壓)
-  */
+  /* 1. Form 容器修正 */
   :global(.pagefind-ui__form) {
     position: relative !important;
     display: flex !important; 
-    flex-direction: column !important; /* [修正] 垂直排列，解決 Input 被壓扁的問題 */
+    flex-direction: column !important;
     width: 100% !important;
   }
 
@@ -139,11 +136,9 @@
   /* 2. 輸入框設定 */
   :global(.pagefind-ui__search-input) {
     width: 100% !important;
-    background-color: rgba(255,255,255,0.03) !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-    color: white !important;
-    
-    /* 預留右側空間給按鈕 */
+    background-color: #f8fafc !important; /* Slate 50 */
+    border: 1px solid #e2e8f0 !important;
+    color: #1e293b !important; /* Slate 800 */
     padding: 14px 16px !important;
     padding-right: 60px !important; 
 
@@ -152,8 +147,6 @@
     border-radius: 12px !important;
     transition: all 0.2s ease !important;
     box-sizing: border-box !important;
-    
-    /* 固定高度：手機 50px */
     height: 50px !important;
   }
   
@@ -162,33 +155,28 @@
       padding: 18px 22px !important;
       padding-right: 70px !important; 
       font-size: 1.1rem !important; 
-      /* 固定高度：電腦 60px */
       height: 60px !important;
     }
   }
 
   :global(.pagefind-ui__search-input:focus) {
-    background-color: rgba(255,255,255,0.06) !important;
+    background-color: #ffffff !important;
     border-color: var(--pagefind-ui-primary) !important;
     outline: none;
-    box-shadow: 0 0 0 1px rgba(244, 114, 182, 0.4), 0 0 20px rgba(244, 114, 182, 0.15) !important;
+    box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.4), 0 0 20px rgba(79, 70, 229, 0.1) !important;
   }
 
-  /* 3. 清除按鈕定位 [關鍵修正]：
-       - 不使用 top: 50% (因為結果出現後 form 會變高，50% 會跑到下面去)
-       - 改用 top: 25px / 30px (精準鎖定在 Input 高度的一半位置)
-  */
+  /* 3. 清除按鈕定位 */
   :global(.pagefind-ui__search-clear) {
     position: absolute !important;
     right: 10px !important;
     z-index: 20 !important;
     
-    /* 手機版：Input 高 50px -> Top 25px */
-    top: 25px !important; 
+    top: 25px !important;
     transform: translateY(-50%) !important;
     
     background: transparent !important;
-    color: #64748b !important;
+    color: #94a3b8 !important; /* Slate 400 */
     padding: 4px 8px !important;
     margin: 0 !important;
     
@@ -199,25 +187,25 @@
     font-size: 13px !important;
     cursor: pointer !important;
     border-radius: 4px !important;
+    transition: all 0.2s ease;
   }
 
   @media (min-width: 768px) {
     :global(.pagefind-ui__search-clear) {
-      /* 電腦版：Input 高 60px -> Top 30px */
-      top: 30px !important; 
+      top: 30px !important;
     }
   }
   
   :global(.pagefind-ui__search-clear:hover) {
-    color: #f472b6 !important;
-    background: rgba(255,255,255,0.05) !important;
+    color: #4f46e5 !important;
+    background: #f1f5f9 !important; /* Slate 100 */
   }
 
   /* 4. 結果列表 */
   :global(.pagefind-ui__drawer) { 
     gap: 12px !important; 
     padding-top: 16px !important;
-    width: 100% !important; /* 確保佔滿寬度 */
+    width: 100% !important; 
   }
 
   :global(.pagefind-ui__result) {
@@ -225,7 +213,7 @@
     padding: 12px !important;
     border-radius: 8px !important;
     background: transparent !important;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   @media (min-width: 768px) {
@@ -236,21 +224,26 @@
   }
 
   :global(.pagefind-ui__result:hover) {
-    background-color: rgba(255,255,255,0.03) !important;
-    border-color: rgba(255,255,255,0.05) !important;
+    background-color: #f8fafc !important; /* Slate 50 */
+    border-color: #f1f5f9 !important; /* Slate 100 */
   }
 
   :global(.pagefind-ui__result-thumb) { display: none; }
 
   :global(.pagefind-ui__result-link) {
-    color: #f472b6 !important;
+    color: #4f46e5 !important; /* Indigo 600 */
     font-weight: 600 !important;
     font-size: 1rem !important;
     text-decoration: none !important;
     display: block !important;
     margin-bottom: 4px !important;
     line-height: 1.4 !important;
-    word-break: break-word !important; 
+    word-break: break-word !important;
+    transition: color 0.2s ease;
+  }
+
+  :global(.pagefind-ui__result-link:hover) {
+    color: #6366f1 !important; /* Indigo 500 */
   }
   
   @media (min-width: 768px) {
@@ -262,7 +255,7 @@
   
   /* 5. 摘要與 line-clamp */
   :global(.pagefind-ui__result-excerpt) {
-    color: #94a3b8 !important;
+    color: #64748b !important; /* Slate 500 */
     font-size: 0.85rem !important;
     line-height: 1.5 !important;
     font-weight: 400 !important;
@@ -284,16 +277,17 @@
     }
   }
   
+  /* 搜尋高亮重點字 */
   :global(.pagefind-ui__result-excerpt mark) {
-    background: rgba(244, 114, 182, 0.15) !important;
-    color: #fce7f3 !important;
+    background: rgba(79, 70, 229, 0.1) !important;
+    color: #312e81 !important; /* Indigo 900 */
     font-weight: 600 !important;
-    padding: 0 3px;
-    border-radius: 3px;
+    padding: 0 4px;
+    border-radius: 4px;
   }
 
   :global(.pagefind-ui__message) {
-      color: #64748b !important;
+      color: #94a3b8 !important; /* Slate 400 */
       padding: 10px 4px !important;
       font-size: 0.9rem !important;
   }

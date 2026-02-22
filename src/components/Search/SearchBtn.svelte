@@ -8,7 +8,7 @@
   aria-label="Search"
   class="
     group flex items-center justify-center w-10 h-10 ml-2 rounded-full
-    text-white/70 hover:text-white bg-transparent hover:bg-white/10
+    text-slate-500 hover:text-indigo-600 bg-transparent hover:bg-slate-100
     transition-all duration-300 active:scale-95
   "
 >
