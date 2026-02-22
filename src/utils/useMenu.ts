@@ -88,7 +88,7 @@ function sortMenuTree(menuItems: MenuItem[]): void {
         const timeA = new Date(pageA.date).getTime()
         const timeB = new Date(pageB.date).getTime()
         if (timeA !== timeB) {
-          return timeA - timeB 
+          return timeB - timeA 
         }
       }
       

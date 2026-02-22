@@ -20,7 +20,7 @@ const topVocabs = allVocab
   }));
 ---
 
-<Layout title="English Stack - Home">
+<Layout title="Home">
   <main class="fixed inset-0 w-full h-[100dvh] bg-slate-50 text-slate-800 overflow-hidden font-sans selection:bg-indigo-100 selection:text-indigo-900 flex flex-col items-center justify-center">
     
     <div class="absolute inset-0 z-0 opacity-40 pointer-events-none" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px;"></div>
@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderWord(initialVocab)
         
         // 設定定時器，每 8 秒自動輪播下一個單字 (8000 毫秒)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         intervalId = window.setInterval(transitionToNextWord, 8000)
       }
     } catch (e) {
