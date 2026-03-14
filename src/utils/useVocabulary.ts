@@ -17,9 +17,16 @@ export interface VocabItem {
 
 export async function useVocabulary(category: 'common' | 'toefl'): Promise<VocabItem[]> {
   // 使用 as any 繞過 Astro 嚴格的集合名稱檢查
-  const entries = await getCollection('reading' as any, (entry: any) => {
+  const readingEntries = await getCollection('reading' as any, (entry: any) => {
     return entry.slug.startsWith(`${category}/`) && entry.data?.draft !== true
   })
+  const speakingEntries = await getCollection('speaking' as any, (entry: any) => {
+    return entry.slug.startsWith(`${category}/`) && entry.data?.draft !== true
+  })
+  const entries = [
+    ...readingEntries.map((e: any) => ({ ...e, _collection: 'reading' })),
+    ...speakingEntries.map((e: any) => ({ ...e, _collection: 'speaking' })),
+  ]
 
   const vocabMap = new Map<string, VocabItem>()
 
@@ -28,7 +35,7 @@ export async function useVocabulary(category: 'common' | 'toefl'): Promise<Vocab
     if (!body) return
 
     const articleTitle = entry.data?.title || 'Untitled'
-    const articleLink = `/readings/${entry.slug}` 
+    const articleLink = `/${entry._collection}/${entry.slug}`
 
     const rows = body.split('\n').filter((line: string) => line.trim().startsWith('|'))
     
