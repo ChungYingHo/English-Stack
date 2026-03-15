@@ -4,8 +4,9 @@
   import DrilldownMenu from "@/components/Menu/components/DrilldownMenu.svelte"
   import SearchBtn from "@/components/Search/SearchBtn.svelte"
   import SearchPanel from "@/components/Search/SearchPanel.svelte"
+  import ToeflGuard from "@/components/ToeflGuard.svelte"
   import { fade, slide } from "svelte/transition"
-  
+
   import { normalizePath } from "@/utils/readPath"
 
   export let rootItems: MenuItem[] = []
@@ -22,6 +23,27 @@
   let scrollY = 0
   let lastScrollY = 0
   let showMenu = true
+
+  const TOEFL_KEY = 'toefl_auth'
+  const TOEFL_PASS = 'toefl2026'
+
+  let showToeflGuard = false
+  let pendingToeflAction: (() => void) | null = null
+
+  function toeflGate(action: () => void) {
+    if (sessionStorage.getItem(TOEFL_KEY) === TOEFL_PASS) {
+      action()
+    } else {
+      pendingToeflAction = action
+      showToeflGuard = true
+    }
+  }
+
+  function onToeflSuccess() {
+    showToeflGuard = false
+    pendingToeflAction?.()
+    pendingToeflAction = null
+  }
 
   function handleScroll() {
     const currentScrollY = window.scrollY
@@ -263,7 +285,7 @@
             <DrilldownMenu
               rootItems={rootItems}
               initialItems={isMobileMenuOpen ? rootItems : (desktopOpenGroup?.children || [])}
-              currentPath={currentPath} 
+              currentPath={currentPath}
               onBackToRoot={() => { if (!isMobileMenuOpen) closeAll(); }}
               onClose={closeAll}
               onTitleChange={(title) => {
@@ -273,6 +295,7 @@
                   desktopTitle = isMobileMenuOpen ? "MENU" : (desktopOpenGroup?.title || "");
                 }
               }}
+              {toeflGate}
             />
           {/key}
 
@@ -325,11 +348,15 @@
 </header>
 
 {#if (desktopOpenGroup && innerWidth >= 1024) || isMobileMenuOpen || isSearchOpen}
-  <button 
-    class="fixed inset-0 z-40 cursor-default focus:outline-none" 
-    aria-label="Close panel" 
+  <button
+    class="fixed inset-0 z-40 cursor-default focus:outline-none"
+    aria-label="Close panel"
     on:click={closeAll}
   ></button>
+{/if}
+
+{#if showToeflGuard}
+  <ToeflGuard onSuccess={onToeflSuccess} />
 {/if}
 
 <style>

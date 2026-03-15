@@ -4,6 +4,9 @@
   const PASSWORD = 'toefl2026'
   const STORAGE_KEY = 'toefl_auth'
 
+  // Optional: called after successful auth (used when triggered from menu)
+  export let onSuccess: (() => void) | undefined = undefined
+
   let visible = $state(false)
   let input = $state('')
   let error = $state(false)
@@ -18,6 +21,7 @@
     if (input === PASSWORD) {
       sessionStorage.setItem(STORAGE_KEY, PASSWORD)
       visible = false
+      onSuccess?.()
     } else {
       error = true
       input = ''

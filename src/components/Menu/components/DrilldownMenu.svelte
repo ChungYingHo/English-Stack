@@ -12,6 +12,20 @@
   export let onTitleChange: ((title: string) => void) | undefined = undefined
   export let onBackToRoot: (() => void) | undefined
   export let onClose: (() => void) | undefined
+  export let toeflGate: ((action: () => void) => void) | undefined = undefined
+
+  const TOEFL_KEY = 'toefl_auth'
+  const TOEFL_PASS = 'toefl2026'
+
+  function isAuthenticated(): boolean {
+    return sessionStorage.getItem(TOEFL_KEY) === TOEFL_PASS
+  }
+
+  function isToeflItem(item: MenuItem): boolean {
+    if (item.type === 'group') return item.title === 'Toefl'
+    if (item.type === 'page') return item.href === '/vocabularies-toefl' || item.href.includes('/toefl/')
+    return false
+  }
 
   let stack: MenuItem[][] = []
   let items: MenuItem[] = [] 
@@ -73,6 +87,24 @@
     items = item.children
   }
 
+  function handleGroupClick(item: MenuGroup) {
+    if (isToeflItem(item) && !isAuthenticated()) {
+      toeflGate?.(() => enterGroup(item))
+    } else {
+      enterGroup(item)
+    }
+  }
+
+  function handleLinkClick(e: MouseEvent, item: MenuItem) {
+    if (item.type !== 'page') return
+    if (isToeflItem(item) && !isAuthenticated()) {
+      e.preventDefault()
+      toeflGate?.(() => { window.location.href = item.href; onClose?.() })
+    } else {
+      onClose?.()
+    }
+  }
+
   function back() {
     if (stack.length === 0) {
       onBackToRoot?.()
@@ -132,7 +164,7 @@
           {#if isGroup(item)}
             <button
               class="group flex justify-between items-center w-full px-4 py-3 rounded-xl text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 active:scale-[0.98] transition-all duration-200"
-              on:click={() => enterGroup(item)}
+              on:click={() => handleGroupClick(item)}
             >
               <span class="text-base font-medium tracking-wide">{item.title}</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-slate-400 transition-all duration-300 group-hover:text-indigo-500 group-hover:translate-x-1">
@@ -144,7 +176,7 @@
               href={item.href}
               use:scrollToActive={normalizePath(item.href) === normalizedCurrentPath}
               class="group flex justify-between items-center w-full px-4 py-3 rounded-xl transition-all duration-200 {normalizePath(item.href) === normalizedCurrentPath ? 'bg-indigo-50 text-indigo-700 font-bold' : 'text-slate-700 hover:text-indigo-600 hover:bg-slate-50'}"
-              on:click={onClose} 
+              on:click={(e) => handleLinkClick(e, item)}
             >
               <span class="text-base tracking-wide">{item.title}</span>
             </a>
