@@ -1,4 +1,4 @@
-export type CollectionType = 'reading' | 'writing' | 'listening' | 'grammar';
+export type CollectionType = 'reading' | 'writing' | 'listening' | 'grammar' | 'speaking';
 
 export type MenuItem = MenuPage | MenuGroup;
 
@@ -26,5 +26,6 @@ export const MENU_COLLECTIONS: MenuCollectionConfig[] = [
   { collectionName: 'reading', title: 'Reading', baseUrl: '/reading' },
   { collectionName: 'writing', title: 'Writing', baseUrl: '/writing' },
   { collectionName: 'listening', title: 'Listening', baseUrl: '/listening' },
+  { collectionName: 'speaking', title: 'Speaking', baseUrl: '/speaking' },
   { collectionName: 'grammar', title: 'Grammar', baseUrl: '/grammar' },
 ]

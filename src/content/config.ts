@@ -29,9 +29,15 @@ const grammarCollection = defineCollection({
   schema: commonSchema,
 })
 
+const speakingCollection = defineCollection({
+  type: 'content',
+  schema: commonSchema,
+})
+
 export const collections = {
   'reading': readingCollection,
   'writing': writingCollection,
   'listening': listeningCollection,
   'grammar': grammarCollection,
+  'speaking': speakingCollection,
 }
