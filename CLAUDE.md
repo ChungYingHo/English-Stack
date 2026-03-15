@@ -32,15 +32,20 @@ src/
 │   ├── Menu/Menu.svelte + DrilldownMenu.svelte
 │   ├── Search/SearchBtn.svelte + SearchPanel.svelte
 │   ├── Vocab/VocabBoard.svelte
+│   ├── ToeflGuard.svelte  # Password gate for TOEFL content
 │   └── PostRenderer.astro
 ├── constants/
 │   ├── authors.ts    # Author definitions
 │   └── listening.ts  # YouTube resource list
 ├── content/
 │   ├── config.ts     # Zod schemas for collections
-│   └── reading/
-│       ├── common/   # Common vocabulary articles
-│       └── toefl/    # TOEFL vocabulary articles
+│   ├── reading/
+│   │   ├── common/   # Common vocabulary articles
+│   │   └── toefl/    # TOEFL vocabulary articles
+│   ├── listening/
+│   │   └── toefl/    # TOEFL listening articles
+│   └── speaking/
+│       └── toefl/    # TOEFL speaking practice
 ├── layouts/Layout.astro
 ├── models/menu.ts
 ├── pages/
@@ -48,7 +53,7 @@ src/
 │   ├── listening.astro
 │   ├── vocabularies-common.astro
 │   ├── vocabularies-toefl.astro
-│   └── reading/[...slug].astro  (+ writing, speaking, grammar)
+│   └── reading/[...slug].astro  (+ writing, speaking, grammar, listening)
 ├── styles/main.scss + tailwind.css
 └── utils/
     ├── content.ts      # Dynamic route generation
@@ -62,6 +67,8 @@ src/
 
 No database — content is stored as `.md` files in `src/content/`.
 
+**Active collections**: `reading`, `writing`, `listening`, `speaking`, `grammar`
+
 **Schema fields** (defined in `src/content/config.ts`):
 - `title` — string (optional)
 - `author` — string (default: `'Jeremy'`)
@@ -69,17 +76,17 @@ No database — content is stored as `.md` files in `src/content/`.
 - `date` — Date | string (optional)
 - `sameDateSort` — number (sort priority for same-date items, optional)
 
-### Adding a New Reading Article
+### Adding a New Article
 
-1. Create a file in `src/content/reading/common/` or `src/content/reading/toefl/`
-2. Use filename convention: `YYYYMMDD.md` (e.g., `20260314.md`)
-3. Add required frontmatter:
+- Reading: `src/content/reading/common/` or `src/content/reading/toefl/`
+- Listening: `src/content/listening/toefl/`
+- Speaking: `src/content/speaking/toefl/`
+- Filename convention: `YYYYMMDD.md` or `YYYYMMDD-slug.md`
 
 ```yaml
 ---
 date: YYYY/MM/DD
 title: Article Title
-link: https://source-url
 author: 'AuthorName'
 ---
 ```
@@ -113,9 +120,22 @@ import { something } from '@/utils/content'
 - **Menu**: Auto-generated from content collections; hierarchical, date-sorted
 - **Vocabulary Board**: Extracts from article Markdown tables; paginates 30/page; TTS pronunciation
 - **Search**: Pagefind — only works after `npm run build` (not in dev)
-- **PostRenderer**: Handles progress bar, anchor links, TTS buttons, copy-to-clipboard for code, changelog display
+- **PostRenderer**: Handles progress bar, anchor links, TTS buttons, copy-to-clipboard for code, changelog display. Accepts `requiresAuth?: boolean` prop — pass `true` to enable TOEFL password gate.
 - **Math**: Render LaTeX with `$...$` inline and `$$...$$` block syntax
 - **Admonitions**: Use `:::info`, `:::note`, `:::warning`, `:::danger`, `:::tip` directive syntax
+
+## TOEFL Content Access Control
+
+TOEFL content is gated behind a password prompt (`ToeflGuard.svelte`).
+
+- **Password**: `toefl2026` (hardcoded, intentional)
+- **Session**: uses `sessionStorage` — persists across refreshes, clears on tab close
+- **Gated pages**:
+  - `vocabularies-toefl.astro` — always gated
+  - `reading/[...slug].astro` — gated when `entry.slug.startsWith('toefl/')`
+  - `listening/[...slug].astro` — gated when `entry.slug.startsWith('toefl/')`
+  - `speaking/[...slug].astro` — gated when `entry.slug.startsWith('toefl/')`
+- To gate a new page, add `<ToeflGuard client:load />` or pass `requiresAuth={true}` to `PostRenderer`
 
 ## Authors
 
