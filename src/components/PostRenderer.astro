@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { AUTHORS } from '@/constants/authors';
 import Layout from '@/layouts/Layout.astro';
+import ToeflGuard from '@/components/ToeflGuard.svelte';
 
 // 對齊你的 config.ts collections
 interface Props {
@@ -10,9 +11,10 @@ interface Props {
     | CollectionEntry<'listening'>
     | CollectionEntry<'writing'>
     | CollectionEntry<'grammar'>;
+  requiresAuth?: boolean;
 }
 
-const { entry } = Astro.props;
+const { entry, requiresAuth = false } = Astro.props;
 const { Content, headings } = await entry.render();
 
 const authorKey = entry.data.author || 'Jeremy';
@@ -34,7 +36,9 @@ const formatDate = (d: Date) => {
 ---
 
 <Layout title={entry.data.title} description={entry.data.title}>
-  
+
+  {requiresAuth && <ToeflGuard client:load />}
+
   <div id="progress-bar" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-sky-400 via-indigo-500 to-indigo-600 z-[100] w-0 transition-all duration-100 ease-out shadow-[0_0_10px_rgba(79,70,229,0.3)]"></div>
   
   <div class="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-100/50 blur-[120px] rounded-full pointer-events-none -z-10"></div>

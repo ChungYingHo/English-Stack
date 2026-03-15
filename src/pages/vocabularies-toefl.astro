@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import { useVocabulary } from '@/utils/useVocabulary';
 import VocabBoard from '@/components/Vocab/VocabBoard.svelte';
+import ToeflGuard from '@/components/ToeflGuard.svelte';
 
 // 抓取 toefl 分類的單字
 const vocabularies = await useVocabulary('toefl');
@@ -22,8 +23,10 @@ const vocabularies = await useVocabulary('toefl');
     </header>
 
     <VocabBoard client:load vocabularies={vocabularies} />
-    
+
   </div>
+
+  <ToeflGuard client:load />
 </Layout>
 
 <style>
