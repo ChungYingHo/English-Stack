@@ -31,12 +31,20 @@
 
   function onKeydown(e: KeyboardEvent) {
     if (e.key === 'Enter') submit()
+    if (e.key === 'Escape' && onSuccess) dismiss()
+  }
+
+  function dismiss() {
+    visible = false
   }
 </script>
 
 {#if visible}
-  <div class="guard-overlay">
-    <div class="guard-card" class:shake={error}>
+  <div class="guard-overlay" onclick={onSuccess ? dismiss : undefined}>
+    <div class="guard-card" class:shake={error} onclick={(e) => e.stopPropagation()}>
+      {#if onSuccess}
+        <button class="close-btn" onclick={dismiss} aria-label="Close">✕</button>
+      {/if}
       <div class="lock-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
@@ -74,6 +82,7 @@
   }
 
   .guard-card {
+    position: relative;
     background: #ffffff;
     border-radius: 1.5rem;
     padding: 2.5rem 2rem;
@@ -85,6 +94,29 @@
     gap: 1rem;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
     animation: pop-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .close-btn:hover {
+    background: #e2e8f0;
+    color: #475569;
   }
 
   .lock-icon {
