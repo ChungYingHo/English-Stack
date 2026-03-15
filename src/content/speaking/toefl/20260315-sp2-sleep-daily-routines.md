@@ -1,6 +1,6 @@
 ---
 date: 2026/03/15
-title: 'SP2 — Interview: Sleep and Daily Routines'
+title: 'Interview: Sleep and Daily Routines'
 author: 'Jeremy'
 sameDateSort: 1
 ---

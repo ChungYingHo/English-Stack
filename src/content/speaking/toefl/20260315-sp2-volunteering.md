@@ -1,6 +1,6 @@
 ---
 date: 2026/03/15
-title: 'SP2 — Interview: Volunteering and Community Service'
+title: 'Interview: Volunteering and Community Service'
 author: 'Jeremy'
 sameDateSort: 3
 ---

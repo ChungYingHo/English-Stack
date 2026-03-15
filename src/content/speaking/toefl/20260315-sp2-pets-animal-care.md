@@ -1,6 +1,6 @@
 ---
 date: 2026/03/15
-title: 'SP2 — Interview: Pets and Animal Care'
+title: 'Interview: Pets and Animal Care'
 author: 'Jeremy'
 sameDateSort: 4
 ---
