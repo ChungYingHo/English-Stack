@@ -45,6 +45,11 @@
     pendingToeflAction = null
   }
 
+  function onToeflDismiss() {
+    showToeflGuard = false
+    pendingToeflAction = null
+  }
+
   function handleScroll() {
     const currentScrollY = window.scrollY
     const threshold = 50 
@@ -356,7 +361,7 @@
 {/if}
 
 {#if showToeflGuard}
-  <ToeflGuard onSuccess={onToeflSuccess} />
+  <ToeflGuard onSuccess={onToeflSuccess} onDismiss={onToeflDismiss} />
 {/if}
 
 <style>

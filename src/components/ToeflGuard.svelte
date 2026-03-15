@@ -5,7 +5,7 @@
   const STORAGE_KEY = 'toefl_auth'
 
   // Optional: called after successful auth (used when triggered from menu)
-  const { onSuccess }: { onSuccess?: () => void } = $props()
+  const { onSuccess, onDismiss }: { onSuccess?: () => void; onDismiss?: () => void } = $props()
 
   let visible = $state(false)
   let input = $state('')
@@ -36,6 +36,7 @@
 
   function dismiss() {
     visible = false
+    onDismiss?.()
   }
 </script>
 
