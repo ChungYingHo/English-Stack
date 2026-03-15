@@ -5,17 +5,15 @@ import Layout from '@/layouts/Layout.astro';
 
 // 對齊你的 config.ts collections
 interface Props {
-  entry: 
-    | CollectionEntry<'reading'> 
-    | CollectionEntry<'listening'> 
-    | CollectionEntry<'writing'> 
-    | CollectionEntry<'speaking'> 
+  entry:
+    | CollectionEntry<'reading'>
+    | CollectionEntry<'listening'>
+    | CollectionEntry<'writing'>
     | CollectionEntry<'grammar'>;
 }
 
 const { entry } = Astro.props;
-// 移除了 headings，因為已經不需要 TOC 了
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 const authorKey = entry.data.author || 'Jeremy';
 const authorData = AUTHORS.find(a => a.name.toLowerCase() === authorKey.toLowerCase()) || AUTHORS[0];
@@ -99,7 +97,7 @@ const formatDate = (d: Date) => {
     <div class="relative">
       <article class="md-content min-w-0 break-words pb-24">
         <Content />
-        
+
         {changelog.length > 0 && (
           <div class="mt-24 pt-8 border-t border-slate-200">
             <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Latest Updates</h3>
@@ -115,8 +113,68 @@ const formatDate = (d: Date) => {
           </div>
         )}
       </article>
+
+      {headings.length > 0 && (
+        <aside class="hidden xl:block absolute top-0 left-[100%] ml-12 h-full">
+          <div class="sticky top-32 w-60 max-h-[75vh] overflow-y-auto custom-scrollbar">
+            <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 pl-3 border-l-2 border-transparent">
+              On this page
+            </div>
+            <nav>
+              <ul class="space-y-0.5">
+                {headings.map((heading) => (
+                  <li>
+                    <a
+                      href={`#${heading.slug}`}
+                      class="toc-link block py-1.5 pl-3 border-l-2 border-slate-100 text-xs text-slate-400 hover:text-indigo-600 hover:border-indigo-400 transition-all duration-200 truncate leading-relaxed"
+                      data-depth={heading.depth}
+                      style={`margin-left: ${(heading.depth - 2) * 0.5}rem`}
+                    >
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      )}
     </div>
   </div>
+
+  {headings.length > 0 && (
+    <div
+      id="mobile-toc-container"
+      class="xl:hidden fixed z-50 bottom-0 left-0 right-0 translate-y-[calc(100%-4rem)] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] border-t border-slate-200 bg-white/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)]"
+    >
+      <button id="toc-toggle" class="w-full h-16 flex items-center justify-between px-6 cursor-pointer group">
+        <div class="flex flex-col items-start">
+          <span class="text-xs font-bold tracking-[0.2em] text-slate-700 uppercase group-hover:text-indigo-600 transition-colors">Table of Contents</span>
+          <span class="text-[10px] text-slate-400 mt-0.5" id="toc-hint">Click to expand</span>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 group-hover:text-indigo-600 transition-all duration-300" id="toc-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+          </svg>
+        </div>
+      </button>
+      <div class="px-6 py-6 pb-16 max-h-[60vh] overflow-y-auto custom-scrollbar">
+        <ul class="space-y-2">
+          {headings.map((heading) => (
+            <li>
+              <a
+                href={`#${heading.slug}`}
+                class="mobile-toc-link block text-sm text-slate-500 hover:text-indigo-600 transition-colors border-l-2 border-transparent pl-4 hover:border-indigo-400"
+                style={`margin-left: ${(heading.depth - 1) * 0.5}rem`}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )}
 </Layout>
 
 <script>
@@ -131,7 +189,50 @@ window.addEventListener('scroll', () => {
   }
 })
 
-// === 2. Code Block Copy Button ===
+// === 2. TOC Highlight ===
+const tocObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.toc-link').forEach(l => {
+        l.classList.remove('text-indigo-600', 'border-indigo-400')
+        l.classList.add('text-slate-400', 'border-slate-100')
+      })
+      const activeLink = document.querySelector(`.toc-link[href="#${entry.target.id}"]`)
+      if (activeLink) {
+        activeLink.classList.remove('text-slate-400', 'border-slate-100')
+        activeLink.classList.add('text-indigo-600', 'border-indigo-400')
+      }
+    }
+  })
+}, { rootMargin: '-100px 0px -70% 0px' })
+document.querySelectorAll('.md-content h2, .md-content h3').forEach(h => tocObserver.observe(h))
+
+// === 3. Mobile TOC Toggle ===
+const tocToggleBtn = document.getElementById('toc-toggle')
+const tocContainer = document.getElementById('mobile-toc-container')
+const tocIcon = document.getElementById('toc-icon')
+const tocHint = document.getElementById('toc-hint')
+let tocIsOpen = false
+
+const toggleToc = (force?: boolean) => {
+  tocIsOpen = force ?? !tocIsOpen
+  if (tocIsOpen) {
+    tocContainer?.classList.remove('translate-y-[calc(100%-4rem)]')
+    tocContainer?.classList.add('translate-y-0')
+    tocIcon?.classList.add('rotate-180')
+    if (tocHint) tocHint.innerText = 'Click to close'
+  } else {
+    tocContainer?.classList.add('translate-y-[calc(100%-4rem)]')
+    tocContainer?.classList.remove('translate-y-0')
+    tocIcon?.classList.remove('rotate-180')
+    if (tocHint) tocHint.innerText = 'Click to expand'
+  }
+}
+
+tocToggleBtn?.addEventListener('click', () => toggleToc())
+document.querySelectorAll('.mobile-toc-link').forEach(l => l.addEventListener('click', () => toggleToc(false)))
+
+// === 4. Code Block Copy Button + Heading Anchors + External Links + TTS ===
 document.addEventListener('DOMContentLoaded', () => {
   const preElements = document.querySelectorAll('pre')
 
@@ -169,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.appendChild(copyBtn)
   })
 
-  // === 3. Heading Anchor Links ===
+  // === 5. Heading Anchor Links ===
   const headings = document.querySelectorAll('.md-content h1, .md-content h2, .md-content h3')
   headings.forEach(heading => {
     const anchor = document.createElement('a')
@@ -194,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     heading.appendChild(anchor)
   })
 
-  // === 4. External Links in MDX ===
+  // === 6. External Links ===
   const contentLinks = document.querySelectorAll('.md-content a')
   contentLinks.forEach(link => {
     const href = link.getAttribute('href')
@@ -204,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // === 5. Vocabulary TTS (Text-to-Speech) 功能 ===
+  // === 7. Vocabulary TTS ===
   const vocabRows = document.querySelectorAll('.md-content table tbody tr')
   
   vocabRows.forEach(row => {

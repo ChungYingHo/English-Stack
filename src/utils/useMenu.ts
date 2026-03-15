@@ -139,18 +139,13 @@ async function buildTreeFromCollection(
 // 定義靜態頁面
 function getStaticPages(): MenuItem[] {
   return [
-    { 
-      type: 'group', 
-      title: 'Vocabulary', 
+    {
+      type: 'group',
+      title: 'Vocabulary',
       children: [
         { type: 'page', title: 'Common Vocabulary', href: '/vocabularies-common' },
         { type: 'page', title: 'Toefl Vocabulary', href: '/vocabularies-toefl' },
       ]
-    },
-    {
-      type: 'page',
-      title: 'Listening Practice',
-      href: '/listening'
     }
   ]
 }

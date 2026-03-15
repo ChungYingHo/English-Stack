@@ -20,12 +20,12 @@ export async function useVocabulary(category: 'common' | 'toefl'): Promise<Vocab
   const readingEntries = await getCollection('reading' as any, (entry: any) => {
     return entry.slug.startsWith(`${category}/`) && entry.data?.draft !== true
   })
-  const speakingEntries = await getCollection('speaking' as any, (entry: any) => {
+  const listeningEntries = await getCollection('listening' as any, (entry: any) => {
     return entry.slug.startsWith(`${category}/`) && entry.data?.draft !== true
   })
   const entries = [
     ...readingEntries.map((e: any) => ({ ...e, _collection: 'reading' })),
-    ...speakingEntries.map((e: any) => ({ ...e, _collection: 'speaking' })),
+    ...listeningEntries.map((e: any) => ({ ...e, _collection: 'listening' })),
   ]
 
   const vocabMap = new Map<string, VocabItem>()
