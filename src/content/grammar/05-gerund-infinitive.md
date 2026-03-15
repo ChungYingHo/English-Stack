@@ -1,8 +1,8 @@
 ---
 date: 2026/03/14
-title: Grammar 06 — 動名詞 vs 不定詞
+title: Grammar 05 — 動名詞 vs 不定詞
 author: 'jeremy'
-sameDateSort: 6
+sameDateSort: 5
 ---
 
 ## 基本概念

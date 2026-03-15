@@ -11,16 +11,16 @@ sameDateSort: 3
 
 ### to — 方向、目標、對象
 
-- `give something **to** someone` — 給某人（動作方向）
-- `go **to** the store`
-- `write **to** him`
+- give something **to** someone — 給某人（動作方向）
+- go **to** the store
+- write **to** him
 - He explained the concept **to** the students.
 
 ### for — 目的、利益、代替
 
-- `do something **for** someone` — 為了某人的利益
-- `buy a gift **for** her`
-- `used **for** measuring temperature` — 用來做某事的目的
+- do something **for** someone — 為了某人的利益
+- buy a gift **for** her
+- used **for** measuring temperature — 用來做某事的目的
 
 分辨訣竅：
 

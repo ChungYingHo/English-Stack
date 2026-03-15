@@ -1,8 +1,8 @@
 ---
 date: 2026/03/14
-title: Grammar 07 — 情態動詞
+title: Grammar 06 — 情態動詞
 author: 'jeremy'
-sameDateSort: 7
+sameDateSort: 6
 ---
 
 ## 情態動詞的共同規則
