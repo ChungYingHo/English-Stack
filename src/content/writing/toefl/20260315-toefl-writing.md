@@ -6,12 +6,10 @@ author: 'Jeremy'
 
 ## New TOEFL 2026 — 寫作考試結構
 
-| 題型 | 題數 | 時間 |
-|------|------|------|
-| Build a Sentence（組織重組句子） | 10 題 | 6 分鐘 |
-| Write an Email（撰寫電子郵件） | 1 題 | 7 分鐘 |
-| Write for an Academic Discussion（學術討論） | 1 題 | 10 分鐘 |
-| **合計** | **12 題** | **約 23 分鐘** |
+- **Build a Sentence**（組織重組句子） — 10 題，6 分鐘
+- **Write an Email**（撰寫電子郵件） — 1 題，7 分鐘
+- **Write for an Academic Discussion**（學術討論） — 1 題，10 分鐘
+- **合計：12 題，約 23 分鐘**
 
 ---
 

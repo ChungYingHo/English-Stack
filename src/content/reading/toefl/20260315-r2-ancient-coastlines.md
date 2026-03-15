@@ -118,98 +118,12 @@ Answer choices:
 
 ### 2018/07/14
 
-| Word | Meaning |
-|------|------|
-| aided | helped |
-| ingenuity | creativity |
-| undertook | began |
-| thriving | prosperous |
-| conventional | generally accepted |
-| maneuverable | easily handled |
-| acknowledged | recognized |
-| in essence | basically |
-| feasible | practical |
-| scale | size |
-| advocated | promoted |
-| fostered | encouraged |
-| remnants | remainders |
-| remote | isolated |
-| cited | mentioned |
-| unfavorable | negative |
-| more permeable | had more places where crossings could occur |
-| pursue | engage in |
-| comparable | similar |
-| extracts | removes |
-| pioneering | original |
-| margins | end |
-| advent | arrival |
-| fragile | easily damaged |
-| durable | long lasting |
-| facilitated | made easier |
-| stimulated | encouraged |
-| surplus | excess |
-| lucrative | profitable |
-| elaborate | complex |
-| vigorous | strong |
-| seldom | rarely |
-| suitable | appropriate |
-| the aftermath of a founder event | the situation that results from a founder event |
+**aided** — helped / **ingenuity** — creativity / **undertook** — began / **thriving** — prosperous / **conventional** — generally accepted / **maneuverable** — easily handled / **acknowledged** — recognized / **in essence** — basically / **feasible** — practical / **scale** — size / **advocated** — promoted / **fostered** — encouraged / **remnants** — remainders / **remote** — isolated / **cited** — mentioned / **unfavorable** — negative / **more permeable** — had more places where crossings could occur / **pursue** — engage in / **comparable** — similar / **extracts** — removes / **pioneering** — original / **margins** — end / **advent** — arrival / **fragile** — easily damaged / **durable** — long lasting / **facilitated** — made easier / **stimulated** — encouraged / **surplus** — excess / **lucrative** — profitable / **elaborate** — complex / **vigorous** — strong / **seldom** — rarely / **suitable** — appropriate / **the aftermath of a founder event** — the situation that results from a founder event
 
 ### 2018/08/25
 
-| Word | Meaning |
-|------|------|
-| constrains to | restrictions on |
-| mechanism | method |
-| predominantly | mainly |
-| feat | accomplishment |
-| durable | long-lasting |
-| posed | presented |
-| hastened | hurried |
-| courteous | polite |
-| remarkable | extraordinary |
-| progression | order |
-| associate | connect |
-| absolute | total |
-| subjected to | exposed to |
-| recurring | repeated |
-| decisive | significant |
-| indistinguishable from | identical to |
-| virtually | almost completely |
-| startled | surprised |
-| disrupt | disturb |
-| rudimentary | simple |
-| enhanced | improved |
-| peculiar to | unique to |
-| exert | put forth |
+**constrains to** — restrictions on / **mechanism** — method / **predominantly** — mainly / **feat** — accomplishment / **durable** — long-lasting / **posed** — presented / **hastened** — hurried / **courteous** — polite / **remarkable** — extraordinary / **progression** — order / **associate** — connect / **absolute** — total / **subjected to** — exposed to / **recurring** — repeated / **decisive** — significant / **indistinguishable from** — identical to / **virtually** — almost completely / **startled** — surprised / **disrupt** — disturb / **rudimentary** — simple / **enhanced** — improved / **peculiar to** — unique to / **exert** — put forth
 
 ### 2018/08/26
 
-| Word | Meaning |
-|------|------|
-| diverse | varied |
-| compensated | made up for |
-| refuge | protect |
-| critically | dangerously |
-| further | additionally |
-| fluctuations | variations |
-| inhibit | slow down |
-| impeded | restricted |
-| distortions | irregularities |
-| temporarily | briefly |
-| peculiar | unusual |
-| classic | typical |
-| remnants | remains |
-| vigorous | lively |
-| ringed | surrounded |
-| in response to | as a result of |
-| depositing | putting |
-| sculpt | shape |
-| constituent | component |
-| gradual | slow |
-| predominate | are in the majority |
-| diffuse | spread |
-| alleged | supposed |
-| controversial | debatable |
-| inconclusive | not decisive |
-| mounting | increasing |
+**diverse** — varied / **compensated** — made up for / **refuge** — protect / **critically** — dangerously / **further** — additionally / **fluctuations** — variations / **inhibit** — slow down / **impeded** — restricted / **distortions** — irregularities / **temporarily** — briefly / **peculiar** — unusual / **classic** — typical / **remnants** — remains / **vigorous** — lively / **ringed** — surrounded / **in response to** — as a result of / **depositing** — putting / **sculpt** — shape / **constituent** — component / **gradual** — slow / **predominate** — are in the majority / **diffuse** — spread / **alleged** — supposed / **controversial** — debatable / **inconclusive** — not decisive / **mounting** — increasing
