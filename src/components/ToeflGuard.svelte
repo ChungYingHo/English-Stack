@@ -5,7 +5,7 @@
   const STORAGE_KEY = 'toefl_auth'
 
   // Optional: called after successful auth (used when triggered from menu)
-  export let onSuccess: (() => void) | undefined = undefined
+  const { onSuccess }: { onSuccess?: () => void } = $props()
 
   let visible = $state(false)
   let input = $state('')
