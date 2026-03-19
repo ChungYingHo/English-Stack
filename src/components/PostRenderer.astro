@@ -62,20 +62,16 @@ const formatDate = (d: Date) => {
       </h1>
 
       <div class="flex flex-wrap items-center justify-center gap-5 text-xs font-medium text-slate-500 tracking-wider uppercase">
-        <a 
-          href="/about" 
-          class="flex items-center gap-3 group cursor-pointer hover:opacity-90 transition-opacity p-1 -ml-1"
-          title="About Author"
-        >
-          <img 
-            src={authorData?.imgPath || '/favicon.ico'} 
-            alt={authorData?.name || 'Author'} 
-            class="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100 group-hover:ring-indigo-200 transition-all shadow-sm" 
+        <div class="flex items-center gap-3 p-1 -ml-1">
+          <img
+            src={authorData?.imgPath || '/favicon.ico'}
+            alt={authorData?.name || 'Author'}
+            class="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100 shadow-sm"
           />
-          <span class="text-slate-500 group-hover:text-indigo-600 transition-colors border-b border-transparent group-hover:border-indigo-200 pb-0.5">
+          <span class="text-slate-500">
             {authorData?.name || 'Jeremy'}
           </span>
-        </a>
+        </div>
         <div class="w-px h-4 bg-slate-300 hidden sm:block"></div>
         <div class="flex items-center gap-2" title="Published Date">
           <span class="text-slate-500">{formatDate(publishDate)}</span>

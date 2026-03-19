@@ -1,0 +1,310 @@
+---
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="404 — Page Not Found">
+  <div class="flex flex-col items-center gap-12">
+
+    <!-- Error header -->
+    <div class="text-center space-y-3">
+      <p class="text-8xl font-black text-indigo-200 leading-none select-none">404</p>
+      <h1 class="text-2xl font-bold text-slate-700">Page not found</h1>
+      <p class="text-slate-400 text-sm">While you're here — guess the word.</p>
+    </div>
+
+    <!-- Game -->
+    <div class="w-full max-w-sm">
+
+      <!-- Board -->
+      <div id="wordle-board" class="flex flex-col items-center gap-1.5 mb-6"></div>
+
+      <!-- Message -->
+      <div id="wordle-message" class="h-8 flex items-center justify-center">
+        <span id="wordle-msg-text" class="text-sm font-semibold text-slate-600 opacity-0 transition-opacity duration-300"></span>
+      </div>
+
+      <!-- Definition -->
+      <div id="wordle-def" class="hidden mb-4 text-center text-sm text-slate-500 px-4">
+        <span id="wordle-def-word" class="font-bold text-indigo-600"></span>
+        <span id="wordle-def-text"></span>
+      </div>
+
+      <!-- Keyboard -->
+      <div id="wordle-keyboard" class="flex flex-col items-center gap-1.5"></div>
+
+      <!-- Home link -->
+      <div class="mt-8 text-center">
+        <a href="/" class="text-sm text-indigo-500 hover:text-indigo-700 font-medium transition-colors">← Back to Home</a>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+const WORDS = [
+  { w: 'ADEPT', d: 'having great skill at something' },
+  { w: 'BLEAK', d: 'lacking warmth or hope' },
+  { w: 'BRISK', d: 'active and energetic' },
+  { w: 'AMPLE', d: 'more than enough; plentiful' },
+  { w: 'INFER', d: 'deduce from evidence and reasoning' },
+  { w: 'VITAL', d: 'absolutely necessary or important' },
+  { w: 'RIGID', d: 'unable to bend; strictly fixed' },
+  { w: 'VAGUE', d: 'not clearly expressed or defined' },
+  { w: 'BLUNT', d: 'not sharp; direct and unpolished in speech' },
+  { w: 'CRISP', d: 'firm and brittle; pleasingly clear' },
+  { w: 'EPOCH', d: 'a period of time in history' },
+  { w: 'HARSH', d: 'unpleasantly rough or severe' },
+  { w: 'NICHE', d: 'a comfortable or fitting position' },
+  { w: 'ONSET', d: 'the beginning of something' },
+  { w: 'QUERY', d: 'a question or inquiry' },
+  { w: 'SCOUR', d: 'to clean thoroughly; to search' },
+  { w: 'TRITE', d: 'overused and lacking originality' },
+  { w: 'VAPOR', d: 'a substance diffused in the air' },
+  { w: 'WRATH', d: 'extreme and violent anger' },
+  { w: 'ACUTE', d: 'sharp; very serious or severe' },
+  { w: 'BLAND', d: 'lacking strong flavor or character' },
+  { w: 'EVOKE', d: 'to bring a feeling or memory to mind' },
+  { w: 'GLEAN', d: 'to gather information gradually' },
+  { w: 'IDEAL', d: 'a standard of perfection' },
+  { w: 'LAPSE', d: 'a brief failure; a passage of time' },
+  { w: 'SCOPE', d: 'the extent or range of something' },
+  { w: 'TACIT', d: 'understood without being stated' },
+  { w: 'YEARN', d: 'to have an intense longing for' },
+  { w: 'ABIDE', d: 'to accept and act in accordance with' },
+  { w: 'DENSE', d: 'closely compacted; slow to understand' },
+  { w: 'FORGE', d: 'to form by heating; to create' },
+  { w: 'HEDGE', d: 'to limit risk; a boundary of shrubs' },
+  { w: 'LADEN', d: 'heavily loaded; weighed down' },
+  { w: 'ROGUE', d: 'a dishonest person; a maverick' },
+  { w: 'USHER', d: 'to guide or escort; to introduce' },
+  { w: 'VALID', d: 'based on truth; legally acceptable' },
+  { w: 'BANAL', d: 'so common as to be boring; trivial' },
+  { w: 'DWARF', d: 'much smaller than usual; to overshadow' },
+  { w: 'MANOR', d: 'a large country house with land' },
+  { w: 'KNACK', d: 'a special skill or ability' },
+]
+
+const ROWS = 6
+const COLS = 5
+
+const entry = WORDS[Math.floor(Math.random() * WORDS.length)]
+const TARGET = entry.w
+
+let currentRow = 0
+let currentCol = 0
+let gameOver = false
+const guesses: string[][] = Array.from({ length: ROWS }, () => Array(COLS).fill(''))
+
+// ── Build board ──────────────────────────────────────────────────────────────
+const boardEl = document.getElementById('wordle-board')!
+for (let r = 0; r < ROWS; r++) {
+  const row = document.createElement('div')
+  row.className = 'flex gap-1.5'
+  for (let c = 0; c < COLS; c++) {
+    const cell = document.createElement('div')
+    cell.id = `wc-${r}-${c}`
+    cell.className = 'wordle-cell'
+    row.appendChild(cell)
+  }
+  boardEl.appendChild(row)
+}
+
+// ── Build keyboard ────────────────────────────────────────────────────────────
+const kbEl = document.getElementById('wordle-keyboard')!
+const kbRows = ['QWERTYUIOP', 'ASDFGHJKL', 'ENTERЗXCVBNM⌫']
+
+kbRows.forEach(rowStr => {
+  const row = document.createElement('div')
+  row.className = 'flex gap-1'
+
+  const keys = rowStr === 'ENTERЗXCVBNM⌫'
+    ? ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫']
+    : rowStr.split('')
+
+  keys.forEach(key => {
+    const btn = document.createElement('button')
+    btn.textContent = key
+    btn.className = key.length > 1 ? 'kb-key kb-wide' : 'kb-key'
+    if (key !== '⌫' && key !== 'ENTER') btn.id = `kb-${key}`
+    btn.addEventListener('click', () => {
+      if (key === 'ENTER') submitGuess()
+      else if (key === '⌫') deleteLetter()
+      else addLetter(key)
+    })
+    row.appendChild(btn)
+  })
+  kbEl.appendChild(row)
+})
+
+// ── Input handlers ────────────────────────────────────────────────────────────
+function addLetter(letter: string) {
+  if (gameOver || currentCol >= COLS) return
+  guesses[currentRow][currentCol] = letter
+  const cell = document.getElementById(`wc-${currentRow}-${currentCol}`)!
+  cell.textContent = letter
+  cell.classList.add('filled')
+  currentCol++
+}
+
+function deleteLetter() {
+  if (gameOver || currentCol <= 0) return
+  currentCol--
+  guesses[currentRow][currentCol] = ''
+  const cell = document.getElementById(`wc-${currentRow}-${currentCol}`)!
+  cell.textContent = ''
+  cell.classList.remove('filled')
+}
+
+function submitGuess() {
+  if (gameOver) return
+  if (currentCol < COLS) { showMsg('Not enough letters', false); return }
+
+  const guess = guesses[currentRow].join('')
+  const statuses = scoreGuess(guess, TARGET)
+
+  // Flip-reveal each cell with stagger
+  for (let c = 0; c < COLS; c++) {
+    const cell = document.getElementById(`wc-${currentRow}-${c}`)!
+    const s = statuses[c]
+    const delay = c * 320
+
+    setTimeout(() => cell.classList.add('flip-out'), delay)
+    setTimeout(() => {
+      cell.classList.remove('flip-out')
+      cell.classList.add(s, 'flip-in')
+    }, delay + 200)
+    setTimeout(() => cell.classList.remove('flip-in'), delay + 400)
+  }
+
+  const won = statuses.every(s => s === 'correct')
+
+  setTimeout(() => {
+    updateKeyboard(guess, statuses)
+    if (won) {
+      gameOver = true
+      const msgs = ['Genius!', 'Magnificent!', 'Impressive!', 'Splendid!', 'Great!', 'Phew!']
+      showMsg(msgs[currentRow], true)
+      revealDef()
+    } else if (currentRow === ROWS - 1) {
+      gameOver = true
+      showMsg(`The word was ${TARGET}`, true)
+      revealDef()
+    }
+    currentRow++
+    currentCol = 0
+  }, COLS * 320 + 100)
+}
+
+// ── Scoring ───────────────────────────────────────────────────────────────────
+function scoreGuess(guess: string, target: string): string[] {
+  const result = Array(COLS).fill('absent')
+  const pool = target.split('')
+  // exact matches first
+  for (let i = 0; i < COLS; i++) {
+    if (guess[i] === pool[i]) { result[i] = 'correct'; pool[i] = '' }
+  }
+  // present matches
+  for (let i = 0; i < COLS; i++) {
+    if (result[i] === 'correct') continue
+    const idx = pool.indexOf(guess[i])
+    if (idx !== -1) { result[i] = 'present'; pool[idx] = '' }
+  }
+  return result
+}
+
+// ── Keyboard coloring ─────────────────────────────────────────────────────────
+const priority: Record<string, number> = { correct: 3, present: 2, absent: 1 }
+
+function updateKeyboard(guess: string, statuses: string[]) {
+  guess.split('').forEach((letter, i) => {
+    const btn = document.getElementById(`kb-${letter}`)
+    if (!btn) return
+    const cur = btn.dataset.status || ''
+    const next = statuses[i]
+    if (!cur || priority[next] > (priority[cur] ?? 0)) {
+      btn.dataset.status = next
+      btn.className = `kb-key kb-${next}`
+    }
+  })
+}
+
+// ── UI helpers ────────────────────────────────────────────────────────────────
+function showMsg(text: string, persist: boolean) {
+  const el = document.getElementById('wordle-msg-text')!
+  el.textContent = text
+  el.classList.remove('opacity-0')
+  el.classList.add('opacity-100')
+  if (!persist) setTimeout(() => {
+    el.classList.remove('opacity-100')
+    el.classList.add('opacity-0')
+  }, 1800)
+}
+
+function revealDef() {
+  const defEl = document.getElementById('wordle-def')!
+  document.getElementById('wordle-def-word')!.textContent = TARGET + ' '
+  document.getElementById('wordle-def-text')!.textContent = '— ' + entry.d
+  defEl.classList.remove('hidden')
+}
+
+// ── Physical keyboard ─────────────────────────────────────────────────────────
+document.addEventListener('keydown', (e: KeyboardEvent) => {
+  if (gameOver) return
+  if (e.key === 'Enter') submitGuess()
+  else if (e.key === 'Backspace') deleteLetter()
+  else if (/^[a-zA-Z]$/.test(e.key)) addLetter(e.key.toUpperCase())
+})
+</script>
+
+<style>
+  .wordle-cell {
+    width: 52px; height: 52px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.35rem; font-weight: 800; color: #1e293b;
+    transition: border-color 0.05s;
+    perspective: 250px;
+  }
+  .wordle-cell.filled { border-color: #94a3b8; }
+
+  /* flip reveal */
+  .wordle-cell.flip-out { animation: flipOut 0.2s ease-in forwards; }
+  .wordle-cell.flip-in  { animation: flipIn  0.2s ease-out forwards; }
+  @keyframes flipOut { to { transform: rotateX(90deg); opacity: 0.3; } }
+  @keyframes flipIn  { from { transform: rotateX(90deg); opacity: 0.3; } to { transform: rotateX(0); opacity: 1; } }
+
+  /* pop on letter input */
+  .wordle-cell.filled:not(.correct):not(.present):not(.absent) {
+    animation: pop 0.08s ease;
+  }
+  @keyframes pop { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+
+  /* status colors */
+  .wordle-cell.correct { background: #10b981; border-color: #10b981; color: white; }
+  .wordle-cell.present { background: #f59e0b; border-color: #f59e0b; color: white; }
+  .wordle-cell.absent  { background: #94a3b8; border-color: #94a3b8; color: white; }
+
+  /* keyboard */
+  .kb-key {
+    width: 36px; height: 44px;
+    border-radius: 6px; border: none;
+    background: #f1f5f9; color: #334155;
+    font-weight: 700; font-size: 0.82rem;
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .kb-key:hover { background: #e2e8f0; }
+  .kb-wide { width: 52px; font-size: 0.72rem; }
+  .kb-key.kb-correct { background: #10b981; color: white; }
+  .kb-key.kb-present { background: #f59e0b; color: white; }
+  .kb-key.kb-absent  { background: #cbd5e1; color: #64748b; }
+
+  /* mobile */
+  @media (max-width: 400px) {
+    .wordle-cell { width: 44px; height: 44px; font-size: 1.1rem; }
+    .kb-key { width: 30px; height: 40px; font-size: 0.72rem; }
+    .kb-wide { width: 44px; }
+  }
+</style>
