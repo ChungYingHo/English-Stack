@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 ## Project Overview
 
 English Stack is a static educational platform for English learning. It features article reading practice with integrated vocabulary extraction, listening resources (YouTube), and full-text search. Built for Scott & Chloe.
@@ -11,6 +13,7 @@ English Stack is a static educational platform for English learning. It features
 - **Content**: Astro content collections (`.md` files), MDX support
 - **Search**: Pagefind (full-text, client-side)
 - **Math**: remark-math + rehype-katex
+- **Charts**: Chart.js + chartjs-plugin-datalabels
 - **Deployment**: Vercel (`@astrojs/vercel`)
 - **Language**: TypeScript (strict)
 
@@ -111,9 +114,10 @@ import { something } from '@/utils/content'
 
 ## Code Style (ESLint enforced)
 
-- Single quotes, no semicolons
-- No relative parent imports (`../`) — use `@/` alias instead
-- Type-safe imports
+- Single quotes, no semicolons, 2-space indentation
+- No relative imports of any kind (`../` or `./`) — always use `@/` alias
+- Type-only imports must use `import type` syntax (`consistent-type-imports`)
+- `no-console` is a warning (except `console.warn`/`console.error`)
 
 ## Key Behaviors
 
@@ -144,3 +148,8 @@ Defined in `src/constants/authors.ts`. Reference by name string in frontmatter.
 ## Deployment
 
 Deployed to Vercel. The `@astrojs/vercel` adapter is configured with web analytics enabled.
+
+## Output Rules
+
+- All outputs are subject to review by **antigravity** and **codex**.
+- Every response must end with a Chinese summary beginning with「親愛的 Jeremy」, describing what was changed and why.
