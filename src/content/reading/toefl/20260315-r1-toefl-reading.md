@@ -42,7 +42,7 @@ sameDateSort: 1
 
 Fill in the missing letters. (Questions 1–10)
 
-> There are a number of environments in which organisms are exposed to temperatures be`__ __` 0℃ and thus the risk of freezing. In polar regions, terrestrial organisms are exposed to freezing temperatures for m`__ __ __` of the year. In more temperate regions, they may have to tolerate several months of winter, when subzero temperatures pe`__ __ __ __ __` for long p`__ __ __ __ __ __` of time. High mountains are an`__ __ __ __ __` place where there is permanent s`__ __ __` and ice, even at the equator. Ex`__ __ __ __ __ __` to subzero temperatures may o`__ __ __ __` on a daily and/or seasonal basis.
+> There are a number of environments in which organisms are exposed to temperatures be`_ _ _` 0℃ and thus the risk of freezing. In polar regions, terrestrial organisms are exposed to freezing temperatures for m`__ __ __` of the year. In more temperate regions, they may have to tolerate several months of winter, when subzero temperatures pe`__ __ __ __ __` for long p`__ __ __ __ __ __` of time. High mountains are an`__ __ __ __ __` place where there is permanent s`__ __ __` and ice, even at the equator. Ex`__ __ __ __ __ __` to subzero temperatures may o`__ __ __ __` on a daily and/or seasonal basis.
 
 ---
 
