@@ -14,7 +14,6 @@
       <canvas id="canvas"></canvas>
       <footer id="game-footer">
         <a href="/">← 返回首頁</a>
-        <a href="https://jeremyho.tw/" target="_blank" rel="noopener noreferrer">有任何問題歡迎聯繫 jeremyho.tw</a>
       </footer>
     </div>
   </body>
@@ -22,7 +21,7 @@
 
 <style is:global>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 100%; height: 100%; overflow: hidden; background: #050a1a; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0d1533; }
   #app { width: 100%; height: 100%; display: flex; flex-direction: column; }
   #canvas {
     flex: 1;
@@ -35,21 +34,25 @@
   }
   #game-footer {
     flex-shrink: 0;
-    padding: 10px 20px;
+    padding: 14px 24px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    background: rgba(5, 10, 26, 0.95);
+    background: rgba(13, 21, 51, 0.95);
     border-top: 1px solid rgba(99, 102, 241, 0.3);
     font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: 9px;
-    gap: 8px;
-    flex-wrap: wrap;
+    font-size: 11px;
   }
-  #game-footer a { color: #6366f1; text-decoration: none; transition: color 0.2s; }
-  #game-footer a:hover { color: #a5b4fc; }
+  #game-footer a {
+    color: #a5b4fc;
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+    letter-spacing: 0.05em;
+  }
+  #game-footer a:hover { color: #fff; text-shadow: 0 0 14px rgba(165, 180, 252, 0.9); }
   @media (max-width: 500px) {
-    #game-footer { font-size: 7px; padding: 8px 12px; }
+    #game-footer { font-size: 9px; padding: 12px 16px; }
   }
 </style>
 
@@ -68,6 +71,9 @@
     x: number; y: number; vx: number; vy: number
     life: number; color: string; size: number
   }
+  interface PowerUp {
+    x: number; y: number; vy: number; type: 'heal' | 'rapid'; phase: number
+  }
 
   // ─── State ──────────────────────────────────────────────────────────────────
   type GameState = 'start' | 'playing' | 'over'
@@ -78,30 +84,52 @@
   let bullets: Bullet[] = []
   let enemies: Enemy[] = []
   let particles: Particle[] = []
-  let lastTime = 0, lastShot = 0, lastSpawn = 0
+  let powerups: PowerUp[] = []
+  let lastTime = 0, lastShot = 0, lastSpawn = 0, lastPowerupSpawn = 0
+  let rapidFireUntil = 0
+  let homeBtn = { x: 0, y: 0, w: 0, h: 0 }
 
   // ─── Input ──────────────────────────────────────────────────────────────────
   const keys: Record<string, boolean> = {}
-  let touchX: number | null = null
+  let touch: { x: number; y: number } | null = null
 
   document.addEventListener('keydown', (e: KeyboardEvent) => {
     keys[e.key] = true
-    if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault()
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' '].includes(e.key)) e.preventDefault()
     if ((e.key === 'Enter' || e.key === ' ') && state !== 'playing') startGame()
   })
   document.addEventListener('keyup', (e: KeyboardEvent) => { delete keys[e.key] })
 
   canvas.addEventListener('touchstart', (e: TouchEvent) => {
     e.preventDefault()
-    touchX = e.touches[0].clientX
+    const rect = canvas.getBoundingClientRect()
+    touch = {
+      x: (e.touches[0].clientX - rect.left) * (canvas.width / rect.width),
+      y: (e.touches[0].clientY - rect.top) * (canvas.height / rect.height),
+    }
     if (state !== 'playing') startGame()
   }, { passive: false })
   canvas.addEventListener('touchmove', (e: TouchEvent) => {
     e.preventDefault()
-    touchX = e.touches[0].clientX
+    const rect = canvas.getBoundingClientRect()
+    touch = {
+      x: (e.touches[0].clientX - rect.left) * (canvas.width / rect.width),
+      y: (e.touches[0].clientY - rect.top) * (canvas.height / rect.height),
+    }
   }, { passive: false })
-  canvas.addEventListener('touchend', () => { touchX = null })
-  canvas.addEventListener('click', () => { if (state !== 'playing') startGame() })
+  canvas.addEventListener('touchend', () => { touch = null })
+  canvas.addEventListener('click', (e: MouseEvent) => {
+    if (state === 'start' || state === 'over') {
+      const rect = canvas.getBoundingClientRect()
+      const px = (e.clientX - rect.left) * (canvas.width / rect.width)
+      const py = (e.clientY - rect.top) * (canvas.height / rect.height)
+      if (px >= homeBtn.x && px <= homeBtn.x + homeBtn.w && py >= homeBtn.y && py <= homeBtn.y + homeBtn.h) {
+        window.location.href = '/'
+        return
+      }
+    }
+    if (state !== 'playing') startGame()
+  })
 
   // ─── Helpers ────────────────────────────────────────────────────────────────
   function resize() {
@@ -111,7 +139,7 @@
   }
 
   function initStars() {
-    stars = Array.from({ length: 120 }, () => ({
+    stars = Array.from({ length: 130 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       z: Math.random(),
@@ -120,8 +148,9 @@
 
   function startGame() {
     score = 0; lives = 3; level = 1; frame = 0
-    bullets = []; enemies = []; particles = []
-    lastShot = 0; lastSpawn = 0
+    bullets = []; enemies = []; particles = []; powerups = []
+    lastShot = 0; lastSpawn = 0; rapidFireUntil = 0
+    lastPowerupSpawn = performance.now()
     player.x = canvas.width / 2
     player.y = canvas.height - 80
     state = 'playing'
@@ -147,9 +176,11 @@
     for (const s of stars) {
       s.y += (0.5 + s.z * 1.5) * 60 * dt
       if (s.y > canvas.height) { s.y = -2; s.x = Math.random() * canvas.width }
+      // Soft blue/purple tinted stars
+      const hue = s.z > 0.7 ? `rgba(210,220,255,` : s.z > 0.4 ? `rgba(190,200,255,` : `rgba(200,215,245,`
       ctx.beginPath()
       ctx.arc(s.x, s.y, 0.5 + s.z * 1.2, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(255,255,255,${0.2 + s.z * 0.8})`
+      ctx.fillStyle = `${hue}${0.2 + s.z * 0.7})`
       ctx.fill()
     }
   }
@@ -213,7 +244,7 @@
   function drawBullet(b: Bullet) {
     ctx.save()
     ctx.shadowColor = '#fbbf24'
-    ctx.shadowBlur = 12
+    ctx.shadowBlur = 10
     ctx.fillStyle = '#fde68a'
     ctx.fillRect(b.x - 2.5, b.y - 12, 5, 22)
     ctx.fillStyle = 'rgba(255,255,255,0.6)'
@@ -221,10 +252,11 @@
     ctx.restore()
   }
 
+  // Enemy color palettes — all clearly threatening (red, orange, purple)
   const EC = [
-    { body: '#ef4444', acc: '#fca5a5', glow: '#f87171' },
-    { body: '#10b981', acc: '#6ee7b7', glow: '#34d399' },
-    { body: '#8b5cf6', acc: '#c4b5fd', glow: '#a78bfa' },
+    { body: '#ef4444', acc: '#fca5a5', glow: '#f87171' },  // red
+    { body: '#f97316', acc: '#fed7aa', glow: '#fb923c' },  // orange (fast)
+    { body: '#8b5cf6', acc: '#c4b5fd', glow: '#a78bfa' },  // purple (heavy)
   ]
 
   function drawEnemy(e: Enemy) {
@@ -235,6 +267,7 @@
     ctx.shadowBlur = 8
 
     if (e.type === 0) {
+      // Red alien bug — classic space invader shape, eyes glowing
       ctx.fillStyle = c.body
       ctx.fillRect(-10, -8, 20, 16)
       ctx.fillRect(-8, -14, 4, 8)
@@ -245,14 +278,27 @@
       ctx.fillRect(-6, -4, 4, 4)
       ctx.fillRect(2, -4, 4, 4)
     } else if (e.type === 1) {
+      // Orange fast blade — pointed down toward the player, clearly threatening
       ctx.beginPath()
-      ctx.moveTo(0, -16); ctx.lineTo(13, 0); ctx.lineTo(0, 16); ctx.lineTo(-13, 0)
+      ctx.moveTo(0, 18)
+      ctx.lineTo(-14, -5)
+      ctx.lineTo(-5, -14)
+      ctx.lineTo(0, -8)
+      ctx.lineTo(5, -14)
+      ctx.lineTo(14, -5)
       ctx.closePath()
-      ctx.fillStyle = c.body; ctx.fill()
-      ctx.strokeStyle = c.acc; ctx.lineWidth = 2; ctx.stroke()
-      ctx.beginPath(); ctx.arc(0, 0, 4, 0, Math.PI * 2)
-      ctx.fillStyle = c.acc; ctx.fill()
+      ctx.fillStyle = c.body
+      ctx.fill()
+      ctx.strokeStyle = c.acc
+      ctx.lineWidth = 1.5
+      ctx.stroke()
+      // Core
+      ctx.beginPath()
+      ctx.arc(0, 2, 4, 0, Math.PI * 2)
+      ctx.fillStyle = c.acc
+      ctx.fill()
     } else {
+      // Purple heavy tank with HP bar
       ctx.fillStyle = c.body
       ctx.fillRect(-18, -12, 36, 24)
       ctx.fillStyle = c.acc
@@ -262,8 +308,50 @@
       const r = e.hp / e.maxHp
       ctx.shadowBlur = 0
       ctx.fillStyle = '#1f2937'; ctx.fillRect(-18, 16, 36, 4)
-      ctx.fillStyle = r > 0.5 ? '#22c55e' : r > 0.25 ? '#f59e0b' : '#ef4444'
+      ctx.fillStyle = r > 0.5 ? '#f97316' : r > 0.25 ? '#f59e0b' : '#ef4444'
       ctx.fillRect(-18, 16, 36 * r, 4)
+    }
+    ctx.restore()
+  }
+
+  function drawPowerUp(p: PowerUp) {
+    ctx.save()
+    const bob = Math.sin(p.phase * 2) * 4
+    ctx.translate(p.x, p.y + bob)
+    const pulse = 12 + Math.sin(p.phase * 3) * 5
+
+    ctx.shadowBlur = pulse
+
+    if (p.type === 'heal') {
+      ctx.shadowColor = '#4ade80'
+      ctx.beginPath()
+      ctx.arc(0, 0, 13, 0, Math.PI * 2)
+      ctx.fillStyle = '#14532d'
+      ctx.fill()
+      ctx.strokeStyle = '#4ade80'
+      ctx.lineWidth = 2
+      ctx.stroke()
+      ctx.shadowBlur = 0
+      ctx.font = 'bold 14px sans-serif'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillStyle = '#4ade80'
+      ctx.fillText('♥', 0, 1)
+    } else {
+      ctx.shadowColor = '#fbbf24'
+      ctx.beginPath()
+      ctx.arc(0, 0, 13, 0, Math.PI * 2)
+      ctx.fillStyle = '#431407'
+      ctx.fill()
+      ctx.strokeStyle = '#fbbf24'
+      ctx.lineWidth = 2
+      ctx.stroke()
+      ctx.shadowBlur = 0
+      ctx.font = 'bold 14px sans-serif'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillStyle = '#fbbf24'
+      ctx.fillText('⚡', 0, 1)
     }
     ctx.restore()
   }
@@ -278,32 +366,44 @@
     ctx.restore()
   }
 
-  function drawHUD() {
+  function drawHUD(now: number) {
     ctx.save()
     ctx.textBaseline = 'top'
     const fs = Math.max(9, Math.min(13, Math.floor(canvas.width / 35)))
 
+    // Score
+    ctx.textAlign = 'left'
     ctx.font = `${fs}px "Press Start 2P", monospace`
     ctx.fillStyle = '#fbbf24'
     ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 8
     ctx.fillText(`${score}`, 16, 14)
 
+    // Level
     ctx.font = `${Math.max(7, fs - 4)}px "Press Start 2P", monospace`
     ctx.fillStyle = '#a5f3fc'; ctx.shadowColor = '#22d3ee'
     ctx.fillText(`LV ${level}`, 16, 14 + fs + 6)
 
+    // Rapid fire timer
+    if (now < rapidFireUntil) {
+      const secs = Math.ceil((rapidFireUntil - now) / 1000)
+      ctx.font = `${Math.max(7, fs - 4)}px "Press Start 2P", monospace`
+      ctx.fillStyle = '#fbbf24'; ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 12
+      ctx.fillText(`⚡ ${secs}s`, 16, 14 + fs + 6 + Math.max(7, fs - 4) + 6)
+    }
+
+    // Lives
     const lifeStr = '♥'.repeat(Math.max(0, lives))
     ctx.font = `${fs + 4}px "Press Start 2P", monospace`
+    ctx.textAlign = 'right'
     ctx.fillStyle = '#f87171'; ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 10
-    const lw = ctx.measureText(lifeStr).width
-    ctx.fillText(lifeStr, canvas.width - lw - 14, 12)
+    ctx.fillText(lifeStr, canvas.width - 14, 12)
 
     ctx.restore()
   }
 
   function drawStartScreen() {
     ctx.save()
-    ctx.fillStyle = 'rgba(5,10,26,0.55)'
+    ctx.fillStyle = 'rgba(13,21,51,0.62)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     const cx = canvas.width / 2
@@ -321,19 +421,55 @@
 
     ctx.font = `${Math.min(10, Math.floor(canvas.width / 36))}px "Press Start 2P", monospace`
     ctx.fillStyle = '#6366f1'; ctx.shadowColor = '#4f46e5'; ctx.shadowBlur = 5
-    ctx.fillText('SHOOT DOWN THE ENEMIES', cx, cy)
+    ctx.fillText('COLLECT ♥ ⚡   SHOOT ▼ ENEMIES', cx, cy)
 
     if (Math.floor(Date.now() / 600) % 2) {
       ctx.font = `${Math.min(9, Math.floor(canvas.width / 40))}px "Press Start 2P", monospace`
       ctx.fillStyle = '#fbbf24'; ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 10
       ctx.fillText('TAP  /  PRESS ENTER  TO  START', cx, cy + titleSize * 0.8)
     }
+    drawHomeBtn(cy + titleSize * 1.5)
     ctx.restore()
+  }
+
+  function drawHomeBtn(y: number) {
+    const cx = canvas.width / 2
+    const fs = Math.min(13, Math.max(10, Math.floor(canvas.width / 28)))
+    const btnW = Math.min(260, canvas.width * 0.6)
+    const btnH = fs * 3.4
+    const btnX = cx - btnW / 2
+    homeBtn = { x: btnX, y, w: btnW, h: btnH }
+
+    ctx.shadowColor = '#6366f1'; ctx.shadowBlur = 16
+    ctx.fillStyle = 'rgba(99,102,241,0.22)'
+    ctx.strokeStyle = '#818cf8'
+    ctx.lineWidth = 2
+    const r = 10
+    ctx.beginPath()
+    ctx.moveTo(btnX + r, y)
+    ctx.lineTo(btnX + btnW - r, y)
+    ctx.arcTo(btnX + btnW, y, btnX + btnW, y + r, r)
+    ctx.lineTo(btnX + btnW, y + btnH - r)
+    ctx.arcTo(btnX + btnW, y + btnH, btnX + btnW - r, y + btnH, r)
+    ctx.lineTo(btnX + r, y + btnH)
+    ctx.arcTo(btnX, y + btnH, btnX, y + btnH - r, r)
+    ctx.lineTo(btnX, y + r)
+    ctx.arcTo(btnX, y, btnX + r, y, r)
+    ctx.closePath()
+    ctx.fill()
+    ctx.stroke()
+
+    ctx.shadowColor = '#a5b4fc'; ctx.shadowBlur = 8
+    ctx.font = `${fs}px "Press Start 2P", monospace`
+    ctx.fillStyle = '#e0e7ff'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('← 返回首頁', cx, y + btnH / 2)
   }
 
   function drawGameOver() {
     ctx.save()
-    ctx.fillStyle = 'rgba(5,10,26,0.8)'
+    ctx.fillStyle = 'rgba(13,21,51,0.82)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     const cx = canvas.width / 2
@@ -359,6 +495,9 @@
       ctx.fillStyle = '#cbd5e1'; ctx.shadowBlur = 0
       ctx.fillText('TAP  /  PRESS ENTER  TO  RETRY', cx, cy + big * 2.5)
     }
+
+    drawHomeBtn(cy + big * 3.8)
+
     ctx.restore()
   }
 
@@ -367,22 +506,28 @@
     frame++
     level = 1 + Math.floor(score / 400)
 
+    // 8-directional movement
     const SPEED = 280
-    if (keys['ArrowLeft'] || keys['a'] || keys['A'])
+    if (keys['ArrowLeft']  || keys['a'] || keys['A'])
       player.x = Math.max(player.w / 2 + 4, player.x - SPEED * dt)
     if (keys['ArrowRight'] || keys['d'] || keys['D'])
-      player.x = Math.min(canvas.width - player.w / 2 - 4, player.x + SPEED * dt)
+      player.x = Math.min(canvas.width  - player.w / 2 - 4, player.x + SPEED * dt)
+    if (keys['ArrowUp']    || keys['w'] || keys['W'])
+      player.y = Math.max(player.h / 2 + 4, player.y - SPEED * dt)
+    if (keys['ArrowDown']  || keys['s'] || keys['S'])
+      player.y = Math.min(canvas.height - player.h / 2 - 4, player.y + SPEED * dt)
 
-    if (touchX !== null) {
-      const rect = canvas.getBoundingClientRect()
-      const relX = (touchX - rect.left) * (canvas.width / rect.width)
-      const dx = relX - player.x
-      const move = Math.min(Math.abs(dx), SPEED * 1.5 * dt) * Math.sign(dx)
-      player.x = Math.max(player.w / 2 + 4, Math.min(canvas.width - player.w / 2 - 4, player.x + move))
+    // Touch: ship follows finger (damped)
+    if (touch !== null) {
+      player.x += (touch.x - player.x) * Math.min(1, 14 * dt)
+      player.y += (touch.y - player.y) * Math.min(1, 14 * dt)
+      player.x = Math.max(player.w / 2 + 4, Math.min(canvas.width  - player.w / 2 - 4, player.x))
+      player.y = Math.max(player.h / 2 + 4, Math.min(canvas.height - player.h / 2 - 4, player.y))
     }
 
-    // Auto-fire
-    const fireRate = Math.max(200, 400 - (level - 1) * 20)
+    // Auto-fire (rapid fire when powerup active)
+    const baseFireRate = Math.max(200, 400 - (level - 1) * 20)
+    const fireRate = now < rapidFireUntil ? Math.floor(baseFireRate / 2.5) : baseFireRate
     if (now - lastShot > fireRate) {
       bullets.push({ x: player.x, y: player.y - player.h / 2 })
       lastShot = now
@@ -408,6 +553,18 @@
         phase: Math.random() * Math.PI * 2,
       })
       lastSpawn = now
+    }
+
+    // Spawn powerup on timer (every ~12s)
+    if (now - lastPowerupSpawn > 12000) {
+      powerups.push({
+        x: 40 + Math.random() * (canvas.width - 80),
+        y: -20,
+        vy: 55,
+        type: Math.random() < 0.55 ? 'heal' : 'rapid',
+        phase: Math.random() * Math.PI * 2,
+      })
+      lastPowerupSpawn = now
     }
 
     enemies = enemies.filter(e => {
@@ -441,6 +598,14 @@
             const c = EC[e.type]
             spawnExplosion(e.x, e.y, [c.body, c.acc, c.glow, '#fff', '#fbbf24'])
             score += e.type === 2 ? 30 : e.type === 1 ? 15 : 10
+            // 22% chance to drop a powerup
+            if (Math.random() < 0.22) {
+              powerups.push({
+                x: e.x, y: e.y, vy: 55,
+                type: Math.random() < 0.55 ? 'heal' : 'rapid',
+                phase: Math.random() * Math.PI * 2,
+              })
+            }
             enemies.splice(ei, 1)
           }
           break
@@ -448,6 +613,24 @@
       }
       if (hit) bullets.splice(bi, 1)
     }
+
+    // Powerup movement + collection
+    powerups = powerups.filter(p => {
+      p.phase += dt * 2.5
+      p.y += p.vy * dt
+      if (p.y > canvas.height + 30) return false
+      if (Math.abs(p.x - player.x) < 26 && Math.abs(p.y - player.y) < 26) {
+        if (p.type === 'heal') {
+          lives = Math.min(5, lives + 1)
+          spawnExplosion(p.x, p.y, ['#4ade80', '#86efac', '#bbf7d0', '#fff'])
+        } else {
+          rapidFireUntil = Math.max(rapidFireUntil, now) + 5000
+          spawnExplosion(p.x, p.y, ['#fbbf24', '#fde68a', '#fef3c7', '#fff'])
+        }
+        return false
+      }
+      return true
+    })
 
     particles = particles.filter(p => {
       p.x += p.vx * 60 * dt; p.y += p.vy * 60 * dt
@@ -462,7 +645,7 @@
     const dt = Math.min((now - lastTime) / 1000, 0.05)
     lastTime = now
 
-    ctx.fillStyle = '#050a1a'
+    ctx.fillStyle = '#0d1533'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     drawStars(dt)
 
@@ -472,7 +655,6 @@
       if (state === 'playing') {
         update(dt, now)
       } else {
-        // game over: keep animating particles
         particles = particles.filter(p => {
           p.x += p.vx * 60 * dt; p.y += p.vy * 60 * dt
           p.vx *= 0.94; p.vy *= 0.94
@@ -482,9 +664,10 @@
       }
       bullets.forEach(drawBullet)
       enemies.forEach(drawEnemy)
+      powerups.forEach(drawPowerUp)
       drawPlayer()
       particles.forEach(drawParticle)
-      drawHUD()
+      drawHUD(now)
       if (state === 'over') drawGameOver()
     }
 
