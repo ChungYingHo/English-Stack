@@ -127,3 +127,131 @@ Answer choices:
 ### 2018/08/26
 
 **diverse** — varied / **compensated** — made up for / **refuge** — protect / **critically** — dangerously / **further** — additionally / **fluctuations** — variations / **inhibit** — slow down / **impeded** — restricted / **distortions** — irregularities / **temporarily** — briefly / **peculiar** — unusual / **classic** — typical / **remnants** — remains / **vigorous** — lively / **ringed** — surrounded / **in response to** — as a result of / **depositing** — putting / **sculpt** — shape / **constituent** — component / **gradual** — slow / **predominate** — are in the majority / **diffuse** — spread / **alleged** — supposed / **controversial** — debatable / **inconclusive** — not decisive / **mounting** — increasing
+
+
+## 單字
+| 單字 | 音標 | 詞性 | 中文 | 例句 |
+|------|------|------|------|------|
+| be of relevance to | - | - | 相關的 | - |
+| be relevant to | - | - | 相關的 | - |
+| pertinent to | - | - | 相關的 | - |
+| sheer quantity | - | - | 龐大的數量 | - |
+| silts | - | - | 淤泥 | - |
+| deposited | - | - | 沉澱 | - |
+| deposit | - | n | 蘊藏量 | - |
+| farther back | - | - | 往後退 | - |
+| Neolithic | - | - | 新石器 | - |
+| Paleolithic | - | - | 舊石器 | - |
+| ganw | - | - | 啃、咬 | - |
+| repugnant | - | - | 令人討厭的 | - |
+| repugnant to somebody | - | - | 令否人反感的 | - |
+| crucial | - | - | 重要的 | - |
+| critical | - | - | 重要的 | - |
+| vital | - | - | 重要的 | - |
+| vital capacity | - | - | 肺活量 | - |
+| pivotal | - | - | 重要的 | - |
+| momentous | - | - | 重要的 | - |
+| established | - | - | 認可的 | - |
+| inadvertent | - | - | 偶然的 | - |
+| adventitious | - | - | 偶然的 | - |
+| haphazard | - | - | 偶然的 | - |
+| fortuitous | - | - | 偶然的 | - |
+| contingent | - | - | 偶然的 | - |
+| accidental | - | - | 偶然的 | - |
+| incidental | - | - | 偶然的 | - |
+| inland | - | - | 內陸 | - |
+| submerged | - | 淹沒 | - |
+| medieval | - | - | 中世紀 | - |
+
+```
+tumbled : 跌入、猛跌 (股市重挫也是用這詞)
+erodes : 侵蝕
+cliffs : 懸崖
+icebound : 冰凍的
+ice breaker : 啟程費
+ice-free : 不結凍的
+ice sheets : 冰原
+break the ice: 打破僵局
+contract : (n) 合約 / (v) 染患、收縮
+contraction : 收縮
+constrict : (v) 收縮 (= contract)
+magnitude : 強度、震度、光度、亮度
+far-reaching: 深遠的
+profound: 深遠的
+shallow: 淺
+flora: 植物
+fauna: 動物
+isolated: 隔離
+insular: 隔離
+irreversibly: 不可逆地
+irretrievable: 不可挽回的
+vast plain: 巨大的平原
+purpose: 目的
+Bering Strait: 白令海
+former: 先前
+shoreline: 海岸線
+isostatic uplift: 壓力平衡的提升 = 地殼均衡抬升
+tectonic movement: 地殼運動
+tectonic plate: 板塊
+plate tectonics: 地球板塊構造學說
+postglacial: 冰河後
+Mediterranean: 地中海
+remnants: 殘餘物、遺蹟、遺址、遺骸 = remainders = relics = ruins = vestige
+remains: 遺蹟
+domains: 領域 = realm = arena = scope = sphere
+expeditions: 探險
+straightforward: 直接的、直率的 = frank = ingenuous = outspoken
+uplift: (n) 隆起 = upheaval 劇變 (國家發生劇變也是這詞)
+subsidence: (n) 下陷
+lift: (v) 抬起 = raise = elevate = heave = hoist
+pebbles: 小圓石
+dunes: 沙丘
+debris: 碎屑
+inundation: 淹沒、氾濫
+landmass: 大陸
+topography: 地形
+mollusk: 軟體動物
+comprising: 由... 組成
+make up of: 由... 組成
+taken from: 採樣
+prevailing: 流行的、盛行的 = prevalent
+retaining: 保留
+BC: 西元前
+BCE: 公元
+AD: 西元後
+radical: 劇烈
+flourished: 繁盛
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
