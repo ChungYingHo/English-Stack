@@ -114,114 +114,168 @@ Answer choices:
 
 ---
 
-## Vocabulary Lists
-
-### 2018/07/14
-
-**aided** — helped / **ingenuity** — creativity / **undertook** — began / **thriving** — prosperous / **conventional** — generally accepted / **maneuverable** — easily handled / **acknowledged** — recognized / **in essence** — basically / **feasible** — practical / **scale** — size / **advocated** — promoted / **fostered** — encouraged / **remnants** — remainders / **remote** — isolated / **cited** — mentioned / **unfavorable** — negative / **more permeable** — had more places where crossings could occur / **pursue** — engage in / **comparable** — similar / **extracts** — removes / **pioneering** — original / **margins** — end / **advent** — arrival / **fragile** — easily damaged / **durable** — long lasting / **facilitated** — made easier / **stimulated** — encouraged / **surplus** — excess / **lucrative** — profitable / **elaborate** — complex / **vigorous** — strong / **seldom** — rarely / **suitable** — appropriate / **the aftermath of a founder event** — the situation that results from a founder event
-
-### 2018/08/25
-
-**constrains to** — restrictions on / **mechanism** — method / **predominantly** — mainly / **feat** — accomplishment / **durable** — long-lasting / **posed** — presented / **hastened** — hurried / **courteous** — polite / **remarkable** — extraordinary / **progression** — order / **associate** — connect / **absolute** — total / **subjected to** — exposed to / **recurring** — repeated / **decisive** — significant / **indistinguishable from** — identical to / **virtually** — almost completely / **startled** — surprised / **disrupt** — disturb / **rudimentary** — simple / **enhanced** — improved / **peculiar to** — unique to / **exert** — put forth
-
-### 2018/08/26
-
-**diverse** — varied / **compensated** — made up for / **refuge** — protect / **critically** — dangerously / **further** — additionally / **fluctuations** — variations / **inhibit** — slow down / **impeded** — restricted / **distortions** — irregularities / **temporarily** — briefly / **peculiar** — unusual / **classic** — typical / **remnants** — remains / **vigorous** — lively / **ringed** — surrounded / **in response to** — as a result of / **depositing** — putting / **sculpt** — shape / **constituent** — component / **gradual** — slow / **predominate** — are in the majority / **diffuse** — spread / **alleged** — supposed / **controversial** — debatable / **inconclusive** — not decisive / **mounting** — increasing
-
-
 ## 單字
-| 單字 | 音標 | 詞性 | 中文 | 例句 |
-|------|------|------|------|------|
-| be of relevance to | - | - | 相關的 | - |
-| be relevant to | - | - | 相關的 | - |
-| pertinent to | - | - | 相關的 | - |
-| sheer quantity | - | - | 龐大的數量 | - |
-| silts | - | - | 淤泥 | - |
-| deposited | - | - | 沉澱 | - |
-| deposit | - | n | 蘊藏量 | - |
-| farther back | - | - | 往後退 | - |
-| Neolithic | - | - | 新石器 | - |
-| Paleolithic | - | - | 舊石器 | - |
-| ganw | - | - | 啃、咬 | - |
-| repugnant | - | - | 令人討厭的 | - |
-| repugnant to somebody | - | - | 令否人反感的 | - |
-| crucial | - | - | 重要的 | - |
-| critical | - | - | 重要的 | - |
-| vital | - | - | 重要的 | - |
-| vital capacity | - | - | 肺活量 | - |
-| pivotal | - | - | 重要的 | - |
-| momentous | - | - | 重要的 | - |
-| established | - | - | 認可的 | - |
-| inadvertent | - | - | 偶然的 | - |
-| adventitious | - | - | 偶然的 | - |
-| haphazard | - | - | 偶然的 | - |
-| fortuitous | - | - | 偶然的 | - |
-| contingent | - | - | 偶然的 | - |
-| accidental | - | - | 偶然的 | - |
-| incidental | - | - | 偶然的 | - |
-| inland | - | - | 內陸 | - |
-| submerged | - | 淹沒 | - |
-| medieval | - | - | 中世紀 | - |
 
-```
-tumbled : 跌入、猛跌 (股市重挫也是用這詞)
-erodes : 侵蝕
-cliffs : 懸崖
-icebound : 冰凍的
-ice breaker : 啟程費
-ice-free : 不結凍的
-ice sheets : 冰原
-break the ice: 打破僵局
-contract : (n) 合約 / (v) 染患、收縮
-contraction : 收縮
-constrict : (v) 收縮 (= contract)
-magnitude : 強度、震度、光度、亮度
-far-reaching: 深遠的
-profound: 深遠的
-shallow: 淺
-flora: 植物
-fauna: 動物
-isolated: 隔離
-insular: 隔離
-irreversibly: 不可逆地
-irretrievable: 不可挽回的
-vast plain: 巨大的平原
-purpose: 目的
-Bering Strait: 白令海
-former: 先前
-shoreline: 海岸線
-isostatic uplift: 壓力平衡的提升 = 地殼均衡抬升
-tectonic movement: 地殼運動
-tectonic plate: 板塊
-plate tectonics: 地球板塊構造學說
-postglacial: 冰河後
-Mediterranean: 地中海
-remnants: 殘餘物、遺蹟、遺址、遺骸 = remainders = relics = ruins = vestige
-remains: 遺蹟
-domains: 領域 = realm = arena = scope = sphere
-expeditions: 探險
-straightforward: 直接的、直率的 = frank = ingenuous = outspoken
-uplift: (n) 隆起 = upheaval 劇變 (國家發生劇變也是這詞)
-subsidence: (n) 下陷
-lift: (v) 抬起 = raise = elevate = heave = hoist
-pebbles: 小圓石
-dunes: 沙丘
-debris: 碎屑
-inundation: 淹沒、氾濫
-landmass: 大陸
-topography: 地形
-mollusk: 軟體動物
-comprising: 由... 組成
-make up of: 由... 組成
-taken from: 採樣
-prevailing: 流行的、盛行的 = prevalent
-retaining: 保留
-BC: 西元前
-BCE: 公元
-AD: 西元後
-radical: 劇烈
-flourished: 繁盛
-```
+| 單字 | 音標 | 詞性 | 中文 |
+|------|------|------|------|
+| be of relevance to | - | phr | 與…相關|
+| be relevant to | - | phr | 與…相關|
+| pertinent to | /ˈpɜː.tɪ.nənt/ | adj | 與…相關的|
+| sheer quantity | - | phr | 龐大的數量|
+| silt | /sɪlt/ | n | 淤泥|
+| deposit | /dɪˈpɒz.ɪt/ | v/n | （v）沉積；（n）礦物蘊藏量|
+| farther back | - | phr | 向後退（指海岸線後退）|
+| Neolithic | /ˌniː.əˈlɪθ.ɪk/ | adj | 新石器時代的|
+| Paleolithic | /ˌpeɪ.liː.əˈlɪθ.ɪk/ | adj | 舊石器時代的|
+| gnaw | /nɔː/ | v | 啃、咬|
+| repugnant | /rɪˈpʌɡ.nənt/ | adj | 令人厭惡的|
+| repugnant to sb | - | phr | 令人反感的|
+| crucial | /ˈkruː.ʃəl/ | adj | 關鍵的（= critical = vital = pivotal = momentous）|
+| critical | /ˈkrɪt.ɪ.kəl/ | adj | 重要的|
+| vital | /ˈvaɪ.təl/ | adj | 重要的|
+| vital capacity | - | phr | 肺活量|
+| pivotal | /ˈpɪv.ə.təl/ | adj | 關鍵的|
+| momentous | /məˈmen.təs/ | adj | 重大的|
+| established | /ɪˈstæb.lɪʃt/ | adj | 公認的|
+| inadvertent | /ˌɪn.ədˈvɜː.tənt/ | adj | 無意間的（= adventitious = haphazard = fortuitous = contingent = accidental = incidental）|
+| adventitious | /ˌæd.venˈtɪʃ.əs/ | adj | 偶然的|
+| haphazard | /ˌhæpˈhæz.əd/ | adj | 偶然的、雜亂的|
+| fortuitous | /fɔːˈtʃuː.ɪ.təs/ | adj | 偶然的|
+| contingent | /kənˈtɪn.dʒənt/ | adj | 偶然的；視情況而定的|
+| accidental | /ˌæk.sɪˈden.təl/ | adj | 偶然的|
+| incidental | /ˌɪn.sɪˈden.təl/ | adj | 偶然的；附帶的|
+| inland | /ˈɪn.lənd/ | adj/adv | 內陸的|
+| submerge | /səbˈmɜːdʒ/ | v | 淹沒|
+| medieval | /ˌmed.iˈiː.vəl/ | adj | 中世紀的|
+| tumble | /ˈtʌm.bəl/ | v | 跌落、猛跌（股市重挫亦用此詞）|
+| erode | /ɪˈrəʊd/ | v | 侵蝕|
+| cliff | /klɪf/ | n | 懸崖|
+| icebound | /ˈaɪs.baʊnd/ | adj | 被冰封鎖的|
+| icebreaker | /ˈaɪsˌbreɪ.kər/ | n | 破冰船；打破僵局的話題|
+| ice-free | - | adj | 不結凍的|
+| ice sheet | - | n | 冰原|
+| break the ice | - | phr | 打破僵局|
+| contract | /ˈkɒn.trækt/ | v/n | （v）收縮；染患（疾病）；（n）合約|
+| contraction | /kənˈtræk.ʃən/ | n | 收縮|
+| constrict | /kənˈstrɪkt/ | v | 收縮（= contract）|
+| magnitude | /ˈmæɡ.nɪ.tjuːd/ | n | 強度；震度；亮度|
+| far-reaching | - | adj | 深遠的（= profound）|
+| profound | /prəˈfaʊnd/ | adj | 深遠的；深刻的|
+| shallow | /ˈʃæl.əʊ/ | adj | 淺的|
+| flora | /ˈflɔː.rə/ | n | 植物群|
+| fauna | /ˈfɔː.nə/ | n | 動物群|
+| isolated | /ˈaɪ.sə.leɪ.tɪd/ | adj | 孤立的；隔離的|
+| insular | /ˈɪn.sjʊ.lər/ | adj | 島嶼的；孤立的|
+| irreversible | /ˌɪr.ɪˈvɜː.sɪ.bəl/ | adj | 不可逆的|
+| irretrievable | /ˌɪr.ɪˈtriː.və.bəl/ | adj | 不可挽回的|
+| vast plain | - | phr | 廣袤的平原|
+| Bering Strait | - | phr | 白令海峽|
+| former | /ˈfɔː.mər/ | adj | 先前的；前者的|
+| shoreline | /ˈʃɔː.laɪn/ | n | 海岸線|
+| isostatic uplift | - | phr | 地殼均衡抬升|
+| tectonic movement | - | phr | 地殼運動|
+| tectonic plate | - | phr | 構造板塊|
+| plate tectonics | - | phr | 板塊構造學說|
+| postglacial | - | adj | 冰河期後的|
+| Mediterranean | - | adj/n | 地中海（的）|
+| remnant | /ˈrem.nənt/ | n | 殘餘物；遺跡（= remainder = relic = ruin = vestige）|
+| domain | /dəˈmeɪn/ | n | 領域（= realm = arena = scope = sphere）|
+| expedition | /ˌek.spɪˈdɪʃ.ən/ | n | 探險（行動）|
+| straightforward | /ˌstreɪtˈfɔː.wəd/ | adj | 直接的；直率的（= frank = ingenuous = outspoken）|
+| uplift | /ˈʌp.lɪft/ | n | 隆起（cf. upheaval 劇變）|
+| subsidence | /səbˈsaɪ.dəns/ | n | 地層下陷|
+| lift | /lɪft/ | v | 抬起（= raise = elevate = heave = hoist）|
+| pebble | /ˈpeb.əl/ | n | 小圓石|
+| dune | /djuːn/ | n | 沙丘|
+| debris | /ˈdeb.riː/ | n | 碎屑；殘骸|
+| inundation | /ˌɪn.ʌnˈdeɪ.ʃən/ | n | 氾濫；淹沒|
+| landmass | /ˈlænd.mæs/ | n | 大陸|
+| topography | /təˈpɒɡ.rə.fi/ | n | 地形（學）|
+| mollusk | /ˈmɒl.əsk/ | n | 軟體動物|
+| comprise | /kəmˈpraɪz/ | v | 由……組成|
+| be made up of | - | phr | 由……組成|
+| take from | - | phr | 採樣；取自|
+| prevailing | /prɪˈveɪ.lɪŋ/ | adj | 盛行的（= prevalent）|
+| retain | /rɪˈteɪn/ | v | 保留|
+| BC / BCE | - | abbr | 西元前（BC = Before Christ；BCE = Before Common Era）|
+| AD | - | abbr | 西元後（Anno Domini）|
+| radical | /ˈræd.ɪ.kəl/ | adj | 劇烈的；根本的|
+| flourish | /ˈflʌr.ɪʃ/ | v | 繁盛；興旺|
+| aid | /eɪd/ | v/n | 幫助|
+| ingenuity | /ˌɪn.dʒɪˈnjuː.ɪ.ti/ | n | 創意；獨創性|
+| undertake | /ˌʌn.dəˈteɪk/ | v | 著手進行|
+| thrive | /θraɪv/ | v | 繁榮；茁壯|
+| conventional | /kənˈven.ʃən.əl/ | adj | 傳統的；一般接受的|
+| maneuverable | /məˈnjuː.vər.ə.bəl/ | adj | 容易操控的|
+| acknowledge | /əkˈnɒl.ɪdʒ/ | v | 承認；認可|
+| in essence | - | phr | 本質上|
+| feasible | /ˈfiː.zɪ.bəl/ | adj | 可行的|
+| scale | /skeɪl/ | n/v | 規模；攀登|
+| advocate | /ˈæd.və.keɪt/ | v | 倡導|
+| foster | /ˈfɒs.tər/ | v | 培育；促進|
+| remote | /rɪˈməʊt/ | adj | 遙遠的；偏僻的|
+| cite | /saɪt/ | v | 引用；提及|
+| unfavorable | /ʌnˈfeɪ.vər.ə.bəl/ | adj | 不利的|
+| permeable | /ˈpɜː.mi.ə.bəl/ | adj | 可穿越的；有通道的|
+| pursue | /pəˈsjuː/ | v | 追求；從事|
+| comparable | /ˈkɒm.pər.ə.bəl/ | adj | 相當的；可比較的|
+| extract | /ɪkˈstrækt/ | v | 提取；抽出|
+| pioneering | /ˌpaɪ.əˈnɪər.ɪŋ/ | adj | 開創性的|
+| margin | /ˈmɑː.dʒɪn/ | n | 邊緣；差距|
+| advent | /ˈæd.vənt/ | n | 到來；出現|
+| fragile | /ˈfrædʒ.aɪl/ | adj | 脆弱的；易損的|
+| durable | /ˈdjʊər.ə.bəl/ | adj | 耐用的|
+| facilitate | /fəˈsɪl.ɪ.teɪt/ | v | 促進；使便利|
+| stimulate | /ˈstɪm.jʊ.leɪt/ | v | 刺激；鼓勵|
+| surplus | /ˈsɜː.pləs/ | n/adj | 剩餘（量）；過剩的|
+| lucrative | /ˈluː.krə.tɪv/ | adj | 有利可圖的|
+| vigorous | /ˈvɪɡ.ər.əs/ | adj | 強勁的；活躍的|
+| seldom | /ˈsel.dəm/ | adv | 很少|
+| suitable | /ˈsuː.tɪ.bəl/ | adj | 合適的|
+| the aftermath of a founder event | - | phr | 創始者效應後的情況|
+| constraint | /kənˈstreɪnt/ | n | 限制|
+| mechanism | /ˈmek.ə.nɪ.z(ə)m/ | n | 機制；方法|
+| predominantly | /prɪˈdɒm.ɪ.nənt.li/ | adv | 主要地|
+| feat | /fiːt/ | n | 壯舉；成就|
+| pose | /pəʊz/ | v | 造成；呈現（問題）|
+| hasten | /ˈheɪ.s(ə)n/ | v | 加快；催促|
+| courteous | /ˈkɜː.ti.əs/ | adj | 有禮貌的|
+| remarkable | /rɪˈmɑː.kə.bəl/ | adj | 非凡的；顯著的|
+| progression | /prəˈɡreʃ.ən/ | n | 進展；順序|
+| associate | /əˈsəʊ.si.eɪt/ | v | 聯繫；聯想|
+| absolute | /ˈæb.sə.luːt/ | adj | 完全的；絕對的|
+| subject to | - | phr | 遭受；暴露於|
+| recur | /rɪˈkɜː/ | v | 反覆發生|
+| decisive | /dɪˈsaɪ.sɪv/ | adj | 決定性的|
+| indistinguishable from | - | phr | 與…無異|
+| virtually | /ˈvɜː.tʃu.ə.li/ | adv | 幾乎；實際上|
+| startle | /ˈstɑː.t(ə)l/ | v | 使驚訝|
+| disrupt | /dɪsˈrʌpt/ | v | 破壞；干擾|
+| rudimentary | /ˌruː.dɪˈmen.tər.i/ | adj | 基本的；初步的|
+| enhance | /ɪnˈhɑːns/ | v | 增強；提升|
+| peculiar to | - | phr | 獨特於…的|
+| exert | /ɪɡˈzɜːt/ | v | 施加（影響、壓力）|
+| diverse | /daɪˈvɜːs/ | adj | 多樣的|
+| compensate | /ˈkɒm.pən.seɪt/ | v | 彌補|
+| refuge | /ˈref.juːdʒ/ | n | 避難所|
+| critically | /ˈkrɪt.ɪ.kl̩i/ | adv | 危險地；嚴重地|
+| fluctuation | /ˌflʌk.tjuˈeɪ.ʃən/ | n | 波動；變化|
+| inhibit | /ɪnˈhɪb.ɪt/ | v | 抑制|
+| impede | /ɪmˈpiːd/ | v | 阻礙|
+| distortion | /dɪˈstɔː.ʃən/ | n | 扭曲；失真|
+| temporarily | /ˈtem.pər.ər.ɪ.li/ | adv | 暫時地|
+| classic | /ˈklæs.ɪk/ | adj | 典型的；經典的|
+| ring | /rɪŋ/ | v | 圍繞|
+| in response to | - | phr | 因…而；回應…|
+| sculpt | /skʌlpt/ | v | 塑形；雕刻|
+| constituent | /kənˈstɪt.ju.ənt/ | n/adj | 組成部分；成分|
+| gradual | /ˈɡrædʒ.u.əl/ | adj | 緩慢的；逐漸的|
+| predominate | /prɪˈdɒm.ɪ.neɪt/ | v | 占多數；主導|
+| diffuse | /dɪˈfjuːz/ | v/adj | 散布；擴散|
+| alleged | /əˈledʒd/ | adj | 所謂的；未經證實的|
+| controversial | /ˌkɒn.trəˈvɜː.ʃəl/ | adj | 有爭議的|
+| inconclusive | /ˌɪn.kənˈkluː.sɪv/ | adj | 不具決定性的|
+| mounting | /ˈmaʊn.tɪŋ/ | adj | 不斷增加的|
 
 
 

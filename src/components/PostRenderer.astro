@@ -13,9 +13,10 @@ interface Props {
     | CollectionEntry<'grammar'>;
   requiresAuth?: boolean;
   quizMode?: 'listening' | 'reading' | 'none';
+  isToefl?: boolean;
 }
 
-const { entry, requiresAuth = false, quizMode = 'none' } = Astro.props;
+const { entry, requiresAuth = false, quizMode = 'none', isToefl = false } = Astro.props;
 const { Content, headings } = await entry.render();
 
 const authorKey = entry.data.author || 'Jeremy';
@@ -96,7 +97,7 @@ const formatDate = (d: Date) => {
     </header>
 
     <div class="relative">
-      <article class="md-content min-w-0 break-words pb-24" data-quiz-mode={quizMode}>
+      <article class={`md-content min-w-0 break-words pb-24${isToefl ? ' toefl-content' : ''}`} data-quiz-mode={quizMode}>
         <Content />
 
         {changelog.length > 0 && (
@@ -306,7 +307,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // === 7. Vocabulary TTS ===
+  // === 7. TOEFL table: wrap for scroll + clean '-' placeholders ===
+  const toeflContent = document.querySelector('.toefl-content')
+  if (toeflContent) {
+    toeflContent.querySelectorAll('table').forEach(table => {
+      const wrapper = document.createElement('div')
+      wrapper.className = 'toefl-table-wrapper'
+      table.parentNode?.insertBefore(wrapper, table)
+      wrapper.appendChild(table)
+    })
+    toeflContent.querySelectorAll('table tbody tr').forEach(row => {
+      const cells = row.querySelectorAll('td')
+      // Clear '-' placeholders in phonetic (col 2) and pos (col 3)
+      ;[1, 2].forEach(idx => {
+        if (cells[idx]?.textContent?.trim() === '-') cells[idx].textContent = ''
+      })
+    })
+  }
+
+  // === 8. Vocabulary TTS ===
   const vocabRows = document.querySelectorAll('.md-content table tbody tr')
   
   vocabRows.forEach(row => {
@@ -615,34 +634,63 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Inline Code */
   .md-content :not(pre) > code { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9em; color: #4338ca; background: #e0e7ff; padding: 0.15rem 0.5rem; border-radius: 0.375rem; font-weight: 600; }
   
-  /* === Vocabulary Cards Styles === */
-  .md-content table { display: grid; grid-template-columns: 1fr; gap: 1.25rem; width: 100%; border: none; margin: 3rem 0; }
-  @media (min-width: 768px) { .md-content table { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); } }
-  
-  .md-content thead { display: none; } 
-  .md-content tbody { display: contents; } 
-  
-  .md-content tr { display: flex; flex-direction: column; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: transform 0.2s, box-shadow 0.2s; }
-  .md-content tr:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #cbd5e1; }
-  
-  .md-content td { border: none !important; padding: 0; background: transparent !important; }
+  /* === Vocabulary Cards Styles (common articles) === */
+  .md-content:not(.toefl-content) table { display: grid; grid-template-columns: 1fr; gap: 1.25rem; width: 100%; border: none; margin: 3rem 0; }
+  @media (min-width: 768px) { .md-content:not(.toefl-content) table { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); } }
 
-  /* 第一欄：單字 (加上 Flex 讓按鈕靠右) */
-  .md-content td:nth-child(1) { 
-    font-size: 1.35rem; 
-    font-weight: 800; 
-    color: #4f46e5; 
-    margin-bottom: 0.25rem; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .md-content:not(.toefl-content) thead { display: none; }
+  .md-content:not(.toefl-content) tbody { display: contents; }
+
+  .md-content:not(.toefl-content) tr { display: flex; flex-direction: column; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: transform 0.2s, box-shadow 0.2s; }
+  .md-content:not(.toefl-content) tr:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #cbd5e1; }
+
+  .md-content:not(.toefl-content) td { border: none !important; padding: 0; background: transparent !important; }
+
+  .md-content:not(.toefl-content) td:nth-child(1) { font-size: 1.35rem; font-weight: 800; color: #4f46e5; margin-bottom: 0.25rem; display: flex; justify-content: space-between; align-items: center; }
+  .md-content:not(.toefl-content) td:nth-child(2) { font-size: 0.85rem; color: #64748b; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.75rem; }
+  .md-content:not(.toefl-content) td:nth-child(3) { align-self: flex-start; display: inline-flex; align-items: center; background: #f1f5f9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 9999px; margin-bottom: 1rem; }
+  .md-content:not(.toefl-content) td:nth-child(4) { font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem; }
+  .md-content:not(.toefl-content) td:nth-child(5) { font-size: 0.95rem; color: #475569; line-height: 1.6; border-top: 1px dashed #e2e8f0; padding-top: 1rem; margin-top: auto; font-style: italic; }
+
+  /* === TOEFL Vocabulary Table Styles === */
+  .toefl-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; border-radius: 0.75rem; border: 1px solid #e2e8f0; margin: 2.5rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .toefl-content table { width: 100%; border-collapse: collapse; }
+  .toefl-content tr:hover td { background: #f8fafc !important; }
+
+  .toefl-content th { padding: 0.5rem 0.85rem; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; font-size: 0.68rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; text-align: left; }
+  .toefl-content td { border-bottom: 1px solid #f1f5f9; padding: 0.45rem 0.85rem; background: #fff !important; vertical-align: middle; }
+
+  /* 單字欄 */
+  .toefl-content td:nth-child(1) { font-weight: 700; color: #4f46e5; font-size: 0.9rem; white-space: nowrap; }
+  /* 音標欄 */
+  .toefl-content td:nth-child(2) { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #94a3b8; white-space: nowrap; }
+  /* 詞性欄 */
+  .toefl-content td:nth-child(3) { font-size: 0.72rem; font-weight: 600; color: #64748b; white-space: nowrap; }
+  /* 中文欄 */
+  .toefl-content td:nth-child(4) { font-size: 0.88rem; color: #334155; line-height: 1.5; }
+
+  /* TTS button inside TOEFL table — inline next to word */
+  .toefl-content .vocab-tts-btn { display: inline-flex; width: 22px; height: 22px; vertical-align: middle; margin-left: 0.35rem; }
+
+  /* Mobile: card layout */
+  @media (max-width: 639px) {
+    .toefl-table-wrapper { overflow-x: visible; border: none; border-radius: 0; box-shadow: none; background: transparent; margin: 2rem 0; }
+    .toefl-content thead { display: none; }
+    .toefl-content table { display: block; }
+    .toefl-content tbody { display: flex; flex-direction: column; gap: 0.5rem; }
+    .toefl-content tr { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.875rem; padding: 0.7rem 1rem; }
+    .toefl-content tr:hover { background: #f8fafc; }
+    .toefl-content tr:hover td { background: transparent !important; }
+    .toefl-content td { display: inline-flex; align-items: center; border: none !important; padding: 0; background: transparent !important; }
+    /* 單字 */
+    .toefl-content td:nth-child(1) { font-weight: 700; color: #4f46e5; font-size: 0.95rem; white-space: nowrap; order: 1; }
+    /* 音標 */
+    .toefl-content td:nth-child(2) { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #94a3b8; order: 2; }
+    /* 詞性 */
+    .toefl-content td:nth-child(3) { font-size: 0.68rem; font-weight: 600; color: #64748b; background: #f1f5f9 !important; padding: 0.15rem 0.45rem !important; border-radius: 4px; order: 3; }
+    /* 中文 */
+    .toefl-content td:nth-child(4) { flex: 0 0 100%; font-size: 0.88rem; color: #334155; line-height: 1.4; padding-top: 0.3rem !important; order: 4; }
   }
-  
-  /* 第二至第五欄：音標、詞性、中文、例句 */
-  .md-content td:nth-child(2) { font-size: 0.85rem; color: #64748b; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.75rem; }
-  .md-content td:nth-child(3) { align-self: flex-start; display: inline-flex; align-items: center; background: #f1f5f9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 9999px; margin-bottom: 1rem; }
-  .md-content td:nth-child(4) { font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem; }
-  .md-content td:nth-child(5) { font-size: 0.95rem; color: #475569; line-height: 1.6; border-top: 1px dashed #e2e8f0; padding-top: 1rem; margin-top: auto; font-style: italic; }
 
   /* === TTS Button Styles === */
   .vocab-tts-btn {

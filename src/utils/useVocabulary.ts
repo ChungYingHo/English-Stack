@@ -5,7 +5,7 @@ export interface VocabOccurrence {
   articleLink: string;
   pos: string;
   meaning: string;
-  example: string;
+  example?: string;
 }
 
 export interface VocabItem {
@@ -45,12 +45,12 @@ export async function useVocabulary(category: 'common' | 'toefl'): Promise<Vocab
 
       const cols = row.split('|').map((c: string) => c.trim())
       
-      if (cols.length >= 6) {
+      if (cols.length >= 5) {
         const word = cols[1]
         const phonetic = cols[2]
         const pos = cols[3]
         const meaning = cols[4]
-        const example = cols[5]
+        const example = cols[5] && cols[5].trim() !== '-' ? cols[5].trim() : undefined
 
         if (!word) return
 
@@ -60,7 +60,7 @@ export async function useVocabulary(category: 'common' | 'toefl'): Promise<Vocab
           articleLink,
           pos,
           meaning,
-          example
+          ...(example ? { example } : {}),
         }
         
         if (vocabMap.has(key)) {

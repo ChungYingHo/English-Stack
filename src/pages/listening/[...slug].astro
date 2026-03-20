@@ -15,4 +15,4 @@ const { entry } = Astro.props;
 const isToefl = entry.slug.startsWith('toefl/');
 ---
 
-<PostRenderer entry={entry} requiresAuth={isToefl} quizMode={isToefl ? 'listening' : 'none'} />
+<PostRenderer entry={entry} requiresAuth={isToefl} quizMode={isToefl ? 'listening' : 'none'} isToefl={isToefl} />
