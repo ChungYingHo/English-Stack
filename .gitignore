@@ -23,3 +23,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# Claude Code internal files
+.claude/
+
+# Extracted course working files (intermediate artifacts)
+course_files/_extracted/
