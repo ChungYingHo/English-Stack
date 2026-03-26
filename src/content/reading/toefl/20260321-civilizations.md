@@ -1,6 +1,6 @@
 ---
 date: 2026/03/21
-title: 'Early Civilizations & Determining Earth's Age'
+title: "Early Civilizations & Determining Earth's Age"
 author: 'Jeremy'
 ---
 
