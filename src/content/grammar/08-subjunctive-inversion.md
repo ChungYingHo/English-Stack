@@ -116,3 +116,40 @@ suggest / recommend / require / demand / insist / propose / request / urge / ord
 
 - *Rarely **does** the system **fail** under normal conditions.*
   （助動詞 does 在主詞 the system 前 → 倒裝）
+
+---
+
+## If 條件句的假設語氣（書寫格式補充）
+
+### 第二類條件句（假設現在）
+
+`If + 過去式（were）, would + V`
+
+- If I **were** a scientist, I **would** focus on renewable energy.（注意：用 were 不用 was）
+- If the experiment **were** to fail, we **would** need to start over.（If…were to… = 較正式的假設）
+
+### 第三類條件句（與過去相反）
+
+`If + had + p.p., would have + p.p.`
+
+- If the team **had used** a larger sample, the results **would have been** more reliable.
+- If more funding **had been** available, the research **could have continued** for another year.
+
+### 混合條件句（過去條件 + 現在結果）
+
+過去的假設影響現在的狀況：
+
+- If they **had developed** the vaccine earlier, millions of lives **would** be saved today.
+- If the algorithm **had been** trained on better data, it **would** perform much better now.
+
+### 省略 if 的倒裝（正式書面語）
+
+省略 if，把 Were / Had / Should 移到句首：
+
+- **Were** I a scientist, I would focus on this question.（= If I were...）
+- **Had** the team used a larger sample, the results would have been more reliable.（= If the team had used...）
+- **Should** any issues arise, please contact the lab director immediately.（= If any issues should arise...）
+
+:::tip
+省略 if 的倒裝是正式書面語的標誌。Were / Had / Should 開頭 → 先找是否為條件句倒裝，再翻譯成對應的 if 句。
+:::
