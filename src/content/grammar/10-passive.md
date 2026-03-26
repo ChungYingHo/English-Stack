@@ -1,8 +1,8 @@
 ---
 date: 2026/03/14
-title: Grammar 10 — 被動語態
+title: Grammar 04 — 被動語態
 author: 'jeremy'
-sameDateSort: 10
+sameDateSort: 4
 ---
 
 ## 為什麼用被動語態

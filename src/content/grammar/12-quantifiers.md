@@ -1,8 +1,8 @@
 ---
 date: 2026/03/14
-title: Grammar 12 — 量詞
+title: Grammar 02 — 量詞
 author: 'jeremy'
-sameDateSort: 12
+sameDateSort: 2
 ---
 
 ## 量詞概覽

@@ -1,8 +1,8 @@
 ---
 date: 2026/03/14
-title: Grammar 07 — 連接詞 & 轉折詞
+title: Grammar 09 — 連接詞 & 轉折詞
 author: 'jeremy'
-sameDateSort: 7
+sameDateSort: 9
 ---
 
 ## 為什麼連接詞很重要

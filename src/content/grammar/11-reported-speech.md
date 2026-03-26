@@ -1,8 +1,8 @@
 ---
 date: 2026/03/14
-title: Grammar 11 — 間接引語
+title: Grammar 10 — 間接引語
 author: 'jeremy'
-sameDateSort: 11
+sameDateSort: 10
 ---
 
 ## 直接引語 vs 間接引語
