@@ -9,16 +9,6 @@ sameDateSort: 2
 
 **[Paragraph 1]** Information on past climates is of primary relevance to archaeology because of what it tells us about the effects on the land and on the resources that people needed to survive. The most **crucial** effect of climate was on the sheer quantity of land available in each period, measurable by studying ancient coastlines. These have changed constantly through time, even in relatively recent periods, as can be seen from the Neolithic stone circle of Er Lannic, in Brittany, France (once inland but now half submerged on an island) or medieval villages in east Yorkshire, England, that have tumbled into the sea in the last few centuries as the North Sea gnaws its way westward and erodes the cliffs. Conversely, silts deposited by rivers sometimes push the sea farther back, creating new land, as at Ephesus in western Turkey, a port on the coast in Roman times but today some five kilometers inland.
 
-**[Paragraph 2]** Nevertheless, for archaeologists concerned with the long periods of time of the Paleolithic period there are variations in coastlines of much greater magnitude to consider. The expansion and contraction of the continental glaciers caused huge and uneven rises and falls in sea levels worldwide. When the ice sheets grew, the sea level would drop as water became locked up in the glaciers; when the ice melted, the sea level would rise again. Falls in sea level often exposed a number of important land bridges, such as those linking Alaska to northeast Asia and Britain to northwest Europe, a phenomenon with far-reaching effects not only on human colonization of the globe but also on the environment as a whole—the flora and fauna of isolated or insular areas were radically and often irreversibly affected. Between Alaska and Asia today lies the Bering Strait, which is so shallow that a fall in sea level of only four meters would turn it into a land bridge. When the ice sheets were at their greatest extent some 18,000 years ago (the glacier maximum), it is thought that the fall was about 120 meters, which therefore created not merely a bridge but a vast plain, 1,000 kilometers from the north to the south, which has been called Beringia. The existence of Beringia (and the extent to which it could have supported human life) is one of the crucial pieces of evidence in the continuing debate about the likely route and date of human colonization of the New World.
-
-**[Paragraph 3]** The assessment of past rises and falls in sea level requires study of submerged land surfaces off the coast and of raised or elevated beaches on land. Raised beaches are **remnants** of former coastlines at higher levels relative to the present shoreline and visible, for instance, along the Californian coast north of San Francisco. The height of a raised beach above the present shoreline, however, does not generally give a straightforward indication of the height of a former sea level. In the majority of cases, the beaches lie at a higher level because the land has been raised up through isostatic uplift or tectonic movement. Isostatic uplift of the land occurs when the weight of ice is removed as temperatures rise, as at the end of an ice age; it has affected coastlines, for example, in Scandinavia, Scotland, Alaska, and Newfoundland during the postglacial period. Tectonic movements involve displacements in the plates that make up Earth's crust. Middle and Late Pleistocene raised beaches in the Mediterranean are one instance of such movements.
-
-**[Paragraph 4]** (A)■ Raised beaches often consist of areas of sand, pebbles, or dunes, sometimes containing seashells or piles of debris **comprising** shells and bones of marine animals used by humans. (B)■ In Tokyo Bay, for example, shell mounds of the Jomon period (about 10,000 to 300 B.C.E.) mark the position of the shoreline at a time of maximum inundation by the sea (6,500–5,500 years ago), when, through tectonic movement, the sea was three to five meters higher in relation to the contemporary landmass of Japan than at present. (C)■ Analysis of the shells themselves has confirmed the changes in marine topography, for it is only during the maximum phase that subtropical species of mollusk are present, indicating a higher water temperature. (D)■
-
----
-
-## Questions
-
 **1.** The word **"crucial"** in the passage is closest in meaning to
 - (A) repugnant
 - (B) important
@@ -39,6 +29,18 @@ sameDateSort: 2
 - (B) Port cities that have lost shoreline due to the erosion of land.
 - (C) The ocean's role in the formation of new land.
 - (D) The importance of changes in shoreline to cities located inland.
+
+<details><summary>答案 Answer Key</summary>
+
+1. **(B)** important
+2. **(B)** Coastlines have changed even in recent times as shown by the current locations of certain Neolithic monuments and medieval villages.
+3. **(A)** Recent changes in the shoreline that have resulted in the creation of new land.
+
+</details>
+
+---
+
+**[Paragraph 2]** Nevertheless, for archaeologists concerned with the long periods of time of the Paleolithic period there are variations in coastlines of much greater magnitude to consider. The expansion and contraction of the continental glaciers caused huge and uneven rises and falls in sea levels worldwide. When the ice sheets grew, the sea level would drop as water became locked up in the glaciers; when the ice melted, the sea level would rise again. Falls in sea level often exposed a number of important land bridges, such as those linking Alaska to northeast Asia and Britain to northwest Europe, a phenomenon with far-reaching effects not only on human colonization of the globe but also on the environment as a whole—the flora and fauna of isolated or insular areas were radically and often irreversibly affected. Between Alaska and Asia today lies the Bering Strait, which is so shallow that a fall in sea level of only four meters would turn it into a land bridge. When the ice sheets were at their greatest extent some 18,000 years ago (the glacier maximum), it is thought that the fall was about 120 meters, which therefore created not merely a bridge but a vast plain, 1,000 kilometers from the north to the south, which has been called Beringia. The existence of Beringia (and the extent to which it could have supported human life) is one of the crucial pieces of evidence in the continuing debate about the likely route and date of human colonization of the New World.
 
 **4.** Which of the following can be inferred from paragraph 2 about the effects of climate change during the Paleolithic period?
 - (A) The amount of land not covered by water was greater during warmer periods.
@@ -64,6 +66,19 @@ sameDateSort: 2
 - (C) It provides a large amount of archaeological evidence that casts doubt on changes in sea level during the Paleolithic period.
 - (D) It shows how ancient coastlines can serve as useful models in understanding recent changes in coastlines.
 
+<details><summary>答案 Answer Key</summary>
+
+4. **(C)** As a result of colder weather, land bridges became exposed.
+5. **(A)** unable to return to their previous conditions.
+6. **(C)** It was probably still four meters under water during the glacier maximum.
+7. **(B)** It illustrates the kind of impact that variations in land availability caused by climate change can have.
+
+</details>
+
+---
+
+**[Paragraph 3]** The assessment of past rises and falls in sea level requires study of submerged land surfaces off the coast and of raised or elevated beaches on land. Raised beaches are **remnants** of former coastlines at higher levels relative to the present shoreline and visible, for instance, along the Californian coast north of San Francisco. The height of a raised beach above the present shoreline, however, does not generally give a straightforward indication of the height of a former sea level. In the majority of cases, the beaches lie at a higher level because the land has been raised up through isostatic uplift or tectonic movement. Isostatic uplift of the land occurs when the weight of ice is removed as temperatures rise, as at the end of an ice age; it has affected coastlines, for example, in Scandinavia, Scotland, Alaska, and Newfoundland during the postglacial period. Tectonic movements involve displacements in the plates that make up Earth's crust. Middle and Late Pleistocene raised beaches in the Mediterranean are one instance of such movements.
+
 **8.** The word **"remnants"** in the passage is closest in meaning to
 - (A) remains
 - (B) domains
@@ -82,6 +97,18 @@ sameDateSort: 2
 - (C) A decrease in temperature.
 - (D) Changes in sea level.
 
+<details><summary>答案 Answer Key</summary>
+
+8. **(A)** remains
+9. **(D)** The surface of Earth may have shifted, moving the beach from its original position.
+10. **(B)** A decrease in the pressure of thick ice sheets.
+
+</details>
+
+---
+
+**[Paragraph 4]** (A)■ Raised beaches often consist of areas of sand, pebbles, or dunes, sometimes containing seashells or piles of debris **comprising** shells and bones of marine animals used by humans. (B)■ In Tokyo Bay, for example, shell mounds of the Jomon period (about 10,000 to 300 B.C.E.) mark the position of the shoreline at a time of maximum inundation by the sea (6,500–5,500 years ago), when, through tectonic movement, the sea was three to five meters higher in relation to the contemporary landmass of Japan than at present. (C)■ Analysis of the shells themselves has confirmed the changes in marine topography, for it is only during the maximum phase that subtropical species of mollusk are present, indicating a higher water temperature. (D)■
+
 **11.** The word **"comprising"** in the passage is closest in meaning to
 - (A) taken from
 - (B) made up of
@@ -93,6 +120,15 @@ sameDateSort: 2
 - (B) The height of raised beaches around Tokyo Bay is a poor indicator of ancient sea levels.
 - (C) The water temperature in Tokyo Bay is lower at present than it was during the Jomon period.
 - (D) Tectonic movement during the Jomon period was not responsible for the formation of Tokyo Bay's raised beaches.
+
+<details><summary>答案 Answer Key</summary>
+
+11. **(B)** made up of
+12. **(C)** The water temperature in Tokyo Bay is lower at present than it was during the Jomon period.
+
+</details>
+
+---
 
 **13.** Look at the four squares ■ that indicate where the following sentence can be added to the passage.
 
@@ -111,6 +147,13 @@ Answer choices:
 - (D) The expansion and contraction of glaciers caused rises and falls in sea levels all over the world and in some areas, led to radical changes in their flora and fauna.
 - (E) The climate changes that led to alterations in the coastlines of San Francisco, Scandinavia, Scotland, Alaska, and Newfoundland isolated species that had once flourished together.
 - (F) Because raised beaches along the Mediterranean Sea were caused by tectonic movements, they contain abundant evidence of ancient civilizations.
+
+<details><summary>答案 Answer Key</summary>
+
+13. **(B)■** — The sentence follows the introduction of shell mounds (debris heaps), and "these heaps of rubbish" refers back to the debris described just before position B.
+14. **(A), (C), (D)**
+
+</details>
 
 ---
 
@@ -276,36 +319,3 @@ Answer choices:
 | controversial | /ˌkɒn.trəˈvɜː.ʃəl/ | adj | 有爭議的|
 | inconclusive | /ˌɪn.kənˈkluː.sɪv/ | adj | 不具決定性的|
 | mounting | /ˈmaʊn.tɪŋ/ | adj | 不斷增加的|
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
