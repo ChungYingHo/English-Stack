@@ -145,6 +145,10 @@ TOEFL content is gated behind a password prompt (`ToeflGuard.svelte`).
 
 Defined in `src/constants/authors.ts`. Reference by name string in frontmatter.
 
+## Git Workflow
+
+All changes are made directly on the `master` branch — do not create feature branches or worktrees.
+
 ## Deployment
 
 Deployed to Vercel. The `@astrojs/vercel` adapter is configured with web analytics enabled.
