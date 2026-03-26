@@ -1,6 +1,6 @@
 ---
 date: 2026/03/15
-title: 'TOEFL 2026 Writing — Overview & Practice'
+title: 'TOEFL Writing — Overview & Practice'
 author: 'Jeremy'
 ---
 
