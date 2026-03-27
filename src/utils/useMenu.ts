@@ -77,28 +77,37 @@ function insertEntryIntoTree(
   })
 }
 
+// 判斷某層的 page items 是否屬於 TOEFL 路徑
+function isToeflGroup(menuItems: MenuItem[]): boolean {
+  const firstPage = menuItems.find((item) => item.type === 'page') as any
+  return firstPage?.href?.includes('/toefl/') ?? false
+}
+
 // 遞迴排序：Page 優先，其次 Group，最後依字母
+// TOEFL 頁面升冪排序（最舊/基礎在上），其他降冪（最新在上）
 function sortMenuTree(menuItems: MenuItem[]): void {
+  const ascending = isToeflGroup(menuItems)
+
   menuItems.sort((a, b) => {
     if (a.type === 'page' && b.type === 'page') {
       const pageA = a as any
       const pageB = b as any
-      
+
       if (pageA.date && pageB.date) {
         const timeA = new Date(pageA.date).getTime()
         const timeB = new Date(pageB.date).getTime()
         if (timeA !== timeB) {
-          return timeB - timeA 
+          return ascending ? timeA - timeB : timeB - timeA
         }
       }
-      
+
       const sortA = pageA.sameDateSort ?? 0
       const sortB = pageB.sameDateSort ?? 0
-      
+
       if (sortA !== sortB) {
         return sortA - sortB
       }
-      
+
       return a.title.localeCompare(b.title)
     }
 
