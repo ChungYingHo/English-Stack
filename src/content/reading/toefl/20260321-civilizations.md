@@ -8,7 +8,7 @@ author: 'Jeremy'
 
 Fill in the missing letters in the paragraph. (Questions 1–10)
 
-Early civilizations, including those in Mesopotamia, Egypt, the Indus Valley, and China, emerged around river valleys, where fertile land and water resources supported agriculture. `Th`_ _ developed `sophis`_ _ _ _ _ _ _ social `struc`_ _ _ _ _, written `lang`_ _ _ _ _ _, and `adva`_ _ _ _ technologies, `wh`_ _ _ allowed `th`_ _ to `thr`_ _ _ and `esta`_ _ _ _ _ cities, `tr`_ _ _ networks, and even empires. Just as important were their significant contributions to fields like art, science, and law. These developments were crucial in shaping the course of human history.
+Early civilizations, including those in Mesopotamia, Egypt, the Indus Valley, and China, emerged around river valleys, where fertile land and water resources supported agriculture. `Th`_ _ developed `sophis`_ _ _ _ _ _ _ social `struc`_ _ _ _ _, written `lang`_ _ _ _ _, and `adva`_ _ _ _ technologies, `wh`_ _ _ allowed `th`_ _ to `thr`_ _ _ and `esta`_ _ _ _ _ cities, `tr`_ _ _ networks, and even empires. Just as important were their significant contributions to fields like art, science, and law. These developments were crucial in shaping the course of human history.
 
 <details>
 <summary>答案 Answer Key</summary>
