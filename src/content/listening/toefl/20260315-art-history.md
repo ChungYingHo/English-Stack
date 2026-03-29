@@ -996,35 +996,35 @@ Today we will look at encaustic painting, an ancient technique using heated bees
 
 ## 單字表
 
-| 單字 | 音標 | 詞性 | 中文 | 例句 |
-|------|------|------|------|------|
-| divine | /dɪˈvaɪn/ | adj | 神聖的 | A defining characteristic is the way these artists depicted the American wilderness as a vast, divine, and untouched paradise. |
-| identity | /aɪˈdɛntɪtɪ/ | n | 身分；認同 | Today, icons are once again central to the identity of Orthodox Christianity, and they are celebrated for their stylized beauty and spiritual depth. |
-| pigments | /ˈpɪɡmənts/ | n | 顏料（複數） | The mechanism works as follows: the artist melts beeswax and mixes it with dry colored pigments. |
-| durable | /ˈdjʊrəbəl/ | adj | 耐久的 | This is crucial because it makes the artwork incredibly durable; the wax is moisture-resistant and doesn't yellow over time. |
-| synonymous | /sɪˈnɑnɪməs/ | adj | 同義的；等同於…的 | This vibrant hue was synonymous with the heavens and the life-giving Nile, appearing prominently in the tomb paintings of pharaohs to ensure divine protection in the afterlife. |
-| transcendent | /trænsˈsɛndənt/ | adj | 超凡的；卓越的 | This enduring focus illustrates that while artistic materials are rooted in local geography, the desire to capture the transcendent is a universal human impulse. |
-| genre | /ˈʒɑnrə/ | n | 類型；流派 | You're probably familiar with the idea of landscape painting, but it wasn't always a popular genre in America. |
-| depicted | /dɪˈpɪktɪd/ | v | 描繪（過去式） | A defining characteristic is the way these artists depicted the American wilderness as a vast, divine, and untouched paradise. |
-| monumental | /ˌmɑnjuˈmɛntəl/ | adj | 宏偉的；巨大的 | More recent studies, however, have disputed the claim that these monumental works were the products of solitary labor. |
-| underpinned | /ˌʌndərˈpɪnd/ | v | 支撐；奠定基礎（過去式） | This discovery reshaped our understanding of the social and economic structures that underpinned the most celebrated era in Western art history. |
-| oxidation | /ˌɑksɪˈdeɪʃən/ | n | 氧化 | However, the presence of oxidation and physical scratches poses a major threat to these fragile objects today. |
-| vulnerability | /ˌvʌlnərəˈbɪlɪtɪ/ | n | 脆弱性；易受損性 | This vulnerability makes the preservation of these historical plates an urgent task for museum conservators. |
-| negotiate | /nɪˈɡoʊʃɪˌeɪt/ | v | 解讀；理解 | In art history, visual literacy refers to the ability to interpret and negotiate meaning from information presented in the form of an image. |
-| comprehend | /ˌkɑmprɪˈhɛnd/ | v | 理解；領悟 | It reminds us that our eyes only see what our minds are prepared to comprehend. |
-| centralizing | /ˈsɛntrəˌlaɪzɪŋ/ | v | 集中；集權（現在分詞） | This serves multiple functions, including centralizing the power of the emperor and attempting to reform religious practices that some felt had become too focused on physical objects. |
-| theological | /ˌθɪəˈlɑdʒɪkəl/ | adj | 神學的 | It was a deep theological debate. |
-| absurd | /əbˈsɜrd/ | adj | 荒謬的；荒誕的 | It illustrates why artists often turn to the absurd when the real world stops making sense. |
-| conceptual | /kənˈsɛptʃuəl/ | adj | 概念的 | It paved the way for modern performance art and conceptual art by proving that an idea could be more important than the finished object. |
-| structural integrity | /ˈstrʌktʃərəl ɪnˈtɛɡrɪtɪ/ | phr | 結構完整性 | However, the extreme heat required can be a major threat to the artist's safety and the structural integrity of the wood if it isn't handled correctly. |
-| create | /kriˈeɪt/ | v | 創造；製作 | In Ancient Egypt, we find the creation of 'Egyptian Blue,' a synthetic pigment made from ground glass and copper. |
-| pigment | /ˈpɪɡmənt/ | n | 顏料 | Archaeologically speaking, the production of blue pigment represents a significant milestone in human artistic development due to the rarity of the color in nature. |
-| dada | /ˈdɑdɑ/ | n | 達達主義 | Dada is an art movement that emerged during World War One as a reaction to the horrors of the conflict. |
-| visual literacy | /ˈvɪʒuəl ˈlɪtərəsɪ/ | phr | 視覺素養 | In art history, visual literacy refers to the ability to interpret and negotiate meaning from information presented in the form of an image. |
-| encaustic | /ɪnˈkɔstɪk/ | adj/n | 蠟畫法（的） | Today we will look at encaustic painting, an ancient technique using heated beeswax. |
-| beeswax | /ˈbɪzˌwæks/ | n | 蜂蠟 | Today we will look at encaustic painting, an ancient technique using heated beeswax. |
-| ultramarine | /ˌʌltrəməˈrɪn/ | n/adj | 群青色 | Lapislazuli, a semi-precious stone imported from Afghanistan, was ground into ultramarine, a pigment so expensive that its use was strictly reserved for the most sacred figures in religious manuscripts. |
-| Hudson River School | /ˈhʌdsən ˈrɪvər skul/ | n | 哈德遜河畫派 | Its origins trace back to the early nineteenth century with a group of artists we now call the Hudson River School. |
-| wilderness | /ˈwɪldərnɪs/ | n | 荒野；曠野 | A defining characteristic is the way these artists depicted the American wilderness as a vast, divine, and untouched paradise. |
-| national identity | /ˈnæʃənəl aɪˈdɛntɪtɪ/ | phr | 國家認同 | These paintings helped create a national identity and even encouraged the start of the national park system. |
-| High Renaissance | /haɪ ˈrɛnəsɑns/ | n | 文藝復興全盛期 | The 'Heroic Genius' is a theory that suggests the great masterpieces of the High Renaissance were the result of the isolated, divine inspiration of single individuals like Michelangelo or Leonardo da Vinci. |
+| 單字 | 音標 | 詞性 | 中文 |
+|------|------|------|------|
+| divine | /dɪˈvaɪn/ | adj | 神聖的 |
+| identity | /aɪˈdɛntɪtɪ/ | n | 身分；認同 |
+| pigments | /ˈpɪɡmənts/ | n | 顏料（複數） |
+| durable | /ˈdjʊrəbəl/ | adj | 耐久的 |
+| synonymous | /sɪˈnɑnɪməs/ | adj | 同義的；等同於…的 |
+| transcendent | /trænsˈsɛndənt/ | adj | 超凡的；卓越的 |
+| genre | /ˈʒɑnrə/ | n | 類型；流派 |
+| depicted | /dɪˈpɪktɪd/ | v | 描繪（過去式） |
+| monumental | /ˌmɑnjuˈmɛntəl/ | adj | 宏偉的；巨大的 |
+| underpinned | /ˌʌndərˈpɪnd/ | v | 支撐；奠定基礎（過去式） |
+| oxidation | /ˌɑksɪˈdeɪʃən/ | n | 氧化 |
+| vulnerability | /ˌvʌlnərəˈbɪlɪtɪ/ | n | 脆弱性；易受損性 |
+| negotiate | /nɪˈɡoʊʃɪˌeɪt/ | v | 解讀；理解 |
+| comprehend | /ˌkɑmprɪˈhɛnd/ | v | 理解；領悟 |
+| centralizing | /ˈsɛntrəˌlaɪzɪŋ/ | v | 集中；集權（現在分詞） |
+| theological | /ˌθɪəˈlɑdʒɪkəl/ | adj | 神學的 |
+| absurd | /əbˈsɜrd/ | adj | 荒謬的；荒誕的 |
+| conceptual | /kənˈsɛptʃuəl/ | adj | 概念的 |
+| structural integrity | /ˈstrʌktʃərəl ɪnˈtɛɡrɪtɪ/ | phr | 結構完整性 |
+| create | /kriˈeɪt/ | v | 創造；製作 |
+| pigment | /ˈpɪɡmənt/ | n | 顏料 |
+| dada | /ˈdɑdɑ/ | n | 達達主義 |
+| visual literacy | /ˈvɪʒuəl ˈlɪtərəsɪ/ | phr | 視覺素養 |
+| encaustic | /ɪnˈkɔstɪk/ | adj/n | 蠟畫法（的） |
+| beeswax | /ˈbɪzˌwæks/ | n | 蜂蠟 |
+| ultramarine | /ˌʌltrəməˈrɪn/ | n/adj | 群青色 |
+| Hudson River School | /ˈhʌdsən ˈrɪvər skul/ | n | 哈德遜河畫派 |
+| wilderness | /ˈwɪldərnɪs/ | n | 荒野；曠野 |
+| national identity | /ˈnæʃənəl aɪˈdɛntɪtɪ/ | phr | 國家認同 |
+| High Renaissance | /haɪ ˈrɛnəsɑns/ | n | 文藝復興全盛期 |
