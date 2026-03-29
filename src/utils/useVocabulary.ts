@@ -41,7 +41,7 @@ export async function useVocabulary(category: 'common' | 'toefl'): Promise<Vocab
     
     rows.forEach((row: string) => {
       if (row.includes('---')) return
-      if (row.includes('單字') && row.includes('音標')) return
+      if (row.includes('單字')) return
 
       const cols = row.split('|').map((c: string) => c.trim())
       
