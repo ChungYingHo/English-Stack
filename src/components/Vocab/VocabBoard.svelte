@@ -92,9 +92,11 @@
         </div>
 
         <div class="text-lg font-bold mb-3 opacity-90">{item.occurrences[0].meaning}</div>
-        <div class="text-sm opacity-70 italic mt-auto pt-4 border-t border-black/5 leading-relaxed line-clamp-2">
-          "{item.occurrences[0].example}"
-        </div>
+        {#if item.occurrences[0].example}
+          <div class="text-sm opacity-70 italic mt-auto pt-4 border-t border-black/5 leading-relaxed line-clamp-2">
+            "{item.occurrences[0].example}"
+          </div>
+        {/if}
       </button>
     {/each}
   </div>
@@ -165,10 +167,12 @@
               <span class="text-lg font-bold text-slate-800 ml-1">{occ.meaning}</span>
             </div>
             
-            <p class="text-slate-600 italic leading-relaxed mb-4 text-[15px]">
-              "{occ.example}"
-            </p>
-            
+            {#if occ.example}
+              <p class="text-slate-600 italic leading-relaxed mb-4 text-[15px]">
+                "{occ.example}"
+              </p>
+            {/if}
+
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
               <div class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Source</div>
               <a href={occ.articleLink} class="text-sm font-semibold text-indigo-600 hover:text-indigo-500 flex items-center gap-1 transition-colors group truncate max-w-[70%]">
