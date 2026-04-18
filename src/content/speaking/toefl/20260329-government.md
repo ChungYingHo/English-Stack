@@ -1,5 +1,5 @@
 ---
-date: 2026/03/28
+date: 2026/03/29
 title: 'TOEFL Speaking — Government & Technology'
 author: 'Jeremy'
 ---
@@ -59,6 +59,10 @@ Thank you for participating today. I'd like to ask you some questions about gove
 | **Positive experience: Efficiency through modern e-Government** | Significant savings on fuel and parking; discounted 'early-bird' processing fees for online applications; no need to hire expensive legal representatives. | Instant submission of documents via mobile apps; 24/7 availability allowing for application at midnight; real-time tracking bar showing exactly when documents arrive. | Ability to share digital receipts instantly with family; online community forums where users share tips on filling forms; professional help via live chat agents. | Improved digital literacy and data management skills; reduced stress due to transparency; sense of empowerment and trust in the state's infrastructure. |
 | **Positive experience: High-quality in-person concierge service** | Free on-site assistance that prevents costly filing mistakes; access to information about government grants or subsidies the user didn't know existed. | One-stop-shop centers that handle multiple permits in a single visit; fast-track appointments that respect the user's scheduled time slot. | Personalized guidance from knowledgeable civil servants; feeling like a valued citizen rather than a number; networking with other small business owners in the waiting lounge. | Learning the specific legal requirements of one's industry; peace of mind from receiving a physical, stamped confirmation; reduced cognitive load through guided steps. |
 
+**公式答（時間／金錢／人）**
+
+Yes, my grandfather once applied for his pension online. The website kept showing errors when we uploaded his ID. He waited many days for the password email. He felt very stressed because he could not use the system alone. Many older people in Taiwan also have the same problem.
+
 **Model Answers**
 
 **B2 (3.5–4.5)**
@@ -85,6 +89,10 @@ Great. When you need to complete government tasks, such as renewing an ID or fil
 | **Online/Mail (Focus: Accuracy and Documentation)** | Digital systems flag errors immediately, preventing financial penalties for late or incorrect filings. Saves money on printing and postage by using paperless uploads. | Auto-fill features pull previous data to speed up the process. Instant confirmation emails provide immediate peace of mind without waiting for a mail carrier. | Removes the pressure of a line of people behind you, allowing you to read fine print carefully. Eliminates potential linguistic barriers or misunderstandings with office staff. | Reduces environmental impact by cutting down on paper waste and carbon emissions from travel. Promotes personal autonomy by allowing individuals to manage their own data directly. |
 | **In-Person (Focus: Troubleshooting and Resolution)** | Saves money by getting the right information the first time, avoiding 'trial and error' application fees. Staff can often waive certain fees or suggest cheaper filing options. | Complex problems are solved in one sitting rather than through weeks of back-and-forth emails. Getting an ID printed on-site is faster than waiting 10 business days for mail delivery. | Real-time feedback from an expert ensures that nuanced questions about legal status or residency are answered accurately. Body language and tone help clarify confusing instructions. | Reduces the 'tech stress' and anxiety associated with website glitches or login failures. Provides a sense of security and closure that comes from handing documents directly to a human. |
 | **In-Person (Focus: Accessibility and Verification)** | Beneficial for those who don't own expensive hardware like scanners or high-speed internet. Prevents identity theft costs by ensuring sensitive documents never enter the mail system. | Immediate physical verification of original birth certificates or passports prevents delays caused by document rejection. Staff can help navigate complex bureaucratic jargon quickly. | Supports community jobs by utilizing local government offices. Provides a necessary social touchpoint for elderly citizens or those who feel isolated by the 'digital-only' world. | Critical for people with disabilities who may need physical assistance or specialized equipment to complete forms. Ensures 100% accuracy for life-changing documents like passports or deeds. |
+
+**公式答（時間／金錢／人）**
+
+I prefer online services. It saves time because I can apply at night. It also saves money because I do not need to drive. Many people in Taiwan also use this method.
 
 **Model Answers**
 
@@ -113,6 +121,10 @@ Interesting. **Some people say government forms should be simplified, even if th
 | **Disagree: Focus on Precision and Allocation** | Detailed data ensures tax dollars are funneled to specific neighborhoods in need; prevents financial fraud by requiring verifiable proof of income/assets. | Prevents long-term delays in infrastructure planning; provides precise traffic or population data so roads aren't rebuilt twice due to bad estimates. | Identifies niche marginalized groups that require specialized social services; ensures that diverse community needs aren't averaged out into a single statistic. | Develops higher-level analytical skills in civil servants; provides researchers with the granular data needed to solve public health crises like localized outbreaks. |
 | **Disagree: Focus on National Security and Long-term Planning** | Protects the economy by enabling thorough vetting for high-value government contracts; prevents money laundering through detailed financial disclosure. | Saves decades of corrective work by identifying demographic shifts early; allows for accurate 20-year urban planning for schools and hospitals. | Ensures public safety through rigorous background checks for sensitive roles; maintains a sense of fairness by ensuring no one skirts the rules. | Builds a robust historical archive for future sociological study; ensures that healthcare policy is based on specific medical histories rather than vague symptoms. |
 
+**公式答（時間／金錢／人）**
+
+I agree. First of all, short forms are easier to understand. Also, people are less likely to make mistakes. Finally, more people will actually finish and submit them.
+
 **Model Answers**
 
 **B2 (3.5–4.5)**
@@ -139,6 +151,10 @@ Good points. Lastly, **some places are introducing digital IDs that people can k
 | **Digital ID (Focus on Security and Tech Integration)** | Biometric locks prevent identity theft costs; remote wiping of data means thieves can't use a stolen phone for financial fraud. | Eliminates time spent searching for a physical wallet; streamlines online verification processes for banking or insurance. | Increases trust in peer-to-peer transactions like online marketplaces; allows for controlled data sharing where you only show your age, not your full address. | Develops a mindset of cybersecurity awareness; ensures vital medical ID info is accessible to first responders even if unconscious. |
 | **Physical ID (Focus on Reliability and Accessibility)** | Requires no expensive hardware or data plans; works for low-income individuals who cannot afford the latest smartphone. | Zero downtime because cards never run out of battery; no time wasted troubleshooting software glitches or app crashes at checkpoints. | Prevents social exclusion of the elderly who struggle with touchscreens; ensures that people in rural areas with poor cellular service aren't stranded. | Protects mental health by reducing total screen time and phone dependency; prevents the stress of 'battery anxiety' during travel. |
 | **Physical ID (Focus on Privacy and Surveillance)** | Prevents tech companies from monetizing location data linked to ID scans; avoids the risk of 'digital pickpocketing' via NFC hacking. | Saves time on frequent mandatory software updates; avoids the lengthy process of recovering an identity if a cloud account is hacked. | Maintains a boundary between government tracking and personal social life; prevents authorities from potentially deactivating IDs remotely during protests. | Encourages organizational skills through physical document management; reduces exposure to blue light and digital eye strain. |
+
+**公式答（時間／金錢／人）**
+
+I think it has good effects. It saves time because I use my phone. It also saves money because I do not pay for a new card. Many people in Taiwan also choose this way.
 
 **Model Answers**
 
@@ -173,6 +189,10 @@ Thank you for speaking with me today. I'd like to ask you some questions about v
 | **Negative: Financial and Resource Strain Focus** | Hidden costs of transportation to remote service sites; potential loss of income from part-time jobs due to mandatory volunteer hours. | Long commutes to underprivileged areas taking up 10+ hours weekly; volunteering taking away from critical study time for professional certifications. | Strained relationships with family due to weekend absences; feeling social pressure to donate money one cannot afford during charity drives. | Physical exhaustion from labor-intensive roles like building houses; risk of 'compassion fatigue' and emotional drainage from high-stress environments. |
 | **Negative: Inefficiency and Lack of Impact Focus** | Misallocation of donor funds toward administrative overhead instead of the cause; the high cost of training short-term volunteers who leave quickly. | Hours wasted on redundant clerical tasks that could be automated; slow progress on community projects due to lack of professional oversight. | Creating a 'savior complex' dynamic rather than equal partnership; superficial connections with community members who see volunteers come and go. | Volunteers performing tasks they aren't qualified for, such as amateur construction; lack of real-world skill growth due to the menial nature of assigned work. |
 
+**公式答（時間／金錢／人）**
+
+Last summer I helped clean a local park with my classmates. We picked up trash and planted small trees together. It felt good because the park looked much cleaner after one day. I also made new friends during the activity. Many students in Taiwan also join this kind of work.
+
 **Model Answers**
 
 **B2 (3.5–4.5)**
@@ -199,6 +219,10 @@ I see. Some volunteer programs are organized by large international organization
 | **Preference for large organizations: Career and Skill Development** | Scholarship opportunities for active volunteers; corporate partnerships that lead to paid internships; high-value networking for future employment. | Long-term commitments that look better on transcripts; flexible remote-work options using global digital platforms. | Mentorship from high-level executives; access to massive social media advocacy groups; prestige associated with a household-name brand. | Project management skills in complex environments; training on industry-standard software; documented impact metrics for grad school apps. |
 | **Preference for local groups: Direct Community Connection** | Low overhead costs ensure every dollar goes to the cause; zero spending on expensive marketing or administrative salaries. | Immediate impact without waiting for bureaucratic approval; flexibility to help during local emergencies or weekend neighborhood drives. | Deep bonds with neighbors and local business owners; direct feedback from the people being served; building a stronger local safety net. | Hands-on problem-solving for specific local issues; improved mental well-being from seeing immediate results; deep knowledge of regional history. |
 | **Preference for local groups: Operational Agility and Efficiency** | Minimal travel expenses as sites are nearby; direct fundraising through community events like bake sales or local auctions. | Elimination of long commute times to headquarters; no time wasted on multi-level corporate meetings or redundant reporting. | High levels of trust within a small, tight-knit team; direct access to the organization's founder; personalized recognition for hard work. | Multi-tasking skills as volunteers often wear many hats; learning to work with scarce resources; physical health benefits from active local labor. |
+
+**公式答（時間／金錢／人）**
+
+I prefer small local groups. First of all, I can see the real impact on my neighborhood. Also, I get to know local people and build trust. Finally, my help goes straight to the people who need it.
 
 **Model Answers**
 
@@ -227,6 +251,10 @@ Interesting. Some people believe that universities and high schools should requi
 | **Disagree: Focus on Logistical Burden and Inequality** | Creates a financial strain on low-income students who need to work paid part-time jobs; adds costs for transportation to volunteer sites. | Conflicts with heavy academic workloads and exam preparation; takes away time from essential sleep or family responsibilities. | Causes resentment toward the community rather than connection; forces interactions that may feel insincere or transactional. | Leads to burnout and high stress levels; diminishes the inherent value of 'service' by turning it into a bureaucratic checkbox. |
 | **Disagree: Focus on Institutional and Quality Issues** | Requires schools to hire dedicated staff to track hours and verify placements; diverts tuition funds away from classroom instruction. | Wastes time for non-profit organizations who must constantly train revolving doors of unmotivated student 'workers'. | Dilutes the impact of genuine volunteers who are actually passionate about the cause; creates a crowd of disinterested students. | Results in low-quality work that doesn't actually solve community problems; prevents students from exploring hobbies they truly care about. |
 
+**公式答（時間／金錢／人）**
+
+I disagree. First of all, students are already very busy with schoolwork. Also, forced service feels fake and not meaningful. Finally, it is unfair to students who work part-time jobs.
+
 **Model Answers**
 
 **B2 (3.5–4.5)**
@@ -253,6 +281,10 @@ Good points. Lastly, looking to the future, **do you think the way people volunt
 | **Shift to Online: Focus on Skill-Based Professionalism** | Non-profits save thousands by getting pro-bono web design or legal advice; organizations avoid the overhead costs of housing physical volunteers. | Streamlines workflows through project management software; allows for 24/7 service coverage as volunteers work across different time zones. | Creates professional networks in specialized fields; links experts with NGOs that desperately need high-level technical consulting. | Builds a professional portfolio with real-world deliverables; improves data management skills and proficiency with specialized software like CRM or CAD. |
 | **In-Person Dominance: Focus on Physical Impact and Direct Aid** | Directly impacts local economies through labor; physical construction of housing or distribution of food provides tangible assets that digital work cannot. | Requires dedicated blocks of time which fosters commitment; hours spent on-site lead to immediate, visible progress in the local environment. | Builds deep, empathetic bonds through face-to-face eye contact; strengthens local community resilience by bringing neighbors together in the same physical space. | Provides physical exercise through manual labor like planting trees; teaches hands-on vocational skills like carpentry, masonry, or gardening. |
 | **In-Person Dominance: Focus on Social Responsibility and Emotional Support** | Encourages local fundraising and 'shop local' initiatives; physical presence in a community often drives more local donations and sponsorships. | Synchronous participation ensures high accountability; scheduled shifts prevent the 'ghosting' common in anonymous online volunteer roles. | Crucial for vulnerable populations like the elderly or orphans who need human touch; reduces social isolation through shared meals and group activities. | Boosts mental health via the 'helper's high' associated with physical presence; develops high-level soft skills like conflict resolution and non-verbal communication. |
+
+**公式答（時間／金錢／人）**
+
+I think it has good effects. It saves time because I can do it at home. It also saves money because there are no extra fees. Many people in Taiwan also choose this way.
 
 **Model Answers**
 
