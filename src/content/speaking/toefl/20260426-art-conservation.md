@@ -1,6 +1,6 @@
 ---
 date: 2026/04/26
-title: 'TOEFL Speaking — Daily Life & Work'
+title: '[sp-7] TOEFL Speaking — Daily Life & Work'
 author: 'Jeremy'
 ---
 
@@ -12,13 +12,20 @@ author: 'Jeremy'
 
 You are being trained to assist visitors during a historical museum tour. Listen to your supervisor and repeat what he says. Repeat only once.
 
-1. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S01_sp07.wav"></audio> The ancient artifacts are inside.
-2. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S02_sp07.wav"></audio> Follow the timeline on the wall.
-3. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S03_sp07.wav"></audio> Would you like to try the touch screen?
-4. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S04_sp07.wav"></audio> Please remain behind the velvet ropes at all times.
-5. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S05_sp07.wav"></audio> Each era is represented by a specific color on the floor.
-6. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S06_sp07.wav"></audio> The interactive displays offer a deeper look into the lives of everyday citizens.
-7. <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S07_sp07.wav"></audio> Students can use their mobile devices to scan the codes for a translated audio description.
+1. The ancient artifacts are inside.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S01_sp07.wav"></audio>
+2. Follow the timeline on the wall.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S02_sp07.wav"></audio>
+3. Would you like to try the touch screen?
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S03_sp07.wav"></audio>
+4. Please remain behind the velvet ropes at all times.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S04_sp07.wav"></audio>
+5. Each era is represented by a specific color on the floor.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S05_sp07.wav"></audio>
+6. The interactive displays offer a deeper look into the lives of everyday citizens.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S06_sp07.wav"></audio>
+7. Students can use their mobile devices to scan the codes for a translated audio description.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_S07_sp07.wav"></audio>
 
 ### Set 2: Sports Arena
 
@@ -26,13 +33,20 @@ You are being trained to assist visitors during a historical museum tour. Listen
 
 You are being trained to assist guests at the city's major sports arena. Listen to your supervisor and repeat what he says. Repeat only once.
 
-1. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S01_sp07.wav"></audio> Keep your ticket stub handy.
-2. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S02_sp07.wav"></audio> Where is your assigned seating section?
-3. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S03_sp07.wav"></audio> Turn left once you pass the main concourse.
-4. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S04_sp07.wav"></audio> Premium suites offer inclusive catering and climate controlled viewing.
-5. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S05_sp07.wav"></audio> Validated parking vouchers are available at the guest services counter downstairs.
-6. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S06_sp07.wav"></audio> Food vendors accept mobile payments but do not allow large glass containers inside.
-7. <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S07_sp07.wav"></audio> If you require accessible transportation to the overflow lot, please notify a staff member immediately.
+1. Keep your ticket stub handy.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S01_sp07.wav"></audio>
+2. Where is your assigned seating section?
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S02_sp07.wav"></audio>
+3. Turn left once you pass the main concourse.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S03_sp07.wav"></audio>
+4. Premium suites offer inclusive catering and climate controlled viewing.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S04_sp07.wav"></audio>
+5. Validated parking vouchers are available at the guest services counter downstairs.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S05_sp07.wav"></audio>
+6. Food vendors accept mobile payments but do not allow large glass containers inside.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S06_sp07.wav"></audio>
+7. If you require accessible transportation to the overflow lot, please notify a staff member immediately.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S07_sp07.wav"></audio>
 
 ### Set 3: Train Station
 
@@ -40,13 +54,20 @@ You are being trained to assist guests at the city's major sports arena. Listen 
 
 You are being trained to assist passengers at a busy train station information desk. Listen to your supervisor and repeat what he says. Repeat only once.
 
-1. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S01_sp07.wav"></audio> How can I help you today?
-2. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S02_sp07.wav"></audio> Your train departs from platform four.
-3. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S03_sp07.wav"></audio> Please show your ticket to the officer.
-4. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S04_sp07.wav"></audio> The local express usually arrives every twenty minutes.
-5. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S05_sp07.wav"></audio> Buy your fare at the machine or the main window.
-6. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S06_sp07.wav"></audio> The schedules for all weekend trips are posted on the large wall.
-7. <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S07_sp07.wav"></audio> If you miss the next train, you can wait for the following one in the lobby.
+1. How can I help you today?
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S01_sp07.wav"></audio>
+2. Your train departs from platform four.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S02_sp07.wav"></audio>
+3. Please show your ticket to the officer.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S03_sp07.wav"></audio>
+4. The local express usually arrives every twenty minutes.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S04_sp07.wav"></audio>
+5. Buy your fare at the machine or the main window.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S05_sp07.wav"></audio>
+6. The schedules for all weekend trips are posted on the large wall.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S06_sp07.wav"></audio>
+7. If you miss the next train, you can wait for the following one in the lobby.
+   <audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_S07_sp07.wav"></audio>
 
 ---
 
@@ -64,18 +85,9 @@ You will be asked 4 questions. Listen to each question and give your response. Y
 
 Thank you for speaking with me today. I'm interested in learning about city vs rural living. **What kind of neighborhood do you or your friends generally like to live in? For example, do you prefer a busy downtown area, a quiet suburb, or a small rural village?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Busy Downtown Area (Focus on Career & Efficiency)** | Higher rental costs are offset by eliminating car payments, insurance, and fuel. Salaries in urban cores are typically 20% higher due to the concentration of corporate headquarters. | Commutes are reduced to a ten-minute walk or subway ride, reclaiming hours usually lost in traffic. Instant access to 24-hour grocery stores and services streamlines daily errands. | Professional networking happens naturally at local coffee shops and co-working spaces. It is easier to maintain friendships when everyone lives within a three-mile radius. | Living in a dense area encourages a high-step count through walking, improving cardiovascular health. Constant exposure to diverse cultures and languages builds global communication skills. |
-| **Busy Downtown Area (Focus on Culture & Entertainment)** | Discretionary spending increases because of the proximity to high-end theaters, Michelin-star restaurants, and luxury shopping districts. Public transport passes are cheaper than maintaining a vehicle. | No time is wasted traveling to events because major concert venues and museums are right outside the door. Spontaneous evening plans are possible without advance scheduling for transit. | The high population density leads to meeting people from various backgrounds, fostering a cosmopolitan mindset. Nightlife hubs provide constant opportunities for meeting new social groups. | Navigating complex transit systems and urban environments sharpens problem-solving skills. Residents stay mentally stimulated by the frequent art gallery openings and public lectures. |
-| **Small Rural Village (Focus on Financial Stability & Peace)** | Mortgage payments for a large house are often half the price of a city studio. Lower cost of local produce and fewer commercial temptations lead to significantly higher monthly savings. | The slower pace of life eliminates the 'hustle' culture, allowing for more restorative sleep and dedicated time for long-term hobbies like gardening or woodworking. | Small communities foster deep, multi-generational bonds where neighbors rely on each other for help. High levels of trust mean people rarely feel anonymous or lonely in their daily lives. | Reduced levels of noise and light pollution lead to lower cortisol levels and better mental health. Residents often learn self-sufficiency skills like home repair and food preservation. |
-| **Small Rural Village (Focus on Physical Health & Nature)** | Homeowners save money by growing their own organic vegetables and fruit. There is no need for expensive gym memberships when the natural landscape provides hiking and biking trails. | Time is spent outdoors in fresh air rather than being trapped in congested traffic or crowded elevators. Weekends are dedicated to nature-based recreation without needing to travel away from home. | Social life revolves around community bonfires and local festivals rather than superficial networking. Children grow up in a safe environment where the whole village looks out for one another. | Air quality is significantly better, reducing the risk of respiratory issues like asthma. Constant physical activity through property maintenance and outdoor exploration keeps the body fit. |
-
 **公式答（時間／金錢／人）**
 
-I prefer a downtown area. It saves time because I can walk to work. It also saves money because I do not need a car. Many people in Taiwan also choose this way.
+I prefer a downtown area very much. It saves a lot of time because I can walk to work every day. I do not need to wait for a bus or sit in traffic. It also saves money because I do not need a car. I can skip the cost of gas and parking every month. Many people in Taiwan also choose to live this way. My friends love living near the MRT station in Taipei. They can visit shops, meet family, and eat out very fast. So overall, I really think a downtown area is the best place to live.
 
 **Model Answers**
 
@@ -99,18 +111,9 @@ I definitely prefer a vibrant downtown neighborhood because of the unparalleled 
 
 I appreciate you explaining that. When choosing a place to live, **do you prefer to have easy access to shops and entertainment, or do you prefer to have more open space and nature nearby? Explain your reasons.**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Access to Shops/Entertainment (Focus: Career and Social Productivity)** | Proximity to high-end retail and corporate hubs increases networking opportunities; eliminates the need for expensive car ownership, insurance, and fuel costs. | Commute times to meetings or social events are reduced to minutes via walking or transit; 24-hour service availability allows for a flexible professional schedule. | Constant exposure to diverse crowds facilitates spontaneous professional networking; urban hubs offer niche hobby groups and specialized networking mixers. | High-intensity urban living fosters multitasking skills; immediate access to specialized medical facilities and state-of-the-art gyms improves physical maintenance. |
-| **Access to Shops/Entertainment (Focus: Lifestyle and Convenience)** | Subscription costs for entertainment are lower when live venues are accessible; frequent small-batch grocery shopping reduces food waste and bulk-buy spoilage. | Eliminates time-consuming weekend 'errand runs' because shops are on the way home; instant access to cinemas and theaters maximizes limited leisure hours. | Shared public spaces like cafes and plazas prevent social isolation; living in a 'walkable' area increases the frequency of casual interactions with neighbors. | Regular walking between venues provides low-impact cardiovascular exercise; exposure to cultural exhibits and theater builds aesthetic appreciation and critical thinking. |
-| **Open Space and Nature (Focus: Mental Health and Sustainability)** | Lower property taxes and rental rates compared to urban centers; massive savings on 'impulse spending' triggered by constant exposure to storefronts. | Slower pace of life reduces the 'rushed' psychological state; more time spent on restorative activities like gardening or hiking rather than waiting in queues. | Stronger, more intimate bonds with a smaller community of neighbors; family relationships are prioritized through shared outdoor activities away from digital distractions. | Significant reduction in cortisol levels and respiratory issues due to cleaner air; develops self-reliance skills like home maintenance, gardening, and navigation. |
-| **Open Space and Nature (Focus: Physical Wellness and Privacy)** | Natural recreation like trail running or lake swimming is free compared to expensive city gym memberships; bulk-buying and home cooking reduce overall food expenditure. | Elimination of noise pollution leads to deeper, more efficient sleep cycles; travel time is redirected toward high-quality physical exercise in natural terrain. | Enhanced privacy leads to a more peaceful domestic life; social gatherings become more intentional 'destination' events like weekend camping or backyard BBQs. | Improved focus and attention span by escaping 'directed attention fatigue' found in busy cities; physical stamina is built through rugged outdoor hobbies. |
-
 **公式答（時間／金錢／人）**
 
-I prefer shops and entertainment over open space. First of all, I can walk to stores and cafes easily. Also, I meet friends at the mall on weekends. Finally, there is always something fun to do nearby.
+I prefer shops and entertainment over open space. First of all, I can walk to stores and cafes very easily. I do not need to drive far just to buy snacks or coffee. Also, I meet friends at the mall every weekend. We can watch a movie, eat lunch, and shop together in one place. Finally, there is always something fun to do nearby. My neighborhood has a night market, a game room, and many small bookstores. I never feel bored even on a rainy day at home. That is why I prefer living near shops and entertainment.
 
 **Model Answers**
 
@@ -134,18 +137,9 @@ I prefer living with easy access to shops and entertainment because of the sheer
 
 Now I'd like to zoom out and ask about a wider trend. **As remote work becomes more common, do you think more people will choose to move away from big cities and live in the countryside? Why or why not?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Agree: Focus on Financial Liberation** | Eliminating high city rents allows for home ownership; lower cost of goods in rural grocery stores increases disposable income. | Zero commute time saves 10+ hours weekly; flexible schedules allow for errands during off-peak hours when stores are empty. | Closer ties with local neighbors through community gardening; more quality time spent with immediate family instead of colleagues. | Reduced exposure to urban air pollution; increased physical activity through outdoor hobbies like hiking or landscaping. |
-| **Agree: Focus on Lifestyle and Wellness** | Reduced spending on 'convenience' costs like expensive takeout; less pressure to spend on status symbols or trendy city fashion. | Slower pace of life eliminates the 'hustle' culture; more time for restorative sleep and personal hobbies due to quiet environments. | Building a sense of belonging in a small-town 'micro-community'; escaping the anonymity and loneliness of crowded city streets. | Lower cortisol levels from proximity to green spaces; opportunity to learn self-sufficiency skills like woodcutting or organic farming. |
-| **Disagree: Focus on Career Growth and Networking** | Proximity to industry hubs keeps salaries high; spontaneous business lunches lead to lucrative partnerships and promotions. | Instant access to specialized services like 24-hour gyms or tech repair saves time searching for limited rural providers. | High density of ambitious peers provides constant networking; diverse social circles offer exposure to global cultures and ideas. | Access to high-end fitness studios and specialized medical specialists; constant mental stimulation from cultural events and museums. |
-| **Disagree: Focus on Infrastructure and Convenience** | No need for the high expense of car ownership and maintenance; access to competitive pricing in large-scale urban shopping districts. | Public transit allows for reading or working during travel; high-speed fiber optic internet ensures no downtime for remote tasks. | Ease of meeting friends at central locations; vibrant nightlife and social clubs prevent the isolation common in remote areas. | Development of 'city smarts' and navigational skills; immediate access to emergency services and world-class hospitals. |
-
 **公式答（時間／金錢／人）**
 
-I agree. First of all, the countryside has cleaner air and less noise. Also, people can buy a bigger house for less money. Finally, families have more time together without long commutes.
+I agree with this idea very much. First of all, the countryside has cleaner air and much less noise. People can sleep better and feel calm every morning. Also, people can buy a bigger house for less money. A small city flat costs the same as a big village house. Finally, families have more time together without long commutes. Parents can eat dinner with their kids and help them with homework. Many young workers in Taiwan already move to places like Yilan or Hualien. That is why I think more people will move to the countryside.
 
 **Model Answers**
 
@@ -169,18 +163,9 @@ I definitely believe this trend will grow because remote work allows people to p
 
 Thank you for sharing all of that. I have just one more question. **Some people believe that living in a large city provides better opportunities for personal growth and career success. Do you agree with this claim, or do you think rural areas can offer similar advantages? Please explain your view.**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Agree: Urban living focuses on career acceleration and networking** | Access to high-paying multinational corporate headquarters; higher density of venture capital for startups; diverse freelance gig economy opportunities. | Commutes are often shorter via extensive subway systems; proximity to 24-hour services like gyms and groceries saves errand time; rapid career advancement cycles. | Constant exposure to industry leaders at professional mixers; diverse international social circles; high concentration of mentors in specialized niche fields. | Development of high-pressure negotiation and soft skills; access to specialized technical workshops; proximity to premier healthcare and research hospitals. |
-| **Agree: Urban living focuses on cultural exposure and personal diversity** | Cost of living is offset by access to free public museums; wider range of budget options for international cuisine; higher resale value on urban property. | Walking-distance access to theaters and galleries; zero time spent on home/yard maintenance compared to rural properties. | Interaction with people from hundreds of different ethnic backgrounds; easier to find specific hobbyist groups like coding clubs or foreign language exchanges. | Increased adaptability and tolerance from navigating complex social environments; rapid language acquisition through immersion in immigrant neighborhoods. |
-| **Disagree: Rural living focuses on financial stability and entrepreneurship** | Significantly lower overhead for starting a physical business; low rent allows for higher savings rates; cheaper land for agricultural or industrial ventures. | Zero time wasted in gridlock traffic; slower pace of life reduces burnout and allows for deep focus on long-term creative projects. | Deep, multi-generational community ties that provide a strong safety net; less social competition leads to more authentic, supportive friendships. | Greater self-reliance skills like home repair and land management; improved mental health from constant access to nature and clean air; lower stress levels. |
-| **Disagree: Rural living focuses on specialized mastery and digital independence** | Remote work allows for earning a 'city salary' while spending at 'rural prices'; lower cost for large studio or office spaces. | Freedom from the 'hustle culture' social obligations that drain evening hours; more time for sleep and physical exercise in natural settings. | Stronger family bonds due to fewer external distractions; reliance on tight-knit local cooperatives for resource sharing and problem-solving. | Development of unique, rare skills that are valued in the city but learned in isolation; high levels of discipline required for self-directed growth without urban crutches. |
-
 **公式答（時間／金錢／人）**
 
-I agree. First of all, big cities have many job choices. Also, students can join workshops and learn new skills. Finally, people meet many mentors and make useful contacts.
+I agree with this idea very much. First of all, big cities have many job choices. Young people can pick from tech, design, finance, or food service very easily. Also, students can join workshops and learn new skills after class. Free classes on coding or public speaking happen in Taipei every week. Finally, people meet many mentors and make useful contacts in the city. My cousin met her boss at a coffee shop in Xinyi. That is why I think big cities give people much better chances to grow. Life in a small town is nice but harder for career success.
 
 **Model Answers**
 
@@ -210,18 +195,9 @@ You will be asked 4 questions. Listen to each question and give your response. Y
 
 Good to see you! Let's have a conversation about commuting & transportation. **What mode of transportation do you or your colleagues typically use to get to work or school? For example, do you mostly use a private car, public transit, or a bicycle?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Public Transit (Focus: Financial Efficiency)** | Eliminates monthly parking fees which can exceed $200 in city centers; removes the burden of gas, insurance premiums, and depreciation costs. | Commute time becomes 'found time' for checking emails or reading; bypasses gridlock via dedicated subway tunnels or light rail tracks. | Increases exposure to a diverse cross-section of the local community; provides opportunities for brief, friendly interactions with regular commuters. | Reduces the high cortisol levels associated with road rage and traffic stress; lowers the individual's carbon footprint significantly. |
-| **Public Transit (Focus: Social/Lifestyle Integration)** | Allows for a 'pay-as-you-go' lifestyle using digital wallets; frees up thousands of dollars annually for travel or leisure activities. | Fixed schedules allow for precise planning of the morning routine; eliminates the time wasted searching for a parking spot near the office. | Encourages meeting colleagues at the station for a 'walking meeting' to the office; fosters a sense of shared urban identity with fellow citizens. | Forces a minimum of 2,000 extra steps per day just walking to and from transit hubs; develops navigation skills and mastery of urban geography. |
-| **Private Car (Focus: Time & Productivity)** | High upfront cost but serves as a long-term asset; allows for bulk grocery shopping on the way home, which saves money compared to convenience stores. | Door-to-door transit eliminates the 15-minute walk to the bus stop; allows for a flexible departure time unaffected by transit delays or strikes. | Provides a private space for hands-free professional calls or private conversations with family; offers a safe environment to transport children to school. | Reduces exposure to seasonal illnesses and germs found on crowded buses; allows for ergonomic seating adjustments to prevent back pain during long trips. |
-| **Private Car (Focus: Comfort & Autonomy)** | The expense is justified by the ability to live in lower-rent suburban areas; avoids the rising costs of ride-sharing apps during surge pricing. | Enables multi-stop trips like dropping off dry cleaning or visiting the gym without waiting for multiple bus transfers. | Acts as a sanctuary for mental decompression between the high-stress office environment and home life; allows for carpooling with a specific, trusted group. | Develops spatial awareness and quick decision-making skills required for defensive driving; provides climate control to stay professional and sweat-free in summer. |
-
 **公式答（時間／金錢／人）**
 
-I like the MRT. It saves time because the train is fast. It also saves money because I do not pay for gas. Many people in Taiwan also use this method.
+I like the MRT very much. It saves a lot of time because the train is very fast. I can go from my house to the office in twenty minutes. It also saves money because I do not pay for gas or parking. One MRT ride only costs me about thirty dollars each time. Many people in Taiwan also use the MRT every day. My coworkers and friends take the same train line from Banqiao to Taipei. We often meet and chat about work on the way. So overall, I really think the MRT is the best way to commute.
 
 **Model Answers**
 
@@ -245,18 +221,9 @@ I prefer using public transportation because it integrates so well into a health
 
 That's a thoughtful answer. **When you are traveling to your daily destination, would you prefer to have a longer commute on a comfortable train, or a much shorter commute in heavy traffic? Tell me why.**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Longer Train Commute: Focus on Productivity and Mental Well-being** | Eliminates monthly parking fees in city centers; reduces vehicle maintenance costs like oil changes and tire wear; qualifying for tax-deductible transit passes. | Commute time becomes 'active' time for answering emails or reading; predictable arrival schedules due to dedicated tracks; no time wasted searching for parking spots. | Shared quiet space creates a sense of communal respect; opportunities for networking with regular commuters; ability to text family or friends without safety risks. | Significant reduction in cortisol levels compared to driving; opportunity to build a habit of reading or learning a new language via apps; physical activity gained walking to the station. |
-| **Longer Train Commute: Focus on Sustainability and Financial Savings** | Massive savings on rising fuel prices; lower insurance premiums for 'low-mileage' drivers; avoiding expensive congestion tolls in urban zones. | Longer duration allows for a psychological 'buffer' between home and work; time can be used for financial planning or personal admin; avoids the unpredictability of road accidents. | Contributing to a greener environment benefits the local community; feeling part of a collective effort to reduce urban smog; less 'road rage' improves interactions with others. | Lower carbon footprint provides a sense of personal purpose; reduced risk of traffic-related accidents; encourages a more disciplined daily schedule and routine. |
-| **Shorter Car Commute: Focus on Family Time and Flexibility** | The higher cost of fuel is offset by the value of billable hours saved; avoiding expensive train tickets for families sharing one vehicle; no need for late-night Uber fees if the train stops running. | Gaining 60-90 minutes of daily life back for sleep or exercise; flexibility to run errands like grocery shopping on the way home; ability to leave exactly when work is finished. | More time for breakfast with children or dinner with a spouse; ability to pick up kids from school or extracurricular activities promptly; more energy for social events in the evening. | Improved sleep hygiene due to later wake-up times; reduced physical fatigue from long-distance travel; quick access to medical facilities or home in case of an emergency. |
-| **Shorter Car Commute: Focus on Personal Control and Privacy** | Investing in a car is a long-term asset whereas train tickets are a sunk cost; ability to carpool with colleagues to split gas expenses; avoiding surge pricing of last-minute transit options. | Direct door-to-door travel eliminates the 'last mile' walk or bus transfer; total control over the environment including temperature and route; no waiting on platform delays or strikes. | Privacy allows for confidential work calls or singing along to music to de-stress; isolation from the germs and illnesses often found in crowded public carriages; comfort of a personal sanctuary. | Development of navigational skills and spatial awareness; ability to carry heavy gym gear or work equipment easily; less exposure to outdoor weather extremes like heavy rain or snow. |
-
 **公式答（時間／金錢／人）**
 
-I prefer a long train ride over heavy traffic. It saves time because I can read or work on the train. It also saves money because I do not pay for gas. Many people in Taiwan also do the same thing.
+I prefer a long train ride over heavy traffic. It saves time because I can read or work on the train. I can finish my emails and news before I reach the office. It also saves money because I do not pay for gas. A car costs me too much every month for fuel and parking. Many people in Taiwan also do the same thing every day. My office friends use the high-speed rail from Taichung to Taipei. They say the ride is calm and easy, not stressful at all. So overall, I really prefer a long train ride over traffic.
 
 **Model Answers**
 
@@ -280,18 +247,9 @@ I would definitely choose the longer train commute for the financial and environ
 
 Building on what you said, I'd like to explore a related idea. **Many major cities are currently investing in high-speed rail and expanded subway systems. Do you believe that these infrastructure projects will significantly reduce the number of people driving personal vehicles in the next decade? Why or why not?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Agree: Efficiency and Practicality focus** | Eliminates monthly expenses like downtown parking fees which can exceed $300 and removes the burden of rising fuel prices. High-speed rail allows travelers to avoid the high cost of airport ride-shares and terminal parking. | Commuters bypass gridlock during rush hour and can use the transit time to answer emails or read. Express subways reduce a 60-minute bumper-to-bumper drive to a predictable 20-minute rail journey. | Increases opportunities for spontaneous social gatherings after work since people aren't rushing to beat traffic. Shared transit spaces foster a sense of urban community and collective responsibility. | Reduces cortisol levels by removing the stress of navigating aggressive traffic. Encourages a more active lifestyle as commuters naturally walk more between stations and their final destinations. |
-| **Agree: Environmental and Urban Planning focus** | Saves the municipal budget billions in road maintenance and highway expansion costs. Residents save money on car insurance premiums and the rapid depreciation of personal vehicles used for daily commuting. | Dedicated rail lines are immune to weather-related road delays or accidents that paralyze highways. Automated subway frequency means zero time wasted looking at a schedule or waiting more than three minutes for a train. | Connects underserved suburban neighborhoods to the city center, allowing diverse populations to access better jobs. Promotes the development of 'walkable' neighborhoods where public squares replace parking lots. | Drastically lowers the carbon footprint of the city by removing thousands of internal combustion engines from the road. Improves local air quality, leading to lower rates of respiratory issues like asthma in urban children. |
-| **Disagree: Cultural and Flexibility focus** | Heavy public investment often leads to higher property taxes for residents regardless of whether they use the system. Maintaining an older car is often perceived as cheaper than paying for daily peak-hour transit fares for a whole family. | Public transit requires adhering to a rigid schedule and often involves multiple transfers that add 30-40 minutes to a trip. Personal vehicles provide 'door-to-door' service, eliminating the 'last mile' walk from the station in bad weather. | Cars offer a private, safe environment for families to talk or listen to music without the intrusion of strangers. Many people value the autonomy of a personal vehicle to visit elderly relatives in rural areas where trains don't go. | Driving is a vital life skill that provides a sense of independence and agency over one's movement. Carrying heavy groceries or specialized equipment for hobbies is physically taxing or impossible on a crowded subway. |
-| **Disagree: Infrastructure and Geography focus** | Massive project overruns often lead to increased ticket prices that rival the cost of gasoline. High-speed rail tickets are frequently priced for business travelers, making them unaffordable for the average daily commuter. | Construction of new lines creates decade-long traffic delays that actually increase idling time for current drivers. In sprawling 'car cities' like Los Angeles, the distance between stations remains too great to make rail a time-saving option. | Reliance on centralized hubs can lead to the 'gentrification' of station areas, pushing low-income residents further away from the logic of the transit map. Digital nomads prefer the isolation of a car to conduct private business calls. | Overcrowded trains during flu seasons increase the risk of spreading communicable diseases compared to a private car cabin. The lack of 24/7 service in many systems leaves late-shift workers with no choice but to keep their vehicles. |
-
 **公式答（時間／金錢／人）**
 
-I agree. It saves time because trains skip the traffic. It also saves money because people do not pay for gas. Many people in Taiwan also agree with this.
+I agree with this idea very much. It saves time because trains skip the traffic every day. A driver can spend one hour stuck on the road in Taipei. It also saves money because people do not pay for gas or parking. A car owner spends thousands of dollars each month on fuel and repairs. Many people in Taiwan also agree with this view. Our MRT is always full during morning and evening rush hours. My parents sold their car last year and only ride the train now. So overall, I really think new train lines will cut down driving a lot.
 
 **Model Answers**
 
@@ -315,18 +273,9 @@ Honestly, I think these transit expansions are essential because, come to think 
 
 Interesting take. To close, I'd like to ask about one more thing. **Looking at the rise of remote work, how do you think a permanent shift away from daily office commuting might impact local economies and urban development in both positive and negative ways?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Negative Impact: Economic Decline of Urban Centers** | Commercial real estate values plummeting as companies downsize office leases; massive loss of tax revenue for city transit systems; local lunch spots and coffee shops losing their primary customer base. | Commuter trains and buses running less frequently due to low demand; longer wait times for specialized urban services that require physical presence. | Loss of 'spontaneous interaction' between diverse professionals in city squares; traditional business districts becoming 'ghost towns' after 5 PM; decline in the cultural vibrancy of city centers. | Higher rates of sedentary behavior as people stop walking to transit hubs; physical deterioration of neglected urban infrastructure and public parks. |
-| **Negative Impact: Social Isolation and Workplace Erosion** | Workers spending more on residential utility bills and home office equipment; companies cutting geographic-based salary adjustments for remote staff. | The 'always-on' culture blurring the lines between work and home; increase in unpaid overtime as people find it harder to 'log off' mentally. | Weakening of mentorship bonds for junior employees who lack face-to-face guidance; reduced social capital and networking opportunities within local professional communities. | Increased risk of burnout and 'Zoom fatigue'; loss of soft skills like reading non-verbal cues and conflict resolution in physical settings. |
-| **Positive Impact: Revitalization of Suburban and Rural Economies** | Wealth redistribution as workers spend their high city salaries in local neighborhood boutiques and groceries; surge in property values in small towns and coastal areas. | Elimination of the 'dead time' spent in traffic; parents gaining 10-15 hours a week to invest in local volunteer work or family activities. | Stronger ties to local neighborhoods and community centers; more involvement in local school boards and grassroots organizations as people stay in their zip code. | Improved mental health from reduced commuting stress; ability to live in areas with better air quality and more access to nature for daily exercise. |
-| **Positive Impact: Sustainable Urban Redevelopment** | Cities converting vacant office towers into affordable housing units; lower public spending required for road repairs and highway expansions. | Shift toward the '15-minute city' model where all essential services are a short walk or bike ride away; more efficient use of personal schedules. | Transformation of car-centric streets into pedestrian plazas and communal green spaces; increased diversity in residential areas as living near a 'hub' becomes less mandatory. | Massive reduction in carbon emissions from fewer cars on the road; opportunity for cities to focus on 'experience-based' tourism rather than just corporate utility. |
-
 **公式答（時間／金錢／人）**
 
-I think it has both good and bad effects. The good part is that workers save time and money because they skip the commute and cook at home. The bad part is that small shops near offices lose customers and close down. Many people in Taiwan also see this happen in city centers.
+I think remote work has both good and bad effects. The good part is that workers save time because they skip the long commute. They can wake up later and still start work on time. It also saves money because people cook at home instead of buying lunch. A home meal is much cheaper than a ten-dollar office bento box. The bad part is that small shops near offices lose many customers. Cafes, snack bars, and lunch spots have to close down for good. Many people in Taiwan also see this happen in city centers like Xinyi. So overall, I think the change brings both gains and losses.
 
 **Model Answers**
 
@@ -356,18 +305,9 @@ You will be asked 4 questions. Listen to each question and give your response. Y
 
 I'm glad we could sit down together. I want to ask you about work-life balance. **What kind of things do you or your friends do to relax after a busy day? For example, do you like watching movies, exercising, or cooking dinner?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Solo Relaxation (Watching Movies/Gaming) — Focus on Mental Decompression** | Subscription costs for Netflix or Steam are minimal compared to dining out; avoids the 'impulse spending' often triggered by social pressure. | Zero commute time for entertainment; sessions can be as short as 20 minutes or as long as two hours depending on chores. | Provides necessary 'social recovery' time for introverts; prevents burnout-induced irritability when interacting with family later. | Dopamine release from gaming improves mood; cinematic storytelling offers escapism that lowers cortisol levels after high-stress meetings. |
-| **Solo Relaxation (Cooking/Reading) — Focus on Self-Improvement** | Bulk-buying groceries for home-cooked meals saves hundreds monthly; learning complex recipes increases financial literacy regarding food costs. | Meal prepping during relaxation saves time on weekday mornings; reading before bed improves sleep latency and quality. | Cooking skills can eventually be used to host meaningful, low-cost dinner parties; sharing recipes builds niche online community bonds. | Refines culinary techniques and knife skills; reading expands vocabulary and critical thinking outside of professional contexts. |
-| **Active/Social Relaxation (Gym/Team Sports) — Focus on Physical Health** | Gym memberships or league fees are an investment that reduces long-term medical expenses; requires purchasing specialized athletic gear. | High-intensity workouts maximize health benefits in under 60 minutes; scheduled classes create a disciplined 'hard stop' to the workday. | Group fitness classes provide a sense of accountability; casual sports leagues allow for networking with people outside one's immediate career field. | Physical exertion flushes out lactic acid and improves cardiovascular health; team sports develop non-verbal communication and coordination skills. |
-| **Active/Social Relaxation (Dining Out/Events) — Focus on Social Networking** | High service costs and tipping at restaurants; frequenting 'third places' like cafes or bars increases discretionary spending. | Table service and travel to venues can take 2-3 hours; requires coordination of multiple schedules which can be logistically taxing. | Face-to-face interaction strengthens emotional intelligence; shared meals facilitate deep venting and peer-to-peer emotional support. | Exposure to new cultures via diverse cuisines; navigating social etiquette in different environments builds interpersonal confidence. |
-
 **公式答（時間／金錢／人）**
 
-I like watching movies at home. It saves time because I do not need to go out. It also saves money because I use my phone. Many people in Taiwan also do the same thing.
+I like watching movies at home very much. It saves a lot of time because I do not need to go out. I can start the movie right after I finish dinner and dishes. It also saves money because I just use my phone or TV. One streaming plan only costs me about three hundred dollars each month. Many people in Taiwan also do the same thing after work. My friends and family love watching Netflix in their own living rooms. We share good shows and drama tips in our group chat. So overall, I really think watching movies at home is the best.
 
 **Model Answers**
 
@@ -391,18 +331,9 @@ I prefer engaging in productive hobbies like cooking or reading to maintain my w
 
 I can see why you'd say that. **When you have free time, do you prefer to spend it doing things by yourself, or do you prefer to be with other people? Why?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Solo activities focusing on personal productivity** | Eliminates peer pressure to spend on expensive group dinners or movie tickets; allows for low-cost hobbies like reading library books or home workouts. | Zero time wasted coordinating multiple schedules or waiting for late friends; complete control over the pace and duration of the activity. | Prevents social burnout for introverts who need solitude to recharge; reduces the likelihood of interpersonal friction or group-think during leisure time. | Develops deep focus and concentration skills required for mastering complex hobbies like coding or painting; encourages self-reliance and emotional independence. |
-| **Solo activities focusing on mental health and recovery** | Saves money on transportation costs to social venues; avoids the 'hospitality tax' of buying rounds of drinks or splitting large group bills. | Allows for spontaneous rest periods without needing to give notice; maximizes the efficiency of 'micro-breaks' during a busy work week. | Provides a necessary break from the constant digital connectivity of social media; fosters a stronger relationship with one's own thoughts and feelings. | Reduces cortisol levels by eliminating the stress of social performance; improves sleep quality by allowing for a quiet, meditative wind-down routine. |
-| **Social activities focusing on networking and career growth** | Group outings often lead to split costs on equipment rentals or bulk-buy discounts for events; potential for professional tips that lead to better salary prospects. | Multitasking by combining relaxation with professional networking; high-density information exchange happens faster in conversation than reading solo. | Expands one's social circle and introduces diverse perspectives from different industries; builds a safety net of friends who can provide support during crises. | Sharpens soft skills like negotiation, active listening, and public speaking; improves emotional intelligence by practicing empathy in real-time interactions. |
-| **Social activities focusing on physical health and team sports** | Gym memberships or court fees are significantly cheaper when divided among a regular group; reduces the need for expensive private personal trainers. | External accountability from teammates ensures that exercise time is actually spent working out rather than procrastinating; creates a fixed, disciplined schedule. | Fosters a sense of belonging and community through shared goals and victories; builds long-term bonds through the 'highs and lows' of competitive play. | High-intensity interval training in a group setting pushes physical limits further than solo sessions; teaches strategic thinking and collaborative problem-solving. |
-
 **公式答（時間／金錢／人）**
 
-I prefer alone time over group time. First of all, I can relax without any pressure. Also, I can focus on my own hobbies. Finally, quiet time helps me feel calm after a busy week.
+I prefer alone time over group time very much. First of all, I can relax without any pressure from others. I do not need to follow a group plan or wait for late friends. Also, I can focus on my own hobbies at home. I love painting, reading books, and cooking new dishes in my kitchen. Finally, quiet time helps me feel calm after a busy week at work. I often take a long walk in the park by myself. Many people in Taiwan also enjoy solo time on Sunday. That is why I really prefer to spend my free time alone.
 
 **Model Answers**
 
@@ -426,18 +357,9 @@ I definitely prefer being by myself when I have free time because it is essentia
 
 Let's look at the bigger picture for a moment. **Many companies now let their employees work from home some days of the week. Do you think more businesses will offer this choice in the future?**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Agree: Focus on Corporate Cost-Efficiency** | Companies slash overhead by reducing office square footage and utility bills for heating, cooling, and electricity. Businesses also save on 'perks' like free coffee, office snacks, and specialized ergonomic furniture for every staff member. | Management saves hours previously spent on physical facility maintenance and security logistics. Scheduling becomes more flexible as global teams can sync up across time zones without waiting for a physical office to open. | Recruitment pools expand globally because companies can hire the best talent regardless of geographic location. Digital collaboration tools like Slack and Zoom become the primary hubs for professional networking and team building. | Digital literacy skyrockets as employees must master cloud-based project management software. Physical health improves as workers avoid the sedentary posture of long commutes and the stress of traffic congestion. |
-| **Agree: Focus on Employee Wellness and Retention** | Workers save thousands annually on fuel, public transit passes, and professional dry cleaning. The 'lunch tax' disappears as employees prepare meals at home instead of buying expensive takeout near city business districts. | The elimination of the daily commute gives workers back roughly 5 to 10 hours a week. This extra time allows for consistent exercise routines or more sleep, which directly correlates to high cognitive performance at work. | Parents and caregivers can be more present for family milestones and school pickups. Stronger local community ties develop as people spend more time in their own neighborhoods rather than in isolated office parks. | Mental health improves due to reduced 'workplace theater' and social anxiety. Employees develop better self-regulation and autonomy, learning to manage their output based on results rather than hours spent at a desk. |
-| **Disagree: Focus on Innovation and Collaboration** | Companies may face hidden costs in cybersecurity insurance and upgrading home hardware for hundreds of individual workers. Long-term revenue might dip if the lack of 'water cooler' moments leads to fewer breakthrough product ideas. | Communication becomes slower as a 30-second desk-side chat turns into a series of back-and-forth emails or waiting for a meeting link. Project timelines often drift because it is harder to monitor real-time progress. | Spontaneous mentorship for junior staff vanishes, making it harder for new hires to learn company culture. Social isolation can lead to burnout as the boundaries between professional and private life become blurred. | Younger workers miss out on developing 'soft skills' like reading body language or navigating office politics. Home environments are often less ergonomic than offices, leading to increased back pain and repetitive strain injuries. |
-| **Disagree: Focus on Operational Control and Security** | Commercial real estate investors and local city economies pressure corporations to bring workers back to justify high rents and support local tax bases. Companies worry about the 'theft of time' where employees might multitask on personal chores. | Onboarding new employees takes significantly longer when training must be done via screen-sharing. Coordination becomes a nightmare when different team members choose different 'home days,' leading to fragmented workflows. | The lack of face-to-face interaction weakens the 'team spirit' and makes employees feel like replaceable cogs in a machine. Internal competition can become toxic when there is no social buffer of shared lunches or coffee breaks. | Sensitive corporate data is at higher risk when accessed via home Wi-Fi networks or in public spaces like cafes. Professional growth stalls because managers are more likely to promote people they see physically in the office every day. |
-
 **公式答（時間／金錢／人）**
 
-I agree. It saves time because workers do not need to go out. It also saves money because companies pay less for offices. Many people in Taiwan also agree with this.
+I agree with this idea very much. It saves time because workers do not need to go out every day. They can skip the long commute and start work right after breakfast. It also saves money because companies pay less for big offices. A smaller office means lower rent, lower power bills, and fewer cleaners. Many people in Taiwan also agree with this change. My friends at tech firms now work from home two or three days a week. They say they feel happier and get more things done. So overall, I really think more companies will offer this choice.
 
 **Model Answers**
 
@@ -461,18 +383,9 @@ I definitely think this trend will continue because it significantly boosts empl
 
 Well said. For my final question, I want to explore a different angle. **Some people believe that being successful at work is the most important thing in life. Do you agree with this, or do you think having time for family and hobbies is more important? Explain why.**
 
-**Brainstorming Table**
-
-| Answer Angle | $ (Money) | Time | People (Connection) | Extra (Skill / Health) |
-|---|---|---|---|---|
-| **Agree: Career success ensures long-term financial security** | High-level positions provide substantial salaries for property investment and retirement funds; career advancement often includes stock options and performance bonuses. | Committing long hours early in life allows for earlier retirement; intense focus on professional efficiency streamlines daily schedules. | Success builds a high-value professional network of mentors and industry leaders; financial stability prevents family stress regarding debt or bills. | Climbing the corporate ladder develops high-level strategic thinking and leadership skills; professional achievement builds self-esteem and a sense of purpose. |
-| **Agree: Career success drives societal progress and innovation** | Successful entrepreneurs and professionals create jobs for others; tax contributions from high earners fund public infrastructure and services. | Work-focused individuals often automate personal chores to maximize productivity; high earners can afford time-saving services like private transport. | Working on major projects fosters deep collaboration with talented colleagues; professional success provides a platform to influence and help more people. | Constant challenges in the workplace prevent cognitive decline; mastering a craft leads to a state of 'flow' and deep psychological satisfaction. |
-| **Disagree: Personal time is essential for mental and physical health** | Prioritizing balance avoids medical costs associated with burnout and chronic stress; expensive hobbies can be replaced by low-cost nature activities. | Leisure time allows for sleep recovery and exercise routines; unscheduled hours permit spontaneous activities that reduce the 'time pressure' feeling. | Regular family dinners and weekend outings strengthen emotional bonds; consistent presence at home prevents the isolation of children or spouses. | Hobbies like painting or sports develop diverse neural pathways beyond office tasks; physical activity reduces the risk of sedentary-related illnesses. |
-| **Disagree: Personal time fosters a well-rounded and creative identity** | Investing in diverse skills through hobbies can lead to unexpected side-income streams; less focus on status symbols reduces the need for high-impact consumption. | Time away from work allows the subconscious to solve complex problems; flexible schedules enable life-long learning and pursuing non-work certifications. | Joining community clubs or volunteer groups creates a support system outside the office; shared hobbies help meet people from different socioeconomic backgrounds. | Maintaining a life outside work prevents an 'identity crisis' during layoffs or retirement; travel and reading broaden one's global perspective and empathy. |
-
 **公式答（時間／金錢／人）**
 
-I disagree. I think family and hobbies are more important than career success. Work is important, but family makes people feel happy and less stressed. Hobbies also help people stay healthy and learn new skills. Many people in Taiwan also agree with this.
+I disagree with this idea very much. I think family and hobbies are more important than career success. Work is important, but family makes people feel happy and less stressed. A quiet dinner with parents is better than staying late at the office. Hobbies also help people stay healthy and learn new skills. I play basketball with friends every weekend to keep my body fit. Many people in Taiwan also agree with this view. My coworkers often say money is not everything in their daily life. So overall, I really think family and hobbies matter much more than just career success.
 
 **Model Answers**
 
