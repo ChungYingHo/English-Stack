@@ -81,7 +81,7 @@ Thanks so much for your time today. I'd like to explore study habits with you. *
 
 **公式答（時間／金錢／人）**
 
-I like flashcards very much. First of all, they save a lot of time for me. I can study new words on the bus or in the MRT every day. Also, flashcards save money because I just make them at home. I only need some small paper and one cheap pen. Finally, many classmates in Taiwan also use flashcards before big tests. My best friend and I often quiz each other at lunch. We share our cards and learn much faster together. That is why I really think flashcards are the best way to study.
+I prefer mock tests very much. First of all, mock tests save a lot of time before exams. They show me which chapters I do not know in just one hour. I do not waste days reading every page in the textbook. Also, mock tests save money because most of them are free online. I do not need to pay an expensive cram school for the same drill. Many students in Taiwan also use mock tests before big exams. My best friend and I time each other every Sunday afternoon. That is why I really think mock tests are the best way to study.
 
 **Model Answers**
 
@@ -191,7 +191,7 @@ Hi! I really appreciate you being here. Let's dive into shopping habits. **What 
 
 **公式答（時間／金錢／人）**
 
-I like shopping for clothes very much. It saves time because I can try many shirts in one short trip. I do not need to wait for a slow delivery at home. It also saves money because I check the price tag right away. I can pick one nice shirt instead of three cheap ones. Many people in Taiwan also shop for clothes every weekend. My friends and I go to Ximending together after class. We try on jackets, jeans, and caps for fun. So overall, I really think buying clothes is the best choice.
+I shop for electronics very much. They save time because one good laptop helps me work and study faster. I can finish reports, watch class videos, and reply to emails in one place. They also save money in the long run because a quality phone can last me three years. I do not need to buy a new one every Black Friday. Many people in Taiwan also love shopping for electronics each year. My friends and I check new headphones, tablets, and smart watches at Guang Hua market. We compare brands and prices before we buy. So overall, I really think electronics are the smartest things to shop for.
 
 **Model Answers**
 

@@ -8,8 +8,6 @@ author: 'Jeremy'
 
 ### Set 1: History Museum
 
-<audio controls src="/audio/toefl/sp07/speaking/SPK_01_T1_INSTR_sp07.wav"></audio>
-
 You are being trained to assist visitors during a historical museum tour. Listen to your supervisor and repeat what he says. Repeat only once.
 
 1. The ancient artifacts are inside.
@@ -29,8 +27,6 @@ You are being trained to assist visitors during a historical museum tour. Listen
 
 ### Set 2: Sports Arena
 
-<audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_INSTR_sp07.wav"></audio>
-
 You are being trained to assist guests at the city's major sports arena. Listen to your supervisor and repeat what he says. Repeat only once.
 
 1. Keep your ticket stub handy.
@@ -49,8 +45,6 @@ You are being trained to assist guests at the city's major sports arena. Listen 
    <audio controls src="/audio/toefl/sp07/speaking/SPK_02_T1_S07_sp07.wav"></audio>
 
 ### Set 3: Train Station
-
-<audio controls src="/audio/toefl/sp07/speaking/SPK_03_T1_INSTR_sp07.wav"></audio>
 
 You are being trained to assist passengers at a busy train station information desk. Listen to your supervisor and repeat what he says. Repeat only once.
 
@@ -385,7 +379,7 @@ Well said. For my final question, I want to explore a different angle. **Some pe
 
 **公式答（時間／金錢／人）**
 
-I disagree with this idea very much. I think family and hobbies are more important than career success. Work is important, but family makes people feel happy and less stressed. A quiet dinner with parents is better than staying late at the office. Hobbies also help people stay healthy and learn new skills. I play basketball with friends every weekend to keep my body fit. Many people in Taiwan also agree with this view. My coworkers often say money is not everything in their daily life. So overall, I really think family and hobbies matter much more than just career success.
+I agree with this idea very much. Career success is the most important thing in life. It saves time because a senior job lets you skip many small tasks. You can hire a cleaner or use a driver to save many hours each week. It also gives you more money for family, hobbies, and travel. A higher salary makes life with your parents and kids much easier. Many people in Taiwan also work very hard for promotions. My cousin in finance just got a big raise and bought her first house. So overall, I really think career success matters more than family time alone.
 
 **Model Answers**
 

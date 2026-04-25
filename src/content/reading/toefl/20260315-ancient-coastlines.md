@@ -9,6 +9,13 @@ sameDateSort: 2
 
 **[Paragraph 1]** Information on past climates is of primary relevance to archaeology because of what it tells us about the effects on the land and on the resources that people needed to survive. The most **crucial** effect of climate was on the sheer quantity of land available in each period, measurable by studying ancient coastlines. These have changed constantly through time, even in relatively recent periods, as can be seen from the Neolithic stone circle of Er Lannic, in Brittany, France (once inland but now half submerged on an island) or medieval villages in east Yorkshire, England, that have tumbled into the sea in the last few centuries as the North Sea gnaws its way westward and erodes the cliffs. Conversely, silts deposited by rivers sometimes push the sea farther back, creating new land, as at Ephesus in western Turkey, a port on the coast in Roman times but today some five kilometers inland.
 
+<details>
+<summary>翻譯 Translation</summary>
+
+關於過去氣候的資訊對考古學至關重要，因為它能告訴我們氣候對土地，以及人們賴以為生的資源所造成的影響。氣候最關鍵的影響，是各個時期可使用的土地總量——這可以透過研究古代海岸線來測量。古海岸線一直都在不斷變化，即使在相對近代也是如此。例如位於法國布列塔尼的新石器時代石圈 Er Lannic（過去在內陸，今天卻有一半淹沒於一座島嶼上），或位於英國東約克郡的中世紀村莊——這些村莊在過去幾世紀間已掉入海中，因為北海持續向西啃蝕、侵蝕著海崖。相對地，河流沉積的淤泥有時會把海岸線往後推、形成新的土地，例如土耳其西部的以弗所——它在羅馬時代是一座濱海港口，今日卻已位於內陸約五公里處。
+
+</details>
+
 **1.** The word **"crucial"** in the passage is closest in meaning to
 - (A) repugnant
 - (B) important
@@ -41,6 +48,13 @@ sameDateSort: 2
 ---
 
 **[Paragraph 2]** Nevertheless, for archaeologists concerned with the long periods of time of the Paleolithic period there are variations in coastlines of much greater magnitude to consider. The expansion and contraction of the continental glaciers caused huge and uneven rises and falls in sea levels worldwide. When the ice sheets grew, the sea level would drop as water became locked up in the glaciers; when the ice melted, the sea level would rise again. Falls in sea level often exposed a number of important land bridges, such as those linking Alaska to northeast Asia and Britain to northwest Europe, a phenomenon with far-reaching effects not only on human colonization of the globe but also on the environment as a whole—the flora and fauna of isolated or insular areas were radically and often irreversibly affected. Between Alaska and Asia today lies the Bering Strait, which is so shallow that a fall in sea level of only four meters would turn it into a land bridge. When the ice sheets were at their greatest extent some 18,000 years ago (the glacier maximum), it is thought that the fall was about 120 meters, which therefore created not merely a bridge but a vast plain, 1,000 kilometers from the north to the south, which has been called Beringia. The existence of Beringia (and the extent to which it could have supported human life) is one of the crucial pieces of evidence in the continuing debate about the likely route and date of human colonization of the New World.
+
+<details>
+<summary>翻譯 Translation</summary>
+
+不過對於關注舊石器時代漫長時間尺度的考古學家而言，他們需要考慮的是「規模大得多」的海岸線變化。大陸冰川的擴張與收縮，造成全球海平面巨大且不均勻的升降。當冰原擴大時，水被鎖在冰川裡，海平面就會下降；冰融化時，海平面就會再度上升。海平面的下降經常露出許多重要的「陸橋」，例如連接阿拉斯加與東北亞、以及連接英國與西北歐的陸橋。這個現象有深遠影響——不只影響人類向全球的擴散，也影響整個環境：原本孤立或位於島嶼上的動植物群，往往發生劇烈、且通常無法逆轉的變化。今日介於阿拉斯加與亞洲之間的是白令海峽，它非常淺，海平面只要下降 4 公尺就會變成陸橋。在大約 18,000 年前冰原達到最大範圍時（冰川極盛期），海平面下降幅度估計約 120 公尺，因此不只形成一座橋，更形成一片從北到南長達 1,000 公里的廣袤平原，被稱為「白令陸橋」（Beringia）。「白令陸橋是否曾經存在，以及它能在多大程度上支持人類生活」，是「新世界何時、由何路線被人類拓殖」這場持續爭論中至關重要的證據之一。
+
+</details>
 
 **4.** Which of the following can be inferred from paragraph 2 about the effects of climate change during the Paleolithic period?
 - (A) The amount of land not covered by water was greater during warmer periods.
@@ -79,6 +93,13 @@ sameDateSort: 2
 
 **[Paragraph 3]** The assessment of past rises and falls in sea level requires study of submerged land surfaces off the coast and of raised or elevated beaches on land. Raised beaches are **remnants** of former coastlines at higher levels relative to the present shoreline and visible, for instance, along the Californian coast north of San Francisco. The height of a raised beach above the present shoreline, however, does not generally give a straightforward indication of the height of a former sea level. In the majority of cases, the beaches lie at a higher level because the land has been raised up through isostatic uplift or tectonic movement. Isostatic uplift of the land occurs when the weight of ice is removed as temperatures rise, as at the end of an ice age; it has affected coastlines, for example, in Scandinavia, Scotland, Alaska, and Newfoundland during the postglacial period. Tectonic movements involve displacements in the plates that make up Earth's crust. Middle and Late Pleistocene raised beaches in the Mediterranean are one instance of such movements.
 
+<details>
+<summary>翻譯 Translation</summary>
+
+要評估過去海平面的升降，必須研究位於海岸外、已被水淹沒的陸地面，以及陸地上隆起或抬升的海灘。「隆起海灘」是過去海岸線的「遺跡」，相對於現今的海岸線位於更高處——例如在舊金山以北的加州海岸就能看到。然而，隆起海灘高出現今海岸線的高度，通常並不能直接代表「過去海平面有多高」。在大多數情況下，海灘之所以位於較高位置，是因為陸地本身被「地殼均衡抬升」或「板塊運動」所推升。「地殼均衡抬升」發生在氣溫上升、冰的重量被移除的時候，例如冰河期的末期；它影響過例如冰河期之後的斯堪地那維亞、蘇格蘭、阿拉斯加與紐芬蘭的海岸線。板塊運動則涉及構成地殼的板塊發生位移。地中海中更新世與更新世晚期的隆起海灘，就是這類運動的實例之一。
+
+</details>
+
 **8.** The word **"remnants"** in the passage is closest in meaning to
 - (A) remains
 - (B) domains
@@ -108,6 +129,13 @@ sameDateSort: 2
 ---
 
 **[Paragraph 4]** (A)■ Raised beaches often consist of areas of sand, pebbles, or dunes, sometimes containing seashells or piles of debris **comprising** shells and bones of marine animals used by humans. (B)■ In Tokyo Bay, for example, shell mounds of the Jomon period (about 10,000 to 300 B.C.E.) mark the position of the shoreline at a time of maximum inundation by the sea (6,500–5,500 years ago), when, through tectonic movement, the sea was three to five meters higher in relation to the contemporary landmass of Japan than at present. (C)■ Analysis of the shells themselves has confirmed the changes in marine topography, for it is only during the maximum phase that subtropical species of mollusk are present, indicating a higher water temperature. (D)■
+
+<details>
+<summary>翻譯 Translation</summary>
+
+(A)■ 隆起海灘通常由一片片沙地、卵石或沙丘構成，有時還含有貝殼，或人類所利用的海洋動物的貝殼與骨骼所形成的「碎屑堆」。(B)■ 例如在東京灣，繩文時代（約西元前 10,000 到西元前 300 年）的「貝塚」標示出當時海平面最高位的海岸線位置（距今約 6,500 到 5,500 年前）——當時由於地殼運動，相對於當時的日本陸地，海面比現在高出三到五公尺。(C)■ 對這些貝殼本身的分析已證實這段海洋地形變化：只有在這個極大期才會出現亞熱帶種類的軟體動物，顯示當時水溫較高。(D)■
+
+</details>
 
 **11.** The word **"comprising"** in the passage is closest in meaning to
 - (A) taken from

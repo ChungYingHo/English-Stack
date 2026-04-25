@@ -518,25 +518,66 @@ document.addEventListener('DOMContentLoaded', () => {
   if (quizMode !== 'listening') return
 
   article.querySelectorAll('details').forEach(details => {
-    if (!details.querySelector('summary')?.textContent?.includes('答案')) return
+    const summaryText = details.querySelector('summary')?.textContent || ''
+    if (!summaryText.includes('答案')) return
 
     // Parse "1.B &nbsp; 2.C ..." → { '1':'B', '2':'C', ... }
+    // Also support single-answer BR items where the answer key starts with "B — ..."
     const raw = details.textContent || ''
     const answers: Record<string, string> = {}
-    ;(raw.match(/\d+\.[A-D]/g) || []).forEach(m => {
-      const [n, l] = m.split('.')
-      answers[n] = l
-    })
+    const numbered = raw.match(/\d+\.\s*[A-D]/g) || []
+    if (numbered.length > 0) {
+      numbered.forEach(m => {
+        const [n, l] = m.replace(/\s+/g, '').split('.')
+        answers[n] = l
+      })
+    } else {
+      // Fallback: look for a leading single letter answer (e.g. "B — Could you ...")
+      const single = raw.trim().match(/^([A-D])\b/)
+      if (single) answers['1'] = single[1]
+    }
 
-    // Walk backward from <details> to find the question <ol>
+    // Walk backward from <details> within the same section to collect all
+    // .quiz-choices ULs. Two layouts are supported:
+    //   (a) Old: <ol><li><ul.quiz-choices>...</ul></li>...</ol>
+    //   (b) New: <p><strong>1.</strong> ...</p><ul.quiz-choices>...</ul>
+    const choiceUls: Element[] = []
     let el = details.previousElementSibling
-    let qOl: Element | null = null
     while (el) {
-      if (el.tagName === 'OL') { qOl = el; break }
       if (['H2', 'H3', 'H4'].includes(el.tagName)) break
+      if (el.tagName === 'UL' && el.classList.contains('quiz-choices')) {
+        choiceUls.unshift(el)
+      } else if (el.tagName === 'OL') {
+        Array.from(el.querySelectorAll(':scope > li > ul.quiz-choices')).forEach(u => choiceUls.unshift(u))
+      }
       el = el.previousElementSibling
     }
-    if (!qOl) { details.remove(); return }
+
+    if (choiceUls.length === 0) return
+
+    const applyAnswers = () => {
+      choiceUls.forEach((ul, idx) => {
+        const correct = answers[String(idx + 1)]
+        if (!correct) return
+        ul.querySelectorAll('.quiz-item').forEach(optLi => {
+          const r = optLi.querySelector('.quiz-radio') as HTMLInputElement | null
+          if (!r) return
+          r.disabled = true
+          if (r.value === correct) optLi.classList.add('quiz-correct')
+          else if (optLi.classList.contains('quiz-selected')) optLi.classList.add('quiz-wrong')
+        })
+      })
+    }
+
+    const resetAnswers = () => {
+      choiceUls.forEach(ul => {
+        ul.querySelectorAll('.quiz-item').forEach(item => {
+          item.classList.remove('quiz-correct', 'quiz-wrong', 'quiz-selected')
+          const r = item.querySelector('.quiz-radio') as HTMLInputElement | null
+          if (r) { r.checked = false; r.disabled = false }
+        })
+      })
+    }
 
     const btn = document.createElement('button')
     btn.className = 'quiz-reveal-btn'
@@ -544,26 +585,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btn.addEventListener('click', () => {
       if (btn.dataset.revealed === 'true') {
-        qOl!.querySelectorAll('.quiz-item').forEach(item => {
-          item.classList.remove('quiz-correct', 'quiz-wrong', 'quiz-selected')
-          const r = item.querySelector('.quiz-radio') as HTMLInputElement | null
-          if (r) { r.checked = false; r.disabled = false }
-        })
+        resetAnswers()
         btn.textContent = '對答案 Check Answers'
         delete btn.dataset.revealed
         btn.classList.remove('quiz-revealed')
       } else {
-        Array.from(qOl!.querySelectorAll(':scope > li')).forEach((qLi, idx) => {
-          const correct = answers[String(idx + 1)]
-          if (!correct) return
-          qLi.querySelectorAll('.quiz-item').forEach(optLi => {
-            const r = optLi.querySelector('.quiz-radio') as HTMLInputElement | null
-            if (!r) return
-            r.disabled = true
-            if (r.value === correct) optLi.classList.add('quiz-correct')
-            else if (optLi.classList.contains('quiz-selected')) optLi.classList.add('quiz-wrong')
-          })
-        })
+        applyAnswers()
         btn.textContent = '重置 Reset'
         btn.dataset.revealed = 'true'
         btn.classList.add('quiz-revealed')
@@ -796,4 +823,51 @@ document.addEventListener('DOMContentLoaded', () => {
     .fill-blank-panel { padding: 1rem; }
     .fill-blank-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.5rem; }
   }
+
+  /* === Reveal-on-click <details> blocks (e.g. 翻譯 Translation) === */
+  .md-content details {
+    margin: 1.25rem 0 2rem;
+    padding: 0;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 0.875rem;
+    background: #f8fafc;
+    overflow: hidden;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .md-content details[open] {
+    border-color: #c7d2fe;
+    background: #fff;
+  }
+  .md-content details > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4f46e5;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.15s;
+  }
+  .md-content details > summary:hover { background: #eef2ff; }
+  .md-content details > summary::-webkit-details-marker { display: none; }
+  .md-content details > summary::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid #6366f1;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.2s;
+  }
+  .md-content details[open] > summary::before { transform: rotate(90deg); }
+  .md-content details > *:not(summary) {
+    padding: 0 1.25rem;
+  }
+  .md-content details > :nth-child(2) { margin-top: 0.5rem; }
+  .md-content details > :last-child { margin-bottom: 1rem; }
+  .md-content details p { margin-bottom: 0.85rem; }
+  .md-content details p:last-child { margin-bottom: 0; }
 </style>

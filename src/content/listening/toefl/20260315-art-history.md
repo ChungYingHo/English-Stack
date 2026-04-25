@@ -52,6 +52,20 @@ M: Maybe you could come with me on Saturday? I'd love a second opinion before I 
 W: I'd love to help! Just let me know what time works best for you.
 
 <details>
+<summary>翻譯 Translation</summary>
+
+M：所以這個週末我決定要去當地的收容所認養一隻狗了。
+W：聽起來太棒了！我記得你已經想了好幾個月。你想找什麼樣的狗呢？
+M：說實話，我想找體型小一點的，因為我的公寓真的很小。我有點擔心狗狗會覺得太擠。
+W：說得有道理。不過你家對面就是公園，牠到外面就有很多地方可以跑來跑去。
+M：對耶。我也聽說收容所有提供免費的訓練課程給新主人。
+W：對，他們有，你一定要去報名。會讓你跟狗狗都比較好適應。
+M：星期六你要不要跟我一起去？簽認養文件之前，我想多聽一個人的意見。
+W：我很樂意陪你去！告訴我哪個時間方便。
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.B &nbsp; 2.C &nbsp; 3.D &nbsp; 4.A &nbsp; 5.B
@@ -102,6 +116,18 @@ W: Sunday might work, though I usually visit my parents then. Maybe we could go 
 M: Good point. I'll check if those tickets are available. Let me know if that time truly suits you.
 
 <details>
+<summary>翻譯 Translation</summary>
+
+W：你有去查市區那家電影院新紀錄片的場次嗎？
+M：有啊，但因為戲院在整修，他們一天只放一場。
+W：好可惜。我這個星期五真的好想去大銀幕上看。
+M：晚場聽說已經賣完了。不過星期天的下午場還有位子。
+W：星期天應該可以，雖然我通常那天會回去看爸媽。也許我們可以去看早場，之後再一起吃午餐？
+M：好啊，我來查一下票還有沒有。如果那時間你方便，再跟我說。
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.B &nbsp; 2.B &nbsp; 3.C &nbsp; 4.D &nbsp; 5.A
@@ -149,6 +175,13 @@ M: Good point. I'll check if those tickets are available. Let me know if that ti
 M: Good evening, everyone! I have some exciting news for you all regarding our upcoming Intramural Sports Tournament. We are thrilled to announce that registration opens this Monday for several team sports, including soccer, volleyball, and basketball. Whether you are a seasoned athlete or just looking for a fun way to stay active, we encourage everyone to participate. There will be prizes for the winning teams and free jerseys for all registered participants. In addition, professional coaches will be present to offer brief workshops before the matches begin. Space is limited, so make sure to gather your teammates and sign up early. We look forward to seeing you on the field!
 
 <details>
+<summary>翻譯 Translation</summary>
+
+M：大家晚安！關於即將到來的校內運動聯賽，我有個令人興奮的消息要告訴大家。我們很高興宣布，這個星期一開放數個團體運動的報名，包括足球、排球和籃球。不論你是經驗老道的運動員，或只是想找個有趣的方式維持運動習慣，我們都鼓勵大家踴躍參加。獲勝隊伍將有獎品，所有報名選手都會獲得一件免費球衣。此外，比賽開始前還會有專業教練到場帶領短時間的訓練工作坊。名額有限，請趕快號召你的隊友、儘早報名。期待在球場上見到大家！
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.B &nbsp; 2.C &nbsp; 3.C &nbsp; 4.C &nbsp; 5.C
@@ -192,6 +225,13 @@ M: Good evening, everyone! I have some exciting news for you all regarding our u
 **Script**
 
 W: Attention students and faculty. We are thrilled to announce that the university's annual Sustainability Fair will be held this Friday in the South Plaza. This event focuses on environmental protection and green living. There will be several interactive workshops where you can learn about solar energy and waste reduction. In addition, local organic farmers will provide healthy snacks for all participants. If you are interested in joining the environmental club, representatives will be available to answer your questions throughout the afternoon. Don't miss it! This is a wonderful chance to contribute to our local community efforts. We look forward to seeing you there!
+
+<details>
+<summary>翻譯 Translation</summary>
+
+W：各位同學與老師請注意。我們很高興宣布，本校年度的永續博覽會將於本週五在南廣場舉行。本次活動聚焦於環境保護與綠色生活。現場將有數個互動式工作坊，你可以學到關於太陽能與廢棄物減量的知識。此外，在地的有機小農會為所有參加者提供健康點心。如果你有興趣加入環保社，整個下午都會有社團代表在場為你解答疑問。千萬別錯過！這是一個為在地社群盡一份心力的好機會。期待現場見到大家！
+
+</details>
 
 <details>
 <summary>答案 Answer Key</summary>
@@ -295,6 +335,13 @@ W: Attention students and faculty. We are thrilled to announce that the universi
 Archaeologically speaking, the production of blue pigment represents a significant milestone in human artistic development due to the rarity of the color in nature. In Ancient Egypt, we find the creation of 'Egyptian Blue,' a synthetic pigment made from ground glass and copper. This vibrant hue was synonymous with the heavens and the life-giving Nile, appearing prominently in the tomb paintings of pharaohs to ensure divine protection in the afterlife. Meanwhile, in Medieval Europe, the narrative surrounding blue shifted dramatically as it became associated with the Virgin Mary. Lapislazuli, a semi-precious stone imported from Afghanistan, was ground into ultramarine, a pigment so expensive that its use was strictly reserved for the most sacred figures in religious manuscripts. A striking contrast emerges in the Maya civilization of Mesoamerica. They developed 'Maya Blue,' a remarkably durable pigment created by fusing indigo with a specific type of clay. This color was inextricably linked to rain deities and sacrificial rituals, often applied to pottery and murals that have survived centuries of tropical weathering. In contrast, the ceramics of the Chinese Yuan Dynasty utilized cobalt blue imported from Persia to create the iconic blue-and-white porcelain that eventually dominated global trade. Across all these traditions, the color blue served as a conduit for the most profound spiritual and status-driven aspirations of society. This enduring focus illustrates that while artistic materials are rooted in local geography, the desire to capture the transcendent is a universal human impulse.
 
 <details>
+<summary>翻譯 Translation</summary>
+
+從考古學的角度來說，「藍色顏料」的製造，是人類藝術發展上的重要里程碑——因為這種顏色在自然界中極為稀少。在古埃及，我們看到「埃及藍」的誕生，這是一種以研磨玻璃與銅製成的合成顏料。這個鮮豔的色調等同於天空與孕育生命的尼羅河，廣泛出現在法老王的墓室壁畫中，藉此確保來世受到神聖的保護。同時間在中世紀的歐洲，藍色的敘事出現了戲劇性的轉變——它開始與聖母瑪利亞連結。從阿富汗進口的半寶石「青金石」被磨成「群青」，這種顏料貴到使用範圍嚴格限定在宗教手稿中最神聖的人物。在中美洲的馬雅文明，又出現了截然不同的對比。他們發展出「馬雅藍」——一種把靛藍染料與特定種類的黏土融合而成、極為耐久的顏料。這個顏色與雨神信仰和獻祭儀式緊密相連，常見於陶器與壁畫上，能挺過數百年熱帶氣候的侵蝕。相對地，中國元朝的陶瓷則使用從波斯進口的鈷藍，創造出後來席捲全球貿易的經典「青花瓷」。在所有這些傳統中，藍色都是社會中最深層的精神與地位渴望的傳達媒介。這種跨越文化的共同關注顯示：藝術材料雖根植於在地地理，但人類想要捕捉「超越性」的渴望，是一種普世共通的衝動。
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.C &nbsp; 2.B &nbsp; 3.A &nbsp; 4.B &nbsp; 5.D &nbsp; 6.A &nbsp; 7.C &nbsp; 8.D &nbsp; 9.C &nbsp; 10.C &nbsp; 11.C &nbsp; 12.D &nbsp; 13.D &nbsp; 14.B
@@ -392,6 +439,13 @@ Archaeologically speaking, the production of blue pigment represents a significa
 **Script**
 
 You're probably familiar with the idea of landscape painting, but it wasn't always a popular genre in America. Its origins trace back to the early nineteenth century with a group of artists we now call the Hudson River School. A defining characteristic is the way these artists depicted the American wilderness as a vast, divine, and untouched paradise. They didn't just paint what they saw; they used heavy light and shadows to make the landscape look holy and magnificent. The turning point came when artists like Thomas Cole and Frederic Church started traveling beyond New York. By the mid-1800s, it had spread across the entire country, influencing how Americans viewed the newly discovered Western territories. These paintings helped create a national identity and even encouraged the start of the national park system. Today, it continues to influence how we photograph nature and how we think about environmental conservation. It's fascinating to see how a small group of painters in New York changed the way an entire nation looked at its own backyard.
+
+<details>
+<summary>翻譯 Translation</summary>
+
+你應該對「風景畫」這個概念不陌生，但在美國它並非一直都是流行的繪畫類型。它的起源可以追溯到十九世紀初，由一群被我們今天稱為「哈德遜河畫派」的藝術家所開啟。這個畫派的鮮明特徵，是他們把美國荒野描繪成一片廣闊、神聖、未經人工破壞的天堂。他們不只是「畫眼前所見」，而是用濃重的光影，把風景畫得像是聖殿般莊嚴宏偉。轉折點出現在湯瑪斯・科爾與弗雷德里克・丘奇等畫家開始走出紐約之後。到了十九世紀中期，這個風格已經擴散到全美各地，影響了美國人如何看待新發現的西部疆域。這些畫作協助塑造了國家認同，甚至推動了國家公園體系的誕生。今日，它仍持續影響我們如何拍攝自然，以及如何思考環境保育。看著紐約的一小群畫家竟然改變了整個國家看待自家後院的方式，實在令人著迷。
+
+</details>
 
 <details>
 <summary>答案 Answer Key</summary>
@@ -493,6 +547,13 @@ You're probably familiar with the idea of landscape painting, but it wasn't alwa
 The 'Heroic Genius' is a theory that suggests the great masterpieces of the High Renaissance were the result of the isolated, divine inspiration of single individuals like Michelangelo or Leonardo da Vinci. The traditional explanation involves the notion that these artists possessed almost supernatural talents that allowed them to transcend the limitations of their era. This was long attributed to the rise of Humanism, which shifted the cultural focus toward individual achievement and the intellectual status of the artist as something more than a mere craftsman. More recent studies, however, have disputed the claim that these monumental works were the products of solitary labor. A 2012 study of workshop records found that the majority of major commissions, including the Sistine Chapel ceiling, relied heavily on a sophisticated system of apprentices and specialized assistants. These individuals performed essential tasks ranging from grinding pigments to painting secondary figures and architectural backgrounds. This suggests that the 'genius' resided more in the artist's ability to manage a complex creative firm than in their ability to execute every brushstroke alone. While we still recognize the visionary leadership of the primary master, we must acknowledge the collective nature of Renaissance production. The myth of the lonely creator remains a romantic ideal, but the historical reality is far more collaborative and industrial. This discovery reshaped our understanding of the social and economic structures that underpinned the most celebrated era in Western art history.
 
 <details>
+<summary>翻譯 Translation</summary>
+
+「英雄式天才」是一個理論，主張文藝復興全盛期的偉大傑作，是出自像米開朗基羅或達文西這類單一個人的孤獨、神授靈感。傳統的解釋是：這些藝術家擁有近乎超自然的天賦，能超越他們所處時代的限制。長久以來這被歸功於人文主義的興起——人文主義把文化焦點轉向個人成就，並把藝術家的知識地位提升到「不只是匠人」的高度。然而較近期的研究已經質疑「這些不朽作品都是孤獨勞動產物」的說法。2012 年一項以工作坊紀錄為材料的研究發現，包括西斯汀禮拜堂天花板在內，絕大多數重大委託案其實大量倚賴一套精密分工的學徒與專業助手體系。這些助手執行各種關鍵任務，從研磨顏料到繪製次要人物與建築背景皆然。這顯示「天才」更多展現在這位藝術家管理一家複雜創意公司的能力，而非親手畫下每一筆。我們當然仍承認首席大師的願景式領導，但也必須承認文藝復興藝術生產本質上的「集體性」。「孤獨創作者」的神話仍是一種浪漫的理想，但歷史現實遠遠更為協作、更為工業化。這個發現重塑了我們對於支撐西洋藝術史最被讚頌時代的社會與經濟結構的理解。
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.D &nbsp; 2.B &nbsp; 3.C &nbsp; 4.C &nbsp; 5.A &nbsp; 6.B &nbsp; 7.D &nbsp; 8.D &nbsp; 9.A &nbsp; 10.B &nbsp; 11.D &nbsp; 12.C &nbsp; 13.A &nbsp; 14.D
@@ -590,6 +651,13 @@ The 'Heroic Genius' is a theory that suggests the great masterpieces of the High
 **Script**
 
 Today's talk focuses on the very first successful form of photography, known as the Daguerreotype. Before digital cameras or even film, artists used a complex chemical method to capture images. The mechanism works as follows: a photographer takes a sheet of silver-plated copper and polishes it until it looks like a mirror. This process begins when the plate is exposed to iodine vapor, which creates a light-sensitive surface. Once the plate is placed inside a camera and exposed to light, a hidden image is formed. What enables this is a second chemical step involving mercury vapor, which makes the image visible to the human eye. The sequence involves fixing the image with a salt solution so it doesn't fade when exposed to more light. This is crucial because, for the first time in history, people could see an exact likeness of a person or place without a painter's help. It changed how we document reality and family history. However, the presence of oxidation and physical scratches poses a major threat to these fragile objects today. Because the image sits right on the surface of the metal, even a light touch can wipe it away forever. This vulnerability makes the preservation of these historical plates an urgent task for museum conservators. The survival of these early images provides us with a hauntingly clear window into the faces of the mid-nineteenth century.
+
+<details>
+<summary>翻譯 Translation</summary>
+
+今天的講座聚焦於人類史上第一個成功的攝影形式——「銀版攝影法（Daguerreotype）」。在數位相機、甚至底片問世之前，藝術家是用一種複雜的化學方法來捕捉影像。整個機制是這樣的：攝影師取一塊鍍銀的銅板，把它拋光到像鏡子那樣亮。整個過程從這塊板子被「碘蒸氣」處理開始——這會在表面形成一層感光膜。當銅板被放進相機並曝光於光線下，就會產生一個「隱藏的影像」。讓影像現形的，是接下來的第二道化學步驟——使用「水銀蒸氣」，這時人眼才看得到影像。再來的步驟是用「鹽溶液」把影像固定，這樣即使再次曝光也不會褪掉。這之所以重要，是因為人類史上第一次，人們不必依賴畫家就能看到某個人或某個地方的精確樣貌。它改變了我們紀錄真實與家族歷史的方式。不過今天，氧化作用與表面刮痕對這些脆弱的物件構成重大威脅。因為影像就直接存在金屬表面，即便輕輕碰一下都可能把它永遠抹掉。這種脆弱性，讓保存這些歷史銀版成為博物館修復師的當務之急。這些早期影像之所以能流傳下來，等於為我們開了一扇通往十九世紀中期人們臉龐的清晰、卻略帶幽幽的窗。
+
+</details>
 
 <details>
 <summary>答案 Answer Key</summary>
@@ -691,6 +759,13 @@ Today's talk focuses on the very first successful form of photography, known as 
 In linguistics, the term 'literacy' refers to the ability to read and write words to understand a message. In art history, visual literacy refers to the ability to interpret and negotiate meaning from information presented in the form of an image. Think of it this way: just as you learn to decode letters to read a book, you can learn to decode symbols, colors, and lighting to read a painting or an advertisement. The parallel here is that both systems require a specific vocabulary to truly understand what is being communicated. Take the example of seventeenth-century Dutch still-life paintings. At first glance, you just see a bowl of fruit. But a visually literate viewer recognizes that a half-peeled lemon or a wilting flower is a symbol for the passing of time and the shortness of life. Now, think about modern political posters. The use of low-angle shots or specific bold colors isn't accidental; it is designed to make the subject look powerful or heroic. Understanding these visual 'sentences' helps us look past the surface of what we see. However, a major limitation of visual literacy is that it is often culturally specific. A symbol that means 'danger' in one part of the world might mean 'luck' in another. If we don't understand the cultural context, we can easily misread the entire visual message. It reminds us that our eyes only see what our minds are prepared to comprehend.
 
 <details>
+<summary>翻譯 Translation</summary>
+
+在語言學中，「素養（literacy）」一詞指的是讀寫文字以理解訊息的能力。在藝術史中，「視覺素養」指的則是從以「圖像」形式呈現的資訊中，去解讀並協商意義的能力。你可以這樣想：就像你學會解碼字母以讀懂一本書，你也可以學會解碼符號、色彩和光線，以「閱讀」一幅畫或一張廣告。這裡的關鍵類比是：兩種系統都需要一套特定的「字彙」，才能真正理解所要傳達的內容。以十七世紀荷蘭靜物畫為例。第一眼你只看到一盤水果。但具有視覺素養的觀者會認得：剝了一半的檸檬或凋萎的花朵，象徵著時間流逝與生命短暫。再想想現代的政治海報。使用低角度鏡頭或特定的鮮豔顏色並不是偶然——而是被設計用來讓主角顯得有權威或英雄感。理解這些視覺「句子」能幫我們看穿表象。然而視覺素養的一大限制是：它常常具有文化專屬性。一個在世界某地代表「危險」的符號，在另一地可能代表「幸運」。如果我們不了解文化脈絡，就很容易誤讀整段視覺訊息。它提醒我們：我們的眼睛只看得見我們的心智已經準備好去理解的東西。
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.A &nbsp; 2.A &nbsp; 3.B &nbsp; 4.B &nbsp; 5.A &nbsp; 6.C &nbsp; 7.D &nbsp; 8.D &nbsp; 9.D &nbsp; 10.C &nbsp; 11.C &nbsp; 12.C &nbsp; 13.C &nbsp; 14.B
@@ -788,6 +863,13 @@ In linguistics, the term 'literacy' refers to the ability to read and write word
 **Script**
 
 Byzantine Iconoclasm is a practice that shaped the religious art of the Eastern Roman Empire for over a century. During this time, the government and church authorities ordered the destruction of religious images, especially icons of holy figures. This serves multiple functions, including centralizing the power of the emperor and attempting to reform religious practices that some felt had become too focused on physical objects. What's often misunderstood is that this wasn't just about simple vandalism or a hate for art. It was a deep theological debate. For those unfamiliar with the cultural context, it may appear to be a strange and violent overreaction to paintings. However, the movement was driven by a fear that people were worshiping the images themselves rather than the divine concepts they represented. This perception led to the widespread destruction of centuries of mosaic work and wooden panels, creating a massive gap in our historical record of early Christian art. Eventually, the movement failed. Today, icons are once again central to the identity of Orthodox Christianity, and they are celebrated for their stylized beauty and spiritual depth. These icons aren't meant to be realistic portraits but rather 'windows to heaven.' Let's now examine how the final restoration of these images changed the way artists used gold and light in their later compositions to emphasize divinity over the material world.
+
+<details>
+<summary>翻譯 Translation</summary>
+
+「拜占庭聖像破壞運動（Byzantine Iconoclasm）」是一場形塑東羅馬帝國宗教藝術超過一個世紀的歷史實踐。在這段期間，政府與教會當局下令摧毀宗教圖像，尤其是聖人聖像。這場運動同時服務於多重目的，包括集中皇帝的權力，以及嘗試改革那些被認為過度聚焦於實體物件的宗教習俗。一個常被誤解的點是：這並不只是單純的破壞文物或對藝術的仇恨——它是一場深刻的神學辯論。對不熟悉當時文化脈絡的人而言，這可能看起來像是針對畫作的奇怪暴力反應。然而推動這場運動的真正力量，是擔心人們崇拜「圖像本身」，而非圖像所代表的「神聖概念」。這種觀念導致數百年累積的馬賽克作品與木板畫遭到廣泛摧毀，在我們對早期基督教藝術的歷史紀錄中留下巨大的空白。最終這場運動失敗了。今日，聖像重新成為東正教信仰認同的核心，並因其風格化的美感與精神深度受到推崇。這些聖像並非寫實的肖像，而是被視為「通往天堂的窗」。我們接下來會看，當這些圖像最終獲得平反後，藝術家如何在後續的作品中改變黃金與光線的使用方式，藉此強調神性凌駕於物質世界之上。
+
+</details>
 
 <details>
 <summary>答案 Answer Key</summary>
@@ -889,6 +971,13 @@ Byzantine Iconoclasm is a practice that shaped the religious art of the Eastern 
 Dada is an art movement that emerged during World War One as a reaction to the horrors of the conflict. This serves multiple functions, including challenging the traditional definitions of art and criticizing a society that many artists felt had lost its mind. Instead of making beautiful paintings, Dadaists organized strange performances that involved shouting nonsense poems or wearing costumes made of cardboard and trash. What's often misunderstood is that Dada wasn't just about being silly or random for the sake of it. For those unfamiliar with the history of the 1910s, it may appear that these artists were simply making fun of the audience. However, their goal was actually to destroy the logic and balance of high society, which they blamed for the war. This perception led to massive scandals, where the police were often called to shut down their exhibitions and shows. Government officials and traditional critics saw it as a dangerous and offensive waste of time. They couldn't see the underlying political protest in the chaos. Today, Dada's status as a serious turning point in art history is widely accepted. It paved the way for modern performance art and conceptual art by proving that an idea could be more important than the finished object. It illustrates why artists often turn to the absurd when the real world stops making sense. Ironically, the very movement that wanted to destroy museums is now celebrated in the most famous museums around the world.
 
 <details>
+<summary>翻譯 Translation</summary>
+
+「達達主義（Dada）」是一個在第一次世界大戰期間興起的藝術運動，是對戰爭恐怖的一種反應。它身負多重功能，包括挑戰藝術的傳統定義，以及批判一個許多藝術家認為已經發瘋的社會。達達主義者不畫漂亮的畫作，反而舉辦各種怪異的表演——大聲朗誦根本沒意義的詩，或穿上用紙板和垃圾做成的服裝。一個常被誤解的點是：達達並不是「為了搞笑或隨機而搞笑」。對不熟悉 1910 年代歷史的人來說，這群藝術家好像只是在嘲弄觀眾。然而他們真正的目標，是摧毀「高層社會」的邏輯與秩序——因為他們認為正是這套秩序造成了戰爭。這種觀感引起巨大醜聞，警方常常被叫來中止他們的展覽與表演。政府官員與傳統評論家把它視為危險、冒犯、浪費時間的行為——他們看不見混亂背後的政治抗議。如今，達達被廣泛承認是藝術史上一個嚴肅的轉捩點。它證明了「一個想法可以比完成品更重要」，因此為現代行為藝術與觀念藝術鋪了路。它也解釋了：為什麼當真實世界開始失去理性時，藝術家經常轉向「荒謬」。最諷刺的是，當年那個想摧毀美術館的運動，現在卻被全世界最著名的美術館所推崇。
+
+</details>
+
+<details>
 <summary>答案 Answer Key</summary>
 
 1.C &nbsp; 2.B &nbsp; 3.D &nbsp; 4.C &nbsp; 5.D &nbsp; 6.D &nbsp; 7.A &nbsp; 8.A &nbsp; 9.D &nbsp; 10.C &nbsp; 11.C &nbsp; 12.C &nbsp; 13.C &nbsp; 14.B
@@ -986,6 +1075,13 @@ Dada is an art movement that emerged during World War One as a reaction to the h
 **Script**
 
 Today we will look at encaustic painting, an ancient technique using heated beeswax. The mechanism works as follows: the artist melts beeswax and mixes it with dry colored pigments. This process begins when the mixture is kept fluid on a heated palette, allowing the artist to apply it to a wood or stone surface. What enables this is the unique property of wax to cool and harden almost instantly, meaning the artist must work quickly with brushes or metal tools. The sequence involves layering the wax and then using a heat source to fuse the layers together, which creates a deep, luminous effect that oil paints struggle to match. This is crucial because it makes the artwork incredibly durable; the wax is moisture-resistant and doesn't yellow over time. However, the extreme heat required can be a major threat to the artist's safety and the structural integrity of the wood if it isn't handled correctly. Because the wax can melt if exposed to high temperatures, museums must keep these works in climate-controlled rooms. The study of encaustic art shows us how ancient Egyptians and Greeks used chemistry to create portraits that still look fresh today, reminding us that the physical materials of art are just as important as the style itself.
+
+<details>
+<summary>翻譯 Translation</summary>
+
+今天我們要看的是「蠟畫法（encaustic painting）」——一種使用加熱蜂蠟的古老技法。整個機制是這樣的：藝術家把蜂蠟融化，再與乾燥的色粉混合。整個過程從這個混合物在加熱調色盤上保持液態時開始，這樣藝術家才能把它塗到木頭或石材表面上。讓這項技法成立的關鍵特性是：蠟一冷卻就幾乎瞬間變硬，所以藝術家必須用刷子或金屬工具動作迅速。其工序包括先層層塗上蠟，再用熱源把這些層融合在一起——這能創造出油彩難以匹敵的深沉、發光感。這非常關鍵，因為蠟畫法讓作品極為耐久——蜂蠟具防潮性，也不會隨時間泛黃。然而，所需的高溫如果處理不當，會嚴重威脅藝術家的安全，也可能傷害木材底材的結構完整性。由於蠟在高溫下會融化，博物館必須把這些作品放在恆溫恆濕的空間裡。研究蠟畫藝術讓我們看見：古埃及人與希臘人如何用化學技巧，創造出至今依然鮮活的肖像——這也提醒我們，藝術的物理材料和風格本身一樣重要。
+
+</details>
 
 <details>
 <summary>答案 Answer Key</summary>
