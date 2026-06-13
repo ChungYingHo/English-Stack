@@ -177,7 +177,7 @@
       s.y += (0.5 + s.z * 1.5) * 60 * dt
       if (s.y > canvas.height) { s.y = -2; s.x = Math.random() * canvas.width }
       // Soft blue/purple tinted stars
-      const hue = s.z > 0.7 ? `rgba(210,220,255,` : s.z > 0.4 ? `rgba(190,200,255,` : `rgba(200,215,245,`
+      const hue = s.z > 0.7 ? 'rgba(210,220,255,' : s.z > 0.4 ? 'rgba(190,200,255,' : 'rgba(200,215,245,'
       ctx.beginPath()
       ctx.arc(s.x, s.y, 0.5 + s.z * 1.2, 0, Math.PI * 2)
       ctx.fillStyle = `${hue}${0.2 + s.z * 0.7})`

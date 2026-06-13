@@ -1,8 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-
-  const PASSWORD = 'toefl2026'
-  const STORAGE_KEY = 'toefl_auth'
+  import { TOEFL_PASSWORD, TOEFL_STORAGE_KEY, isToeflAuthenticated } from '@/constants/toefl'
 
   // Optional: called after successful auth (used when triggered from menu)
   const { onSuccess, onDismiss }: { onSuccess?: () => void; onDismiss?: () => void } = $props()
@@ -12,14 +10,14 @@
   let error = $state(false)
 
   onMount(() => {
-    if (sessionStorage.getItem(STORAGE_KEY) !== PASSWORD) {
+    if (!isToeflAuthenticated()) {
       visible = true
     }
   })
 
   function submit() {
-    if (input === PASSWORD) {
-      sessionStorage.setItem(STORAGE_KEY, PASSWORD)
+    if (input === TOEFL_PASSWORD) {
+      sessionStorage.setItem(TOEFL_STORAGE_KEY, TOEFL_PASSWORD)
       visible = false
       onSuccess?.()
     } else {

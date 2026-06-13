@@ -97,6 +97,8 @@ const topVocabs = allVocab
 </Layout>
 
 <script>
+import { speak } from '@/utils/tts'
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('hero-container')
   const actionBtn = document.getElementById('action-btn')
@@ -161,18 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // TTS 語音功能
   if (ttsBtn) {
+    const activeClasses = ['scale-110', 'text-indigo-600', 'border-indigo-300', 'bg-indigo-50']
     ttsBtn.addEventListener('click', () => {
       if (!currentWordText) return
-      window.speechSynthesis.cancel() 
-      const utterance = new SpeechSynthesisUtterance(currentWordText)
-      utterance.lang = 'en-US' 
-      utterance.rate = 0.85    
-      
-      ttsBtn.classList.add('scale-110', 'text-indigo-600', 'border-indigo-300', 'bg-indigo-50')
-      utterance.onend = () => ttsBtn.classList.remove('scale-110', 'text-indigo-600', 'border-indigo-300', 'bg-indigo-50')
-      utterance.onerror = () => ttsBtn.classList.remove('scale-110', 'text-indigo-600', 'border-indigo-300', 'bg-indigo-50')
-      
-      window.speechSynthesis.speak(utterance)
+      ttsBtn.classList.add(...activeClasses)
+      speak(currentWordText, {
+        onend: () => ttsBtn.classList.remove(...activeClasses),
+        onerror: () => ttsBtn.classList.remove(...activeClasses),
+      })
     })
   }
 

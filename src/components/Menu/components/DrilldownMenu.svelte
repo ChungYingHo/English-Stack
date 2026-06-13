@@ -1,25 +1,19 @@
 <script lang="ts">
-  import { fly } from "svelte/transition"
-  import { cubicOut } from "svelte/easing"
-  import type { MenuItem, MenuGroup } from "@/models/menu"
-  
-  import { normalizePath } from "@/utils/readPath"
+  import { fly } from 'svelte/transition'
+  import { cubicOut } from 'svelte/easing'
+  import type { MenuItem, MenuGroup } from '@/models/menu'
+
+  import { normalizePath } from '@/utils/readPath'
+  import { isToeflAuthenticated } from '@/constants/toefl'
 
   export let rootItems: MenuItem[] = []
   export let initialItems: MenuItem[] | null = null
-  export let currentPath = "" 
+  export let currentPath = '' 
 
   export let onTitleChange: ((title: string) => void) | undefined = undefined
   export let onBackToRoot: (() => void) | undefined
   export let onClose: (() => void) | undefined
   export let toeflGate: ((action: () => void) => void) | undefined = undefined
-
-  const TOEFL_KEY = 'toefl_auth'
-  const TOEFL_PASS = 'toefl2026'
-
-  function isAuthenticated(): boolean {
-    return sessionStorage.getItem(TOEFL_KEY) === TOEFL_PASS
-  }
 
   function isToeflItem(item: MenuItem): boolean {
     if (item.type === 'group') return item.title === 'Toefl'
@@ -37,7 +31,7 @@
     currentStack: MenuItem[][]
   ): { found: boolean, stack: MenuItem[][], finalItems: MenuItem[] } {
     
-    const normalizedTarget = normalizePath(targetPath);
+    const normalizedTarget = normalizePath(targetPath)
     for (const item of currentItems) {
       if (item.type === 'page' && normalizePath(item.href) === normalizedTarget) {
         return { found: true, stack: currentStack, finalItems: currentItems }
@@ -77,7 +71,7 @@
   init()
 
   function isGroup(item: MenuItem): item is MenuGroup {
-    return item.type === "group"
+    return item.type === 'group'
   }
 
   function enterGroup(item: MenuGroup) {
@@ -88,7 +82,7 @@
   }
 
   function handleGroupClick(item: MenuGroup) {
-    if (isToeflItem(item) && !isAuthenticated()) {
+    if (isToeflItem(item) && !isToeflAuthenticated()) {
       toeflGate?.(() => enterGroup(item))
     } else {
       enterGroup(item)
@@ -97,7 +91,7 @@
 
   function handleLinkClick(e: MouseEvent, item: MenuItem) {
     if (item.type !== 'page') return
-    if (isToeflItem(item) && !isAuthenticated()) {
+    if (isToeflItem(item) && !isToeflAuthenticated()) {
       e.preventDefault()
       toeflGate?.(() => { window.location.href = item.href; onClose?.() })
     } else {
@@ -114,28 +108,28 @@
     direction = -1
     items = stack[stack.length - 1]
     stack = stack.slice(0, -1)
-    onTitleChange?.("")
+    onTitleChange?.('')
   }
 
   function scrollToActive(node: HTMLElement, isActive: boolean) {
     if (isActive) {
       setTimeout(() => {
-        node.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 250);
+        node.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 250)
     }
     
     return {
       update(newIsActive: boolean) {
         if (newIsActive) {
           setTimeout(() => {
-            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 250);
+            node.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }, 250)
         }
       }
     }
   }
 
-  $: normalizedCurrentPath = normalizePath(currentPath);
+  $: normalizedCurrentPath = normalizePath(currentPath)
 </script>
 
 <div class="relative w-full grid grid-cols-1 grid-rows-1 transition-all duration-300 ease-out">
@@ -159,7 +153,7 @@
         </li>
       {/if}
 
-      {#each items as item}
+      {#each items as item (item.title)}
         <li>
           {#if isGroup(item)}
             <button

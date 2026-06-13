@@ -1,13 +1,13 @@
 <script>
-  export let videoId;
-  export let title = "YouTube video player";
+  export let videoId
+  export let title = 'YouTube video player'
   
-  let isPlaying = false;
+  let isPlaying = false
   
-  $: posterUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  $: posterUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
 
   function playVideo() {
-    isPlaying = true;
+    isPlaying = true
   }
 </script>
 

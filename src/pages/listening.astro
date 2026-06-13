@@ -1,17 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { LISTENING_LIST } from '@/constants/listening';
+import { formatDate } from '@/utils/date';
 
 // 將清單依照日期由新到舊 (Descending) 排序
 const sortedListening = [...LISTENING_LIST].sort((a, b) => {
   return new Date(b.date).getTime() - new Date(a.date).getTime();
 });
-
-// 格式化日期為好閱讀的英文格式 (如: Feb 27, 2026)
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
-};
 ---
 
 <Layout title="Listening Practice" description="Curated listening materials and YouTube videos.">

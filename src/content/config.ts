@@ -7,6 +7,10 @@ const commonSchema = z.object({
   link: z.string().optional().default(''),
   date: z.date().or(z.string()).optional(),
   sameDateSort: z.number().optional().default(0),
+  // 以下欄位為選用，宣告於此讓使用端可享型別安全 (取代散落的 `as any`)
+  draft: z.boolean().optional().default(false),
+  tags: z.array(z.string()).optional(),
+  changelog: z.array(z.date().or(z.string())).optional(),
 })
 
 const readingCollection = defineCollection({

@@ -1,86 +1,86 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte'
 
-  export let onClose: () => void; 
+  export let onClose: () => void 
   
-  let errorMsg = "";
+  let errorMsg = ''
 
   onMount(() => {
     // 1. 定義同步事件
     const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+      if (e.key === 'Escape') onClose()
+    }
     
     const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest(".pagefind-ui__result-link")) {
-        onClose();
+      const target = e.target as HTMLElement
+      if (target.closest('.pagefind-ui__result-link')) {
+        onClose()
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeydown);
-    const container = document.getElementById("pagefind-search");
-    container?.addEventListener("click", handleClick);
+    window.addEventListener('keydown', handleKeydown)
+    const container = document.getElementById('pagefind-search')
+    container?.addEventListener('click', handleClick)
 
     // 2. 初始化 Pagefind
     const initPagefind = async () => {
       if (!(window as any).PagefindUI) {
         try {
-          await loadScript("/pagefind/pagefind-ui.js");
+          await loadScript('/pagefind/pagefind-ui.js')
         } catch (e) {
           try {
-             await loadScript("/_pagefind/pagefind-ui.js");
+             await loadScript('/_pagefind/pagefind-ui.js')
           } catch (e2) {
-             console.error("Pagefind script load error:", e2);
-             errorMsg = "無法載入搜尋引擎。請確認已執行 npm run build。";
-             return;
+             console.error('Pagefind script load error:', e2)
+             errorMsg = '無法載入搜尋引擎。請確認已執行 npm run build。'
+             return
           }
         }
       }
 
-      const PagefindUI = (window as any).PagefindUI;
+      const PagefindUI = (window as any).PagefindUI
       if (PagefindUI) {
         try {
           new PagefindUI({
-            element: "#pagefind-search",
+            element: '#pagefind-search',
             showImages: false,
             showSubResults: true,
             excerptLength: 15,
-            baseUrl: "/", 
+            baseUrl: '/', 
             translations: {
-              placeholder: "Search...",
-              zero_results: "No results found",
-              clear_search: "Clear" 
+              placeholder: 'Search...',
+              zero_results: 'No results found',
+              clear_search: 'Clear' 
             }
-          });
+          })
 
-          const input = document.querySelector(".pagefind-ui__search-input") as HTMLInputElement;
+          const input = document.querySelector('.pagefind-ui__search-input') as HTMLInputElement
           if (input) {
-            input.focus();
-            input.addEventListener('click', (e) => e.stopPropagation());
+            input.focus()
+            input.addEventListener('click', (e) => e.stopPropagation())
           }
         } catch (e) {
-          console.error("Pagefind init error:", e);
+          console.error('Pagefind init error:', e)
         }
       }
-    };
+    }
 
-    initPagefind();
+    initPagefind()
 
     return () => {
-      window.removeEventListener("keydown", handleKeydown);
-      container?.removeEventListener("click", handleClick);
-    };
-  });
+      window.removeEventListener('keydown', handleKeydown)
+      container?.removeEventListener('click', handleClick)
+    }
+  })
 
   function loadScript(src: string) {
     return new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => resolve(true);
-      script.onerror = () => reject(new Error(`Script load error for ${src}`));
-      document.body.appendChild(script);
-    });
+      const script = document.createElement('script')
+      script.src = src
+      script.onload = () => resolve(true)
+      script.onerror = () => reject(new Error(`Script load error for ${src}`))
+      document.body.appendChild(script)
+    })
   }
 </script>
 

@@ -13,7 +13,6 @@ English Stack is a static educational platform for English learning. It features
 - **Content**: Astro content collections (`.md` files), MDX support
 - **Search**: Pagefind (full-text, client-side)
 - **Math**: remark-math + rehype-katex
-- **Charts**: Chart.js + chartjs-plugin-datalabels
 - **Deployment**: Vercel (`@astrojs/vercel`)
 - **Language**: TypeScript (strict)
 
@@ -23,6 +22,7 @@ English Stack is a static educational platform for English learning. It features
 npm run dev      # Start dev server
 npm run build    # Production build (required before search works)
 npm run preview  # Preview production build locally
+npm run lint     # ESLint over JS/TS/Astro/Svelte (use lint:fix to auto-fix)
 ```
 
 ## Project Structure
@@ -39,7 +39,8 @@ src/
 │   └── PostRenderer.astro
 ├── constants/
 │   ├── authors.ts    # Author definitions
-│   └── listening.ts  # YouTube resource list
+│   ├── listening.ts  # YouTube resource list
+│   └── toefl.ts      # TOEFL password/storage key + isToeflAuthenticated()
 ├── content/
 │   ├── config.ts     # Zod schemas for collections
 │   ├── reading/
@@ -60,11 +61,15 @@ src/
 ├── styles/main.scss + tailwind.css
 └── utils/
     ├── content.ts      # Dynamic route generation
-    ├── date.ts         # Date formatting (en-US)
+    ├── date.ts         # Shared date formatting (en-US, single source)
     ├── readPath.ts     # Path normalization
+    ├── tts.ts          # Shared speak() text-to-speech helper
     ├── useMenu.ts      # Hierarchical menu builder from collections
     └── useVocabulary.ts # Vocabulary extraction from Markdown tables
 ```
+
+> Vocab components: `VocabBoard.svelte` (cards) and `VocabBoardToefl.svelte` (table)
+> share `Vocab/Pagination.svelte` and `Vocab/VocabModal.svelte`.
 
 ## Content Collections
 
@@ -78,6 +83,9 @@ No database — content is stored as `.md` files in `src/content/`.
 - `link` — string (original article URL, optional)
 - `date` — Date | string (optional)
 - `sameDateSort` — number (sort priority for same-date items, optional)
+- `draft` — boolean (optional, default `false`; `true` hides the entry from menu/vocab/routes)
+- `tags` — string[] (optional; rendered as pills in the article header)
+- `changelog` — (Date | string)[] (optional; latest 3 shown as "Latest Updates")
 
 ### Adding a New Article
 

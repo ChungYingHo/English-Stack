@@ -1,40 +1,47 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { AUTHORS } from '@/constants/authors';
+import { formatDate } from '@/utils/date';
 import Layout from '@/layouts/Layout.astro';
 import ToeflGuard from '@/components/ToeflGuard.svelte';
 
-// 對齊你的 config.ts collections
+// 對齊 config.ts 的 collections
 interface Props {
   entry:
     | CollectionEntry<'reading'>
     | CollectionEntry<'listening'>
     | CollectionEntry<'writing'>
-    | CollectionEntry<'grammar'>;
+    | CollectionEntry<'grammar'>
+    | CollectionEntry<'speaking'>;
   requiresAuth?: boolean;
   quizMode?: 'listening' | 'reading' | 'none';
   isToefl?: boolean;
 }
 
-const { entry, requiresAuth = false, quizMode = 'none', isToefl = false } = Astro.props;
+const { entry } = Astro.props;
+
+// 由 entry 的 collection 與 slug 自動推導，集中 TOEFL/測驗邏輯，
+// 讓各路由頁面保持一致 (仍可由 props 明確覆寫)。
+const isToefl = Astro.props.isToefl ?? entry.slug.startsWith('toefl/');
+const requiresAuth = Astro.props.requiresAuth ?? isToefl;
+const quizMode = Astro.props.quizMode ??
+  (isToefl && (entry.collection === 'reading' || entry.collection === 'listening')
+    ? entry.collection
+    : 'none');
+
 const { Content, headings } = await entry.render();
 
 const authorKey = entry.data.author || 'Jeremy';
 const authorData = AUTHORS.find(a => a.name.toLowerCase() === authorKey.toLowerCase()) || AUTHORS[0];
 
 const publishDate = entry.data.date ? new Date(entry.data.date) : new Date();
-const tags: string[] = (entry.data as any).tags || [];
-const originalLink: string | undefined = entry.data.link;
+const tags = entry.data.tags ?? [];
+const originalLink = entry.data.link;
 
-const changelog = ((entry.data as any).changelog || [])
-  .map((date: string) => new Date(date))
-  .sort((a: Date, b: Date) => b.getTime() - a.getTime())
+const changelog = (entry.data.changelog ?? [])
+  .map((date) => new Date(date))
+  .sort((a, b) => b.getTime() - a.getTime())
   .slice(0, 3);
-
-const formatDate = (d: Date) => {
-  if (isNaN(d.getTime())) return '';
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
-};
 ---
 
 <Layout title={entry.data.title} description={entry.data.title}>
@@ -180,6 +187,8 @@ const formatDate = (d: Date) => {
 </Layout>
 
 <script>
+import { speak } from '@/utils/tts'
+
 // === 1. Progress Bar ===
 const progressBar = document.getElementById('progress-bar')
 window.addEventListener('scroll', () => {
@@ -347,17 +356,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     ttsBtn.addEventListener('click', (e) => {
       e.preventDefault()
-      window.speechSynthesis.cancel() 
-      
-      const utterance = new SpeechSynthesisUtterance(wordText)
-      utterance.lang = 'en-US' 
-      utterance.rate = 0.85    
-      
       ttsBtn.classList.add('playing')
-      utterance.onend = () => ttsBtn.classList.remove('playing')
-      utterance.onerror = () => ttsBtn.classList.remove('playing')
-      
-      window.speechSynthesis.speak(utterance)
+      speak(wordText, {
+        onend: () => ttsBtn.classList.remove('playing'),
+        onerror: () => ttsBtn.classList.remove('playing'),
+      })
     })
     
     wordTd.appendChild(ttsBtn)
