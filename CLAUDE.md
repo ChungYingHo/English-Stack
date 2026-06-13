@@ -140,7 +140,7 @@ import { something } from '@/utils/content'
 
 TOEFL content is gated behind a password prompt (`ToeflGuard.svelte`).
 
-- **Password**: `toefl2026` (hardcoded, intentional)
+- **Password**: from `PUBLIC_TOEFL_PASSWORD` env var (set at build/deploy; see `.env.example`), falling back to `toefl2026` for local dev. Defined in `src/constants/toefl.ts`. Note: `PUBLIC_` vars are bundled into the client JS, so this gate is a lightweight mask, not real security.
 - **Session**: uses `sessionStorage` — persists across refreshes, clears on tab close
 - **Gated pages**:
   - `vocabularies-toefl.astro` — always gated
